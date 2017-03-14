@@ -1,0 +1,805 @@
+
+* {
+	font-family: Verdana, "Bitstream Vera Sans", Arial, Geneva, Helvetica, sans-serif;
+}
+
+#rc,
+#tv {
+	margin: 0px;
+}
+
+body {
+	background-color: #ffffff;
+	margin: 3px;
+	padding: 0;
+}
+
+form {
+	margin: 0px;
+	padding: 0;
+}
+
+td,
+div {
+	color: black;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+#layout {
+  margin-left: 169px;
+  overflow: auto;
+  max-height: 99vh;
+}
+
+input {
+	color: black;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+textarea {
+	color: black;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+select {
+	color: black;
+	font-weight: normal;
+	font-size: 12px;
+}
+img {
+	border: 0;
+	vertical-align: middle;
+	display: inline;
+}
+/*
+.submit {
+	height: 20px;
+}*/
+
+h1 {
+	margin-right: 5px;
+	margin-left: 5px;
+	font-size: 13px;
+	font-weight: bold;
+	color: black;
+	display: inline;
+}
+h2 {
+	margin: 0px;
+	font-size: 12px;
+	font-weight: bold;
+	color: black;
+	display: inline;
+}
+h3,
+.epg_title {
+	margin: 0px;
+	font-size: 12px;
+	font-weight: bold;
+	color: black;
+}
+#prog_list .epg_title a {
+	margin: 0;
+	padding: 0;
+}
+.col_label {
+	width: 100px;
+	text-align: right;
+}
+.col_label h5 {
+	margin: 1px 5px;
+	font-size: 12px;
+	font-weight: normal;
+	color: black;
+	text-align: right;
+	white-space: nowrap;
+}
+.col_value h5 {
+	display: inline;
+	font-size: 12px;
+	font-weight: normal;
+	color: black;
+}
+h6 {
+	margin: 1px 5px;
+	font-size: 10px;
+	font-weight: normal;
+	color: black;
+	text-align: right;
+}
+
+label {
+	cursor: default;
+}
+
+a,
+a:visited,
+a:active,
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+label + input {
+	margin-left: 1em;
+}
+
+#tv input,
+#tv select,
+#tv h5 {
+	font-weight: normal;
+	font-size: 9px;
+	display: inline;
+}
+#tv #content {
+	vertical-align: top;
+	border-spacing: 10px;
+}
+#rc .rc,
+#tv #sect_rc {
+	background-image: url("fern_back.jpg");
+}
+#tv #sect_channels {
+	vertical-align: top;
+}
+#rec_list .col_name {
+	font-weight: bold;
+}
+
+#error h2 {
+	font-size: 12px;
+	color: red;
+}
+
+body.help .heading {
+	display: table-row;
+}
+
+.row_odd td,
+.row_even td,
+.heading {
+	height: 17px;
+}
+.list.hilight .row_even:hover,
+.list.hilight .row_odd:hover
+{
+	background-color: #8cc1da;
+}
+.heading td {
+	background-color: #6d96a9;
+	height: 17px;
+}
+.heading h2,
+.heading .channel_name,
+.heading a {
+	font-weight: bold;
+	color: white;
+	margin-top: 0px;
+	white-space: normal;
+}
+
+#prog_summary .row_even .col_epg,
+.row_even {
+	background-color: #ffffff;
+}
+.row_odd {
+	background-color: #dee6ee;
+}
+
+.col_label,
+.col_value,
+.col_active,
+.col_channel,
+.col_start,
+.col_stop,
+.col_date,
+.col_time {
+	padding-left: 3px;
+	padding-right: 3px;
+	white-space: nowrap;
+}
+
+.col_channels {
+	text-align: right;
+	padding: 10px;
+	width: 40%;
+}
+
+.col_wanted_channels {
+	text-align: left;
+	padding: 10px;
+	width: 40%;
+}
+
+.col_navi img,
+.col_navi a {
+	padding: 0;
+	margin: 0;
+}
+.col_navi {
+	text-align: right;
+	vertical-align: middle;
+	white-space: nowrap;
+	height: 17px;
+}
+
+.list,
+.group {
+	border: 1px solid #6d96a9;
+}
+.group td {
+	padding: 2px;
+}
+
+#prog_list .list {
+	margin-bottom: 0.5em;
+}
+
+#prog_summary .action,
+#prog_detail .action {
+	display: block;
+	margin: 5px 0 0 0;
+}
+.action a,
+.action img,
+.heading img,
+.heading .action {
+	margin: 0;
+	padding: 0;
+}
+.action {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	width: 20px;
+}
+.heading .action {
+	background-color: white;
+}
+
+/* Summary */
+#prog_summary .group {
+	margin: 0 3px 3px 0;
+	display: inline;
+	float: left;
+}
+#prog_summary .heading td.col_content {
+	height: 17px;
+	width: 246px;
+	color: white;
+	background-color: #6d96a9;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#prog_summary .row_even td.col_content {
+	width: 246px;
+	height: 200px;
+	background-color: #dee6ee;
+	vertical-align: top;
+}
+#prog_summary table.content td.col_buttons {
+	height: 200px;
+}
+#prog_summary .col_epg {
+	vertical-align: top;
+}
+#prog_summary .date_long {
+	text-align: right;
+	margin-top: 3px;
+	float: left;
+}
+#prog_summary .time_duration {
+	text-align: right;
+	margin-top: 3px;
+}
+#prog_summary .epg_title {
+	margin-top: 1em;
+	width: 216px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#prog_summary .epg_subtitle {
+	width: 216px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#prog_summary .epg_summary {
+	margin-top: 1em;
+	margin-bottom: 3px;
+	width: 210px;
+	height: 120px;
+	overflow: auto;
+	white-space: normal;
+}
+#prog_summary .heading a {
+	font-weight: bold;
+	color: white;
+	padding: 2px 2px;
+}
+
+#action_record_settings,
+#action_switch_settings {
+	margin-top: 1em;
+}
+.newday {
+	height: 17px;
+	background-color: #6d96a9;
+}
+.newday td {
+	padding-left: 3px;
+	font-weight: bold;
+	color: white;
+}
+#prog_summary2 .epg_title,
+#prog_summary2 .channel_name {
+	display: block;
+}
+#prog_summary2 .epg_subtitle {
+	font-size: 12px;
+	font-weight: normal;
+	color: black;
+	display: block;
+}
+#prog_list .col_buttons,
+#rec_list .col_buttons,
+#epgsearch_list .col_buttons,
+#epgsearch_config .col_buttons,
+#prog_summary2 .col_buttons {
+	width: 120px;
+	text-align: right;
+	padding-right: 3px;
+	white-space: nowrap;
+}
+#prog_summary2 table.percent td {
+	height: 8px;
+}
+#prog_summary2 table.percent {
+	height: 8px;
+	width: 80px;
+	border: 1px solid #6d96a9;
+}
+#prog_summary2 table.percent .elapsed {
+	background-color: #6d96a9;
+}
+#prog_summary2 table.percent .remaining {
+	background-color: transparent;
+}
+
+#prog_detail .heading .col_content * {
+	color: white;
+	font-weight: bold;
+}
+#prog_detail .channel_name {
+	white-space: nowrap;
+}
+#prog_detail .date_long {
+	margin-left: 2em;
+	white-space: nowrap;
+}
+#prog_detail .time_vps,
+#prog_detail .time_duration {
+	margin-left: 2em;
+	white-space: nowrap;
+}
+#prog_detail .epg_title {
+	display: block;
+}
+#prog_detail .epg_subtitle {
+	font-size: 12px;
+	font-weight: normal;
+	color: black;
+	display: block;
+}
+#prog_detail .epg_summary {
+	margin: 2em 0;
+	display: block;
+}
+#prog_detail .epg_video h4,
+#prog_detail .epg_audio h4 {
+	margin: 0;
+	font-size: 10px;
+	font-weight: bold;
+	display: inline;
+}
+#prog_detail .epg_video h5,
+#prog_detail .epg_audio h5 {
+	margin-left: 1em;
+	display: inline;
+	font-size: 10px;
+	font-weight: normal;
+	font-style: italic;
+}
+#prog_detail .col_epg {
+	padding: 1em;
+}
+#prog_summary .row_even td.col_content,
+#prog_detail .row_even td.col_content {
+	padding: 0;
+}
+#prog_summary table.content td.col_buttons,
+#prog_detail table.content td.col_buttons {
+	padding-top: 1em;
+	vertical-align: top;
+	width: 20px;
+	text-align: center;
+	background-color: #dee6ee;
+	border-right: 1px solid #6d96a9;
+}
+
+.heading,
+#prog_list .heading td span,
+#prog_list .heading td {
+	vertical-align: middle;
+}
+#prog_list .date_long {
+	color: white;
+	font-weight: bold;
+	padding: 0 2em;
+}
+
+.col_duration {
+	padding-left: 3px;
+	padding-right: 3px;
+	width: 100px;
+	vertical-align: middle;
+}
+	
+.col_name,
+#content .col_title * {
+	padding-left: 3px;
+	padding-right: 3px;
+	min-width: 50px;
+	white-space: normal;
+}
+.col_info,
+.col_record {
+	width: 16px;
+	text-align: center;
+}
+.col_active {
+	width: 90px;
+}
+.col_channel {
+	width: 100px;
+}
+.col_start,
+.col_stop,
+.col_date,
+.col_time {
+	width: 76px;
+	text-align: left;
+}
+.col_edit,
+.col_delete,
+.col_stream,
+.col_checkbox {
+	text-align: center;
+	width: 16px;
+	max-width: 16px;
+}
+
+#heading {
+	height: 29px;
+	border: 1px solid #6d96a9;
+}
+#heading tr {
+	vertical-align: middle;
+	background-color: #dee6ee;
+}
+#heading td {
+	vertical-align: middle;
+	padding: 0px 10px;
+}
+#heading .col_other {
+	text-align: right;
+}
+#heading .col_other table {
+	display: inline;
+}
+#heading .col_help {
+	text-align: center;
+	width: 45px;
+}
+
+#prog_timeline #content {
+	position: absolute;
+	top: 32px;
+	left: 3px;
+}
+#prog_timeline .timertable,
+#prog_timeline .prgtable {
+	border-color: #6d96a9;
+}
+#prog_timeline #timeline {
+	background: red;
+}
+#prog_timeline .color_current {
+	background-color: #b4e29c;
+}
+#prog_timeline .color_summary {
+	background-color: #dee6ee;
+}
+#prog_timeline .color_broadcast {
+	background-color: #ffffff;
+}
+#prog_timeline .color_timer {
+	background-color: #ffb2b4;
+}
+#prog_timeline .color_spacer {
+	background-color: #e0e0e0;
+}
+#rec_list #path {
+	margin: 1em 10px 0px 10px;
+}
+#rec_edit .col_value {
+	white-space: normal;
+}
+
+#timer_list .list {
+	margin-top: 0.6em;
+}
+#timer_list .timers {
+	border-top: 1px solid black;
+}
+#timer_list .color_ok {
+	background-color: #00a317;
+}
+#timer_list .color_conflict {
+	background-color: #a11917;
+}
+#timer_list .color_collision {
+	background-color: #ffde62;
+}
+#timer_list .color_inactive {
+	background-color: #858585;
+}
+#timer_list .prgtable {
+	border-left-color: #000000;
+	border-right-color: #000000;
+}
+#prog_timeline .row_even table td.color1,
+#timer_list .row_even table td.color1 {
+	background-color: #ffffff;
+}
+#prog_timeline .row_even table td.color2,
+#timer_list .row_even table td.color2 {
+	background-color: #dee6ee;
+}
+#prog_timeline table.timestable td.color1 {
+	background-color: #ffffff;
+}
+#prog_timeline table.timestable td.color2 {
+	background-color: #dee6ee;
+}
+#vdr_cmds pre {
+	margin: 0px;
+	padding: 0px;
+}
+
+#epgsearch_new #use_extepg_settings {
+	white-space: normal;
+	vertical-align: top;
+}
+#epgsearch_new #use_extepg_settings table {
+	padding: 0 5px 5px 0;
+	display: inline;
+	float: left;
+	vertical-align: top;
+	height: 100%;
+}
+#epgsearch_new #use_extepg_settings table select,
+#epgsearch_new #use_extepg_settings table input {
+	width: 100%;
+}
+#epgsearch_new #avoid_repeats_settings div {
+	white-space: normal;
+}
+#epgsearch_new #avoid_repeats_settings span {
+	float: left;
+	padding-right: 1em;
+}
+
+#content {
+	margin-top: 0.6em;
+}
+#buttons {
+	border: 1px solid #6d96a9;
+	padding: 3px;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	background-color: #dee6ee;
+	text-align: right;
+}
+
+#config .heading {
+	background-color: #dee6ee;
+	border: none;
+}
+#config .heading a {
+	color: black;
+	font-weight: normal;
+}
+#about .group,
+#config .group {
+	margin-top: 0.5em;
+	width: 100%;
+}
+#config .col_label {
+	width: 50%;
+}
+#about .col_label {
+	width: 20%;
+}
+#about .col_label h5 {
+	white-space: nowrap;
+}
+
+select.channels {
+	min-width: 100px;
+}
+
+/* Tooltips */
+.tt_border {
+	border: 2px solid white;
+}
+.tt_table {
+	width: 250px;
+	border: 2px solid #6d96a9;
+	background-color: #dee6ee;
+}
+.tt_table th {
+	background-color: #6d96a9;
+	font-weight: bold;
+	color: white;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.tt_table td {
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* Help */
+#help dt {
+	margin-top: 0.6em;
+	font-weight: bold;
+	font-style: italic;
+}
+#help dd dl dt {
+	margin-top: 0.3em;
+	font-weight: normal;
+	font-style: italic;
+}
+#help dl {
+	padding: 5px;
+}
+#help h3 {
+	font-weight: bold;
+	font-style: italic;
+	letter-spacing: 0.5em;
+	background-color: #6d96a9;
+	color: white;
+	padding: 2px 5px;
+}
+#help h4 {
+	text-decoration: underline;
+	font-style: normal;
+}
+#help strong {
+	font-weight: bold;
+}
+#help .ref_menu {
+	font-style: italic;
+}
+#help .ref_file {
+	text-decoration: underline;
+}
+#help .ref_label {
+	font-style: italic;
+}
+#help .links {
+	padding: 5px;
+	background-color: #dee6ee;
+	text-align: justify;
+}
+#help .links a {
+	white-space: nowrap;
+}
+#about a,
+#about a:visited,
+#about a:active,
+#help a,
+#help a:visited,
+#help a:active {
+	color: blue;
+}
+#help .group {
+	margin-top: 0.6em;
+	border: 1px solid #6d96a9;
+	white-space: normal;
+}
+#help .group p {
+	padding: 5px;
+}
+#help .top_link {
+	text-align: right;
+	font-size: 0.8em;
+	background-color: #dee6ee;
+	padding: 1px 5px;
+	margin: 0px;
+}
+
+/* Navigation */
+#navigation {
+	width: 155px;
+	float: left;
+	margin: 0px 3px;
+}
+#navigation .nav_bar {
+	border: 1px solid #6d96a9;
+	padding: 1em 0px;
+}
+#navigation .logo {
+	padding-top: 1em;
+	padding-bottom: 2em;
+	width: 150px;
+}
+#navigation .navi {
+	font-size: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	text-align: center;
+}
+
+#navigation .navi:hover {
+	background-color: #dee6ee;
+}
+#navigation .search {
+	padding-top: 6px;
+	font-size: 12px;
+	text-align: center;
+}
+#navigation a,
+#navigation a:visited,
+#navigation a:active {
+	color: #6d96a9;
+	font-weight: bold;
+	text-decoration: none;
+	border: 0px;
+}
+#navigation input {
+	width: 130px;
+}
+
+/* message boxes */
+.warning h1 {
+	display: block;
+	font-weight: bold;
+	font-size: 14px;
+}
+.warning {
+	margin: 2em;
+	padding: 1em;
+	border: 1px solid #6d96a9;
+	background-color: #dee6ee;
+	text-align: center;
+	vertical-align: middle;
+}
+.error h1 {
+	display: block;
+	color: red;
+	font-weight: bold;
+	font-size: 14px;
+}
+.error {
+	margin: 2em;
+	padding: 1em;
+	border: 2px solid red;
+	background-color: #dee6ee;
+	text-align: center;
+	vertical-align: middle;
+}
