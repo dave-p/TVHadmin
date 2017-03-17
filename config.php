@@ -58,24 +58,48 @@
 		<td colspan="2"><h2>TVHeadend Server</h2></td>
 	    </tr>
 	    <tr class="row_odd">
-		<td class="col_label"><h5>TVH Username:</h5></td>
+		<td class="col_label"><h5>Username:</h5></td>
 <?php
 		include_once "include.php";
 		echo "<td class=\"col_value\"><input type=\"text\" name=\"USER\" value=\"$user\" size=\"16\" /></td>";
 ?>
 	    </tr>
 	    <tr class="row_even">
-		<td class="col_label"><h5>TVH Password:</h5></td>
+		<td class="col_label"><h5>Password:</h5></td>
 <?php
 		echo "<td class=\"col_value\"><input type=\"password\" name=\"PASS\" value=\"$pass\" size=\"16\" /></td>";
 ?>
 	    </tr>
 	    <tr class="row_odd">
-		<td class="col_label"><h5>TVH IP Address:</h5></td>
+		<td class="col_label"><h5>IP Address:</h5></td>
 <?php
 		echo "<td class=\"col_value\"><input type=\"text\" name=\"IP\" value=\"$ip\" size=\"24\" /></td>";
 ?>
 	    </tr>
+<?php
+	$prof = get_profiles();
+	if (isset($prof)) {
+	  if(count($prof) == 1) {
+		$config_uuid = $prof[0]['uuid'];
+		echo "<input type=\"hidden\" name=\"PROFILE\" value=\"\">";
+		echo "<input type=\"hidden\" name=\"UUID\" value=\"$config_uuid\">";
+	  }
+	  else {
+		echo "<tr class=\"row_even\">";
+		echo "<td class=\"col_label\"><h5>Recording Profile:</h5></td>";
+		echo "<td class=\"col_value\"><select name=\"PROFILE\">";
+	    foreach ($prof as $p) {
+		$pname = $p['name'];
+		if ($pname == '') $pname = '(default)';
+		if ($p['uuid'] == $config_uuid) $sel = 'selected';
+		else $sel = '';
+		echo "<option value=\"$pname\" $sel>$pname</option>";
+	    }
+		echo "</td>";
+	    echo "</tr>";
+	  }
+	}
+?>
 	</table>
 
 	<table border="0" cellspacing="0" cellpadding="0" class="group">
@@ -89,7 +113,7 @@
 <?php
 	for ($st=0; $st<7; $st++) {
 	  echo "<option value=\"$st\"";
-	  if ($st == $epg_start) echo " selected";
+	  if (isset($epg_start) && ($st == $epg_start)) echo " selected";
 	  echo ">$st:00</option>";
 	}
 ?>
@@ -106,11 +130,13 @@
 		<td class="col_channels">
 		    <select name="all_channels" size="8" multiple="multiple" class="channels">
 <?php
-        $chans = get_channels();
-        foreach($chans as $v) {
-            $cname = $v["val"];
-            print "<option value=\"$cname\">$cname</option>";
-        }
+	if (isset($urlp)) {
+	    $chans = get_channels();
+	    foreach($chans as $v) {
+		$cname = $v["val"];
+		print "<option value=\"$cname\">$cname</option>";
+	    }
+	}
 ?>
 		    </select>
 		</td>

@@ -1,6 +1,5 @@
 <?php
 $config_file = 'data/config';
-$config_uuid = '4e3a1e13acd2d5a9c129e7b00f6c986e';
 
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
@@ -9,9 +8,12 @@ if (file_exists($config_file)) {
   $pass = $settings['PASS'];
   $ip = $settings['IP'];
   $urlp = "http://" . $user . ":" . $pass . "@" . $ip;
+  $profile = $settings['PROFILE'];
+  $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
 }
-else if (strpos($_SERVER['PHP_SELF'], 'config.php') === false) {
+else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&
+	(strpos($_SERVER['PHP_SELF'], 'configure.php') === false)) {
   header('Location: config.php');
   die;
 }
@@ -77,6 +79,15 @@ function get_links() {
   return $ret;
 }
 
+function get_profiles() {
+  global $urlp;
+  $url = "$urlp/api/dvr/config/grid";
+  $json = curl_file_get_contents($url);
+  $j = json_decode($json, true);
+  $ret = &$j["entries"];
+  return $ret;
+}
+
 
 function sort_channels($a, $b) {
   return strcasecmp($a["val"], $b["val"]);
@@ -100,7 +111,7 @@ function curl_file_get_contents($URL)
 
     if ($contents) return $contents;
     else {
-        echo "Failed to get contents for $URL";
+#        echo "Failed to get contents for $URL";
         return FALSE;
     }
 }
