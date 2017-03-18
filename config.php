@@ -98,65 +98,56 @@
 		echo "</td>";
 	    echo "</tr>";
 	  }
-	}
-?>
-	</table>
+	echo "</table>
 
-	<table border="0" cellspacing="0" cellpadding="0" class="group">
-	    <tr class="heading">
-		<td colspan="2"><h2>Preferences</h2></td>
+	<table border='0' cellspacing='0' cellpadding='0' class='group'>
+	    <tr class='heading'>
+		<td colspan='2'><h2>Preferences</h2></td>
 	    </tr>
-	    <tr class="row_odd">
-		<td class="col_label"><h5>EPG Day starts at:</h5></td>
-		<td class="col_value">
-		    <select name="EPGSTART">
-<?php
+	    <tr class='row_odd'>
+		<td class='col_label'><h5>EPG Day starts at:</h5></td>
+		<td class='col_value'>
+		    <select name='EPGSTART'>";
 	for ($st=0; $st<7; $st++) {
 	  echo "<option value=\"$st\"";
 	  if (isset($epg_start) && ($st == $epg_start)) echo " selected";
 	  echo ">$st:00</option>";
 	}
-?>
-		    </select>
+		  echo "</select>
 		</td>
 	    </tr>
 	</table>
 
-	<table border="0" cellspacing="0" cellpadding="0" class="group">
-	    <tr class="heading">
-		<td colspan="3"><h2>Channel Selections</h2></td>
+	<table border='0' cellspacing='0' cellpadding='0' class='group'>
+	    <tr class='heading'>
+		<td colspan='3'><h2>Channel Selections</h2></td>
 	    </tr>
-	    <tr class="row_odd">
-		<td class="col_channels">
-		    <select name="all_channels" size="8" multiple="multiple" class="channels">
-<?php
-	if (isset($urlp)) {
+	    <tr class='row_odd'>
+		<td class='col_channels'>
+		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();
 	    foreach($chans as $v) {
 		$cname = $v["val"];
 		print "<option value=\"$cname\">$cname</option>";
 	    }
-	}
-?>
-		    </select>
+		    echo "</select>
 		</td>
 		<td>
-		    <input type="button" onClick="one2two()" value="&gt;&gt;&gt;&gt;&gt;" /><br />
-		    <input type="button" onClick="two2one()" value="&lt;&lt;&lt;&lt;&lt;" />
+		    <input type='button' onClick='one2two()' value='&gt;&gt;&gt;&gt;&gt;' /><br />
+		    <input type='button' onClick='two2one()' value='&lt;&lt;&lt;&lt;&lt;' />
 		</td>
-		<td class="col_wanted_channels">
-		    <select name="selected_channels[]" size="8" multiple="multiple" class="channels">
-<?php
+		<td class='col_wanted_channels'>
+		    <select name='selected_channels[]' size='8' multiple='multiple' class='channels'>";
 	$sel = &$settings['selected_channels'];
 	foreach($sel as $s) {
 	    echo "<option value=\"$s\">$s</option>";
 	}
-?>
-		    </select>
+		    echo "</select>
 		</td>
-	    </tr>
+	    </tr>";
+	}
+?>
 	</table>
-
 	<div id="buttons">
 	    <input type="submit" class="submit" name="save" value="Save" onclick="selectAll()" />
 	</div>
@@ -172,5 +163,6 @@
     </script>
   </div>
  </div>
+</div>
 </body>
 </html>
