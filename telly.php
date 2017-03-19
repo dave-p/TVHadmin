@@ -99,8 +99,6 @@
 	  echo "</table></div>\n";
 	}
  ?>
-    </p>
-</div>
 <!-- end container -->
 </div>
 </body>

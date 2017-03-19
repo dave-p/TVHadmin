@@ -80,11 +80,10 @@
 	    $i++;
 	    $id++;
 	  }
-	  echo "</table>\n";
+	  echo "</table></div>";
 	}
-	echo "</div>";
  ?>
-    </p>
+    </div>
 <!-- end container -->
 </div>
 </body>
