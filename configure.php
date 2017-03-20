@@ -13,5 +13,5 @@
 	}
 	$enc = json_encode($vars);
 	file_put_contents($config_file, $enc);
-	header('Location: fav.php'); 
+	header('Location: TVHadmin.php?screen=config'); 
 ?>

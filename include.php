@@ -1,6 +1,15 @@
 <?php
 $config_file = 'data/config';
 
+$pages = array(
+	'now'=>"What's On Now?",
+	'telly'=>'Channels',
+	'fav'=>'Favourite Channels',
+	'timers'=>'Timers',
+	'recordings'=>'Recordings',
+	'links'=>'Series Links',
+	'config'=>'Configuration');
+
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
   $settings = json_decode($conf, true);

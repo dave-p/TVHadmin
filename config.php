@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Configuration';
-  include_once('head.php');
+  include_once('./head.php');
 ?>
     <script language= "JavaScript">
 
@@ -60,7 +60,6 @@
 	    <tr class="row_odd">
 		<td class="col_label"><h5>Username:</h5></td>
 <?php
-		include_once "include.php";
 		echo "<td class=\"col_value\"><input type=\"text\" name=\"USER\" value=\"$user\" size=\"16\" /></td>";
 ?>
 	    </tr>
@@ -114,6 +113,18 @@
 	  echo ">$st:00</option>";
 	}
 		  echo "</select>
+		</td>
+	    </tr>
+	    <tr class='row_even'>
+		<td class='col_label'><h5>Home Page:</h5></td>
+		<td class='col_value'>
+		    <select name='HOME'>";
+	foreach ($pages as $key=>$value) {
+	  echo "<option value='$key'";
+	  if (isset($settings['HOME']) && ($key == $settings['HOME'])) echo " selected";
+	  echo ">$value</option>";
+	}
+		echo "</select>
 		</td>
 	    </tr>
 	</table>

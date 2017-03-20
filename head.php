@@ -9,7 +9,20 @@
 </head> 
 <body>
 <div id="container">
+  <div id="navigation">
+    <div class="logo">
+      <img src="images/logo.png" alt="TVHeadend Logo" width="150" border="0" />
+    </div>
+    <div class="nav_bar">
 <?php
-  include_once realpath(dirname(__FILE__) . '/nav.html'); 
-  include_once realpath(dirname(__FILE__) . '/include.php');
+  include_once './include.php';
+  foreach ($pages as $key=>$value) {
+    echo "<div class='navi'><a href='TVHadmin.php?screen=$key'>$value</a></div>";
+  }
 ?>
+      <form action="search.php" method="POST" name="telly" class="search">
+        <input type="text" name="find" /><br />
+        <input type="submit" name="submit" value="Search" />
+      </form>
+    </div>
+  </div>
