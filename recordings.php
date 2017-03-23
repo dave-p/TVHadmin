@@ -1,17 +1,27 @@
 <?php
   $page_title = 'Recordings';
-  include_once('head.php');
-?>
-  <div id="rec_list">
-    <div id="layout">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading"><tr><td class="col_title"><h1>Recordings</h1></td></tr></table>
-      <table width="100%" border=0 cellpadding=0 class="list hilight">
-      <tr class="heading"><td class="col_date"><h2>Date</h2></td>
-      <td class="col_time"><h2>Time</h2></td>
-      <td class="col_length"><h2>Length</h2></td> 
-      <td class="col_name"><h2>Name</h2></td></tr> 
-<?php
-        $recordings = get_recordings();
+  include_once './head.php';
+  if (!isset($sort)) $sort = 0;
+  if (isset($_POST['last_sort'])) $sort = 1 - $_POST['last_sort'];
+  echo "
+  <div id='rec_list'>
+    <div id='layout'>
+      <form name='order' method='POST' action='recordings.php'>
+        <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
+	  <tr><td class='col_title'><h1>Recordings</h1></td>
+	    <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
+	     <input type='hidden' name='last_sort' value='$sort'></td>
+	  </tr>
+	</table>
+      </form>
+      <table width='100%' border=0 cellpadding=0 class='list hilight'>
+        <tr class='heading'><td class='col_date'><h2>Date</h2></td>
+          <td class='col_time'><h2>Time</h2></td>
+          <td class='col_length'><h2>Length</h2></td>
+          <td class='col_name'><h2>Name</h2></td>
+	</tr>
+  ";
+        $recordings = get_recordings($sort);
 	$i = 0;
 	foreach($recordings as $t) {
 		$time = strftime("%H:%M", $t["start"]);
@@ -20,18 +30,19 @@
 		$hh = $duration / 3600;
 		$mm = ($duration % 3600) / 60;
 		if ($i % 2) {
-			echo "<tr class=\"row_odd\">";
+			echo "<tr class='row_odd'>";
 		}
 		else {
-			echo "<tr class=\"row_even\">";
+			echo "<tr class='row_even'>";
 		}
-		printf("<td class=\"col_date selected\"><div>%s</div></td>", $date);
-               printf("<td class=\"col_time\"><div>%s</div></td><td class=\"col_length\"><div>%d:%02d</div></td><td class=\"col_name\"><div class=\"epg_title\">%s</div><div class=\"epg_subtitle\">%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_subtitle"]);
+		echo "<td class='col_date selected'><div>$date</div></td>";
+		printf("<td class='col_time'><div>%s</div></td><td class='col_length'><div>%d:%02d</div></td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_subtitle"]);
                 echo "</tr>\n";
 		$i++;
 	}
-	echo "</table></div>\n";
- ?>
+?>
+      </table>
+     </div>
     </div>
    </div>
   </body>

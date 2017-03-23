@@ -127,6 +127,18 @@
 		echo "</select>
 		</td>
 	    </tr>
+	    <tr class='row_odd'>
+		<td class='col_label'><h5>Recordings Sort Order:</h5></td>
+		<td class='col_value'>
+		    <select name='SORT'>";
+	foreach ($orders as $key=>$value) {
+	  echo "<option value='$key'";
+	  if (isset($settings['SORT']) && ($key == $settings['SORT'])) echo " selected";
+	  echo ">$value</option>";
+	}
+		  echo "</select>
+		</td>
+	    </tr>
 	</table>
 
 	<table border='0' cellspacing='0' cellpadding='0' class='group'>

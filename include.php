@@ -10,6 +10,10 @@ $pages = array(
 	'links'=>'Series Links',
 	'config'=>'Configuration');
 
+$orders = array(
+	0 => "Date",
+	1 => "Title");
+
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
   $settings = json_decode($conf, true);
@@ -20,6 +24,7 @@ if (file_exists($config_file)) {
   $profile = $settings['PROFILE'];
   $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
+  $sort = $settings['SORT'];
 }
 else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&
 	(strpos($_SERVER['PHP_SELF'], 'configure.php') === false)) {
@@ -59,13 +64,14 @@ function get_timers() {
   return $ret;
 }
 
-function get_recordings() {
+function get_recordings($s) {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid_finished";
   $json = curl_file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
-  usort($ret, "sort_recordings");
+  if($s == 0) usort($ret, "sort_recordings");
+  else usort($ret, "sort_recordings_title");
   return $ret;
 }
 
@@ -108,6 +114,27 @@ function sort_timers($a, $b) {
 
 function sort_recordings($a, $b) {
   return ($a["start"] - $b["start"]);
+}
+
+function sort_recordings_title($a, $b) {
+  $x = $a["disp_title"];
+  $y = $b["disp_title"];
+  if(strncmp($x, 'New: ', 5) == 0) {
+    $x = substr($x, 5);
+    if(substr($x, -3) == '...') {
+      $x = substr($x, 0, -3);
+    }
+  }
+  if(strncmp($y, 'New: ', 5) == 0) {
+    $y = substr($y, 5);
+    if(substr($y, -3) == '...') {
+      $y = substr($y, 0, -3);
+    }
+  }
+  $n = min(strlen($x), strlen($y));
+  $ret = strncmp($x, $y, $n);
+  if($ret == 0) return ($a["start"] - $b["start"]);
+  return $ret;
 }
 
 function curl_file_get_contents($URL)
