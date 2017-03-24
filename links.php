@@ -1,5 +1,6 @@
 <?php
-  include_once('head.php');
+  $page_title = 'Series Links';
+  include_once './head.php';
 ?>
   <div id="series_list">
     <div id="layout">
