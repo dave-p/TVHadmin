@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Search Results';
-  include_once('head.php');
+  include_once './head.php';
 ?>
 	<script type="text/javascript">
 	function formSubmit()

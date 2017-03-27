@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Timers';
-  include_once('head.php');
+  include_once './head.php';
 ?>
  <div id="layout">
   <div id="timer_list">
@@ -39,10 +39,10 @@
 		echo "<td class=\"col_info\"><img src=\"images/tick_red.png\"></td>";
 		$clashes[] = $t;
 	    }
-	    printf("<td class=\"col_channel\"><div>%s</div></td><td class=\"col_date selected\"><div>%s</div></td>", $t["channelname"], $date);
-            printf("<td class=\"col_start\"><div>%s</div></td><td class=\"col_stop\"><div>%s</div></td><td class=\"col_name\"><div>%s</div></td>", $start, $stop, $t["disp_title"]);
+	    printf("<td class=\"col_channel\">%s</td><td class=\"col_date selected\">%s</td>", $t["channelname"], $date);
+            printf("<td class=\"col_start\">%s</td><td class=\"col_stop\">%s</td><td class=\"col_name\">%s</td>", $start, $stop, $t["disp_title"]);
 	    if ($t["autorec"] != "") {
-		echo "<td class=\"col_channel\"><div>Series Link</div></td>";
+		echo "<td class=\"col_channel\">Series Link</td>";
 	    }
 	    else {
 		echo "<td class=\"col_channel\"></td>";

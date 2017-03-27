@@ -143,7 +143,7 @@
 
 	<table border='0' cellspacing='0' cellpadding='0' class='group'>
 	    <tr class='heading'>
-		<td colspan='3'><h2>Channel Selections</h2></td>
+		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
 	    <tr class='row_odd'>
 		<td class='col_channels'>

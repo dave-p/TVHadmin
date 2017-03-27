@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Favourite Channels';
-  include_once('head.php');
+  include_once './head.php';
 ?>
 	<script type="text/javascript">
 	function formSubmit()
@@ -36,7 +36,7 @@
 	}
 	echo "</select>&nbsp; ";
 	echo "</td></tr></table></form>";
-	echo " <p>";
+#	echo " <p>";
 	$id = 0;
 
 	foreach ($chans as $c) {

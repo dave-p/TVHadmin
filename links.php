@@ -4,12 +4,18 @@
 ?>
   <div id="series_list">
     <div id="layout">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading"><tr><td class="col_title"><h1>Series Links</h1></td></tr></table>
-      <table width="100%" border=0 cellpadding=0 class="list hilight"><tr class="heading">
-      <td class="col_start"><h2>Timers</h2></td>
-      <td class="col_channel"><h2>Channel</h2></td>
-      <td class="col_name"><h2>Name</h2></td> 
-      <td class="col_delete"></td></tr>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+        <tr>
+	  <td class="col_title"><h1>Series Links</h1></td>
+	</tr>
+      </table>
+      <table width="100%" border=0 cellpadding=0 class="list hilight">
+	<tr class="heading">
+	  <td class="col_start"><h2>Timers</h2></td>
+	  <td class="col_channel"><h2>Channel</h2></td>
+	  <td class="col_name"><h2>Name</h2></td> 
+	  <td class="col_delete"></td>
+	</tr>
 <?php
         $links = get_links();
 	$channels = get_channels();
@@ -33,14 +39,17 @@
 	    foreach($timers as $t) {
 		if ($t["autorec"] == $l["uuid"]) $n++;
 	    }
-            printf("<td class=\"col_start\"><div>%d</div></td>", $n);
-	    printf("<td class=\"col_channel\"><div>%s</div></td>", $channelname);
-            printf("<td class=\"col_name\"><div>%s</div></td>", $l["title"]);
-            printf ("<td class=\"col_delete\"><a href=\"delete.php?uuid=%s\"><img src=\"images\delete.png\"></a></td></tr>\n", $l["uuid"]);
+	    echo "
+	<td class='col_start'>$n</td>
+	<td class='col_channel'>$channelname</td>
+	<td class='col_name'>{$l['title']}</td>
+	<td class='col_delete'><a href='delete.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
+      </tr>\n";
 	    $i++;
 	}
-	echo "</table></div>\n";
  ?>
+     </table>
+    </div>
    </div>
   </div>
   </body>

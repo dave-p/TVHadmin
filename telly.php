@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Channels';
-  include_once('head.php');
+  include_once './head.php';
 ?>
 	<script type="text/javascript">
 	function formSubmit()
@@ -21,11 +21,14 @@
 	}
 	$id = 0;
 
-        echo "<div id=\"layout\">";
-        echo " <form name=\"whatandwhen\" method=\"GET\" action=\"telly.php\">";
-        echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" id=\"heading\"><tr><td class=\"col_title\"><h1>Channels</h1></td>";
-	echo "<td>Channel: <select name=\"prog\" size=\"1\" onchange=\"formSubmit()\">";
-
+        echo "
+  <div id='layout'>
+    <form name='whatandwhen' method='GET' action='telly.php'>
+      <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
+	<tr>
+	  <td class='col_title'><h1>Channels</h1></td>
+	  <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>
+	";
 	$chans = get_channels();
 	foreach($chans as $v) {
 	  $cname = $v["val"];
@@ -49,13 +52,6 @@
 	  $date += 86400; 
 	}
 	echo "</select></td>";
-#	echo "<input type=\"checkbox\" name=\"All\" onchange=\"formSubmit()\"";
-#	if (isset($_POST['All'])) {
-#	  echo " checked=\"checked\"";
-#	}
-#	echo ">All Dates&nbsp;";
-	echo "</tr></table></form>";
-	echo " <p>";
 
 	if(isset($prog)) {
 	  echo "<table border=0 cellpadding=2 class=\"list hilight\">";

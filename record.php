@@ -1,5 +1,5 @@
 <?php
-	include_once "include.php";
+	include_once "./include.php";
 	$evt = $_GET["eventId"];
 	$id = $_GET['id'];
 	$when = $_GET['when'];

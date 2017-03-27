@@ -35,8 +35,8 @@
 		else {
 			echo "<tr class='row_even'>";
 		}
-		echo "<td class='col_date selected'><div>$date</div></td>";
-		printf("<td class='col_time'><div>%s</div></td><td class='col_length'><div>%d:%02d</div></td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_subtitle"]);
+		echo "<td class='col_date selected'>$date</td>";
+		printf("<td class='col_time'>%s</td><td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_subtitle"]);
                 echo "</tr>\n";
 		$i++;
 	}
