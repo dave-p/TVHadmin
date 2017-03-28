@@ -53,10 +53,8 @@
 	echo "</table></div>\n";
 	foreach ($clashes as $c) {
 	    $title = $c["disp_title"];
-	    $poss = search_epg($c["channelname"],$title);
-#var_dump($poss);
-	    foreach ($poss as $p) {
-		if ($p["start"] == $c["start"]) break;
+	    if (preg_match("/^(.*).../", $title, $t)) {
+		$title = $t[1];
 	    }
 	    if (preg_match("/^New: (.*)/", $title, $t)) {
 		$ts = $t[1];
@@ -66,18 +64,21 @@
 		$ts = $title;
 		$tl = "New: " . $title;
 	    }
-	    $alt1 = search_epg("",$ts);
-#var_dump($alt1);
-#	    $alt2 = search_epg("",$tl);
-#	    $alts = array_merge($alt1, $alt2);
-	    printf("<p>Alternatives for \"%s\" (%s)</p><ul>", $ts, $tl);
-	    foreach ($alt1 as $a) {
-		if ($p["episodeUri"] == $a["episodeUri"]) {
-		    $when = strftime("%a %e/%m %H:%M", $a["start"]);
-		    printf("<li>%s %s</li>", $when,$a["title"]);
+	    $poss = search_epg($c["channelname"],$ts);
+	    foreach ($poss as $p) {
+		if ($p["start"] == $c["start"]) {
+		    $alt1 = search_epg("",$ts);
+		    printf("<p>Alternatives for \"%s\" (%s)</p><ul>", $ts, $tl);
+		    foreach ($alt1 as $a) {
+			if ($p["episodeUri"] == $a["episodeUri"]) {
+			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
+			    printf("<li>%s %s</li>", $when,$a["title"]);
+			}
+		    }
+		    echo "</ul>";
+		    break;
 		}
 	    }
-	    echo "</ul>";
 	}
  ?>
     </div>
