@@ -39,6 +39,7 @@
 	    foreach($timers as $t) {
 		if ($t["autorec"] == $l["uuid"]) $n++;
 	    }
+	    $l['title'] = stripslashes($l['title']);
 	    echo "
 	<td class='col_start'>$n</td>
 	<td class='col_channel'>$channelname</td>
