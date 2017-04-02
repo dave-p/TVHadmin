@@ -20,7 +20,13 @@ if (file_exists($config_file)) {
   $user = $settings['USER'];
   $pass = $settings['PASS'];
   $ip = $settings['IP'];
-  $urlp = "http://" . $user . ":" . $pass . "@" . $ip;
+  if ($user == '') {
+    $urlp = "http://$ip";
+  }
+  else if ($pass == '') {
+    $urlp = "http://$user@$ip";
+  }
+  else $urlp = "http://$user:$pass@$ip";
   $profile = $settings['PROFILE'];
   $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
