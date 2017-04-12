@@ -53,7 +53,7 @@
 	echo "</table></div>\n";
 	foreach ($clashes as $c) {
 	    $title = $c["disp_title"];
-	    if (preg_match("/^(.*).../", $title, $t)) {
+	    if (preg_match("/^(.*)\.\.\./", $title, $t)) {
 		$title = $t[1];
 	    }
 	    if (preg_match("/^New: (.*)/", $title, $t)) {
@@ -72,7 +72,7 @@
 		    foreach ($alt1 as $a) {
 			if ($p["episodeUri"] == $a["episodeUri"]) {
 			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
-			    printf("<li>%s %s</li>", $when,$a["title"]);
+			    printf("<li>%s %s %s</li>", $when,$a["channelName"],$a["title"]);
 			}
 		    }
 		    echo "</ul>";
