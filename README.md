@@ -7,7 +7,8 @@ This project provides a simple web-based front-end for TVHeadend. It is inspired
 ### Requirements:
 - A recent version of TVHeadend (at least v4.2 - the latest development version preferred).
 - A web server to host TVHadmin, with PHP available.
-- PHP must be able to read/write files in a suitable directory; this is probably not allowed by default.
+- PHP must be able to read/write files in a suitable directory; see the 'open_basedir' directive in PHP.INI.
+- The cURL PHP module must be installed.
 
 Note that the web server is responsible for security! For use across the internet you should configure authentication on the web server and preferably use SSL.
 
