@@ -70,7 +70,7 @@
 ?>
 	    </tr>
 	    <tr class="row_odd">
-		<td class="col_label"><h5>IP Address:</h5></td>
+		<td class="col_label"><h5>IP Address:port:</h5></td>
 <?php
 		echo "<td class=\"col_value\"><input type=\"text\" name=\"IP\" value=\"$ip\" size=\"24\" /></td>";
 ?>
