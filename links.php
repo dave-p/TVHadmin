@@ -13,6 +13,7 @@
 	<tr class="heading">
 	  <td class="col_start"><h2>Timers</h2></td>
 	  <td class="col_channel"><h2>Channel</h2></td>
+	  <td class="col_channel"><h2>Link</h2></td>
 	  <td class="col_name"><h2>Name</h2></td> 
 	  <td class="col_delete"></td>
 	</tr>
@@ -40,9 +41,11 @@
 		if ($t["autorec"] == $l["uuid"]) $n++;
 	    }
 	    $l['title'] = stripslashes($l['title']);
+	    $crid = strrchr($l['serieslink'], '/');
 	    echo "
 	<td class='col_start'>$n</td>
 	<td class='col_channel'>$channelname</td>
+	<td class='col_channel'>$crid</td>
 	<td class='col_name'>{$l['title']}</td>
 	<td class='col_delete'><a href='delete.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
       </tr>\n";
