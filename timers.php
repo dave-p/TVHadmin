@@ -58,17 +58,15 @@
 	    }
 	    if (preg_match("/^New: (.*)/", $title, $t)) {
 		$ts = $t[1];
-		$tl = $title;
 	    }
 	    else {
 		$ts = $title;
-		$tl = "New: " . $title;
 	    }
 	    $poss = search_epg($c["channelname"],$ts);
 	    foreach ($poss as $p) {
 		if ($p["start"] == $c["start"]) {
 		    $alt1 = search_epg("",$ts);
-		    printf("<p>Alternatives for \"%s\" (%s)</p><ul>", $ts, $tl);
+		    echo "<p>Alternatives for \"$ts\"</p><ul>";
 		    foreach ($alt1 as $a) {
 			if ($p["episodeUri"] == $a["episodeUri"]) {
 			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
@@ -103,10 +101,9 @@
 	}
 
         function check_event($timers, $e) {
-            if (count($timers) < 1) return true;
             $estart = $e["start"];
             $estop = $e["stop"];
-            $euuid = $e["dvrUuid"];
+            @$euuid = $e["dvrUuid"];
             foreach ($timers as $t) {
               if (!$t["enabled"]) continue;
               if ($t["uuid"] == $euuid) continue;
