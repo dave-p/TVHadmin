@@ -72,7 +72,12 @@
 		    foreach ($alt1 as $a) {
 			if ($p["episodeUri"] == $a["episodeUri"]) {
 			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
-			    printf("<li>%s %s %s</li>", $when,$a["channelName"],$a["title"]);
+			    if (check_event($timers, $a)) {
+				printf("<li>%s %s %s</li>", $when,$a["channelName"],$a["title"]);
+			    }
+			    else {
+				printf("<li>%s %s %s (CLASH)</li>", $when,$a["channelName"],$a["title"]);
+			    }
 			}
 		    }
 		    echo "</ul>";
@@ -80,7 +85,39 @@
 		}
 	    }
 	}
- ?>
+
+	function check_timer($timers, $t) {
+	    if (count($timers) < 2) return true;
+	    $tstart = $t["start"];
+	    $tstop = $t["stop"];
+	    $tuuid = $t["uuid"];
+	    foreach ($timers as $m) {
+	      if (!$m["enabled"]) continue;
+	      if ($m["uuid"] == $tuuid) continue;
+	      if(($tstart >= $m["start"] && $tstart < $m["stop"])
+	          ||($m["start"] >= $tstart && $m["start"] < $tstop)) {
+		return false;
+	      }
+	    }
+	    return true;
+	}
+
+        function check_event($timers, $e) {
+            if (count($timers) < 1) return true;
+            $estart = $e["start"];
+            $estop = $e["stop"];
+            $euuid = $e["dvrUuid"];
+            foreach ($timers as $t) {
+              if (!$t["enabled"]) continue;
+              if ($t["uuid"] == $euuid) continue;
+              if(($estart >= $t["start"] && $estart < $t["stop"])
+                  ||($t["start"] >= $estart && $t["start"] < $estop)) {
+                return false;
+              }
+            }
+            return true;
+        }
+?>
     </div>
    </div>
   </body>

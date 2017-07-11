@@ -157,20 +157,4 @@ function curl_file_get_contents($URL)
         return FALSE;
     }
 }
-
-function check_timer($timers, $t) {
-  if (count($timers) < 2) return true;
-  $tstart = $t["start"];
-  $tstop = $t["stop"];
-  $tuuid = $t["uuid"];
-  foreach ($timers as $m) {
-    if (!$m["enabled"]) continue;
-    if ($m["uuid"] == $tuuid) continue;
-    if(($tstart >= $m["start"] && $tstart < $m["stop"])
-	||($m["start"] >= $tstart && $m["start"] < $tstop)) {
-	  return false;
-    }
-  }
-  return true;
-} 
 ?>
