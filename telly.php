@@ -11,13 +11,13 @@
  <?php
         $timers = get_timers();
         $dt = localtime(time(), true);
-        $date = mktime($epg_start, 0, 0, $dt["tm_mon"]+1, $dt["tm_mday"], $dt["tm_year"]+1900);
+        $today = mktime($epg_start, 0, 0, $dt["tm_mon"]+1, $dt["tm_mday"], $dt["tm_year"]+1900);
 	if(isset($_GET['prog'])) {
 	  $prog = $_GET['prog'];
 	  $when = $_GET['when'];
 	}
 	else {
-	  $when = $date;
+	  $when = $today;
 	}
 	$id = 0;
 
@@ -39,9 +39,13 @@
 	  print(">$cname</option>");
 	}
 
-	echo "</select></td>";
-	echo "<td>Date: <select name=\"when\" size=\"1\" onchange=\"formSubmit()\">";
-
+	echo "</select></td><td>";
+	$prev = $when - 86400;
+	if ($prev >= $today) {
+	  echo "<a href='telly.php?prog=$prog&when=$prev'><img src='images/left.png'></a>";
+	}
+	echo "&nbsp;<select name='when' size='1' onchange='formSubmit()'>";
+	$date = $today;
 	for($i=0; $i<8; $i++) {
 	  $d = date('D d/n', $date);
 	  print("<option value=\"$date\"");
@@ -51,7 +55,12 @@
 	  print(">$d</option>");
 	  $date += 86400; 
 	}
-	echo "</select></td>";
+	echo "</select>&nbsp;";
+	$next = $when + 86400;
+	if ($next <= $today+7*86400) {
+	  echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
+	}
+	echo "</td></table></form>";
 
 	if(isset($prog)) {
 	  echo "<table border=0 cellpadding=2 class=\"list hilight\">";
