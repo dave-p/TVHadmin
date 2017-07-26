@@ -41,8 +41,8 @@
 	}
 	echo "</select>&nbsp; ";
 	$next = $when + 86400;
-	if ($next <= $today+7*86400) {
-	  echo "<a href='fav.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
+	if ($next < $date) {
+	  echo "<a href='fav.php?when=$next'><img src='images/right.png'></a>";
 	}
 	echo "</td></tr></table></form>";
 	$id = 0;
