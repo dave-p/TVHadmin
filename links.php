@@ -24,10 +24,10 @@
 	$i = 0;
 	foreach($links as $l) {
 	    if ($i % 2) {
-		echo "<tr class=\"row_odd\">";
+		echo "<tr class='row_odd'>";
 	    }
 	    else {
-		echo "<tr class=\"row_even\">";
+		echo "<tr class='row_even'>";
 	    }
 	    $lc = $l["channel"];
 	    foreach($channels as $c) {
@@ -47,7 +47,7 @@
 	<td class='col_channel'>$channelname</td>
 	<td class='col_channel'>$crid</td>
 	<td class='col_name'>{$l['title']}</td>
-	<td class='col_delete'><a href='delete.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
+	<td class='col_delete'><a href='delete-series.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
       </tr>\n";
 	    $i++;
 	}

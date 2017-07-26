@@ -24,30 +24,30 @@
 	    $stop = strftime("%H:%M", $t["stop"]);
 	    $date = strftime("%a %e/%m", $t["start"]);
 	    if ($i % 2) {
-		echo "<tr class=\"row_odd\">";
+		echo "<tr class='row_odd'>";
 	    }
 	    else {
-		echo "<tr class=\"row_even\">";
+		echo "<tr class='row_even'>";
 	    }
 	    if (!$t["enabled"]) {
-		echo "<td class=\"col_info\"><img src=\"images/tick_yellow.png\"></td>";
+		echo "<td class='col_info'><img src='images/tick_yellow.png'></td>";
 	    }
 	    elseif (check_timer($timers, $t)) {
-		echo "<td class=\"col_info\"><img src=\"images/tick_green.png\"></td>";
+		echo "<td class='col_info'><img src='images/tick_green.png'></td>";
 	    }
 	    else {
-		echo "<td class=\"col_info\"><img src=\"images/tick_red.png\"></td>";
+		echo "<td class='col_info'><img src='images/tick_red.png'></td>";
 		$clashes[] = $t;
 	    }
-	    printf("<td class=\"col_channel\">%s</td><td class=\"col_date selected\">%s</td>", $t["channelname"], $date);
-            printf("<td class=\"col_start\">%s</td><td class=\"col_stop\">%s</td><td class=\"col_name\">%s</td>", $start, $stop, $t["disp_title"]);
+	    printf("<td class='col_channel'>%s</td><td class='col_date selected'>%s</td>", $t["channelname"], $date);
+            printf("<td class='col_start'>%s</td><td class='col_stop'>%s</td><td class='col_name'>%s</td>", $start, $stop, $t["disp_title"]);
 	    if ($t["autorec"] != "") {
-		echo "<td class=\"col_channel\">Series Link</td>";
+		echo "<td class='col_channel'>Series Link</td>";
 	    }
 	    else {
-		echo "<td class=\"col_channel\"></td>";
+		echo "<td class='col_channel'></td>";
 	    }
-            printf ("<td class=\"col_delete\"><a href=\"delete.php?uuid=%s\"><img src=\"images\delete.png\" title=\"Delete Timer\"></a></td></tr>\n", $t["uuid"]);
+            printf ("<td class='col_delete'><a href='delete-timer.php?uuid=%s'><img src='images\delete.png' title='Delete Timer'></a></td></tr>\n", $t["uuid"]);
 	    $i++;
 	}
 	echo "</table></div>\n";
