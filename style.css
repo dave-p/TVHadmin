@@ -32,8 +32,12 @@ div {
 
 #layout {
   margin-left: 169px;
-  overflow: auto;
-  max-height: 99vh;
+  overflow-y: auto;
+  max-height: 95vh;
+}
+
+#topmenu {
+  margin-left: 169px;
 }
 
 input {
@@ -153,15 +157,6 @@ label + input {
 	font-weight: bold;
 }
 
-#error h2 {
-	font-size: 12px;
-	color: red;
-}
-
-body.help .heading {
-	display: table-row;
-}
-
 .row_odd td,
 .row_even td,
 .heading {
@@ -265,69 +260,6 @@ body.help .heading {
 }
 
 /* Summary */
-#prog_summary .group {
-	margin: 0 3px 3px 0;
-	display: inline;
-	float: left;
-}
-#prog_summary .heading td.col_content {
-	height: 17px;
-	width: 246px;
-	color: white;
-	background-color: #6d96a9;
-	white-space: nowrap;
-	overflow: hidden;
-}
-#prog_summary .row_even td.col_content {
-	width: 246px;
-	height: 200px;
-	background-color: #dee6ee;
-	vertical-align: top;
-}
-#prog_summary table.content td.col_buttons {
-	height: 200px;
-}
-#prog_summary .col_epg {
-	vertical-align: top;
-}
-#prog_summary .date_long {
-	text-align: right;
-	margin-top: 3px;
-	float: left;
-}
-#prog_summary .time_duration {
-	text-align: right;
-	margin-top: 3px;
-}
-#prog_summary .epg_title {
-	margin-top: 1em;
-	width: 216px;
-	overflow: hidden;
-	white-space: nowrap;
-}
-#prog_summary .epg_subtitle {
-	width: 216px;
-	overflow: hidden;
-	white-space: nowrap;
-}
-#prog_summary .epg_summary {
-	margin-top: 1em;
-	margin-bottom: 3px;
-	width: 210px;
-	height: 120px;
-	overflow: auto;
-	white-space: normal;
-}
-#prog_summary .heading a {
-	font-weight: bold;
-	color: white;
-	padding: 2px 2px;
-}
-
-#action_record_settings,
-#action_switch_settings {
-	margin-top: 1em;
-}
 .newday {
 	height: 17px;
 	background-color: #6d96a9;
@@ -370,67 +302,6 @@ body.help .heading {
 }
 #prog_summary2 table.percent .remaining {
 	background-color: transparent;
-}
-
-#prog_detail .heading .col_content * {
-	color: white;
-	font-weight: bold;
-}
-#prog_detail .channel_name {
-	white-space: nowrap;
-}
-#prog_detail .date_long {
-	margin-left: 2em;
-	white-space: nowrap;
-}
-#prog_detail .time_vps,
-#prog_detail .time_duration {
-	margin-left: 2em;
-	white-space: nowrap;
-}
-#prog_detail .epg_title {
-	display: block;
-}
-#prog_detail .epg_subtitle {
-	font-size: 12px;
-	font-weight: normal;
-	color: black;
-	display: block;
-}
-#prog_detail .epg_summary {
-	margin: 2em 0;
-	display: block;
-}
-#prog_detail .epg_video h4,
-#prog_detail .epg_audio h4 {
-	margin: 0;
-	font-size: 10px;
-	font-weight: bold;
-	display: inline;
-}
-#prog_detail .epg_video h5,
-#prog_detail .epg_audio h5 {
-	margin-left: 1em;
-	display: inline;
-	font-size: 10px;
-	font-weight: normal;
-	font-style: italic;
-}
-#prog_detail .col_epg {
-	padding: 1em;
-}
-#prog_summary .row_even td.col_content,
-#prog_detail .row_even td.col_content {
-	padding: 0;
-}
-#prog_summary table.content td.col_buttons,
-#prog_detail table.content td.col_buttons {
-	padding-top: 1em;
-	vertical-align: top;
-	width: 20px;
-	text-align: center;
-	background-color: #dee6ee;
-	border-right: 1px solid #6d96a9;
 }
 
 .heading,
@@ -503,38 +374,7 @@ body.help .heading {
 #heading .col_other table {
 	display: inline;
 }
-#heading .col_help {
-	text-align: center;
-	width: 45px;
-}
 
-#prog_timeline #content {
-	position: absolute;
-	top: 32px;
-	left: 3px;
-}
-#prog_timeline .timertable,
-#prog_timeline .prgtable {
-	border-color: #6d96a9;
-}
-#prog_timeline #timeline {
-	background: red;
-}
-#prog_timeline .color_current {
-	background-color: #b4e29c;
-}
-#prog_timeline .color_summary {
-	background-color: #dee6ee;
-}
-#prog_timeline .color_broadcast {
-	background-color: #ffffff;
-}
-#prog_timeline .color_timer {
-	background-color: #ffb2b4;
-}
-#prog_timeline .color_spacer {
-	background-color: #e0e0e0;
-}
 #rec_list #path {
 	margin: 1em 10px 0px 10px;
 }
@@ -578,34 +418,6 @@ body.help .heading {
 #prog_timeline table.timestable td.color2 {
 	background-color: #dee6ee;
 }
-#vdr_cmds pre {
-	margin: 0px;
-	padding: 0px;
-}
-
-#epgsearch_new #use_extepg_settings {
-	white-space: normal;
-	vertical-align: top;
-}
-#epgsearch_new #use_extepg_settings table {
-	padding: 0 5px 5px 0;
-	display: inline;
-	float: left;
-	vertical-align: top;
-	height: 100%;
-}
-#epgsearch_new #use_extepg_settings table select,
-#epgsearch_new #use_extepg_settings table input {
-	width: 100%;
-}
-#epgsearch_new #avoid_repeats_settings div {
-	white-space: normal;
-}
-#epgsearch_new #avoid_repeats_settings span {
-	float: left;
-	padding-right: 1em;
-}
-
 #content {
 	margin-top: 0.6em;
 }
@@ -617,7 +429,6 @@ body.help .heading {
 	background-color: #dee6ee;
 	text-align: right;
 }
-
 #config .heading {
 	background-color: #dee6ee;
 	border: none;
@@ -667,76 +478,6 @@ select.channels {
 	padding-right: 5px;
 }
 
-/* Help */
-#help dt {
-	margin-top: 0.6em;
-	font-weight: bold;
-	font-style: italic;
-}
-#help dd dl dt {
-	margin-top: 0.3em;
-	font-weight: normal;
-	font-style: italic;
-}
-#help dl {
-	padding: 5px;
-}
-#help h3 {
-	font-weight: bold;
-	font-style: italic;
-	letter-spacing: 0.5em;
-	background-color: #6d96a9;
-	color: white;
-	padding: 2px 5px;
-}
-#help h4 {
-	text-decoration: underline;
-	font-style: normal;
-}
-#help strong {
-	font-weight: bold;
-}
-#help .ref_menu {
-	font-style: italic;
-}
-#help .ref_file {
-	text-decoration: underline;
-}
-#help .ref_label {
-	font-style: italic;
-}
-#help .links {
-	padding: 5px;
-	background-color: #dee6ee;
-	text-align: justify;
-}
-#help .links a {
-	white-space: nowrap;
-}
-#about a,
-#about a:visited,
-#about a:active,
-#help a,
-#help a:visited,
-#help a:active {
-	color: blue;
-}
-#help .group {
-	margin-top: 0.6em;
-	border: 1px solid #6d96a9;
-	white-space: normal;
-}
-#help .group p {
-	padding: 5px;
-}
-#help .top_link {
-	text-align: right;
-	font-size: 0.8em;
-	background-color: #dee6ee;
-	padding: 1px 5px;
-	margin: 0px;
-}
-
 /* Navigation */
 #navigation {
 	width: 155px;
@@ -777,33 +518,4 @@ select.channels {
 }
 #navigation input {
 	width: 130px;
-}
-
-/* message boxes */
-.warning h1 {
-	display: block;
-	font-weight: bold;
-	font-size: 14px;
-}
-.warning {
-	margin: 2em;
-	padding: 1em;
-	border: 1px solid #6d96a9;
-	background-color: #dee6ee;
-	text-align: center;
-	vertical-align: middle;
-}
-.error h1 {
-	display: block;
-	color: red;
-	font-weight: bold;
-	font-size: 14px;
-}
-.error {
-	margin: 2em;
-	padding: 1em;
-	border: 2px solid red;
-	background-color: #dee6ee;
-	text-align: center;
-	vertical-align: middle;
 }
