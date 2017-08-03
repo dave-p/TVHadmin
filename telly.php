@@ -22,7 +22,7 @@
 	$id = 0;
 
         echo "
-  <div id='layout'>
+  <div id='topmenu'>
     <form name='whatandwhen' method='GET' action='telly.php'>
       <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
 	<tr>
@@ -61,6 +61,7 @@
 	  echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
 	}
 	echo "</td></table></form>";
+	echo "</div><div id='layout'>";
 
 	if(isset($prog)) {
 	  echo "<table border=0 cellpadding=2 class=\"list hilight\">";

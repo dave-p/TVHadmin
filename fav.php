@@ -21,8 +21,8 @@
 	  $when = $today;
 	}
 
-        echo "<div id=\"layout\">";
-	echo " <form name=\"whichday\" method=\"GET\" action=\"fav.php\">";
+        echo "<div id='topmenu'>";
+	echo " <form name='whichday' method='GET' action='fav.php'>";
         echo "<table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'><tr><td class='col_title'><h1>Favourite Channels</h1></td><td>";
 	$prev = $when - 86400;
 	if ($prev >= $today) {
@@ -32,7 +32,7 @@
 	$date = $today;
 	for($i=0; $i<8; $i++) {
 	  $d = date('D d/n', $date);
-	  print("<option value=\"$date\"");
+	  print("<option value='$date'");
 	  if (isset($when) && ($date == $when)) {
 	    print (" selected");
 	  }
@@ -45,11 +45,12 @@
 	  echo "<a href='fav.php?when=$next'><img src='images/right.png'></a>";
 	}
 	echo "</td></tr></table></form>";
+	echo "</div><div id='layout'>";
 	$id = 0;
 
 	foreach ($chans as $c) {
-	  echo "<div id=\"content\"><table width=\"100%\" border=0 cellpadding=2 class=\"list hilight\">";
-	  echo "<tr class=\"heading\"><td colspan=\"4\"><span class=\"channel_name\">$c</span>";
+	  echo "<div id='content'><table width='100%' border=0 cellpadding=2 class='list hilight'>";
+	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$c</span>";
 	  echo "</td></tr>";
 	  $progs = get_epg($c);
 
@@ -60,13 +61,13 @@
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
 	    if ($i % 2) {
-	      echo "<tr class=\"row_odd\" id=\"$id\">";
+	      echo "<tr class='row_odd' id='$id'>";
 	    }
 	    else {
-	      echo "<tr class=\"row_even\" id=\"$id\">";
+	      echo "<tr class='row_even' id='$id'>";
 	    }
-	    print("<td class=\"col_duration\">$start - $end</td>");
-	    printf("<td class=\"col_title\"><div class=\"epg_title\">%s</div><div class=\"epg_subtitle\">%s</div></td>", $p["title"],$p["summary"]);
+	    print("<td class='col_duration'>$start - $end</td>");
+	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p["summary"]);
 	    $evt = $p["eventId"];
 	    $dup = 0;
 	    foreach($timers as $t) {
@@ -76,9 +77,9 @@
 	      }
 	    }
 	    if ($dup == 0) {
-	      echo "<td><a href=\"record.php?eventId=$evt&series=N&from=1&id=$id&when=$when\"><img src=\"images/rec_button1.png\" alt=\"record\" title=\"record\"></a></td>";
+	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 	      if (isset($p["serieslinkUri"])) {
-		echo "<td><a href=\"record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when\"><img src=\"images/rec_buttonS.png\" alt=\"record series\" title=\"record series\"></a></td>";
+		echo "<td><a href='record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td>";
 	      }
 	      echo "</tr>\n";
 	    }
