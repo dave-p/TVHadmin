@@ -5,7 +5,7 @@
   if (isset($_POST['last_sort'])) $sort = 1 - $_POST['last_sort'];
   echo "
   <div id='rec_list'>
-    <div id='layout'>
+    <div id='topmenu'>
       <form name='order' method='POST' action='recordings.php'>
         <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
 	  <tr><td class='col_title'><h1>Recordings</h1></td>
@@ -14,6 +14,8 @@
 	  </tr>
 	</table>
       </form>
+    </div>
+    <div id='layout'>
       <table width='100%' border=0 cellpadding=0 class='list hilight'>
         <tr class='heading'><td class='col_date'><h2>Date</h2></td>
           <td class='col_time'><h2>Time</h2></td>
@@ -36,7 +38,7 @@
 			echo "<tr class='row_even'>";
 		}
 		echo "<td class='col_date selected'>$date</td>";
-		printf("<td class='col_time'>%s</td><td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_subtitle"]);
+		printf("<td class='col_time'>%s</td><td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_description"]);
                 echo "</tr>\n";
 		$i++;
 	}
