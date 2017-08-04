@@ -31,7 +31,7 @@
 	";
 	$chans = get_channels();
 	foreach($chans as $v) {
-	  $cname = $v["val"];
+	  $cname = $v["name"];
 	  print("<option value=\"$cname\"");
 	  if (isset($prog) && $cname == $prog) {
 	    print (" selected");
@@ -57,7 +57,7 @@
 	}
 	echo "</select>&nbsp;";
 	$next = $when + 86400;
-	if ($next < $date) {
+	if (isset($prog) && ($next < $date)) {
 	  echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
 	}
 	echo "</td></table></form>";

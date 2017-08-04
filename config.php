@@ -139,6 +139,22 @@
 		  echo "</select>
 		</td>
 	    </tr>
+	    <tr class='row_even'>
+		<td class='col_label'><h5>Show in What's On Now:</h5></td>
+		<td class='col_value'>";
+	$tags = get_tags();
+	foreach ($tags as $t) {
+	  $v = $t['val'];
+	  $g = "Media_" . str_replace(' ','_',$v);
+	  echo "$v: <input type='checkbox' name='$g' ";
+	  if (isset($settings[$g])) {
+	    echo " checked";
+	  }
+	  echo "> ";
+	}
+	echo "
+		</td>
+	    </tr>
 	</table>
 
 	<table border='0' cellspacing='0' cellpadding='0' class='group'>
@@ -150,7 +166,7 @@
 		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();
 	    foreach($chans as $v) {
-		$cname = $v["val"];
+		$cname = $v["name"];
 		print "<option value=\"$cname\">$cname</option>";
 	    }
 		    echo "</select>

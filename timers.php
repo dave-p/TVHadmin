@@ -68,13 +68,15 @@
 		    $alt1 = search_epg("",$ts);
 		    echo "<p>Alternatives for \"$ts\"</p><ul>";
 		    foreach ($alt1 as $a) {
+			$sl = '';
+			if (isset($a["deafsigned"])) $sl = '[SL]';
 			if ($p["episodeUri"] == $a["episodeUri"]) {
 			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
 			    if (check_event($timers, $a)) {
-				printf("<li>%s %s %s</li>", $when,$a["channelName"],$a["title"]);
+				printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
 			    }
 			    else {
-				printf("<li>%s %s %s (CLASH)</li>", $when,$a["channelName"],$a["title"]);
+				printf("<li>%s %s %s %s (CLASH)</li>", $when,$a["channelName"],$a["title"], $sl);
 			    }
 			}
 		    }

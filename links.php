@@ -31,8 +31,8 @@
 	    }
 	    $lc = $l["channel"];
 	    foreach($channels as $c) {
-		if ($lc == $c["key"]) {
-		    $channelname = $c["val"];
+		if ($lc == $c["uuid"]) {
+		    $channelname = $c["name"];
 		    break;
 		}
 	    }

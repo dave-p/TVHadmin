@@ -83,7 +83,7 @@ function get_recordings($s) {
 
 function get_channels() {
   global $urlp;
-  $url = "$urlp/api/channel/list";
+  $url = "$urlp/api/channel/grid?limit=999";
   $json = curl_file_get_contents($url);
   $c = json_decode($json, true);
   $ret = &$c["entries"];
@@ -109,9 +109,17 @@ function get_profiles() {
   return $ret;
 }
 
+function get_tags() {
+  global $urlp;
+  $url = "$urlp/api/channeltag/list";
+  $json = curl_file_get_contents($url);
+  $j = json_decode($json, true);
+  $ret = &$j["entries"];
+  return $ret;
+}
 
 function sort_channels($a, $b) {
-  return strcasecmp($a["val"], $b["val"]);
+  return strcasecmp($a["name"], $b["name"]);
 }
 
 function sort_timers($a, $b) {
