@@ -29,13 +29,14 @@
 	    else {
 		echo "<tr class='row_even'>";
 	    }
-	    if (!$t["enabled"]) {
-		echo "<td class='col_info'><img src='images/tick_yellow.png'></td>";
-	    }
-	    elseif (check_timer($timers, $t)) {
+	    switch(check_timer($timers, $t)) {
+	      case 0:
 		echo "<td class='col_info'><img src='images/tick_green.png'></td>";
-	    }
-	    else {
+	        break;
+	      case 1:
+		echo "<td class='col_info'><img src='images/tick_yellow.png'></td>";
+		break;
+	      case 2: 
 		echo "<td class='col_info'><img src='images/tick_red.png'></td>";
 		$clashes[] = $t;
 	    }
@@ -72,7 +73,7 @@
 			if (isset($a["deafsigned"])) $sl = '[SL]';
 			if ($p["episodeUri"] == $a["episodeUri"]) {
 			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
-			    if (check_event($timers, $a)) {
+			    if (!check_event($timers, $a)) {
 				printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
 			    }
 			    else {
@@ -91,15 +92,17 @@
 	    $tstart = $t["start"];
 	    $tstop = $t["stop"];
 	    $tuuid = $t["uuid"];
+	    $mux = get_mux_for_timer($t);
 	    foreach ($timers as $m) {
 	      if (!$m["enabled"]) continue;
 	      if ($m["uuid"] == $tuuid) continue;
 	      if(($tstart >= $m["start"] && $tstart < $m["stop"])
 	          ||($m["start"] >= $tstart && $m["start"] < $tstop)) {
-		return false;
+		if(get_mux_for_timer($m) == $mux) return 1;
+		else return 2;
 	      }
 	    }
-	    return true;
+	    return 0;
 	}
 
         function check_event($timers, $e) {
@@ -111,11 +114,38 @@
               if ($t["uuid"] == $euuid) continue;
               if(($estart >= $t["start"] && $estart < $t["stop"])
                   ||($t["start"] >= $estart && $t["start"] < $estop)) {
-                return false;
+		if (get_mux_for_event($e) == get_mux_for_timer($t)) return 1;
+                else return 2;
               }
             }
-            return true;
+            return 0;
         }
+
+	function get_mux_for_event($event) {
+		$id = $event["channelUuid"];
+		$r = get_mux_for_channel($id);
+		return $r;
+	}
+
+	function get_mux_for_timer($timer) {
+		$id = $timer["channel"];
+		$r = get_mux_for_channel($id);
+		return $r;
+	}
+
+	function get_mux_for_channel($ch) {
+		global $urlp;
+		$channels = get_channels();
+		foreach ($channels as $c) {
+			if ($ch == $c["uuid"]) break;
+		}
+		$svc = $c["services"][0];
+		$url = "$urlp/api/service/streams?uuid=$svc";
+		$json = curl_file_get_contents($url);
+		$j = json_decode($json, true);
+		$name = $j["name"];
+		return substr($name, 0, strrpos($name, '/'));
+	}
 ?>
     </div>
    </div>
