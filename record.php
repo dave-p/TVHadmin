@@ -15,7 +15,7 @@
 	else {
 	  $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
 	}
-	curl_file_get_contents($url);
+	file_get_contents($url);
 	$from = $_GET['from'];
 	if ($from == 1) {
 	  header("Location: fav.php?when=$when#$id");

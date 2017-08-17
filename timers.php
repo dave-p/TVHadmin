@@ -141,7 +141,7 @@
 		}
 		$svc = $c["services"][0];
 		$url = "$urlp/api/service/streams?uuid=$svc";
-		$json = curl_file_get_contents($url);
+		$json = file_get_contents($url);
 		$j = json_decode($json, true);
 		$name = $j["name"];
 		return substr($name, 0, strrpos($name, '/'));

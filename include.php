@@ -42,7 +42,7 @@ function get_epg($channel) {
   global $urlp;
   $prog = urlencode($channel);
   $url = "$urlp/api/epg/events/grid?limit=999&channel=$prog";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -54,7 +54,7 @@ function search_epg($channel,$title) {
   $ttl = urlencode(preg_quote($title)); 
   $url = "$urlp/api/epg/events/grid?limit=999&title=$ttl";
   if ($channel != "") $url .= "&channel=$prog";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -63,7 +63,7 @@ function search_epg($channel,$title) {
 function get_timers() {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid_upcoming";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   usort($ret, "sort_timers");
@@ -73,7 +73,7 @@ function get_timers() {
 function get_recordings($s) {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid_finished";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   if($s == 0) usort($ret, "sort_recordings");
@@ -84,7 +84,7 @@ function get_recordings($s) {
 function get_channels() {
   global $urlp;
   $url = "$urlp/api/channel/grid?limit=999";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $c = json_decode($json, true);
   $ret = &$c["entries"];
   usort($ret, "sort_channels");
@@ -94,7 +94,7 @@ function get_channels() {
 function get_links() {
   global $urlp;
   $url = "$urlp/api/dvr/autorec/grid";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -103,7 +103,7 @@ function get_links() {
 function get_profiles() {
   global $urlp;
   $url = "$urlp/api/dvr/config/grid";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -112,7 +112,7 @@ function get_profiles() {
 function get_tags() {
   global $urlp;
   $url = "$urlp/api/channeltag/list";
-  $json = curl_file_get_contents($url);
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
