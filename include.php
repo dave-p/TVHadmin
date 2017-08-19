@@ -48,6 +48,16 @@ function get_epg($channel) {
   return $ret;
 }
 
+function get_epg_now($channel) {
+  global $urlp;
+  $prog = urlencode($channel);
+  $url = "$urlp/api/epg/events/grid?channel=$prog&mode=now";
+  $json = file_get_contents($url);
+  $j = json_decode($json, true);
+  $ret = &$j["entries"];
+  return $ret;
+}
+
 function search_epg($channel,$title) {
   global $urlp;
   $prog = urlencode($channel);

@@ -54,7 +54,7 @@
 		}
 		goto nogood;
 good:
-		$e = get_epg($c["name"]);
+		$e = get_epg_now($c["name"]);
 		$p = &$e[0];
 		if ($i % 2) echo "<tr class=\"row_odd\">";
 		else echo "<tr class=\"row_even\">";
@@ -65,6 +65,8 @@ good:
 		else $pc = 0;
 		$dur = intval($duration/60);
 		$don = intval((time() - $p["start"])/60);
+		if (isset($p['summary'])) $summ = $p['summary'];
+		else $summ = '';
 		echo "
       <td class='col_duration'>$start - $end
        <table border=0 cellspacing=0 cellpadding=0 class='percent' title='$don min&nbsp;/&nbsp;$dur min'>
@@ -79,7 +81,7 @@ good:
       </td>
       <td class='col_title'>
        <div class='epg_title'>{$p['title']}</div>
-       <div class='epg_subtitle'>{$p['summary']}</div>
+       <div class='epg_subtitle'>{$summ}</div>
       </td>
      </tr>";
 		$i++;
