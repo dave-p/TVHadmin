@@ -8,6 +8,7 @@ $pages = array(
 	'timers'=>'Timers',
 	'recordings'=>'Recordings',
 	'links'=>'Series Links',
+	'status'=>'Status',
 	'config'=>'Configuration');
 
 $orders = array(
