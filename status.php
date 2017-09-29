@@ -14,12 +14,15 @@
 	'signal'=> 'Signal Strength',
 	'snr'	=> 'SNR',
 	'stream'=> 'Stream',
-	'snr_scale' => 'SNR Scale',
 	'ec_block'  => 'Block Error Count',
 	'tc_bit'    => 'Total Bit Error Count',
-	'signal_scale' => 'Signal Scale',
 	'tc_block'  => 'Total Block Error Count',
 	'ec_bit'    => 'Bit Error Count');
+
+  $ignore = array(
+	'input'	=> 1,
+	'snr_scale' => 'SNR Scale',
+	'signal_scale' => 'Signal Scale');
 
   function get_input_status() {
 	global $urlp;
@@ -46,8 +49,22 @@
         <tr class='heading'>
           <td class='col_name' colspan=2><h2>{$s['input']}</h2></td> 
         </tr>";
+	    switch($s['signal_scale']) {
+		case 1:
+		  $s['signal'] = $s['signal'] * 100 / 65535 . ' %';
+		  break;
+		case 2:
+		  $s['signal'] = round($s['signal'] / 1000, 1) . ' dBm';
+	    }
+	    switch($s['snr_scale']) {
+		case 1:
+		  $s['snr'] = $s['snr'] * 100 / 65535 . ' %';
+                  break;
+		case 2:
+		  $s['snr'] = round($s['snr'] / 1000, 1) . ' dB';
+	    }    
 	    foreach($s as $key => $val) {
-		if ($key == 'input') continue;
+		if (isset($ignore[$key])) continue;
 		if ($i % 2) {
 		    echo "<tr class='row_odd'>";
 		}
