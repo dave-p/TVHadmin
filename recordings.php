@@ -19,6 +19,7 @@
       <table width='100%' border=0 cellpadding=0 class='list hilight'>
         <tr class='heading'><td class='col_date'><h2>Date</h2></td>
           <td class='col_time'><h2>Time</h2></td>
+	  <td class='col_channel'><h2>Channel</h2></td>
           <td class='col_length'><h2>Length</h2></td>
           <td class='col_name'><h2>Name</h2></td>
 	</tr>
@@ -37,8 +38,8 @@
 		else {
 			echo "<tr class='row_even'>";
 		}
-		echo "<td class='col_date selected'>$date</td>";
-		printf("<td class='col_time'>%s</td><td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $hh, $mm, $t["disp_title"], $t["disp_description"]);
+		echo "<td class='col_date'>$date</td>";
+		printf("<td class='col_time'>%s</td><td class='col_channel'>%s<td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $t["channelname"], $hh, $mm, $t["disp_title"], $t["disp_description"]);
                 echo "</tr>\n";
 		$i++;
 	}
