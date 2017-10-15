@@ -7,11 +7,6 @@
 	font-family: Verdana, "Bitstream Vera Sans", Arial, Geneva, Helvetica, sans-serif;
 }
 
-#rc,
-#tv {
-	margin: 0px;
-}
-
 body {
 	background-color: #ffffff;
 	margin: 3px;
@@ -135,24 +130,6 @@ label + input {
 	margin-left: 1em;
 }
 
-#tv input,
-#tv select,
-#tv h5 {
-	font-weight: normal;
-	font-size: 9px;
-	display: inline;
-}
-#tv #content {
-	vertical-align: top;
-	border-spacing: 10px;
-}
-#rc .rc,
-#tv #sect_rc {
-	background-image: url("fern_back.jpg");
-}
-#tv #sect_channels {
-	vertical-align: top;
-}
 #rec_list .col_name {
 	font-weight: bold;
 }
@@ -163,8 +140,7 @@ label + input {
 	height: 17px;
 }
 .list.hilight .row_even:hover,
-.list.hilight .row_odd:hover
-{
+.list.hilight .row_odd:hover {
 	background-color: #8cc1da;
 }
 .heading td {
@@ -213,18 +189,6 @@ label + input {
 	width: 40%;
 }
 
-.col_navi img,
-.col_navi a {
-	padding: 0;
-	margin: 0;
-}
-.col_navi {
-	text-align: right;
-	vertical-align: middle;
-	white-space: nowrap;
-	height: 17px;
-}
-
 .list,
 .group {
 	border: 1px solid #6d96a9;
@@ -232,31 +196,12 @@ label + input {
 .group td {
 	padding: 2px;
 }
-
 #prog_list .list {
 	margin-bottom: 0.5em;
 }
-
-#prog_summary .action,
-#prog_detail .action {
-	display: block;
-	margin: 5px 0 0 0;
-}
-.action a,
-.action img,
-.heading img,
-.heading .action {
+.heading img {
 	margin: 0;
 	padding: 0;
-}
-.action {
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	width: 20px;
-}
-.heading .action {
-	background-color: white;
 }
 
 /* Summary */
@@ -342,9 +287,12 @@ label + input {
 }
 .col_start,
 .col_stop,
-.col_date,
 .col_time {
-	width: 76px;
+	width: 65px;
+	text-align: left;
+}
+.col_date {
+	width: 85px;
 	text-align: left;
 }
 .col_edit,
@@ -374,14 +322,9 @@ label + input {
 #heading .col_other table {
 	display: inline;
 }
-
 #rec_list #path {
 	margin: 1em 10px 0px 10px;
 }
-#rec_edit .col_value {
-	white-space: normal;
-}
-
 #timer_list .list {
 	margin-top: 0.6em;
 }
@@ -404,18 +347,10 @@ label + input {
 	border-left-color: #000000;
 	border-right-color: #000000;
 }
-#prog_timeline .row_even table td.color1,
 #timer_list .row_even table td.color1 {
 	background-color: #ffffff;
 }
-#prog_timeline .row_even table td.color2,
 #timer_list .row_even table td.color2 {
-	background-color: #dee6ee;
-}
-#prog_timeline table.timestable td.color1 {
-	background-color: #ffffff;
-}
-#prog_timeline table.timestable td.color2 {
 	background-color: #dee6ee;
 }
 #content {
@@ -437,7 +372,6 @@ label + input {
 	color: black;
 	font-weight: normal;
 }
-#about .group,
 #config .group {
 	margin-top: 0.5em;
 	width: 100%;
@@ -445,37 +379,9 @@ label + input {
 #config .col_label {
 	width: 50%;
 }
-#about .col_label {
-	width: 20%;
-}
-#about .col_label h5 {
-	white-space: nowrap;
-}
 
 select.channels {
 	min-width: 100px;
-}
-
-/* Tooltips */
-.tt_border {
-	border: 2px solid white;
-}
-.tt_table {
-	width: 250px;
-	border: 2px solid #6d96a9;
-	background-color: #dee6ee;
-}
-.tt_table th {
-	background-color: #6d96a9;
-	font-weight: bold;
-	color: white;
-	padding-left: 2px;
-	padding-right: 2px;
-}
-.tt_table td {
-	color: black;
-	padding-left: 5px;
-	padding-right: 5px;
 }
 
 /* Navigation */
