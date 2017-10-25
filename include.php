@@ -73,11 +73,10 @@ function search_epg($channel,$title) {
 
 function get_timers() {
   global $urlp;
-  $url = "$urlp/api/dvr/entry/grid_upcoming";
+  $url = "$urlp/api/dvr/entry/grid_upcoming?sort=start";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
-  usort($ret, "sort_timers");
   return $ret;
 }
 
@@ -131,10 +130,6 @@ function get_tags() {
 
 function sort_channels($a, $b) {
   return strcasecmp($a["name"], $b["name"]);
-}
-
-function sort_timers($a, $b) {
-  return ($a["start"] - $b["start"]);
 }
 
 function sort_recordings($a, $b) {
