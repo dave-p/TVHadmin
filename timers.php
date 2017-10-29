@@ -18,6 +18,7 @@
 <?php
         $timers = get_timers();
 	$i = 0;
+	$channels = array();
 	$clashes = array();
 	foreach($timers as $t) {
 	    $start = strftime("%H:%M", $t["start"]);
@@ -134,8 +135,10 @@
 	}
 
 	function get_mux_for_channel($ch) {
-		global $urlp;
-		$channels = get_channels();
+		global $urlp, $channels;
+		if (empty($channels)) {
+			$channels = get_channels();
+		}
 		foreach ($channels as $c) {
 			if ($ch == $c["uuid"]) break;
 		}
