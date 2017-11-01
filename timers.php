@@ -93,13 +93,12 @@
 	    $tstart = $t["start"];
 	    $tstop = $t["stop"];
 	    $tuuid = $t["uuid"];
-	    $mux = get_mux_for_timer($t);
 	    foreach ($timers as $m) {
 	      if (!$m["enabled"]) continue;
 	      if ($m["uuid"] == $tuuid) continue;
 	      if(($tstart >= $m["start"] && $tstart < $m["stop"])
 	          ||($m["start"] >= $tstart && $m["start"] < $tstop)) {
-		if(get_mux_for_timer($m) == $mux) return 1;
+		if(get_mux_for_timer($m) == get_mux_for_timer($t)) return 1;
 		else return 2;
 	      }
 	    }
