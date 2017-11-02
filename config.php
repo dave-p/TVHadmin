@@ -90,7 +90,7 @@
 	    foreach ($prof as $p) {
 		$pname = $p['name'];
 		if ($pname == '') $pname = '(default)';
-		if ($p['uuid'] == $config_uuid) $sel = 'selected';
+		if ($p['uuid'] === $config_uuid) $sel = 'selected';
 		else $sel = '';
 		echo "<option value=\"$pname\" $sel>$pname</option>";
 	    }

@@ -86,7 +86,7 @@
             $evt = $p["eventId"];
             $dup = 0;
             foreach($timers as $t) {
-              if ($evt == $t["broadcast"]) {
+              if ($evt === $t["broadcast"]) {
                 $dup = 1;
                 break;
               }

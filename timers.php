@@ -72,7 +72,7 @@
 		    foreach ($alt1 as $a) {
 			$sl = '';
 			if (isset($a["deafsigned"])) $sl = '[SL]';
-			if ($p["episodeUri"] == $a["episodeUri"]) {
+			if ($p["episodeUri"] === $a["episodeUri"]) {
 			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
 			    if (!check_event($timers, $a)) {
 				printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
@@ -95,10 +95,10 @@
 	    $tuuid = $t["uuid"];
 	    foreach ($timers as $m) {
 	      if (!$m["enabled"]) continue;
-	      if ($m["uuid"] == $tuuid) continue;
+	      if ($m["uuid"] === $tuuid) continue;
 	      if(($tstart >= $m["start"] && $tstart < $m["stop"])
 	          ||($m["start"] >= $tstart && $m["start"] < $tstop)) {
-		if(get_mux_for_timer($m) == get_mux_for_timer($t)) return 1;
+		if(get_mux_for_timer($m) === get_mux_for_timer($t)) return 1;
 		else return 2;
 	      }
 	    }
@@ -111,10 +111,10 @@
             @$euuid = $e["dvrUuid"];
             foreach ($timers as $t) {
               if (!$t["enabled"]) continue;
-              if ($t["uuid"] == $euuid) continue;
+              if ($t["uuid"] === $euuid) continue;
               if(($estart >= $t["start"] && $estart < $t["stop"])
                   ||($t["start"] >= $estart && $t["start"] < $estop)) {
-		if (get_mux_for_event($e) == get_mux_for_timer($t)) return 1;
+		if (get_mux_for_event($e) === get_mux_for_timer($t)) return 1;
                 else return 2;
               }
             }
@@ -139,7 +139,7 @@
 			$channels = get_channels();
 		}
 		foreach ($channels as $c) {
-			if ($ch == $c["uuid"]) break;
+			if ($ch === $c["uuid"]) break;
 		}
 		$svc = $c["services"][0];
 		$url = "$urlp/api/service/streams?uuid=$svc";

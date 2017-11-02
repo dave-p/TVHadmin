@@ -31,14 +31,14 @@
 	    }
 	    $lc = $l["channel"];
 	    foreach($channels as $c) {
-		if ($lc == $c["uuid"]) {
+		if ($lc === $c["uuid"]) {
 		    $channelname = $c["name"];
 		    break;
 		}
 	    }
 	    $n = 0;
 	    foreach($timers as $t) {
-		if ($t["autorec"] == $l["uuid"]) $n++;
+		if ($t["autorec"] === $l["uuid"]) $n++;
 	    }
 	    $l['title'] = stripslashes($l['title']);
 	    $crid = strrchr($l['serieslink'], '/');
