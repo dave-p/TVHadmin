@@ -4,7 +4,7 @@
 	$id = $_GET['id'];
 	$when = $_GET['when'];
 	if (isset($_GET['prog'])) {
-	  $prog = $_GET['prog'];
+	  $prog = urlencode($_GET['prog']);
 	}
 	else {
 	  $prog = '';
