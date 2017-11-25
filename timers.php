@@ -89,7 +89,7 @@
 	}
 
 	function check_timer($timers, $t) {
-	    if (count($timers) < 2) return true;
+	    if (count($timers) < 2) return 0;
 	    $tstart = $t["start"];
 	    $tstop = $t["stop"];
 	    $tuuid = $t["uuid"];
