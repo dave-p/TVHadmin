@@ -142,11 +142,9 @@
 	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in What's On Now:</h5></td>
 		<td class='col_value'>";
-	$tags = get_tags();
-	foreach ($tags as $t) {
-	  $v = $t['val'];
-	  $g = "Media_" . str_replace(' ','_',$v);
-	  echo "$v: <input type='checkbox' name='$g' ";
+	foreach (array_flip($types) as $t=>$v) {
+	  $g = "Media_" . $t;
+	  echo "$t: <input type='checkbox' name='$g' ";
 	  if (isset($settings[$g])) {
 	    echo " checked";
 	  }

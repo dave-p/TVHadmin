@@ -15,6 +15,10 @@ $orders = array(
 	0 => "Date",
 	1 => "Title");
 
+$types = [1=>"SDTV",2=>"Radio",17=>"HDTV",22=>"SDTV",2=>"Radio",17=>"HDTV",
+	22=>"SDTV",23=>"SDTV",24=>"SDTV",25=>"HDTV",26=>"HDTV",27=>"HDTV",
+	28=>"HDTV",29=>"HDTV",30=>"HDTV",31=>"UHDTV"]; 
+
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
   $settings = json_decode($conf, true);
@@ -119,9 +123,9 @@ function get_profiles() {
   return $ret;
 }
 
-function get_tags() {
+function get_services() {
   global $urlp;
-  $url = "$urlp/api/channeltag/list";
+  $url = "$urlp/api/mpegts/service/grid?hidemode=all&limit=9999";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];

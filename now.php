@@ -2,7 +2,11 @@
 	$page_title = "What's On Now";
 	include_once './head.php';
 	$chans = get_channels();
-	$tags = get_tags();
+	$service = array();
+	$sv = get_services();
+	foreach ($sv as $s) {
+		$service[$s["uuid"]] = $s["dvb_servicetype"];
+	}
 	$wday = date('l, j M Y', time());
 	$time = date('H:i', time());
 	$media = array();
@@ -14,20 +18,18 @@
     <tr>
      <td class='col_title'><h1>What's on at $time</h1></td>
      <td>";
-	foreach ($tags as $t) {
-		$v = $t['val'];
-		echo "$v: <input type='checkbox' name='$v'";
+	foreach (array_flip($types) as $t=>$v) {
+		echo "$t: <input type='checkbox' name='$t'";
 		if (isset($_GET['update'])) {
-			$g = str_replace(' ','_',$v);
- 			if (isset($_GET[$g])) {
-				$media[$t['key']] = 1;
+ 			if (isset($_GET[$t])) {
+				$media[$t] = 1;
 				echo " checked";
 			}
 		}
 		else {
-			$g = "Media_" . str_replace(' ','_',$v);
+			$g = "Media_" . $t;
  			if (isset($settings[$g])) {
-				$media[$t['key']] = 1;
+				$media[$t] = 1;
 				echo " checked";
 			}
 		}
@@ -48,12 +50,10 @@
     </tr>";
 	$i = 0;
 	foreach($chans as $c) {
-		$ct = $c["tags"];
-		foreach($ct as $z) {
-			if (array_key_exists($z, $media)) goto good;
-		}
-		goto nogood;
-good:
+		$svcid = $c["services"][0];
+		$csvtype = $service[$svcid];
+		$csvname = $types[$csvtype];
+		if (!array_key_exists($csvname, $media)) goto nogood;
 		$e = get_epg_now($c["name"]);
 		$p = &$e[0];
 		if ($i % 2) echo "<tr class=\"row_odd\">";
