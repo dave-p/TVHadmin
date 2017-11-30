@@ -12,6 +12,10 @@
         $chans = &$settings['selected_channels'];
 
 	$timers = get_timers();
+	$tevents = array();
+	foreach ($timers as $t) {
+	  $tevents[$t["broadcast"]] = 1;
+	}
         $dt = localtime(time(), true);
         $today = mktime($epg_start, 0, 0, $dt["tm_mon"]+1, $dt["tm_mday"], $dt["tm_year"]+1900);
 	if(isset($_GET['when'])) {
@@ -69,14 +73,7 @@
 	    print("<td class='col_duration'>$start - $end</td>");
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p["summary"]);
 	    $evt = $p["eventId"];
-	    $dup = 0;
-	    foreach($timers as $t) {
-	      if ($evt === $t["broadcast"]) {
-		$dup = 1;
-		break;
-	      }
-	    }
-	    if ($dup == 0) {
+	    if (!array_key_exists($evt, $tevents)) {
 	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 	      if (isset($p["serieslinkUri"])) {
 		echo "<td><a href='record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td>";
