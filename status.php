@@ -24,6 +24,8 @@
 	'snr_scale' => 'SNR Scale',
 	'signal_scale' => 'Signal Scale');
 
+  if (isset($_POST['uuid'])) clear_input_stats($_POST['uuid']);
+
   function get_input_status() {
 	global $urlp;
 	$url = "$urlp/api/status/inputs";
@@ -32,23 +34,32 @@
 	$ret = &$j["entries"];
 	return $ret;
   }
+
+  function clear_input_stats($uuid) {
+    global $urlp;
+    $url = "$urlp/api/status/inputclrstats?uuid=$uuid";
+    file_get_contents($url);
+  }
 ?>
   <div id="status">
     <div id="layout">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
-        <tr>
-	  <td class="col_title"><h1>System Status</h1></td>
-	</tr>
-      </table>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+	  <tr>
+	    <td class="col_title"><h1>System Status</h1></td>
+	  </tr>
+	</table>
 <?php
-	$i = 0;
 	$stats = get_input_status();
 	foreach($stats as $s) {
-	    echo "
+	  $i = 0;
+	  echo "
       <table width='100%' border=0 cellpadding=0 class='list hilight'>
-        <tr class='heading'>
-          <td class='col_name' colspan=2><h2>{$s['input']}</h2></td> 
-        </tr>";
+	<tr class='heading'>
+	  <td class='col_name' colspan=2> 
+	    <form name='clear' method='POST' action='status.php'><h2>{$s['input']}</h2>
+	    <input type='submit' name='clearcounts' value='Clear Counters'>
+	    <input type='hidden' name='uuid' value='{$s["uuid"]}'></form></td>
+	</tr>";
 	    switch($s['signal_scale']) {
 		case 1:
 		  $s['signal'] = $s['signal'] * 100 / 65535 . ' %';
