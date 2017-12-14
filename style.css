@@ -136,12 +136,16 @@ label + input {
 
 .row_odd td,
 .row_even td,
+.row_error td,
 .heading {
 	height: 17px;
 }
 .list.hilight .row_even:hover,
 .list.hilight .row_odd:hover {
 	background-color: #8cc1da;
+}
+.list.hilight .row_error:hover {
+	background-color: #e08080;
 }
 .heading td {
 	background-color: #6d96a9;
@@ -156,14 +160,16 @@ label + input {
 	white-space: normal;
 }
 
-#prog_summary .row_even .col_epg,
+/*#prog_summary .row_even .col_epg,*/
 .row_even {
 	background-color: #ffffff;
 }
 .row_odd {
 	background-color: #dee6ee;
 }
-
+.row_error {
+	background-color: #ffe0e0;
+}
 .col_label,
 .col_value,
 .col_active,

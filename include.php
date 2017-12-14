@@ -90,6 +90,13 @@ function get_recordings($s) {
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
+  $url = "$urlp/api/dvr/entry/grid_failed";
+  $json = file_get_contents($url);
+  $j = json_decode($json, true);
+  $fail = &$j["entries"];
+  foreach ($fail as $f) {
+    $ret[] = $f;
+  }
   if($s == 0) usort($ret, "sort_recordings");
   else usort($ret, "sort_recordings_title");
   return $ret;

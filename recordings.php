@@ -32,11 +32,16 @@
 		$duration = $t["stop_real"] - $t["start_real"];
 		$hh = $duration / 3600;
 		$mm = ($duration % 3600) / 60;
-		if ($i % 2) {
-			echo "<tr class='row_odd'>";
+		if (strpos($t['status'], 'OK')) {
+			if ($i % 2) {
+				echo "<tr class='row_odd'>";
+			}
+			else {
+				echo "<tr class='row_even'>";
+			}
 		}
 		else {
-			echo "<tr class='row_even'>";
+			echo "<tr class='row_error'>";
 		}
 		echo "<td class='col_date'>$date</td>";
 		printf("<td class='col_time'>%s</td><td class='col_channel'>%s<td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $t["channelname"], $hh, $mm, $t["disp_title"], $t["disp_description"]);
