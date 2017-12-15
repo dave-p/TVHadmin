@@ -22,6 +22,7 @@
 	  <td class='col_channel'><h2>Channel</h2></td>
           <td class='col_length'><h2>Length</h2></td>
           <td class='col_name'><h2>Name</h2></td>
+	  <td class='col_delete'></td>
 	</tr>
   ";
         $recordings = get_recordings($sort);
@@ -43,9 +44,15 @@
 		else {
 			echo "<tr class='row_error'>";
 		}
-		echo "<td class='col_date'>$date</td>";
-		printf("<td class='col_time'>%s</td><td class='col_channel'>%s<td class='col_length'>%d:%02d</td><td class='col_name'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $time, $t["channelname"], $hh, $mm, $t["disp_title"], $t["disp_description"]);
-                echo "</tr>\n";
+		echo "
+	  <td class='col_date'>$date</td>
+	  <td class='col_time'>$time</td>
+	  <td class='col_channel'>{$t['channelname']}</td>";
+		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
+		echo "
+	  <td class='col_name'><div class='epg_title'>{$t['disp_title']}</div><div class='epg_subtitle'>{$t['disp_subtitle']}</div></td>
+	  <td class='col_delete'><a href='delete-recording.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
+	</tr>";
 		$i++;
 	}
 ?>
