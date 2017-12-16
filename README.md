@@ -1,7 +1,7 @@
 # TVHadmin
 A PHP-powered web front-end for TVHeadend, inspired by VDRadmin.
 
-This project provides a simple web-based front-end for TVHeadend. It is inspired by VDRadmin-am, written by Andreas Mair (http://andreas.vdr-developer.org/vdradmin-am/index.html). It was written for UK Freeview but should work with any TV provider supported by TVHeadend.
+This project provides a simple web-based front-end for TVHeadend. It is inspired by VDRadmin-am, written by Andreas Mair (http://andreas.vdr-developer.org/vdradmin-am/index.html). It was written for UK Freeview and has been tested with UK Freesat but should also work with any TV provider supported by TVHeadend.
 
 
 ### Requirements
@@ -15,6 +15,6 @@ Note that the web server is responsible for security! For use across the interne
 ### Installation
 - Copy the files to your web server's HTTPROOT or a subdirectory
 - Edit the first line of include.php to match the location (relative to include.php) where the configuration settings will be written
-- Browse to http://your.web.server/path/TVHadmin.php. Fill in the IP address (with port number) of your TVHeadend server and the username and password of a TVHeadend admin user, then click the 'save' button.
+- Browse to http://your.web.server/path/TVHadmin.php. Enter the username and password of a TVHeadend admin user. In the "IP address:port" box enter the details of your TVHeadend server; if you have started TVHeadend with the "--http_root" option then add the directory after the port number. Click the 'save' button.
 - If connection to TVHeadend succeeds you will see further configuration options. Make any changes then click 'save' again.
 - TVHadmin should now be working.
