@@ -20,7 +20,7 @@
     echo "<div class='navi'><a href='TVHadmin.php?screen=$key'>$value</a></div>";
   }
 ?>
-      <form action="search.php" method="POST" name="telly" class="search">
+      <form action="search.php" method="GET" name="telly" class="search">
         <input type="text" name="find" /><br />
         <input type="submit" name="submit" value="Search" />
       </form>

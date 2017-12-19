@@ -17,10 +17,17 @@
 	}
 	file_get_contents($url);
 	$from = $_GET['from'];
-	if ($from == 1) {
-	  header("Location: fav.php?when=$when#$id");
-	}
-	else {
-	  header("Location: telly.php?when=$when&prog=$prog#$id");
+	switch ($from) {
+	  case 1:
+	    header("Location: fav.php?when=$when#$id");
+	    break;
+	  case 2:
+	    header("Location: telly.php?when=$when&prog=$prog#$id");
+	    break;
+	  case 3:
+	    header("Location: search.php?find=$id");
+	    break;
+	  default:
+	    header("Location: TVHadmin.php");
 	}
 ?>
