@@ -46,7 +46,7 @@ else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&
 function get_epg($channel) {
   global $urlp;
   $prog = urlencode($channel);
-  $url = "$urlp/api/epg/events/grid?limit=999&channel=$prog";
+  $url = "$urlp/api/epg/events/grid?limit=9999&channel=$prog";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
@@ -67,7 +67,7 @@ function search_epg($channel,$title) {
   global $urlp;
   $prog = urlencode($channel);
   $ttl = urlencode(preg_quote($title)); 
-  $url = "$urlp/api/epg/events/grid?limit=999&title=$ttl";
+  $url = "$urlp/api/epg/events/grid?limit=9999&title=$ttl";
   if ($channel != "") $url .= "&channel=$prog";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
@@ -104,7 +104,7 @@ function get_recordings($s) {
 
 function get_channels() {
   global $urlp;
-  $url = "$urlp/api/channel/grid?limit=999";
+  $url = "$urlp/api/channel/grid?limit=9999";
   $json = file_get_contents($url);
   $c = json_decode($json, true);
   $ret = &$c["entries"];
