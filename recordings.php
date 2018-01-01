@@ -44,13 +44,19 @@
 		else {
 			echo "<tr class='row_error'>";
 		}
+		if ($settings['SUMM'] == 'summary') {
+			$summ = 'disp_description';
+		}
+		else {
+			$summ = 'disp_subtitle';
+		}
 		echo "
 	  <td class='col_date'>$date</td>
 	  <td class='col_time'>$time</td>
 	  <td class='col_channel'>{$t['channelname']}</td>";
 		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
 		echo "
-	  <td class='col_name'><div class='epg_title'>{$t['disp_title']}</div><div class='epg_subtitle'>{$t['disp_subtitle']}</div></td>
+	  <td class='col_name'><div class='epg_title'>{$t['disp_title']}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
 	  <td class='col_delete'><a href='delete-recording.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
 	</tr>";
 		$i++;

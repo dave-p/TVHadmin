@@ -37,7 +37,7 @@
 	$chans = get_channels();
 	foreach($chans as $v) {
 	  $cname = $v["name"];
-	  print("<option value=\"$cname\"");
+	  print("<option value='$cname'");
 	  if (isset($prog) && $cname == $prog) {
 	    print (" selected");
 	  }
@@ -53,7 +53,7 @@
 	$date = $today;
 	for($i=0; $i<8; $i++) {
 	  $d = date('D d/n', $date);
-	  print("<option value=\"$date\"");
+	  print("<option value='$date'");
 	  if (isset($when) && ($date == $when)) {
 	    print (" selected");
 	  }
@@ -69,8 +69,8 @@
 	echo "</div><div id='layout'>";
 
 	if(isset($prog)) {
-	  echo "<table border=0 cellpadding=2 class=\"list hilight\">";
-	  echo "<tr class=\"heading\"><td colspan=\"4\"><span class=\"channel_name\">$prog</span>";
+	  echo "<table border=0 cellpadding=2 class='list hilight'>";
+	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$prog</span>";
 	  echo "</td></tr>";
 	  $progs = get_epg($prog);
 	  $i = 0;
@@ -80,19 +80,19 @@
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
 	    if ($i % 2) {
-	      echo "<tr class=\"row_odd\" id=\"$id\">";
+	      echo "<tr class='row_odd' id='$id'>";
 	    }
 	    else {
-	      echo "<tr class=\"row_even\" id=\"$id\">";
+	      echo "<tr class='row_even' id='$id'>";
 	    }
 	    $id++;
-	    print("<td class=\"col_duration\">$start - $end</td>");
-	    printf("<td class=\"col_title\"><div class=\"epg_title\">%s</div><div class=\"epg_subtitle\">%s</div></td>", $p["title"],$p["summary"]);
+	    print("<td class='col_duration'>$start - $end</td>");
+	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
             $evt = $p["eventId"];
 	    if (!array_key_exists($evt, $tevents)) {
-              echo "<td><a href=\"record.php?eventId=$evt&series=N&from=0&id=$id&when=$when&prog=$uprog\"><img src=\"images/rec_button1.png\" alt=\"record\" title=\"record\"></a></td>";
+              echo "<td><a href='record.php?eventId=$evt&series=N&from=0&id=$id&when=$when&prog=$uprog'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
               if (isset($p["serieslinkUri"])) {
-                echo "<td><a href=\"record.php?eventId=$evt&series=Y&from=0&id=$id&when=$when&prog=$uprog\"><img src=\"images/rec_buttonS.png\" alt=\"record series\" title=\"record series\"></a></td>";
+                echo "<td><a href='record.php?eventId=$evt&series=Y&from=0&id=$id&when=$when&prog=$uprog'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td>";
               }
             }
             else {

@@ -71,7 +71,7 @@
 	      echo "<tr class='row_even' id='$id'>";
 	    }
 	    print("<td class='col_duration'>$start - $end</td>");
-	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p["summary"]);
+	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
 	    $evt = $p["eventId"];
 	    if (!array_key_exists($evt, $tevents)) {
 	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
