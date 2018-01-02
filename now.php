@@ -44,7 +44,7 @@
  </div>
  <div id='layout'>
   <div id='prog_summary2'>
-   <table border=0 cellpadding=0 cellspacing=0 class='list hilight' id='content'>
+   <table border=0 cellpadding=2 class='list hilight' id='content'>
     <tr class='newday'>
      <td colspan='4'><span class='date_long'>$wday</span></td>
     </tr>";
@@ -82,6 +82,9 @@
       <td class='col_title'>
        <div class='epg_title'>{$p['title']}</div>
        <div class='epg_subtitle'>{$summ}</div>
+      </td>
+      <td class='col_delete'>
+	<a href='$urlp/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
       </td>
      </tr>";
 		$i++;
