@@ -23,6 +23,7 @@
           <td class='col_length'><h2>Length</h2></td>
           <td class='col_name'><h2>Name</h2></td>
 	  <td class='col_delete'></td>
+	  <td class='col_stream'></td>
 	</tr>
   ";
         $recordings = get_recordings($sort);
@@ -58,6 +59,7 @@
 		echo "
 	  <td class='col_name'><div class='epg_title'>{$t['disp_title']}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
 	  <td class='col_delete'><a href='delete-recording.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
+	  <td class='col_stream'><a href='$urlp/play/dvrfile/{$t['uuid']}?title={$t['disp_title']}'><img src='images\play.png' title='Play'></a></td>
 	</tr>";
 		$i++;
 	}

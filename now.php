@@ -83,7 +83,7 @@
        <div class='epg_title'>{$p['title']}</div>
        <div class='epg_subtitle'>{$summ}</div>
       </td>
-      <td class='col_delete'>
+      <td class='col_stream'>
 	<a href='$urlp/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
       </td>
      </tr>";
