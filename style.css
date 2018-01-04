@@ -6,47 +6,34 @@
 * {
 	font-family: Verdana, "Bitstream Vera Sans", Arial, Geneva, Helvetica, sans-serif;
 }
-
 body {
 	background-color: #ffffff;
 	margin: 3px;
 	padding: 0;
 }
-
 form {
 	margin: 0px;
 	padding: 0;
 }
-
 td,
 div {
 	color: black;
 	font-weight: normal;
 	font-size: 12px;
 }
-
 #layout {
   margin-left: 169px;
   overflow-y: auto;
   max-height: 95vh;
 }
-
 #topmenu {
   margin-left: 169px;
 }
-
 input {
 	color: black;
 	font-weight: normal;
 	font-size: 12px;
 }
-
-textarea {
-	color: black;
-	font-weight: normal;
-	font-size: 12px;
-}
-
 select {
 	color: black;
 	font-weight: normal;
@@ -57,11 +44,6 @@ img {
 	vertical-align: middle;
 	display: inline;
 }
-/*
-.submit {
-	height: 20px;
-}*/
-
 h1 {
 	margin-right: 5px;
 	margin-left: 5px;
@@ -77,16 +59,11 @@ h2 {
 	color: black;
 	display: inline;
 }
-h3,
 .epg_title {
 	margin: 0px;
 	font-size: 12px;
 	font-weight: bold;
 	color: black;
-}
-#prog_list .epg_title a {
-	margin: 0;
-	padding: 0;
 }
 .col_label {
 	width: 100px;
@@ -100,24 +77,6 @@ h3,
 	text-align: right;
 	white-space: nowrap;
 }
-.col_value h5 {
-	display: inline;
-	font-size: 12px;
-	font-weight: normal;
-	color: black;
-}
-h6 {
-	margin: 1px 5px;
-	font-size: 10px;
-	font-weight: normal;
-	color: black;
-	text-align: right;
-}
-
-label {
-	cursor: default;
-}
-
 a,
 a:visited,
 a:active,
@@ -125,11 +84,6 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
-
-label + input {
-	margin-left: 1em;
-}
-
 #rec_list .col_name {
 	font-weight: bold;
 }
@@ -152,15 +106,13 @@ label + input {
 	height: 17px;
 }
 .heading h2,
-.heading .channel_name,
-.heading a {
+.heading .channel_name {
 	font-weight: bold;
 	color: white;
 	margin-top: 0px;
 	white-space: normal;
 }
 
-/*#prog_summary .row_even .col_epg,*/
 .row_even {
 	background-color: #ffffff;
 }
@@ -172,7 +124,6 @@ label + input {
 }
 .col_label,
 .col_value,
-.col_active,
 .col_channel,
 .col_start,
 .col_stop,
@@ -182,13 +133,11 @@ label + input {
 	padding-right: 3px;
 	white-space: nowrap;
 }
-
 .col_channels {
 	text-align: right;
 	padding: 10px;
 	width: 40%;
 }
-
 .col_wanted_channels {
 	text-align: left;
 	padding: 10px;
@@ -201,13 +150,6 @@ label + input {
 }
 .group td {
 	padding: 2px;
-}
-#prog_list .list {
-	margin-bottom: 0.5em;
-}
-.heading img {
-	margin: 0;
-	padding: 0;
 }
 
 /* Summary */
@@ -230,16 +172,6 @@ label + input {
 	color: black;
 	display: block;
 }
-#prog_list .col_buttons,
-#rec_list .col_buttons,
-#epgsearch_list .col_buttons,
-#epgsearch_config .col_buttons,
-#prog_summary2 .col_buttons {
-	width: 120px;
-	text-align: right;
-	padding-right: 3px;
-	white-space: nowrap;
-}
 #prog_summary2 table.percent td {
 	height: 8px;
 }
@@ -255,24 +187,15 @@ label + input {
 	background-color: transparent;
 }
 
-.heading,
-#prog_list .heading td span,
-#prog_list .heading td {
+.heading {
 	vertical-align: middle;
 }
-#prog_list .date_long {
-	color: white;
-	font-weight: bold;
-	padding: 0 2em;
-}
-
 .col_duration {
 	padding-left: 3px;
 	padding-right: 3px;
 	width: 100px;
 	vertical-align: middle;
 }
-	
 .col_name,
 #content .col_title * {
 	padding-left: 3px;
@@ -280,13 +203,9 @@ label + input {
 	min-width: 50px;
 	white-space: normal;
 }
-.col_info,
-.col_record {
+.col_info {
 	width: 16px;
 	text-align: center;
-}
-.col_active {
-	width: 90px;
 }
 .col_channel {
 	width: 100px;
@@ -301,10 +220,8 @@ label + input {
 	width: 85px;
 	text-align: left;
 }
-.col_edit,
 .col_delete,
-.col_stream,
-.col_checkbox {
+.col_stream {
 	text-align: center;
 	width: 16px;
 	max-width: 16px;
@@ -322,42 +239,8 @@ label + input {
 	vertical-align: middle;
 	padding: 0px 10px;
 }
-#heading .col_other {
-	text-align: right;
-}
-#heading .col_other table {
-	display: inline;
-}
-#rec_list #path {
-	margin: 1em 10px 0px 10px;
-}
 #timer_list .list {
 	margin-top: 0.6em;
-}
-#timer_list .timers {
-	border-top: 1px solid black;
-}
-#timer_list .color_ok {
-	background-color: #00a317;
-}
-#timer_list .color_conflict {
-	background-color: #a11917;
-}
-#timer_list .color_collision {
-	background-color: #ffde62;
-}
-#timer_list .color_inactive {
-	background-color: #858585;
-}
-#timer_list .prgtable {
-	border-left-color: #000000;
-	border-right-color: #000000;
-}
-#timer_list .row_even table td.color1 {
-	background-color: #ffffff;
-}
-#timer_list .row_even table td.color2 {
-	background-color: #dee6ee;
 }
 #content {
 	margin-top: 0.6em;
@@ -373,10 +256,6 @@ label + input {
 #config .heading {
 	background-color: #dee6ee;
 	border: none;
-}
-#config .heading a {
-	color: black;
-	font-weight: normal;
 }
 #config .group {
 	margin-top: 0.5em;
@@ -411,7 +290,6 @@ select.channels {
 	padding-bottom: 6px;
 	text-align: center;
 }
-
 #navigation .navi:hover {
 	background-color: #dee6ee;
 }
