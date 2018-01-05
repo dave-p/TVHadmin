@@ -7,7 +7,7 @@
   <div id='rec_list'>
     <div id='topmenu'>
       <form name='order' method='POST' action='recordings.php'>
-        <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
+        <table id='heading'>
 	  <tr><td class='col_title'><h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
 	    <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
 	     <input type='hidden' name='last_sort' value='$sort'></td>
@@ -16,7 +16,7 @@
       </form>
     </div>
     <div id='layout'>
-      <table width='100%' border=0 cellpadding=0 class='list hilight'>
+      <table class='list'>
         <tr class='heading'><td class='col_date'><h2>Date</h2></td>
           <td class='col_time'><h2>Time</h2></td>
 	  <td class='col_channel'><h2>Channel</h2></td>

@@ -45,7 +45,7 @@
 <div id="layout">
  <div id="config">
     <form action="configure.php" method="post" name="FormName">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+	<table id="heading">
 	    <tr>
 		<td class="col_title">
 			<h1>Configuration</h1>
@@ -53,7 +53,7 @@
 	    </tr>
 	</table>
 
-	<table border="0" cellspacing="0" cellpadding="0" class="group">
+	<table class="group">
 	    <tr class="heading">
 		<td colspan="2"><h2>TVHeadend Server</h2></td>
 	    </tr>

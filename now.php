@@ -14,7 +14,7 @@
  <div id='topmenu'>
   <form name='media' method='GET' action='now.php'>
    <input type='hidden' name='update' value='1'>
-   <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
+   <table id='heading'>
     <tr>
      <td class='col_title'><h1>What's on at $time</h1></td>
      <td>";
@@ -44,7 +44,7 @@
  </div>
  <div id='layout'>
   <div id='prog_summary2'>
-   <table border=0 cellpadding=2 class='list hilight' id='content'>
+   <table class='list' id='content'>
     <tr class='newday'>
      <td colspan='4'><span class='date_long'>$wday</span></td>
     </tr>";

@@ -43,7 +43,7 @@
 ?>
   <div id="status">
     <div id="layout">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+	<table id="heading">
 	  <tr>
 	    <td class="col_title"><h1>System Status</h1></td>
 	  </tr>
@@ -53,7 +53,7 @@
 	foreach($stats as $s) {
 	  $i = 0;
 	  echo "
-      <table width='100%' border=0 cellpadding=0 class='list hilight'>
+      <table class='list'>
 	<tr class='heading'>
 	  <td class='col_name' colspan=2> 
 	    <form name='clear' method='POST' action='status.php'><h2>{$s['input']}</h2>

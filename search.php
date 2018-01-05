@@ -19,14 +19,14 @@
 			$tevents[$t["broadcast"]] = 1;
 		}
 		echo "
-      <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
+      <table id='heading'>
 	<tr>
 	  <td class='col_title'>
 	    <h1>Matches for: <i>$find</i></h1>
 	  </td>
 	</tr>
       </table>
-      <table border='0' cellpadding='2' width='100%' class='list hilight' id='content'>";
+      <table class='list' id='content'>";
 		$i = 0;
 		$last_prog_date = " ";
 		$results = search_epg("", $find);

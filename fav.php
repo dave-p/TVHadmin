@@ -27,7 +27,7 @@
 
         echo "<div id='topmenu'>";
 	echo " <form name='whichday' method='GET' action='fav.php'>";
-        echo "<table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'><tr><td class='col_title'><h1>Favourite Channels</h1></td><td>";
+        echo "<table id='heading'><tr><td class='col_title'><h1>Favourite Channels</h1></td><td>";
 	$prev = $when - 86400;
 	if ($prev >= $today) {
 	  echo "<a href='fav.php?when=$prev'><img src='images/left.png'></a>";
@@ -53,7 +53,7 @@
 	$id = 0;
 
 	foreach ($chans as $c) {
-	  echo "<div id='content'><table width='100%' border=0 cellpadding=2 class='list hilight'>";
+	  echo "<div id='content'><table class='list'>";
 	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$c</span>";
 	  echo "</td></tr>";
 	  $progs = get_epg($c);
@@ -74,14 +74,14 @@
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
 	    $evt = $p["eventId"];
 	    if (!array_key_exists($evt, $tevents)) {
-	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
+	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when'><img src='images/rec_button1.png' alt='record' title='record'></a></td><td>";
 	      if (isset($p["serieslinkUri"])) {
-		echo "<td><a href='record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td>";
+		echo "<a href='record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a>";
 	      }
-	      echo "</tr>\n";
+	      echo "</td></tr>\n";
 	    }
 	    else {
-              echo "<td></td></tr>\n";
+              echo "<td></td><td></td></tr>\n";
 	    }
 	    $i++;
 	    $id++;

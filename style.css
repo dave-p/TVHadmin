@@ -94,11 +94,11 @@ a:hover {
 .heading {
 	height: 17px;
 }
-.list.hilight .row_even:hover,
-.list.hilight .row_odd:hover {
+.list .row_even:hover,
+.list .row_odd:hover {
 	background-color: #8cc1da;
 }
-.list.hilight .row_error:hover {
+.list .row_error:hover {
 	background-color: #e08080;
 }
 .heading td {
@@ -146,12 +146,14 @@ a:hover {
 
 .list,
 .group {
+	border-spacing: 2px;
+	width: 100%;
 	border: 1px solid #6d96a9;
 }
+.list td,
 .group td {
 	padding: 2px;
 }
-
 /* Summary */
 .newday {
 	height: 17px;
@@ -230,6 +232,8 @@ a:hover {
 #heading {
 	height: 29px;
 	border: 1px solid #6d96a9;
+	border-spacing: 0;
+	width: 100%;
 }
 #heading tr {
 	vertical-align: middle;

@@ -4,9 +4,10 @@
 ?>
  <div id="layout">
   <div id="timer_list">
-    <table width="100%" border=0 cellspacing=0 cellpadding=0 id="heading">
+    <table id="heading">
       <tr><td class="col_title"><h1>Timers</h1></td></tr></table>
-    <table width="100%" border=0 cellpadding=0 class="list hilight"><tr class="heading">
+    <table class="list">
+     <tr class="heading">
       <td class="col_info"></td>
       <td class="col_channel"><h2>Channel</h2></td>
       <td class="col_date selected"><h2>Date</h2></td>

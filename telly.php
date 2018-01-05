@@ -29,7 +29,7 @@
         echo "
   <div id='topmenu'>
     <form name='whatandwhen' method='GET' action='telly.php'>
-      <table width='100%' border='0' cellspacing='0' cellpadding='0' id='heading'>
+      <table id='heading'>
 	<tr>
 	  <td class='col_title'><h1>Channels</h1></td>
 	  <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>
@@ -69,7 +69,7 @@
 	echo "</div><div id='layout'>";
 
 	if(isset($prog)) {
-	  echo "<table border=0 cellpadding=2 class='list hilight'>";
+	  echo "<table class='list'>";
 	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$prog</span>";
 	  echo "</td></tr>";
 	  $progs = get_epg($prog);
@@ -90,13 +90,14 @@
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
             $evt = $p["eventId"];
 	    if (!array_key_exists($evt, $tevents)) {
-              echo "<td><a href='record.php?eventId=$evt&series=N&from=0&id=$id&when=$when&prog=$uprog'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
+              echo "<td><a href='record.php?eventId=$evt&series=N&from=0&id=$id&when=$when&prog=$uprog'><img src='images/rec_button1.png' alt='record' title='record'></a></td><td>";
               if (isset($p["serieslinkUri"])) {
-                echo "<td><a href='record.php?eventId=$evt&series=Y&from=0&id=$id&when=$when&prog=$uprog'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td>";
+                echo "<a href='record.php?eventId=$evt&series=Y&from=0&id=$id&when=$when&prog=$uprog'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a>";
               }
+	      echo "</td>";
             }
             else {
-              echo "<td></td></tr>\n";
+              echo "<td></td><td></td></tr>\n";
             }
 	    $i++;
 	  }

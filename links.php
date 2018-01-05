@@ -4,12 +4,12 @@
 ?>
   <div id="series_list">
     <div id="layout">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+      <table id="heading">
         <tr>
 	  <td class="col_title"><h1>Series Links</h1></td>
 	</tr>
       </table>
-      <table width="100%" border=0 cellpadding=0 class="list hilight">
+      <table class="list">
 	<tr class="heading">
 	  <td class="col_start"><h2>Timers</h2></td>
 	  <td class="col_channel"><h2>Channel</h2></td>
