@@ -26,14 +26,7 @@ div {
   overflow-y: auto;
   max-height: 95vh;
 }
-#topmenu {
-  margin-left: 169px;
-}
-input {
-	color: black;
-	font-weight: normal;
-	font-size: 12px;
-}
+input,
 select {
 	color: black;
 	font-weight: normal;
@@ -149,6 +142,7 @@ a:hover {
 	border-spacing: 2px;
 	width: 100%;
 	border: 1px solid #6d96a9;
+	margin-top: 0.6em;
 }
 .list td,
 .group td {
@@ -198,8 +192,7 @@ a:hover {
 	width: 100px;
 	vertical-align: middle;
 }
-.col_name,
-#content .col_title * {
+.col_name {
 	padding-left: 3px;
 	padding-right: 3px;
 	min-width: 50px;
@@ -244,9 +237,6 @@ a:hover {
 	padding: 0px 10px;
 }
 #timer_list .list {
-	margin-top: 0.6em;
-}
-#content {
 	margin-top: 0.6em;
 }
 #buttons {

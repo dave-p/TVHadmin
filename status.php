@@ -41,7 +41,6 @@
     file_get_contents($url);
   }
 ?>
-  <div id="status">
     <div id="layout">
 	<table id="heading">
 	  <tr>
@@ -91,8 +90,7 @@
 	    echo "</table>";
 	}
  ?>
-     </table>
-    </div>
+    </table>
    </div>
   </div>
   </body>

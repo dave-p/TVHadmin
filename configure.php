@@ -1,5 +1,5 @@
 <?php
-	include_once "include.php";
+	include_once "./include.php";
 	$vars = $_POST;
 	if (!empty($vars['PROFILE']) && empty($vars['UUID'])) {
 	  if($vars['PROFILE'] == '(default)') $vars['PROFILE'] = '';

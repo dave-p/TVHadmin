@@ -3,10 +3,9 @@
   include_once './head.php';
 ?>
  <div id="layout">
-  <div id="timer_list">
-    <table id="heading">
-      <tr><td class="col_title"><h1>Timers</h1></td></tr></table>
-    <table class="list">
+   <table id="heading">
+     <tr><td class="col_title"><h1>Timers</h1></td></tr></table>
+   <table class="list">
      <tr class="heading">
       <td class="col_info"></td>
       <td class="col_channel"><h2>Channel</h2></td>
@@ -150,7 +149,6 @@
 		return substr($name, 0, strrpos($name, '/'));
 	}
 ?>
-    </div>
    </div>
   </body>
 </html>

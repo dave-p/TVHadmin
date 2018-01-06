@@ -9,7 +9,6 @@
 	}
 	</script>
   <div id="layout">
-    <div id="prog_list">
  <?php
 	if($_GET['find'] != "") {
 		$find = $_GET["find"];
@@ -26,7 +25,7 @@
 	  </td>
 	</tr>
       </table>
-      <table class='list' id='content'>";
+      <table class='list'>";
 		$i = 0;
 		$last_prog_date = " ";
 		$results = search_epg("", $find);
@@ -66,7 +65,6 @@
 		echo "</table>";
 	}
 ?>
-    </div>
    </div>
   </div>
   </body>

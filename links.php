@@ -2,7 +2,6 @@
   $page_title = 'Series Links';
   include_once './head.php';
 ?>
-  <div id="series_list">
     <div id="layout">
       <table id="heading">
         <tr>
@@ -52,8 +51,7 @@
 	    $i++;
 	}
  ?>
-     </table>
-    </div>
+    </table>
    </div>
   </div>
   </body>

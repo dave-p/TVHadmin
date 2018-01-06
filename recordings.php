@@ -4,8 +4,7 @@
   if (!isset($sort)) $sort = 0;
   if (isset($_POST['last_sort'])) $sort = 1 - $_POST['last_sort'];
   echo "
-  <div id='rec_list'>
-    <div id='topmenu'>
+    <div id='layout'>
       <form name='order' method='POST' action='recordings.php'>
         <table id='heading'>
 	  <tr><td class='col_title'><h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
@@ -14,8 +13,6 @@
 	  </tr>
 	</table>
       </form>
-    </div>
-    <div id='layout'>
       <table class='list'>
         <tr class='heading'><td class='col_date'><h2>Date</h2></td>
           <td class='col_time'><h2>Time</h2></td>
@@ -64,8 +61,7 @@
 		$i++;
 	}
 ?>
-      </table>
-     </div>
+     </table>
     </div>
    </div>
   </body>

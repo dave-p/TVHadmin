@@ -27,7 +27,7 @@
 	$id = 0;
 
         echo "
-  <div id='topmenu'>
+  <div id='layout'>
     <form name='whatandwhen' method='GET' action='telly.php'>
       <table id='heading'>
 	<tr>
@@ -66,12 +66,13 @@
 	  echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
 	}
 	echo "</td></table></form>";
-	echo "</div><div id='layout'>";
 
 	if(isset($prog)) {
-	  echo "<table class='list'>";
-	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$prog</span>";
-	  echo "</td></tr>";
+	  echo "
+	<table class='list'>
+	  <tr class='heading'>
+	   <td colspan='4'><span class='channel_name'>$prog</span></td>
+	  </tr>";
 	  $progs = get_epg($prog);
 	  $i = 0;
 	  foreach($progs as $p) {
@@ -104,7 +105,6 @@
 	  echo "</table></div>\n";
 	}
  ?>
-<!-- end container -->
 </div>
 </body>
 </html>

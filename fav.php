@@ -25,7 +25,7 @@
 	  $when = $today;
 	}
 
-        echo "<div id='topmenu'>";
+        echo "<div id='layout'>";
 	echo " <form name='whichday' method='GET' action='fav.php'>";
         echo "<table id='heading'><tr><td class='col_title'><h1>Favourite Channels</h1></td><td>";
 	$prev = $when - 86400;
@@ -49,11 +49,10 @@
 	  echo "<a href='fav.php?when=$next'><img src='images/right.png'></a>";
 	}
 	echo "</td></tr></table></form>";
-	echo "</div><div id='layout'>";
 	$id = 0;
 
 	foreach ($chans as $c) {
-	  echo "<div id='content'><table class='list'>";
+	  echo "<table class='list'>";
 	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$c</span>";
 	  echo "</td></tr>";
 	  $progs = get_epg($c);
@@ -86,7 +85,7 @@
 	    $i++;
 	    $id++;
 	  }
-	  echo "</table></div>";
+	  echo "</table>";
 	}
  ?>
     </div>

@@ -11,7 +11,7 @@
 	$time = date('H:i', time());
 	$media = array();
 	echo "
- <div id='topmenu'>
+ <div id='layout'>
   <form name='media' method='GET' action='now.php'>
    <input type='hidden' name='update' value='1'>
    <table id='heading'>
@@ -41,10 +41,8 @@
     </tr>
    </table>
   </form>
- </div>
- <div id='layout'>
   <div id='prog_summary2'>
-   <table class='list' id='content'>
+   <table class='list'>
     <tr class='newday'>
      <td colspan='4'><span class='date_long'>$wday</span></td>
     </tr>";
