@@ -1,21 +1,26 @@
 <?php
   $page_title = 'Timers';
   include_once './head.php';
-?>
- <div id="layout">
-   <table id="heading">
-     <tr><td class="col_title"><h1>Timers</h1></td></tr></table>
-   <table class="list">
-     <tr class="heading">
-      <td class="col_info"></td>
-      <td class="col_channel"><h2>Channel</h2></td>
-      <td class="col_date selected"><h2>Date</h2></td>
-      <td class="col_start"><h2>Start</h2></td>
-      <td class="col_stop"><h2>Stop</h2></td> 
-      <td class="col_name"><h2>Name</h2></td> 
-      <td class="col_channel"><h2>Mode</h2></td>
+  if (isset($_GET["uuid"])) {
+    $uuid = $_GET["uuid"];
+    $url = "$urlp/api/dvr/entry/cancel?uuid=$uuid";
+    file_get_contents($url);
+  }
+  echo "
+ <div id='layout'>
+   <table id='heading'>
+     <tr><td class='col_title'><h1>Timers</h1></td></tr></table>
+   <table class='list'>
+     <tr class='heading'>
+      <td class='col_info'></td>
+      <td class='col_channel'><h2>Channel</h2></td>
+      <td class='col_date'><h2>Date</h2></td>
+      <td class='col_start'><h2>Start</h2></td>
+      <td class='col_stop'><h2>Stop</h2></td> 
+      <td class='col_name'><h2>Name</h2></td> 
+      <td class='col_channel'><h2>Mode</h2></td>
       <td class=col_delete></td></tr>
-<?php
+  ";
         $timers = get_timers();
 	$i = 0;
 	$channels = array();
@@ -49,7 +54,7 @@
 	    else {
 		echo "<td class='col_channel'></td>";
 	    }
-            printf ("<td class='col_delete'><a href='delete-timer.php?uuid=%s'><img src='images\delete.png' title='Delete Timer'></a></td></tr>\n", $t["uuid"]);
+            echo "<td class='col_delete'><a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a></td></tr>\n";
 	    $i++;
 	}
 	echo "</table></div>\n";

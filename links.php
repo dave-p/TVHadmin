@@ -1,22 +1,27 @@
 <?php
   $page_title = 'Series Links';
   include_once './head.php';
-?>
-    <div id="layout">
-      <table id="heading">
+  if (isset($_GET["uuid"])) {
+    $uuid = $_GET["uuid"];
+    $url = "$urlp/api/idnode/delete?uuid=$uuid";
+    file_get_contents($url);
+  }
+  echo "
+    <div id='layout'>
+      <table id='heading'>
         <tr>
-	  <td class="col_title"><h1>Series Links</h1></td>
+	  <td class='col_title'><h1>Series Links</h1></td>
 	</tr>
       </table>
-      <table class="list">
-	<tr class="heading">
-	  <td class="col_start"><h2>Timers</h2></td>
-	  <td class="col_channel"><h2>Channel</h2></td>
-	  <td class="col_channel"><h2>Link</h2></td>
-	  <td class="col_name"><h2>Name</h2></td> 
-	  <td class="col_delete"></td>
+      <table class='list'>
+	<tr class='heading'>
+	  <td class='col_start'><h2>Timers</h2></td>
+	  <td class='col_channel'><h2>Channel</h2></td>
+	  <td class='col_channel'><h2>Link</h2></td>
+	  <td class='col_name'><h2>Name</h2></td> 
+	  <td class='col_delete'></td>
 	</tr>
-<?php
+  ";
         $links = get_links();
 	$channels = get_channels();
 	$timers = get_timers();
@@ -46,7 +51,7 @@
 	<td class='col_channel'>$channelname</td>
 	<td class='col_channel'>$crid</td>
 	<td class='col_name'>{$l['title']}</td>
-	<td class='col_delete'><a href='delete-series.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
+	<td class='col_delete'><a href='links.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
       </tr>\n";
 	    $i++;
 	}

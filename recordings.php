@@ -1,6 +1,11 @@
 <?php
   $page_title = 'Recordings';
   include_once './head.php';
+  if (isset($_GET["uuid"])) {
+    $uuid = $_GET["uuid"];
+    $url = "$urlp/api/dvr/entry/remove?uuid=$uuid";
+    file_get_contents($url);
+  }
   if (!isset($sort)) $sort = 0;
   if (isset($_POST['last_sort'])) $sort = 1 - $_POST['last_sort'];
   echo "
@@ -55,7 +60,7 @@
 		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
 		echo "
 	  <td class='col_name'><div class='epg_title'>{$t['disp_title']}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
-	  <td class='col_delete'><a href='delete-recording.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
+	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
 	  <td class='col_stream'><a href='$urlp/play/dvrfile/{$t['uuid']}?title={$t['disp_title']}'><img src='images\play.png' title='Play'></a></td>
 	</tr>";
 		$i++;
