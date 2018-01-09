@@ -22,15 +22,19 @@ div {
 	font-size: 12px;
 }
 #layout {
-  margin-left: 169px;
-  overflow-y: auto;
-  max-height: 95vh;
+	margin-left: 169px;
+	overflow-y: auto;
+	max-height: 95vh;
 }
 input,
 select {
 	color: black;
 	font-weight: normal;
 	font-size: 12px;
+}
+input[type=checkbox] {
+	vertical-align: middle;
+	margin-right: 10px;
 }
 img {
 	border: 0;
