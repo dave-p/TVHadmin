@@ -19,6 +19,8 @@
 	if(isset($_GET['prog'])) {
 	  $prog = $_GET['prog'];
 	  $uprog = urlencode($prog);
+	}
+	if(isset($_GET['when'])) {
 	  $when = $_GET['when'];
 	}
 	else {
@@ -33,6 +35,7 @@
 	<tr>
 	  <td class='col_title'><h1>Channels</h1></td>
 	  <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>
+	    <option value=''>Select Channel</option>
 	";
 	$chans = get_channels();
 	foreach($chans as $v) {
@@ -44,30 +47,44 @@
 	  print(">$cname</option>");
 	}
 
-	echo "</select></td><td>";
-	$prev = $when - 86400;
-	if ($prev >= $today) {
-	  echo "<a href='telly.php?prog=$prog&when=$prev'><img src='images/left.png'></a>";
-	}
-	echo "&nbsp;<select name='when' size='1' onchange='formSubmit()'>";
-	$date = $today;
-	for($i=0; $i<8; $i++) {
-	  $d = date('D d/n', $date);
-	  print("<option value='$date'");
-	  if (isset($when) && ($date == $when)) {
-	    print (" selected");
+        if (isset($_GET['all'])) $all = 'checked';
+        else $all = '';
+        echo "
+	    </select>
+	  </td>
+	  <td>
+            <label>
+              All Dates <input type='checkbox' name='all' $all onchange='formSubmit()'>
+            </label>";
+	if ($all !== 'checked') {
+	  $prev = $when - 86400;
+	  if ($prev >= $today) {
+	    echo "<a href='telly.php?prog=$prog&when=$prev'><img src='images/left.png'></a>";
 	  }
-	  print(">$d</option>");
-	  $date += 86400; 
+	  echo "&nbsp;<select name='when' size='1' onchange='formSubmit()'>";
+	  $date = $today;
+	  for($i=0; $i<8; $i++) {
+	    $d = date('D d/n', $date);
+	    print("<option value='$date'");
+	    if (isset($when) && ($date == $when)) {
+	      print (" selected");
+	    }
+	    print(">$d</option>");
+	    $date += 86400;
+	  }
+	  echo "</select>&nbsp;";
+	  $next = $when + 86400;
+	  if (isset($prog) && ($next < $date)) {
+	    echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
+	  }
 	}
-	echo "</select>&nbsp;";
-	$next = $when + 86400;
-	if (isset($prog) && ($next < $date)) {
-	  echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
-	}
-	echo "</td></table></form>";
+	echo "
+	  </td>
+	</tr>
+      </table>
+    </form>";
 
-	if(isset($prog)) {
+	if(isset($prog) && ($prog !== '')) {
 	  echo "
 	<table class='list'>
 	  <tr class='heading'>
@@ -75,9 +92,19 @@
 	  </tr>";
 	  $progs = get_epg($prog);
 	  $i = 0;
+	  $last_prog_date = " ";
 	  foreach($progs as $p) {
-	    $delta = $p["start"] - $when;
-	    if (($delta < 0) || ($delta > 86400)) continue;
+	    if (isset($_GET['all'])) {
+	      $d = date('l d/n', $p["start"]);
+	      if ($d != $last_prog_date) {
+		echo "<tr class='newday'><td colspan='5'><span class='date_long'>$d</span></td></tr>";
+		$last_prog_date = $d;
+	      }
+	    }
+	    else {
+	      $delta = $p["start"] - $when;
+	      if (($delta < 0) || ($delta > 86400)) continue;
+	    }
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
 	    if ($i % 2) {
