@@ -11,6 +11,12 @@
 	$time = date('H:i', time());
 	$media = array();
 	echo "
+	<script type='text/javascript'>
+	function formSubmit()
+	{
+	document.media.submit();
+	}
+	</script>
  <div id='layout'>
   <form name='media' method='GET' action='now.php'>
    <input type='hidden' name='update' value='1'>
@@ -19,7 +25,7 @@
      <td class='col_title'><h1>What's on at $time</h1></td>
      <td>";
 	foreach (array_flip($types) as $t=>$v) {
-		echo "$t: <input type='checkbox' name='$t'";
+		echo "$t: <input type='checkbox' name='$t' onchange='formSubmit()'";
 		if (isset($_GET['update'])) {
  			if (isset($_GET[$t])) {
 				$media[$t] = 1;
@@ -36,7 +42,6 @@
 		echo "> ";
 	}
 	echo "
-      <input type='submit' value='Update'>
      </td>
     </tr>
    </table>
