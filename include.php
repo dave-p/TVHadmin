@@ -15,9 +15,8 @@ $orders = array(
 	0 => "Date",
 	1 => "Title");
 
-$types = [1=>"SDTV",2=>"Radio",17=>"HDTV",22=>"SDTV",2=>"Radio",17=>"HDTV",
-	22=>"SDTV",23=>"SDTV",24=>"SDTV",25=>"HDTV",26=>"HDTV",27=>"HDTV",
-	28=>"HDTV",29=>"HDTV",30=>"HDTV",31=>"UHDTV"]; 
+$types = [1=>"SDTV",2=>"Radio",17=>"HDTV",22=>"SDTV",23=>"SDTV",24=>"SDTV",25=>"HDTV",
+	 26=>"HDTV",27=>"HDTV",28=>"HDTV",29=>"HDTV",30=>"HDTV",31=>"UHDTV"];
 
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
