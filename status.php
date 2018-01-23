@@ -35,6 +35,14 @@
 	return $ret;
   }
 
+  function get_server_info() {
+	global $urlp;
+	$url = "$urlp/api/serverinfo";
+	$json = file_get_contents($url);
+	$j = json_decode($json, true);
+	return $j;
+  }
+
   function clear_input_stats($uuid) {
     global $urlp;
     $url = "$urlp/api/status/inputclrstats?uuid=$uuid";
@@ -49,9 +57,19 @@
 	</table>
 <?php
 	$stats = get_input_status();
+	$info = get_server_info();
 	foreach($stats as $s) {
 	  $i = 0;
 	  echo "
+      <table class='list'>
+	<tr class='heading'>
+	  <td class='col_name' colspan=2><h2>System Information</h2></td>
+	</tr>
+	<tr class='row_odd'>
+	  <td class='col_channel'>Software Version</td>
+	  <td class='col_name'>{$info['sw_version']}</td>
+	</tr>
+      </table>
       <table class='list'>
 	<tr class='heading'>
 	  <td class='col_name' colspan=2> 
