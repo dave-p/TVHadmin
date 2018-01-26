@@ -57,7 +57,7 @@
             echo "<td class='col_delete'><a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a></td></tr>\n";
 	    $i++;
 	}
-	echo "</table></div>\n";
+	echo "</table>\n";
 	foreach ($clashes as $c) {
 	    $title = $c["disp_title"];
 	    if (preg_match("/^(.*)\.\.\./", $title, $t)) {
@@ -154,6 +154,7 @@
 		return substr($name, 0, strrpos($name, '/'));
 	}
 ?>
+     </div>
    </div>
   </body>
 </html>
