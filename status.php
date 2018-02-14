@@ -52,7 +52,7 @@
     <div id="layout">
 	<table id="heading">
 	  <tr>
-	    <td class="col_title"><h1>System Status</h1></td>
+	    <td class="col_title"><div id='mobmenu'>&#9776;</div> <h1>System Status</h1></td>
 	  </tr>
 	</table>
 <?php
@@ -65,7 +65,7 @@
 	<tr class='heading'>
 	  <td class='col_name' colspan=2><h2>System Information</h2></td>
 	</tr>
-	<tr class='row_odd'>
+	<tr class='row_even'>
 	  <td class='col_channel'>Software Version</td>
 	  <td class='col_name'>{$info['sw_version']}</td>
 	</tr>

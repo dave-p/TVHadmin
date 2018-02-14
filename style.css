@@ -307,3 +307,39 @@ select.channels {
 #navigation input {
 	width: 130px;
 }
+#mobmenu { display:none; }
+@media (max-width: 800px) {
+	body {
+		font-size: small;
+	}
+	#navigation {
+		margin: 50px 0 0 -155px;
+		position: fixed;
+		background-color: white;
+	}
+	#navigation .logo {
+		display: none;
+	}
+	#navigation:hover, 
+	#navigation:focus,
+	#navigation.focus { 
+		margin: 50px -155px 0 0;
+		-moz-transition-property: margin;
+		-moz-transition-duration: 0.5s;
+		-moz-transition-timing-function: ease-out;
+		-webkit-transition-property: margin;
+		-webkit-transition-duration: 0.5s;
+		-o-transition-property: margin;
+		-o-transition-duration: 0.5s;
+	}
+	#layout {
+		margin-left: 0px;
+		border-left: 0;
+	}
+	#mobmenu {
+		display: inline-block;
+		text-rendering: geometricPrecision;
+		font-size:medium;
+	}
+
+}

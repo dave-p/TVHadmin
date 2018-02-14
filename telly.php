@@ -33,7 +33,7 @@
     <form name='whatandwhen' method='GET' action='telly.php'>
       <table id='heading'>
 	<tr>
-	  <td class='col_title'><h1>Channels</h1></td>
+	  <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Channels</h1></td>
 	  <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>
 	    <option value=''>Select Channel</option>
 	";

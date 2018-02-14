@@ -22,7 +22,7 @@
    <input type='hidden' name='update' value='1'>
    <table id='heading'>
     <tr>
-     <td class='col_title'><h1>What's on at $time</h1></td>
+     <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
      <td>";
 	foreach (array_flip($types) as $t=>$v) {
 		echo "$t: <input type='checkbox' name='$t' onchange='formSubmit()'";

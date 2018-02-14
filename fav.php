@@ -25,9 +25,15 @@
 	  $when = $today;
 	}
 
-        echo "<div id='layout'>";
-	echo " <form name='whichday' method='GET' action='fav.php'>";
-        echo "<table id='heading'><tr><td class='col_title'><h1>Favourite Channels</h1></td><td>";
+        echo "
+	    <div id='layout'>
+	      <form name='whichday' method='GET' action='fav.php'>
+		<table id='heading'>
+		  <tr>
+		    <td class='col_title'>
+		      <div id='mobmenu' title='menu'>&#9776;</div> <h1>Favourite Channels</h1>
+		    </td>
+		    <td>";
 	$prev = $when - 86400;
 	if ($prev >= $today) {
 	  echo "<a href='fav.php?when=$prev'><img src='images/left.png'></a>";

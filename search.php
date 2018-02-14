@@ -21,7 +21,7 @@
       <table id='heading'>
 	<tr>
 	  <td class='col_title'>
-	    <h1>Matches for: <i>$find</i></h1>
+	    <div id='mobmenu'>&#9776;</div> <h1>Matches for: <i>$find</i></h1>
 	  </td>
 	</tr>
       </table>

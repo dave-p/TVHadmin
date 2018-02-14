@@ -48,7 +48,7 @@
 	<table id="heading">
 	    <tr>
 		<td class="col_title">
-			<h1>Configuration</h1>
+			<div id='mobmenu'>&#9776;</div> <h1>Configuration</h1>
 		</td>
 	    </tr>
 	</table>

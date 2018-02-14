@@ -12,7 +12,7 @@
     <div id='layout'>
       <form name='order' method='POST' action='recordings.php'>
         <table id='heading'>
-	  <tr><td class='col_title'><h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
+	  <tr><td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
 	    <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
 	     <input type='hidden' name='last_sort' value='$sort'></td>
 	  </tr>
