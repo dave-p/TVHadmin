@@ -6,6 +6,20 @@
 <meta name="application-name" content="TVHadmin" />
 <title>TVHadmin - <?php echo $page_title; ?></title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<!--[if !IE]> -->
+<script>
+  function mobclick() {
+    var mytop=document.getElementById("mobmenu");
+    mytop.addEventListener('click', function() {
+        var mynav=document.getElementById("navigation");
+        if (mynav.classList.contains('focus'))
+            mynav.classList.remove('focus');
+        else mynav.classList.add('focus');
+    });
+  }
+  window.onload=mobclick;
+</script>
+<!-- <![endif]-->
 </head> 
 <body>
 <div id="container">
