@@ -5,6 +5,9 @@
 
 * {
 	font-family: Verdana, "Bitstream Vera Sans", Arial, Geneva, Helvetica, sans-serif;
+	color: black;
+	font-weight: normal;
+	font-size: 12px;
 }
 body {
 	background-color: #ffffff;
@@ -15,22 +18,10 @@ form {
 	margin: 0px;
 	padding: 0;
 }
-td,
-div {
-	color: black;
-	font-weight: normal;
-	font-size: 12px;
-}
 #layout {
 	margin-left: 169px;
 	overflow-y: auto;
 	max-height: 95vh;
-}
-input,
-select {
-	color: black;
-	font-weight: normal;
-	font-size: 12px;
 }
 input[type=checkbox] {
 	vertical-align: middle;
@@ -46,21 +37,18 @@ h1 {
 	margin-left: 5px;
 	font-size: 16px;
 	font-weight: bold;
-	color: black;
 	display: inline;
 }
 h2 {
 	margin: 0px;
 	font-size: 12px;
 	font-weight: bold;
-	color: black;
 	display: inline;
 }
 .epg_title {
 	margin: 0px;
 	font-size: 12px;
 	font-weight: bold;
-	color: black;
 }
 .col_label {
 	width: 100px;
@@ -70,7 +58,6 @@ h2 {
 	margin: 1px 5px;
 	font-size: 12px;
 	font-weight: normal;
-	color: black;
 	text-align: right;
 	white-space: nowrap;
 }
@@ -78,13 +65,11 @@ a,
 a:visited,
 a:active,
 a:hover {
-	color: black;
 	text-decoration: none;
 }
 #rec_list .col_name {
 	font-weight: bold;
 }
-
 .row_odd td,
 .row_even td,
 .row_error td,
@@ -140,7 +125,6 @@ a:hover {
 	padding: 10px;
 	width: 40%;
 }
-
 .list,
 .group {
 	border-spacing: 2px;
@@ -167,9 +151,6 @@ a:hover {
 	display: block;
 }
 #prog_summary2 .epg_subtitle {
-	font-size: 12px;
-	font-weight: normal;
-	color: black;
 	display: block;
 }
 #prog_summary2 table.percent td {
@@ -283,7 +264,6 @@ select.channels {
 	width: 150px;
 }
 #navigation .navi {
-	font-size: 12px;
 	padding-top: 6px;
 	padding-bottom: 6px;
 	text-align: center;
@@ -293,7 +273,6 @@ select.channels {
 }
 #navigation .search {
 	padding-top: 6px;
-	font-size: 12px;
 	text-align: center;
 }
 #navigation a,
