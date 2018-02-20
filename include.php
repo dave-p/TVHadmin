@@ -86,11 +86,11 @@ function get_timers() {
 
 function get_recordings($s) {
   global $urlp;
-  $url = "$urlp/api/dvr/entry/grid_finished";
+  $url = "$urlp/api/dvr/entry/grid_finished?limit=99999";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
-  $url = "$urlp/api/dvr/entry/grid_failed";
+  $url = "$urlp/api/dvr/entry/grid_failed?limit=99999";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $fail = &$j["entries"];
