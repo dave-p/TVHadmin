@@ -2,6 +2,36 @@
   $page_title = 'System Status';
   include_once './head.php';
 
+  echo "
+<script>
+window.addEventListener('load',function(event) {
+    var tableArr = document.getElementsByClassName('list');
+    var cellWidths = new Array();
+
+    // get widest
+    for(i = 0; i < tableArr.length; i++)
+    {
+        for(j = 0; j < tableArr[i].rows[1].cells.length; j++)
+        {
+           var cell = tableArr[i].rows[1].cells[j];
+
+           if(!cellWidths[j] || cellWidths[j] < cell.clientWidth)
+                cellWidths[j] = cell.clientWidth;
+        }
+    }
+
+    // set all columns to the widest width found
+    for(i = 0; i < tableArr.length; i++)
+    {
+        for(j = 0; j < tableArr[i].rows[1].cells.length; j++)
+        {
+            tableArr[i].rows[1].cells[j].style.width = cellWidths[j]+'px';
+        }
+    }
+},false);
+</script>
+  ";
+
   $params = array(
 	'uuid'	=> 'uuid',
 	'subs'	=> 'Subscribers',

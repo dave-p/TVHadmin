@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 <!--[if !IE]> -->
 <script>
-  function mobclick() {
+  window.addEventListener('load',function() {
     var mytop=document.getElementById("mobmenu");
     mytop.addEventListener('click', function() {
         var mynav=document.getElementById("navigation");
@@ -16,8 +16,7 @@
             mynav.classList.remove('focus');
         else mynav.classList.add('focus');
     });
-  }
-  window.onload=mobclick;
+  },false);
 </script>
 <!-- <![endif]-->
 </head> 
