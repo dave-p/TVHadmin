@@ -51,6 +51,9 @@
 	    if ($t["autorec"] != "") {
 		echo "<td class='col_channel'>Series Link</td>";
 	    }
+	    else if ($t["timerec"] != "") {
+		echo "<td class='col_channel'>Timed Recording</td>";
+	    }
 	    else {
 		echo "<td class='col_channel'></td>";
 	    }
