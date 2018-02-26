@@ -21,7 +21,8 @@
       <td class='col_channel'><h2>Mode</h2></td>
       <td class=col_delete></td></tr>
   ";
-        $timers = get_timers();
+	$timers = get_timers();
+	$autorecs = get_autorecs();
 	$i = 0;
 	$channels = array();
 	$clashes = array();
@@ -46,18 +47,35 @@
 		echo "<td class='col_info'><img src='images/tick_red.png'></td>";
 		$clashes[] = $t;
 	    }
-	    printf("<td class='col_channel'>%s</td><td class='col_date selected'>%s</td>", $t["channelname"], $date);
-            printf("<td class='col_start'>%s</td><td class='col_stop'>%s</td><td class='col_name'>%s</td>", $start, $stop, $t["disp_title"]);
+	    echo "
+      <td class='col_channel'>{$t['channelname']}</td>
+      <td class='col_date selected'>$date</td>
+      <td class='col_start'>$start</td>
+      <td class='col_stop'>$stop</td>
+      <td class='col_name'>{$t["disp_title"]}</td>";
 	    if ($t["autorec"] != "") {
-		echo "<td class='col_channel'>Series Link</td>";
+		$type = "Autorec";
+                foreach ($autorecs as $a) {
+		    if ($a["uuid"] == $t["autorec"]) {
+			if ($a["serieslink"] != "") {
+			    $type = "Series Link";
+			}
+			break;
+		    }
+		}
 	    }
 	    else if ($t["timerec"] != "") {
-		echo "<td class='col_channel'>Timed Recording</td>";
+		$type = "Timed Recording";
 	    }
 	    else {
-		echo "<td class='col_channel'></td>";
+		$type = "";
 	    }
-            echo "<td class='col_delete'><a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a></td></tr>\n";
+            echo "
+      <td class='col_channel'>$type</td>
+      <td class='col_delete'>
+	<a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a>
+      </td>
+    </tr>\n";
 	    $i++;
 	}
 	echo "</table>\n";
@@ -155,6 +173,15 @@
 		$j = json_decode($json, true);
 		$name = $j["name"];
 		return substr($name, 0, strrpos($name, '/'));
+	}
+
+	function get_autorecs() {
+		global $urlp;
+		$url = "$urlp/api/dvr/autorec/grid?limit=99999";
+		$json = file_get_contents($url);
+		$j = json_decode($json, true);
+		$ret = &$j["entries"];
+		return $ret;
 	}
 ?>
      </div>
