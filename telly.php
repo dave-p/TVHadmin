@@ -103,7 +103,8 @@
 	    }
 	    else {
 	      $delta = $p["start"] - $when;
-	      if (($delta < 0) || ($delta > 86400)) continue;
+	      if ($delta < 0) continue;
+	      if ($delta > 86400) break;
 	    }
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
