@@ -167,6 +167,15 @@
 		    <input type='radio' name='SUMM' value='subtitle' $c2>Subtitle
 		</td>
 	    </tr>
+	    <tr class='row_even'>
+		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
+		<td class='col_value'><input type='checkbox' name='NOANON'";
+          if (isset($settings['NOANON'])) {
+            echo " checked";
+          }
+          echo ">
+		</td>
+	    </tr>
 	</table>
 
 	<table border='0' cellspacing='0' cellpadding='0' class='group'>

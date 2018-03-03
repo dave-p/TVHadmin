@@ -10,6 +10,12 @@
 	$wday = date('l, j M Y', time());
 	$time = date('H:i', time());
 	$media = array();
+	if (array_key_exists('NOANON', $settings)) {
+		$view_url = $urlp;
+	}
+	else {
+		$view_url = 'http://' . $ip;
+	}
 	echo "
 	<script type='text/javascript'>
 	function formSubmit()
@@ -87,7 +93,7 @@
        <div class='epg_subtitle'>{$summ}</div>
       </td>
       <td class='col_stream'>
-	<a href='$urlp/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
+	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
       </td>
      </tr>";
 		$i++;
