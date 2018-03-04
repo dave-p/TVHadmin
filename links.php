@@ -8,12 +8,16 @@
   }
   echo "
     <div id='layout'>
+     <div id='banner'>
       <table id='heading'>
         <tr>
 	  <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Series Links</h1></td>
 	</tr>
       </table>
-      <table class='list'>
+     </div>
+     <div id='wrapper'>
+      <div id='content'>
+       <table class='list'>
 	<tr class='heading'>
 	  <td class='col_start'><h2>Timers</h2></td>
 	  <td class='col_channel'><h2>Channel</h2></td>
@@ -56,8 +60,10 @@
 	    $i++;
 	}
  ?>
-    </table>
+     </table>
+    </div>
    </div>
   </div>
-  </body>
+ </div>
+</body>
 </html>

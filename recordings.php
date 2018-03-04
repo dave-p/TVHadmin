@@ -16,23 +16,29 @@
   }
   echo "
     <div id='layout'>
-      <form name='order' method='POST' action='recordings.php'>
-        <table id='heading'>
-	  <tr><td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
-	    <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
-	     <input type='hidden' name='last_sort' value='$sort'></td>
-	  </tr>
-	</table>
-      </form>
-      <table class='list'>
-        <tr class='heading'><td class='col_date'><h2>Date</h2></td>
-          <td class='col_time'><h2>Time</h2></td>
-	  <td class='col_channel'><h2>Channel</h2></td>
-          <td class='col_length'><h2>Length</h2></td>
-          <td class='col_name'><h2>Name</h2></td>
-	  <td class='col_delete'></td>
-	  <td class='col_stream'></td>
-	</tr>
+      <div id='banner'>
+	<form name='order' method='POST' action='recordings.php'>
+	  <table id='heading'>
+	    <tr>
+	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
+	      <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
+	       <input type='hidden' name='last_sort' value='$sort'></td>
+	    </tr>
+	  </table>
+        </form>
+      </div>
+      <div id='wrapper'>
+	<div id='content'>
+	  <table class='list'>
+	    <tr class='heading'>
+	      <td class='col_date'><h2>Date</h2></td>
+	      <td class='col_time'><h2>Time</h2></td>
+	      <td class='col_channel'><h2>Channel</h2></td>
+	      <td class='col_length'><h2>Length</h2></td>
+	      <td class='col_name'><h2>Name</h2></td>
+	      <td class='col_delete'></td>
+	      <td class='col_stream'></td>
+	    </tr>
   ";
         $recordings = get_recordings($sort);
 	$i = 0;
@@ -72,7 +78,9 @@
 		$i++;
 	}
 ?>
-     </table>
+       </table>
+      </div>
+     </div>
     </div>
    </div>
   </body>

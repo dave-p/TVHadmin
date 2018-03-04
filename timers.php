@@ -8,18 +8,26 @@
   }
   echo "
  <div id='layout'>
-   <table id='heading'>
-     <tr><td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timers</h1></td></tr></table>
-   <table class='list'>
-     <tr class='heading'>
-      <td class='col_info'></td>
-      <td class='col_channel'><h2>Channel</h2></td>
-      <td class='col_date'><h2>Date</h2></td>
-      <td class='col_start'><h2>Start</h2></td>
-      <td class='col_stop'><h2>Stop</h2></td> 
-      <td class='col_name'><h2>Name</h2></td> 
-      <td class='col_channel'><h2>Mode</h2></td>
-      <td class=col_delete></td></tr>
+   <div id='banner'>
+     <table id='heading'>
+       <tr>
+	<td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timers</h1></td>
+       </tr>
+     </table>
+   </div>
+   <div id='wrapper'>
+     <div id='content'>
+       <table class='list'>
+	<tr class='heading'>
+	 <td class='col_info'></td>
+	 <td class='col_channel'><h2>Channel</h2></td>
+	 <td class='col_date'><h2>Date</h2></td>
+	 <td class='col_start'><h2>Start</h2></td>
+	 <td class='col_stop'><h2>Stop</h2></td> 
+	 <td class='col_name'><h2>Name</h2></td> 
+	 <td class='col_channel'><h2>Mode</h2></td>
+	 <td class=col_delete></td>
+	</tr>
   ";
 	$timers = get_timers();
 	$autorecs = get_autorecs();
@@ -184,6 +192,8 @@
 		return $ret;
 	}
 ?>
+	</div>
+       </div>
      </div>
    </div>
   </body>

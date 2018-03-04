@@ -20,8 +20,20 @@ form {
 }
 #layout {
 	margin-left: 169px;
-	overflow-y: auto;
-	max-height: 95vh;
+	height: 98vh;
+	display: flex;
+	flex-direction: column;
+}
+#banner {
+}
+#wrapper {
+	display: flex;
+	flex: 1;
+	min-height: 0px;
+	overflow: auto;
+}
+#content {
+	width: 100%;
 }
 input[type=checkbox] {
 	vertical-align: middle;

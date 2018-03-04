@@ -30,12 +30,13 @@
 
         echo "
   <div id='layout'>
-    <form name='whatandwhen' method='GET' action='telly.php'>
-      <table id='heading'>
-	<tr>
-	  <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Channels</h1></td>
-	  <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>
-	    <option value=''>Select Channel</option>
+    <div id='banner'>
+      <form name='whatandwhen' method='GET' action='telly.php'>
+        <table id='heading'>
+	  <tr>
+	    <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Channels</h1></td>
+	    <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>
+	      <option value=''>Select Channel</option>
 	";
 	$chans = get_channels();
 	foreach($chans as $v) {
@@ -79,10 +80,13 @@
 	  }
 	}
 	echo "
-	  </td>
-	</tr>
-      </table>
-    </form>";
+	    </td>
+	  </tr>
+        </table>
+      </form>
+    </div>
+    <div id='wrapper'>
+      <div id='content'>";
 
 	if(isset($prog) && ($prog !== '')) {
 	  echo "
@@ -133,6 +137,8 @@
 	  echo "</table></div>\n";
 	}
  ?>
-</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

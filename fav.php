@@ -26,14 +26,15 @@
 	}
 
         echo "
-	    <div id='layout'>
-	      <form name='whichday' method='GET' action='fav.php'>
-		<table id='heading'>
-		  <tr>
-		    <td class='col_title'>
-		      <div id='mobmenu' title='menu'>&#9776;</div> <h1>Favourite Channels</h1>
-		    </td>
-		    <td>";
+    <div id='layout'>
+      <div id='banner'>
+	<form name='whichday' method='GET' action='fav.php'>
+	  <table id='heading'>
+	    <tr>
+	      <td class='col_title'>
+		<div id='mobmenu' title='menu'>&#9776;</div> <h1>Favourite Channels</h1>
+	      </td>
+	      <td>";
 	$prev = $when - 86400;
 	if ($prev >= $today) {
 	  echo "<a href='fav.php?when=$prev'><img src='images/left.png'></a>";
@@ -54,7 +55,14 @@
 	if ($next < $date) {
 	  echo "<a href='fav.php?when=$next'><img src='images/right.png'></a>";
 	}
-	echo "</td></tr></table></form>";
+	echo "
+	      </td>
+	    </tr>
+	  </table>
+	</form>
+      </div>
+      <div id='wrapper'>
+	<div id='content'>";
 	$id = 0;
 
 	foreach ($chans as $c) {
@@ -95,9 +103,11 @@
 	  echo "</table>";
 	}
  ?>
+	</div>
+      </div>
     </div>
 <!-- end container -->
-</div>
+  </div>
 </body>
 </html>
 

@@ -24,12 +24,13 @@
 	}
 	</script>
  <div id='layout'>
-  <form name='media' method='GET' action='now.php'>
-   <input type='hidden' name='update' value='1'>
-   <table id='heading'>
-    <tr>
-     <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
-     <td>";
+  <div id='banner'>
+   <form name='media' method='GET' action='now.php'>
+    <input type='hidden' name='update' value='1'>
+    <table id='heading'>
+     <tr>
+      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
+      <td>";
 	foreach (array_flip($types) as $t=>$v) {
 		echo "$t: <input type='checkbox' name='$t' onchange='formSubmit()'";
 		if (isset($_GET['update'])) {
@@ -48,15 +49,17 @@
 		echo "> ";
 	}
 	echo "
-     </td>
-    </tr>
-   </table>
-  </form>
-  <div id='prog_summary2'>
-   <table class='list'>
-    <tr class='newday'>
-     <td colspan='4'><span class='date_long'>$wday</span></td>
-    </tr>";
+      </td>
+     </tr>
+    </table>
+   </form>
+  </div>
+  <div id='wrapper'>
+   <div id='prog_summary2'>
+    <table class='list'>
+     <tr class='newday'>
+      <td colspan='4'><span class='date_long'>$wday</span></td>
+     </tr>";
 	$i = 0;
 	foreach($chans as $c) {
 		$svcid = $c["services"][0];
@@ -101,6 +104,7 @@ nogood:
 	}
 	echo "</table></div>\n";
  ?>
+    </div>
    </div>
   </div>
  </body>
