@@ -25,6 +25,19 @@ form {
 	flex-direction: column;
 }
 #banner {
+	border: 1px solid #6d96a9;
+        width: 100%;
+        background-color: #dee6ee;
+}
+#banner table {
+        border-spacing: 0;
+        width: 100%;
+}
+#banner tr {
+}
+#banner td {
+        vertical-align: middle;
+        padding: 0px 10px;
 }
 #wrapper {
 	display: flex;
@@ -94,6 +107,9 @@ a:hover {
 }
 .list .row_error:hover {
 	background-color: #e08080;
+}
+.heading {
+	vertical-align: middle;
 }
 .heading td {
 	background-color: #6d96a9;
@@ -180,9 +196,6 @@ a:hover {
 	background-color: transparent;
 }
 
-.heading {
-	vertical-align: middle;
-}
 .col_duration {
 	padding-left: 3px;
 	padding-right: 3px;
@@ -194,10 +207,6 @@ a:hover {
 	padding-right: 3px;
 	min-width: 50px;
 	white-space: normal;
-}
-.col_info {
-	width: 16px;
-	text-align: center;
 }
 .col_channel {
 	width: 100px;
@@ -213,28 +222,11 @@ a:hover {
 	text-align: left;
 }
 .col_delete,
+.col_info,
 .col_stream {
 	text-align: center;
 	width: 16px;
 	max-width: 16px;
-}
-
-#heading {
-	height: 29px;
-	border: 1px solid #6d96a9;
-	border-spacing: 0;
-	width: 100%;
-}
-#heading tr {
-	vertical-align: middle;
-	background-color: #dee6ee;
-}
-#heading td {
-	vertical-align: middle;
-	padding: 0px 10px;
-}
-#timer_list .list {
-	margin-top: 0.6em;
 }
 #buttons {
 	border: 1px solid #6d96a9;
@@ -244,8 +236,8 @@ a:hover {
 	background-color: #dee6ee;
 	text-align: right;
 }
-#config .heading {
-	background-color: #dee6ee;
+#config {
+	width: 100%;
 	border: none;
 }
 #config .group {

@@ -29,7 +29,7 @@
     <div id='layout'>
       <div id='banner'>
 	<form name='whichday' method='GET' action='fav.php'>
-	  <table id='heading'>
+	  <table>
 	    <tr>
 	      <td class='col_title'>
 		<div id='mobmenu' title='menu'>&#9776;</div> <h1>Favourite Channels</h1>

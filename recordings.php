@@ -18,7 +18,7 @@
     <div id='layout'>
       <div id='banner'>
 	<form name='order' method='POST' action='recordings.php'>
-	  <table id='heading'>
+	  <table>
 	    <tr>
 	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
 	      <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>

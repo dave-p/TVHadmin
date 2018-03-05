@@ -80,7 +80,8 @@ window.addEventListener('load',function(event) {
   }
 ?>
     <div id="layout">
-	<table id="heading">
+      <div id='banner'>
+	<table>
 	  <tr>
 	    <td class="col_title"><div id='mobmenu'>&#9776;</div> <h1>System Status</h1></td>
 	  </tr>
@@ -91,6 +92,9 @@ window.addEventListener('load',function(event) {
 	foreach($stats as $s) {
 	  $i = 0;
 	  echo "
+    </div>
+    <div id='wrapper'>
+     <div id='content'>
       <table class='list'>
 	<tr class='heading'>
 	  <td class='col_name' colspan=2><h2>System Information</h2></td>
@@ -138,8 +142,10 @@ window.addEventListener('load',function(event) {
 	    echo "</table>";
 	}
  ?>
-    </table>
+      </table>
+     </div>
+    </div>
    </div>
   </div>
-  </body>
+ </body>
 </html>

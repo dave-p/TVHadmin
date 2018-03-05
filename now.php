@@ -27,7 +27,7 @@
   <div id='banner'>
    <form name='media' method='GET' action='now.php'>
     <input type='hidden' name='update' value='1'>
-    <table id='heading'>
+    <table>
      <tr>
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
       <td>";

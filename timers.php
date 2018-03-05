@@ -9,7 +9,7 @@
   echo "
  <div id='layout'>
    <div id='banner'>
-     <table id='heading'>
+     <table>
        <tr>
 	<td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timers</h1></td>
        </tr>

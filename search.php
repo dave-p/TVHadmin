@@ -18,7 +18,7 @@
 			$tevents[$t["broadcast"]] = 1;
 		}
 		echo "
-      <table id='heading'>
+      <table>
 	<tr>
 	  <td class='col_title'>
 	    <div id='mobmenu'>&#9776;</div> <h1>Matches for: <i>$find</i></h1>

@@ -32,7 +32,7 @@
   <div id='layout'>
     <div id='banner'>
       <form name='whatandwhen' method='GET' action='telly.php'>
-        <table id='heading'>
+        <table>
 	  <tr>
 	    <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Channels</h1></td>
 	    <td>Channel: <select name='prog' size='1' onchange='formSubmit()'>

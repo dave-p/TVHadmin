@@ -43,16 +43,18 @@
     </script>
 
 <div id="layout">
- <div id="config">
-    <form action="configure.php" method="post" name="FormName">
-	<table id="heading">
+  <div id="banner">
+	<table>
 	    <tr>
 		<td class="col_title">
 			<div id='mobmenu'>&#9776;</div> <h1>Configuration</h1>
 		</td>
 	    </tr>
 	</table>
-
+  </div>
+  <div id='wrapper'>
+    <div id='config'>
+      <form action="configure.php" method="post" name="FormName">
 	<table class="group">
 	    <tr class="heading">
 		<td colspan="2"><h2>TVHeadend Server</h2></td>
@@ -221,6 +223,7 @@
         var m1 = document.FormName.all_channels;
         var m2 = document.FormName.elements['selected_channels[]'];
     </script>
+   </div>
   </div>
  </div>
 </div>
