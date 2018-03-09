@@ -34,6 +34,7 @@
 	$i = 0;
 	$channels = array();
 	$clashes = array();
+	$now = time();
 	foreach($timers as $t) {
 	    $start = strftime("%H:%M", $t["start"]);
 	    $stop = strftime("%H:%M", $t["stop"]);
@@ -44,7 +45,10 @@
 	    else {
 		echo "<tr class='row_even'>";
 	    }
-	    switch(check_timer($timers, $t)) {
+	    if ($t["start"] < $now) {
+		echo "<td class='col_info'><img src='images/rec.png'></td>";
+	    }
+	    else switch(check_timer($timers, $t)) {
 	      case 0:
 		echo "<td class='col_info'><img src='images/tick_green.png'></td>";
 	        break;
