@@ -164,6 +164,8 @@ a:hover {
 .group td {
 	padding: 2px;
 }
+.wideonly { }
+
 /* Summary */
 .newday {
 	height: 17px;
@@ -300,6 +302,7 @@ select.channels {
 		position: fixed;
 		background-color: white;
 	}
+	.wideonly,
 	#navigation .logo {
 		display: none;
 	}

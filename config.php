@@ -150,8 +150,26 @@
 	  if (isset($settings[$g])) {
 	    echo " checked";
 	  }
-	  echo "> ";
+	  echo ">";
 	}
+	echo "
+		</td>
+	    </tr>
+	    <tr class='row_odd'>
+		<td class='col_label'><h5>Show in Recordings:</h5></td>
+		<td class='col_value'>";
+	foreach (array_flip($types) as $t=>$v) {
+	  $g = "Rec_" . $t;
+	  echo "$t: <input type='checkbox' name='$g' ";
+	  if (isset($settings[$g])) {
+	    echo " checked";
+	  }
+	  echo ">";
+	}
+	echo "
+		</td> 
+	    </tr> 
+	";
 	if (!isset($settings['SUMM'])) $settings[SUMM] = 'summary';
 	if ($settings['SUMM'] == 'summary') {
 	  $c1 = 'checked'; $c2 = '';
@@ -160,16 +178,14 @@
 	  $c1 = ''; $c2 = 'checked';
 	}
 	echo "
-		</td>
-	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
 		<td class='col_value'>
 		    <input type='radio' name='SUMM' value='summary' $c1>Summary&nbsp;
 		    <input type='radio' name='SUMM' value='subtitle' $c2>Subtitle
 		</td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
 		<td class='col_value'><input type='checkbox' name='NOANON'";
           if (isset($settings['NOANON'])) {

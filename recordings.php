@@ -8,6 +8,14 @@
   }
   if (!isset($sort)) $sort = 0;
   if (isset($_POST['last_sort'])) $sort = 1 - $_POST['last_sort'];
+  $chtype = array();
+  $media = array();
+  $sv = get_services();
+  foreach ($sv as $s) {
+      foreach ($s["channel"] as $c) {
+          $chtype[$c] = $s["dvb_servicetype"];
+      }
+  }
   if (array_key_exists('NOANON', $settings)) {
       $view_url = $urlp;
   }
@@ -15,17 +23,50 @@
       $view_url = 'http://' . $ip;
   }
   echo "
+    <script type='text/javascript'>
+      function formSubmit() {
+        document.media.submit();
+      }
+    </script>
     <div id='layout'>
       <div id='banner'>
-	<form name='order' method='POST' action='recordings.php'>
-	  <table>
-	    <tr>
-	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings (Sorted By {$orders[$sort]})</h1></td>
-	      <td><input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
-	       <input type='hidden' name='last_sort' value='$sort'></td>
-	    </tr>
-	  </table>
-        </form>
+	<table>
+	  <tr>
+	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings</h1>
+	      </td>
+	      <td>
+		<form name='order' method='POST' action='recordings.php'>
+		  <input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
+		  <input type='hidden' name='last_sort' value='$sort'>
+		</form>
+	      </td>
+	      <td><span class='wideonly'>
+		<form name='media' method='GET' action='recordings.php'>
+		  <input type='hidden' name='update' value='1'>
+	      ";
+  foreach (array_flip($types) as $t=>$v) {
+      echo "$t: <input type='checkbox' name='$t' onchange='formSubmit()'";
+      if (isset($_GET['update'])) {
+          if (isset($_GET[$t])) {
+              $media[$t] = 1;
+              echo " checked";
+           }
+      }
+      else {
+          $g = "Rec_" . $t;
+          if (isset($settings[$g])) {
+              $media[$t] = 1;
+              echo " checked";
+          }
+      }
+      echo "> ";
+  }
+  echo "
+		</form>
+	      </span>
+	    </td>
+	  </tr>
+	</table>
       </div>
       <div id='wrapper'>
 	<div id='content'>
@@ -43,6 +84,10 @@
         $recordings = get_recordings($sort);
 	$i = 0;
 	foreach($recordings as $t) {
+		$cid = $t["channel"];
+		$typeno = $chtype[$cid];
+		$ctname = $types[$typeno];
+		if (!array_key_exists($ctname, $media)) goto nogood;
 		$time = strftime("%H:%M", $t["start"]);
 		$date = strftime("%a %e/%m/%y", $t["start"]);
 		$duration = $t["stop_real"] - $t["start_real"];
@@ -76,6 +121,7 @@
 	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$t['disp_title']}'><img src='images\play.png' title='Play'></a></td>
 	</tr>";
 		$i++;
+nogood:
 	}
 ?>
        </table>
