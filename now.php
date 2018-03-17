@@ -32,7 +32,10 @@
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
       <td>";
 	foreach (array_flip($types) as $t=>$v) {
-		echo "$t: <input type='checkbox' name='$t' onchange='formSubmit()'";
+		echo "
+	<div class='media'>
+	  <label for='$t'>$t:</label>
+	  <input type='checkbox' name='$t' id='$t' onchange='formSubmit()'";
 		if (isset($_GET['update'])) {
  			if (isset($_GET[$t])) {
 				$media[$t] = 1;
@@ -46,7 +49,8 @@
 				echo " checked";
 			}
 		}
-		echo "> ";
+		echo ">
+	</div>";
 	}
 	echo "
       </td>

@@ -45,7 +45,10 @@
 		  <input type='hidden' name='update' value='1'>
 	      ";
   foreach (array_flip($types) as $t=>$v) {
-      echo "$t: <input type='checkbox' name='$t' onchange='formSubmit()'";
+      echo "
+	<div class='media'>
+	  <label for='$t'>$t:</label>
+	  <input type='checkbox' name='$t' id='$t' onchange='formSubmit()'";
       if (isset($_GET['update'])) {
           if (isset($_GET[$t])) {
               $media[$t] = 1;
@@ -59,7 +62,8 @@
               echo " checked";
           }
       }
-      echo "> ";
+      echo ">
+	</div>";
   }
   echo "
 		</form>
