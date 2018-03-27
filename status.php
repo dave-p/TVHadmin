@@ -78,38 +78,41 @@ window.addEventListener('load',function(event) {
     $url = "$urlp/api/status/inputclrstats?uuid=$uuid";
     file_get_contents($url);
   }
-?>
-    <div id="layout">
+
+  $info = get_server_info();
+  echo "
+    <div id='layout'>
       <div id='banner'>
 	<table>
 	  <tr>
-	    <td class="col_title"><div id='mobmenu'>&#9776;</div> <h1>System Status</h1></td>
+	    <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>System Status</h1></td>
 	  </tr>
 	</table>
-<?php
+      </div>
+      <div id='wrapper'>
+	<div id='content'>
+	<table class='list'>
+	  <tr class='heading'>
+	    <td class='col_name' colspan=2><h2>System Information</h2></td>
+	  </tr>
+	  <tr class='row_even'>
+	    <td class='col_channel'>Software Version</td>
+	    <td class='col_name'>{$info['sw_version']}</td>
+	  </tr>
+	</table>
+  ";
 	$stats = get_input_status();
-	$info = get_server_info();
 	foreach($stats as $s) {
 	  $i = 0;
 	  echo "
-    </div>
-    <div id='wrapper'>
-     <div id='content'>
-      <table class='list'>
-	<tr class='heading'>
-	  <td class='col_name' colspan=2><h2>System Information</h2></td>
-	</tr>
-	<tr class='row_even'>
-	  <td class='col_channel'>Software Version</td>
-	  <td class='col_name'>{$info['sw_version']}</td>
-	</tr>
-      </table>
       <table class='list'>
 	<tr class='heading'>
 	  <td class='col_name' colspan=2> 
 	    <form name='clear' method='POST' action='status.php'><h2>{$s['input']}</h2>
-	    <input type='submit' name='clearcounts' value='Clear Counters'>
-	    <input type='hidden' name='uuid' value='{$s["uuid"]}'></form></td>
+	      <input type='submit' name='clearcounts' value='Clear Counters'>
+	      <input type='hidden' name='uuid' value='{$s["uuid"]}'>
+	    </form>
+	  </td>
 	</tr>";
 	    switch($s['signal_scale']) {
 		case 1:
@@ -142,7 +145,6 @@ window.addEventListener('load',function(event) {
 	    echo "</table>";
 	}
  ?>
-      </table>
      </div>
     </div>
    </div>
