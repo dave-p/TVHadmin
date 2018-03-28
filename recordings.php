@@ -114,15 +114,16 @@
 		else {
 			$summ = 'disp_subtitle';
 		}
+		$title = htmlspecialchars($t['disp_title'],ENT_QUOTES);
 		echo "
 	  <td class='col_date'>$date</td>
 	  <td class='col_time'>$time</td>
 	  <td class='col_channel'>{$t['channelname']}</td>";
 		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
 		echo "
-	  <td class='col_name'><div class='epg_title'>{$t['disp_title']}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
+	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
 	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
-	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$t['disp_title']}'><img src='images\play.png' title='Play'></a></td>
+	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>
 	</tr>";
 		$i++;
 nogood:
