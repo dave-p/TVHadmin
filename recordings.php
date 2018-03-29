@@ -88,6 +88,7 @@
         $recordings = get_recordings($sort);
 	$i = 0;
 	foreach($recordings as $t) {
+		if ($t["sched_status"] == "scheduled") continue;
 		$cid = $t["channel"];
 		$typeno = $chtype[$cid];
 		$ctname = $types[$typeno];
@@ -98,6 +99,7 @@
 		$hh = $duration / 3600;
 		$mm = ($duration % 3600) / 60;
 		if (strpos($t['status'], 'OK')) {
+			$ok = 1;
 			if ($i % 2) {
 				echo "<tr class='row_odd'>";
 			}
@@ -106,6 +108,7 @@
 			}
 		}
 		else {
+			$ok = 0;
 			echo "<tr class='row_error'>";
 		}
 		if ($settings['SUMM'] == 'summary') {
@@ -122,9 +125,11 @@
 		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
 		echo "
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
-	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>
-	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>
-	</tr>";
+	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>";
+		if ($ok) echo "
+	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>";
+		else echo "<td></td>";
+		echo "</tr>";
 		$i++;
 nogood:
 	}

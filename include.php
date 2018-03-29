@@ -86,17 +86,10 @@ function get_timers() {
 
 function get_recordings($s) {
   global $urlp;
-  $url = "$urlp/api/dvr/entry/grid_finished?limit=99999";
+  $url = "$urlp/api/dvr/entry/grid?limit=99999";
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
-  $url = "$urlp/api/dvr/entry/grid_failed?limit=99999";
-  $json = file_get_contents($url);
-  $j = json_decode($json, true);
-  $fail = &$j["entries"];
-  foreach ($fail as $f) {
-    $ret[] = $f;
-  }
   if($s == 0) usort($ret, "sort_recordings");
   else usort($ret, "sort_recordings_title");
   return $ret;
