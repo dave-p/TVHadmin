@@ -98,7 +98,7 @@
 		$duration = $t["stop_real"] - $t["start_real"];
 		$hh = $duration / 3600;
 		$mm = ($duration % 3600) / 60;
-		if (strpos($t['status'], 'OK')) {
+		if ($t['sched_status'] == 'completed') {
 			$ok = 1;
 			if ($i % 2) {
 				echo "<tr class='row_odd'>";
@@ -106,6 +106,10 @@
 			else {
 				echo "<tr class='row_even'>";
 			}
+		}
+		else if ($t['sched_status'] == 'recording') {
+			$ok = 1;
+			echo "<tr class='row_inprogress'>";
 		}
 		else {
 			$ok = 0;

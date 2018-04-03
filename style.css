@@ -98,6 +98,7 @@ a:hover {
 .row_odd td,
 .row_even td,
 .row_error td,
+.row_inprogress td,
 .heading {
 	height: 17px;
 }
@@ -131,6 +132,9 @@ a:hover {
 }
 .row_error {
 	background-color: #ffe0e0;
+}
+.row_inprogress {
+	background-color: #e0e0e0;
 }
 .col_label,
 .col_value,
