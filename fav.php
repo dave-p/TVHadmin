@@ -16,6 +16,11 @@
 	foreach ($timers as $t) {
 	  $tevents[$t["broadcast"]] = 1;
 	}
+	$links = get_links();
+	$levents = array();
+	foreach ($links as $l) {
+	  $levents[$l["serieslink"]] = 1;
+	}
         $dt = localtime(time(), true);
         $today = mktime($epg_start, 0, 0, $dt["tm_mon"]+1, $dt["tm_mday"], $dt["tm_year"]+1900);
 	if(isset($_GET['when'])) {
@@ -88,14 +93,16 @@
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
 	    $evt = $p["eventId"];
 	    if (!array_key_exists($evt, $tevents)) {
-	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when'><img src='images/rec_button1.png' alt='record' title='record'></a></td><td>";
-	      if (isset($p["serieslinkUri"])) {
-		echo "<a href='record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a>";
-	      }
-	      echo "</td></tr>\n";
+	      echo "<td><a href='record.php?eventId=$evt&series=N&from=1&id=$id&when=$when&prog=$uprog'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 	    }
 	    else {
-              echo "<td></td><td></td></tr>\n";
+	      echo "<td></td>";
+	    }
+	    if ((isset($p["serieslinkUri"])) && !array_key_exists($p["serieslinkUri"], $levents)) {
+	      echo "<td><a href='record.php?eventId=$evt&series=Y&from=1&id=$id&when=$when&prog=$uprog'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td></tr>";
+	    }
+	    else {
+	      echo "<td></td></tr>";
 	    }
 	    $i++;
 	    $id++;

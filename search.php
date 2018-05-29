@@ -17,6 +17,11 @@
 		foreach ($timers as $t) {
 			$tevents[$t["broadcast"]] = 1;
 		}
+		$links = get_links();
+		$levents = array();
+		foreach ($links as $l) {
+			$levents[$l["serieslink"]] = 1;
+		}
 		echo "
       <table>
 	<tr>
@@ -51,14 +56,16 @@
 	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$r['summary']}</div></td>";
 			$evt = $r["eventId"];
 			if (!array_key_exists($evt, $tevents)) {
-				echo "<td><a href='record.php?eventId=$evt&series=N&from=3&id=$find'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
-				if (isset($r["serieslinkUri"])) {
-					echo "<td><a href='record.php?eventId=$evt&series=Y&from=3&id=$find'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td>";
-				}
-				echo "</tr>\n";
+				echo "<td><a href='record.php?eventId=$evt&series=N&from=3&id=$id&when=$when&prog=$uprog'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 			}
 			else {
-				echo "<td></td></tr>\n";
+				echo "<td></td>";
+			}
+			if ((isset($r["serieslinkUri"])) && !array_key_exists($r["serieslinkUri"], $levents)) {
+				echo "<td><a href='record.php?eventId=$evt&series=Y&from=3&id=$id&when=$when&prog=$uprog'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td></tr>";
+			}
+			else {
+				echo "<td></td></tr>";
 			}
 			$i++;
 		}
