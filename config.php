@@ -101,7 +101,7 @@
 	  }
 	echo "</table>
 
-	<table border='0' cellspacing='0' cellpadding='0' class='group'>
+	<table class='group'>
 	    <tr class='heading'>
 		<td colspan='2'><h2>Preferences</h2></td>
 	    </tr>
@@ -196,7 +196,7 @@
 	    </tr>
 	</table>
 
-	<table border='0' cellspacing='0' cellpadding='0' class='group'>
+	<table class='group'>
 	    <tr class='heading'>
 		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
@@ -210,7 +210,7 @@
 	    }
 		    echo "</select>
 		</td>
-		<td>
+		<td align='center'>
 		    <input type='button' onClick='one2two()' value='&gt;&gt;&gt;&gt;&gt;' /><br />
 		    <input type='button' onClick='two2one()' value='&lt;&lt;&lt;&lt;&lt;' />
 		</td>
