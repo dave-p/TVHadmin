@@ -47,7 +47,7 @@ function get_epg($channel) {
   global $urlp;
   $prog = urlencode($channel);
   $url = "$urlp/api/epg/events/grid?limit=9999&channel=$prog";
-  $json = file_get_contents($url);
+  $json = preg_replace('/[^(\x20-\x7F)]/',"",file_get_contents($url));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -57,7 +57,7 @@ function get_epg_now($channel) {
   global $urlp;
   $prog = urlencode($channel);
   $url = "$urlp/api/epg/events/grid?channel=$prog&mode=now";
-  $json = file_get_contents($url);
+  $json = preg_replace('/[^(\x20-\x7F)]/',"",file_get_contents($url));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -69,7 +69,7 @@ function search_epg($channel,$title) {
   $ttl = urlencode(preg_quote($title)); 
   $url = "$urlp/api/epg/events/grid?limit=9999&title=$ttl";
   if ($channel != "") $url .= "&channel=$prog";
-  $json = file_get_contents($url);
+  $json = preg_replace('/[^(\x20-\x7F)]/',"",file_get_contents($url));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -78,7 +78,7 @@ function search_epg($channel,$title) {
 function get_timers() {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid_upcoming?sort=start";
-  $json = file_get_contents($url);
+  $json = preg_replace('/[^(\x20-\x7F)]/',"",file_get_contents($url));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -87,7 +87,7 @@ function get_timers() {
 function get_recordings($s) {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid?limit=99999";
-  $json = file_get_contents($url);
+  $json = preg_replace('/[^(\x20-\x7F)]/',"",file_get_contents($url));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   if($s == 0) usort($ret, "sort_recordings");
@@ -159,20 +159,5 @@ function sort_recordings_title($a, $b) {
   $ret = strncmp($x, $y, $n);
   if($ret == 0) return ($a["start"] - $b["start"]);
   return $ret;
-}
-
-function curl_file_get_contents($URL)
-{
-    $c = curl_init();
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($c, CURLOPT_URL, $URL);
-    $contents = curl_exec($c);
-    curl_close($c);
-
-    if ($contents) return $contents;
-    else {
-#        echo "Failed to get contents for $URL";
-        return FALSE;
-    }
 }
 ?>
