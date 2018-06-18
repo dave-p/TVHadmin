@@ -67,6 +67,7 @@
 	$i = 0;
 	foreach($chans as $c) {
 		$svcid = $c["services"][0];
+		if (!array_key_exists($svcid, $service)) goto nogood;
 		$csvtype = $service[$svcid];
 		$csvname = $types[$csvtype];
 		if (!array_key_exists($csvname, $media)) goto nogood;
