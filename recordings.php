@@ -90,9 +90,11 @@
 	foreach($recordings as $t) {
 		if ($t["sched_status"] == "scheduled") continue;
 		$cid = $t["channel"];
-		$typeno = $chtype[$cid];
-		$ctname = $types[$typeno];
-		if (!array_key_exists($ctname, $media)) goto nogood;
+		if (array_key_exists($cid, $chtype)) {
+			$typeno = $chtype[$cid];
+			$ctname = $types[$typeno];
+			if (!array_key_exists($ctname, $media)) goto nogood;
+		}
 		$time = strftime("%H:%M", $t["start"]);
 		$date = strftime("%a %e/%m/%y", $t["start"]);
 		$duration = $t["stop_real"] - $t["start_real"];
