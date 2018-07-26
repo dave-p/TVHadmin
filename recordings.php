@@ -7,7 +7,7 @@
     file_get_contents($url);
   }
   if (!isset($sort)) $sort = 0;
-  if (isset($_POST['last_sort'])) $sort = 1 - $_POST['last_sort'];
+  if (isset($_POST['sort'])) $sort = $_POST['sort'];
   $chtype = array();
   $media = array();
   $sv = get_services();
@@ -22,10 +22,19 @@
   else {
       $view_url = 'http://' . $ip;
   }
+  if ($sort == 0) {
+    $b0 = ' checked>';
+    $b1 = '>';
+  }
+  else {
+    $b0 = '>';
+    $b1 = ' checked>';
+  }
   echo "
     <script type='text/javascript'>
-      function formSubmit() {
-        document.media.submit();
+      function formSubmit(which) {
+	var formObject = document.forms[which];
+        formObject.submit();
       }
     </script>
     <div id='layout'>
@@ -36,8 +45,14 @@
 	      </td>
 	      <td>
 		<form name='order' method='POST' action='recordings.php'>
-		  <input type='submit' name='sort' value='Sort by {$orders[1-$sort]}'>
-		  <input type='hidden' name='last_sort' value='$sort'>
+		  <div class='media'>
+		  <label for='B0'>Date</label>
+		  <input type='radio' name='sort' value='0' id='B0' onChange='formSubmit(\"order\")'$b0
+		  </div>
+		  <div class='media'>
+		  <label for='B1'>Title</label>
+		  <input type='radio' name='sort' value='1' id='B1' onChange='formSubmit(\"order\")'$b1
+		  </div>
 		</form>
 	      </td>
 	      <td><span class='wideonly'>
@@ -48,7 +63,7 @@
       echo "
 	<div class='media'>
 	  <label for='$t'>$t:</label>
-	  <input type='checkbox' name='$t' id='$t' onchange='formSubmit()'";
+	  <input type='checkbox' name='$t' id='$t' onchange='formSubmit(\"media\")'";
       if (isset($_GET['update'])) {
           if (isset($_GET[$t])) {
               $media[$t] = 1;
