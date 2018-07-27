@@ -131,14 +131,14 @@
 	    </tr>
 	    <tr class='row_odd'>
 		<td class='col_label'><h5>Recordings Sort Order:</h5></td>
-		<td class='col_value'>
-		    <select name='SORT'>";
+		<td class='col_value'>";
 	foreach ($orders as $key=>$value) {
-	  echo "<option value='$key'";
-	  if (isset($settings['SORT']) && ($key == $settings['SORT'])) echo " selected";
-	  echo ">$value</option>";
+	  echo "<label for='B$key'>$value:</label>";
+	  echo "<input type='radio' name='sort' id='B$key' value='$key'";
+	  if (isset($settings['SORT']) && ($key == $settings['SORT'])) echo " checked>";
+	  else echo ">";
 	}
-		  echo "</select>
+		  echo "
 		</td>
 	    </tr>
 	    <tr class='row_even'>
@@ -181,8 +181,10 @@
 	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
 		<td class='col_value'>
-		    <input type='radio' name='SUMM' value='summary' $c1>Summary&nbsp;
-		    <input type='radio' name='SUMM' value='subtitle' $c2>Subtitle
+		    <label for='summ'>Summary:</label>
+		    <input type='radio' name='SUMM' value='summary' id='summ' $c1>
+		    <label for='subt'>Subtitle:</label>
+		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
 		</td>
 	    </tr>
 	    <tr class='row_odd'>
