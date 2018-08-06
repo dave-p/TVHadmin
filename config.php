@@ -62,19 +62,19 @@
 	    <tr class="row_odd">
 		<td class="col_label"><h5>Username:</h5></td>
 <?php
-		echo "<td class=\"col_value\"><input type=\"text\" name=\"USER\" value=\"$user\" size=\"16\" /></td>";
+		echo "<td class='col_value'><input type='text' name='USER' value='$user' size='16'></td>";
 ?>
 	    </tr>
 	    <tr class="row_even">
 		<td class="col_label"><h5>Password:</h5></td>
 <?php
-		echo "<td class=\"col_value\"><input type=\"password\" name=\"PASS\" value=\"$pass\" size=\"16\" /></td>";
+		echo "<td class='col_value'><input type='password' name='PASS' value='$pass' size='16'></td>";
 ?>
 	    </tr>
 	    <tr class="row_odd">
 		<td class="col_label"><h5>IP Address:port:</h5></td>
 <?php
-		echo "<td class=\"col_value\"><input type=\"text\" name=\"IP\" value=\"$ip\" size=\"24\" /></td>";
+		echo "<td class='col_value'><input type='text' name='IP' value='$ip' size='24'></td>";
 ?>
 	    </tr>
 <?php
@@ -82,19 +82,19 @@
 	if (isset($prof)) {
 	  if(count($prof) == 1) {
 		$config_uuid = $prof[0]['uuid'];
-		echo "<input type=\"hidden\" name=\"PROFILE\" value=\"\">";
-		echo "<input type=\"hidden\" name=\"UUID\" value=\"$config_uuid\">";
+		echo "<input type='hidden' name='PROFILE' value=''>";
+		echo "<input type='hidden' name='UUID' value='$config_uuid'>";
 	  }
 	  else {
-		echo "<tr class=\"row_even\">";
-		echo "<td class=\"col_label\"><h5>Recording Profile:</h5></td>";
-		echo "<td class=\"col_value\"><select name=\"PROFILE\">";
+		echo "<tr class='row_even'>";
+		echo "<td class='col_label'><h5>Recording Profile:</h5></td>";
+		echo "<td class='col_value'><select name='PROFILE'>";
 	    foreach ($prof as $p) {
 		$pname = $p['name'];
 		if ($pname == '') $pname = '(default)';
 		if ($p['uuid'] === $config_uuid) $sel = 'selected';
 		else $sel = '';
-		echo "<option value=\"$pname\" $sel>$pname</option>";
+		echo "<option value='$pname' $sel>$pname</option>";
 	    }
 		echo "</td>";
 	    echo "</tr>";
@@ -208,19 +208,19 @@
 	    $chans = get_channels();
 	    foreach($chans as $v) {
 		$cname = $v["name"];
-		print "<option value=\"$cname\">$cname</option>";
+		print "<option value='$cname'>$cname</option>";
 	    }
 		    echo "</select>
 		</td>
 		<td align='center'>
-		    <input type='button' onClick='one2two()' value='&gt;&gt;&gt;&gt;&gt;' /><br />
-		    <input type='button' onClick='two2one()' value='&lt;&lt;&lt;&lt;&lt;' />
+		    <input type='button' onClick='one2two()' value='&gt;&gt;&gt;&gt;&gt;'><br>
+		    <input type='button' onClick='two2one()' value='&lt;&lt;&lt;&lt;&lt;'>
 		</td>
 		<td class='col_wanted_channels'>
 		    <select name='selected_channels[]' size='8' multiple='multiple' class='channels'>";
 	$sel = &$settings['selected_channels'];
 	foreach($sel as $s) {
-	    echo "<option value=\"$s\">$s</option>";
+	    echo "<option value='$s'>$s</option>";
 	}
 		    echo "</select>
 		</td>
@@ -229,7 +229,7 @@
 ?>
 	</table>
 	<div id="buttons">
-	    <input type="submit" class="submit" name="save" value="Save" onclick="selectAll()" />
+	    <input type="submit" class="submit" name="save" value="Save" onclick="selectAll()">
 	</div>
     </form>
     <script language= "JavaScript">

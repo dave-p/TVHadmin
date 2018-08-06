@@ -88,8 +88,8 @@
       <td class='col_duration'>$start - $end
        <table border=0 cellspacing=0 cellpadding=0 class='percent' title='$don min&nbsp;/&nbsp;$dur min'>
 	<tr>
-	 <td class='elapsed' width='$pc%'><img src='images/spacer.gif' width=1 height=1 alt='' /></td>
-	 <td class='remaining'><img src='images/spacer.gif' width=1 height=1 alt='' /></td>
+	 <td class='elapsed' width='$pc%'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
+	 <td class='remaining'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
 	</tr>
        </table>
       </td>

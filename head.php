@@ -1,11 +1,11 @@
 <!DOCTYPE html> 
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="application-name" content="TVHadmin" />
+<meta name="application-name" content="TVHadmin">
 <title>TVHadmin - <?php echo $page_title; ?></title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" href="style.css">
 <!--[if !IE]> -->
 <script>
   window.addEventListener('load',function() {
@@ -24,7 +24,7 @@
 <div id="container">
   <div id="navigation">
     <div class="logo">
-      <img src="images/logo.png" alt="TVHeadend Logo" width="150" border="0" />
+      <img src="images/logo.png" alt="TVHeadend Logo" width="150" border="0">
     </div>
     <div class="nav_bar">
 <?php
@@ -34,8 +34,8 @@
   }
 ?>
       <form action="search.php" method="GET" name="telly" class="search">
-        <input type="text" name="find" /><br />
-        <input type="submit" name="submit" value="Search" />
+        <input type="text" name="find"><br>
+        <input type="submit" name="submit" value="Search">
       </form>
     </div>
   </div>
