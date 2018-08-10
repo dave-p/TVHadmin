@@ -2,8 +2,7 @@
   $page_title = 'Configuration';
   include_once('./head.php');
 ?>
-    <script language= "JavaScript">
-
+    <script>
 	function one2two() {
 	    m1len = m1.length ;
 	    for ( i=0; i<m1len ; i++){
@@ -110,7 +109,7 @@
 		<td class='col_value'>
 		    <select name='EPGSTART'>";
 	for ($st=0; $st<7; $st++) {
-	  echo "<option value=\"$st\"";
+	  echo "<option value='$st'";
 	  if (isset($epg_start) && ($st == $epg_start)) echo " selected";
 	  echo ">$st:00</option>";
 	}
@@ -232,7 +231,7 @@
 	    <input type="submit" class="submit" name="save" value="Save" onclick="selectAll()">
 	</div>
     </form>
-    <script language= "JavaScript">
+    <script>
 // IMPORTANT: this is the extra bit of code
 // shorthand for referring to menus
 // must run after document has been created
