@@ -48,7 +48,8 @@ form {
 #content {
 	width: 100%;
 }
-input[type=checkbox] {
+input[type=checkbox],
+input[type=radio] {
 	vertical-align: middle;
 	margin-right: 10px;
 }
@@ -184,25 +185,25 @@ a:hover {
 	font-weight: bold;
 	color: white;
 }
-#prog_summary2 .epg_title,
-#prog_summary2 .channel_name {
+#whatson .epg_title,
+#whatson .channel_name {
 	display: block;
 }
-#prog_summary2 .epg_subtitle {
+#whatson .epg_subtitle {
 	display: block;
 }
-#prog_summary2 table.percent td {
+#whatson table.percent td {
 	height: 8px;
 }
-#prog_summary2 table.percent {
+#whatson table.percent {
 	height: 8px;
-	width: 80px;
+	width: 90px;
 	border: 1px solid #6d96a9;
 }
-#prog_summary2 table.percent .elapsed {
+#whatson table.percent .elapsed {
 	background-color: #6d96a9;
 }
-#prog_summary2 table.percent .remaining {
+#whatson table.percent .remaining {
 	background-color: transparent;
 }
 

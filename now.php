@@ -59,7 +59,7 @@
    </form>
   </div>
   <div id='wrapper'>
-   <div id='prog_summary2'>
+   <div id='whatson'>
     <table class='list'>
      <tr class='newday'>
       <td colspan='4'><span class='date_long'>$wday</span></td>
