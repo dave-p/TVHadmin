@@ -3,6 +3,7 @@ $config_file = 'data/config';
 
 $pages = array(
 	'now'=>"What's On Now?",
+	'timeline'=>"Timeline",
 	'telly'=>'Channels',
 	'fav'=>'Favourite Channels',
 	'timers'=>'Timers',
@@ -58,6 +59,21 @@ function get_epg_now($channel) {
   $prog = urlencode($channel);
   $url = "$urlp/api/epg/events/grid?channel=$prog&mode=now";
   $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
+  $j = json_decode($json, true);
+  $ret = &$j["entries"];
+  return $ret;
+}
+
+function get_epg_next($channel, $end) {
+  global $urlp;
+  $data = array("channel"=>"$channel","filter"=>"[{'field':'stop','type':'numeric','value':'{$end}','comparison':'lt'}]");
+  $query = http_build_query($data);
+  $ctx = stream_context_create(array('http' => array(
+	'method' => 'POST',
+	'header'  => 'Content-type: application/x-www-form-urlencoded',
+	'content' => $query )));
+  $url = "$urlp/api/epg/events/grid";
+  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url, false, $ctx));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;

@@ -207,6 +207,39 @@ a:hover {
 	background-color: transparent;
 }
 
+#timeline .channel_name {
+	display: block;
+}
+#timeline .col_schedule {
+	width: 100%;
+	white-space: nowrap;
+}
+#timeline .spacer {
+	float: left;
+	background-color: #e0e0e0;
+	white-space: nowrap;
+}
+#timeline .item {
+	float: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-top:1px solid #6d96a9;
+	border-bottom:1px solid #6d96a9;
+	border-left:1px solid #6d96a9;
+	border-right:0px none;
+	white-space: nowrap;
+}
+
+#timenow {
+	background: red;
+	position:fixed;
+	top:18px;
+	left:193px;
+	width:1px;
+	height:1132px;
+	z-index:2;
+}
+
 .col_duration {
 	padding-left: 3px;
 	padding-right: 3px;
@@ -220,7 +253,7 @@ a:hover {
 	white-space: normal;
 }
 .col_channel {
-	width: 100px;
+	overflow: hidden;
 }
 .col_start,
 .col_stop,
