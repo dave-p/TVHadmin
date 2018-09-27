@@ -133,7 +133,7 @@
 		<td class='col_value'>";
 	foreach ($orders as $key=>$value) {
 	  echo "<label for='B$key'>$value:</label>";
-	  echo "<input type='radio' name='sort' id='B$key' value='$key'";
+	  echo "<input type='radio' name='SORT' id='B$key' value='$key'";
 	  if (isset($settings['SORT']) && ($key == $settings['SORT'])) echo " checked>";
 	  else echo ">";
 	}
