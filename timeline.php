@@ -11,8 +11,10 @@
 	$wday = date('D j M', $utime);
 	$media = array();
 	$colours = array('#ffffff', '#dee6ee', '#ffffff', '#dee6ee');
-#	$settings['TIMELINE'] = 7200;
-	$textent = 14400;	// make this a setting
+	if(isset($settings['TIMESPAN'])) {
+		$textent = $settings['TIMESPAN'] * 3600;
+	}
+	else $textent = 14400;
 	$toffset = $utime % 1800;	//secs from start of chart to now
 	$tstart = $utime - $toffset;
 	$tend = $tstart + $textent;
@@ -54,7 +56,7 @@
 			}
 		}
 		else {
-			$g = "Media_" . $t;
+			$g = "Time_" . $t;
  			if (isset($settings[$g])) {
 				$media[$t] = 1;
 				echo " checked";

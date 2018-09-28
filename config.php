@@ -154,7 +154,21 @@
 	echo "
 		</td>
 	    </tr>
-	    <tr class='row_odd'>
+            <tr class='row_odd'>
+                <td class='col_label'><h5>Show in Timeline:</h5></td>
+                <td class='col_value'>";
+        foreach (array_flip($types) as $t=>$v) {
+          $g = "Time_" . $t;
+          echo "$t: <input type='checkbox' name='$g' ";
+          if (isset($settings[$g])) {
+            echo " checked";
+          }
+          echo ">";
+        }
+        echo "
+                </td>
+            </tr>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
 	foreach (array_flip($types) as $t=>$v) {
@@ -177,7 +191,7 @@
 	  $c1 = ''; $c2 = 'checked';
 	}
 	echo "
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
 		<td class='col_value'>
 		    <label for='summ'>Summary:</label>
@@ -186,7 +200,7 @@
 		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
 		</td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
 		<td class='col_value'><input type='checkbox' name='NOANON'";
           if (isset($settings['NOANON'])) {
@@ -195,6 +209,18 @@
           echo ">
 		</td>
 	    </tr>
+            <tr class='row_odd'>
+                <td class='col_label'><h5>Timeline length:</h5></td>
+                <td class='col_value'>
+                    <select name='TIMESPAN'>";
+        foreach (array(2, 4, 6) as $st) {
+          echo "<option value='$st'";
+          if (isset($settings['TIMESPAN']) && ($st == $settings['TIMESPAN'])) echo " selected";
+          echo ">$st hours</option>";
+        }
+                  echo "</select>
+                </td>
+            </tr>
 	</table>
 
 	<table class='group'>
