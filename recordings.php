@@ -7,7 +7,7 @@
     file_get_contents($url);
   }
   if (!isset($sort)) $sort = 0;
-  if (isset($_POST['sort'])) $sort = $_POST['sort'];
+  if (isset($_POST['SORT'])) $sort = $_POST['SORT'];
   $chtype = array();
   $media = array();
   $sv = get_services();

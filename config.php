@@ -131,10 +131,11 @@
 	    <tr class='row_odd'>
 		<td class='col_label'><h5>Recordings Sort Order:</h5></td>
 		<td class='col_value'>";
+	if (!isset($settings['SORT'])) $settings['SORT'] = 0;
 	foreach ($orders as $key=>$value) {
 	  echo "<label for='B$key'>$value:</label>";
 	  echo "<input type='radio' name='SORT' id='B$key' value='$key'";
-	  if (isset($settings['SORT']) && ($key == $settings['SORT'])) echo " checked>";
+	  if ($key == $settings['SORT']) echo " checked>";
 	  else echo ">";
 	}
 		  echo "
