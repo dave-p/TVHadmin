@@ -22,14 +22,6 @@
   else {
       $view_url = 'http://' . $ip;
   }
-  if ($sort == 0) {
-    $b0 = ' checked>';
-    $b1 = '>';
-  }
-  else {
-    $b0 = '>';
-    $b1 = ' checked>';
-  }
   echo "
     <script type='text/javascript'>
       function formSubmit(which) {
@@ -44,15 +36,14 @@
 	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings</h1>
 	      </td>
 	      <td>
-		<form name='order' method='POST' action='recordings.php'>
-		  <div class='media'>
-		  <label for='B0'>Date</label>
-		  <input type='radio' name='sort' value='0' id='B0' onChange='formSubmit(\"order\")'$b0
-		  </div>
-		  <div class='media'>
-		  <label for='B1'>Title</label>
-		  <input type='radio' name='sort' value='1' id='B1' onChange='formSubmit(\"order\")'$b1
-		  </div>
+		<form name='order' method='POST' action='recordings.php'>";
+  foreach ($orders as $key=>$value) {
+    echo "<div class='media'><label for='B$key'>$value:</label>";
+    echo "<input type='radio' name='SORT' id='B$key' value='$key' onChange='formSubmit(\"order\")'";
+    if ($key == $sort) echo " checked></div>";
+    else echo "></div>";
+  }
+  echo "
 		</form>
 	      </td>
 	      <td><span class='wideonly'>

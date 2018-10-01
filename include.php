@@ -13,8 +13,9 @@ $pages = array(
 	'config'=>'Configuration');
 
 $orders = array(
-	0 => "Date",
-	1 => "Title");
+	0 => "Date Fwd",
+	1 => "Date Rev",
+	2 => "Title");
 
 $types = [1=>"SDTV",2=>"Radio",17=>"HDTV",22=>"SDTV",23=>"SDTV",24=>"SDTV",25=>"HDTV",
 	 26=>"HDTV",27=>"HDTV",28=>"HDTV",29=>"HDTV",30=>"HDTV",31=>"UHDTV"];
@@ -106,8 +107,16 @@ function get_recordings($s) {
   $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
   $j = json_decode($json, true);
   $ret = &$j["entries"];
-  if($s == 0) usort($ret, "sort_recordings");
-  else usort($ret, "sort_recordings_title");
+  switch($s) {
+    case 0:
+      usort($ret, "sort_recordings");
+      break;
+    case 1:
+      usort($ret, "sort_recordings_desc");
+      break;
+    case 2:
+      usort($ret, "sort_recordings_title");
+  }
   return $ret;
 }
 
@@ -154,6 +163,10 @@ function sort_channels($a, $b) {
 
 function sort_recordings($a, $b) {
   return ($a["start"] - $b["start"]);
+}
+
+function sort_recordings_desc($a, $b) {
+  return ($b["start"] - $a["start"]);
 }
 
 function sort_recordings_title($a, $b) {
