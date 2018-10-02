@@ -52,7 +52,8 @@ window.addEventListener('load',function(event) {
   $ignore = array(
 	'input'	=> 1,
 	'snr_scale' => 'SNR Scale',
-	'signal_scale' => 'Signal Scale');
+	'signal_scale' => 'Signal Scale',
+	'pids' => 'PIDs');
 
   if (isset($_POST['uuid'])) clear_input_stats($_POST['uuid']);
 
