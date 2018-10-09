@@ -98,21 +98,18 @@
 		$csvname = $types[$csvtype];
 		if (!array_key_exists($csvname, $media)) goto nogood;
 		$e = get_epg_next($c["name"], $tend);
-#		if ($i % 2) echo "<tr class=\"row_odd\">";
-#		else echo "<tr class=\"row_even\">";
 		echo "
+     <tr>
       <td class='col_channel'>
        <div class='channel_name' style='background-color: {$colours[$i%2]}'>{$c['name']}</div>
       </td>
       <td class='col_schedule'>";
 		$p = &$e[0];
 		$pcount = 0;
-#		$width = 0;
 		while (isset($p['start']) && ($p['start'] < $tend)) {
 		    if ($pcount == 0) {
 			if ($p['start'] > $tstart) {	#Need a spacer
 			    $spc = (($p['start'] - $tstart) * 98) / $textent;
-#			    $width += $spc;
 			    echo "
 	 <div class='spacer' style='width: $spc%;'>
 	    <img src='images/spacer.gif' width=1 height=1 alt=''></div>";
@@ -122,8 +119,6 @@
 		    else $colour = '#dee6ee';
 		    $duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		    $pc = (98 * $duration) / $textent;
-		    $width += $pc;
-#		    if ($width >= 100) $pc -= $width-98;
 		    echo "
 	 <div class='item' style='background-color: $colour; width: $pc%;'>
 	    <img src='images/spacer.gif' width=1 height=1 alt=''>{$p['title']}</div>";
