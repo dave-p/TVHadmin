@@ -108,11 +108,16 @@
 		$mm = ($duration % 3600) / 60;
 		if ($t['sched_status'] == 'completed') {
 			$ok = 1;
-			if ($i % 2) {
-				echo "<tr class='row_odd'>";
+			if ($t['status'] == 'Completed OK') {
+				if ($i % 2) {
+					echo "<tr class='row_odd'>";
+				}
+				else {
+					echo "<tr class='row_even'>";
+				}
 			}
 			else {
-				echo "<tr class='row_even'>";
+				echo "<tr class='row_error'>";
 			}
 		}
 		else if ($t['sched_status'] == 'recording') {
