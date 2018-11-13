@@ -36,6 +36,7 @@
 	$clashes = array();
 	$now = time();
 	foreach($timers as $t) {
+	    if (!$t["enabled"]) continue;
 	    $start = strftime("%H:%M", $t["start"]);
 	    $stop = strftime("%H:%M", $t["stop"]);
 	    $date = strftime("%a %e/%m", $t["start"]);
