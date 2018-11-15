@@ -40,11 +40,12 @@
 	    $start = strftime("%H:%M", $t["start"]);
 	    $stop = strftime("%H:%M", $t["stop"]);
 	    $date = strftime("%a %e/%m", $t["start"]);
+	    $subtitle = $t["disp_extratext"];
 	    if ($i % 2) {
-		echo "<tr class='row_odd'>";
+		echo "<tr class='row_odd' title=\"$subtitle\">";
 	    }
 	    else {
-		echo "<tr class='row_even'>";
+		echo "<tr class='row_even' title=\"$subtitle\">";
 	    }
 	    if ($t["start"] < $now) {
 		echo "<td class='col_info'><img src='images/rec.png'></td>";
