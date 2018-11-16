@@ -119,8 +119,9 @@
 		    else $colour = '#dee6ee';
 		    $duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		    $pc = (98 * $duration) / $textent;
+		    @$subtitle = $p[$settings['SUMM']];
 		    echo "
-	 <div class='item' style='background-color: $colour; width: $pc%;'>
+	 <div class='item' style='background-color: $colour; width: $pc%;' title=\"$subtitle\">
 	    <img src='images/spacer.gif' width=1 height=1 alt=''>{$p['title']}</div>";
 		    $pcount++;
 		    $p = &$e[$pcount];
