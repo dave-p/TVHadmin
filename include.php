@@ -36,7 +36,6 @@ if (file_exists($config_file)) {
   $profile = $settings['PROFILE'];
   $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
-  $sort = $settings['SORT'];
   if (!isset($settings['SUMM'])) $settings['SUMM'] = 'summary';
 }
 else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&

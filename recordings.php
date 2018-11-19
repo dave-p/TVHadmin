@@ -6,8 +6,9 @@
     $url = "$urlp/api/dvr/entry/remove?uuid=$uuid";
     file_get_contents($url);
   }
-  if (!isset($sort)) $sort = 0;
-  if (isset($_POST['SORT'])) $sort = $_POST['SORT'];
+  if (isset($_GET['SORT'])) $sort = $_GET['SORT'];
+  else if (isset($settings['SORT'])) $sort = $settings['SORT'];
+  else $sort = 0;
   $chtype = array();
   $media = array();
   $sv = get_services();
@@ -36,7 +37,7 @@
 	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings</h1>
 	      </td>
 	      <td>
-		<form name='order' method='POST' action='recordings.php'>";
+		<form name='order' method='GET' action='recordings.php'>";
   foreach ($orders as $key=>$value) {
     echo "<div class='media'><label for='B$key'>$value:</label>";
     echo "<input type='radio' name='SORT' id='B$key' value='$key' onChange='formSubmit(\"order\")'";
@@ -49,6 +50,7 @@
 	      <td><span class='wideonly'>
 		<form name='media' method='GET' action='recordings.php'>
 		  <input type='hidden' name='update' value='1'>
+		  <input type='hidden' name='SORT' value='$sort'>
 	      ";
   foreach (array_flip($types) as $t=>$v) {
       echo "
@@ -142,7 +144,7 @@
 		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
 		echo "
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
-	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Recording'></a></td>";
+	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&SORT=$sort'><img src='images\delete.png' title='Delete Recording'></a></td>";
 		if ($ok) echo "
 	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>";
 		else echo "<td></td>";
