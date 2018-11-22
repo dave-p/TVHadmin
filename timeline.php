@@ -21,7 +21,14 @@
 	$now = ($utime - $tstart) / $textent;
 	echo "
 	<script type='text/javascript'>
-	window.onload = function() {
+	window.onload = drawCursor;
+
+	var globalResizeTimer = null;
+	window.onresize = function() {
+	    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
+	    globalResizeTimer = window.setTimeout(drawCursor(), 200);
+	};
+	function drawCursor() {
 	    var elem = document.getElementById('schedules');
 	    if(elem) {
 		var rect = elem.getBoundingClientRect();
