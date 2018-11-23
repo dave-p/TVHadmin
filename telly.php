@@ -65,7 +65,7 @@
 	if ($all !== 'checked') {
 	  $prev = $when - 86400;
 	  if ($prev >= $today) {
-	    echo "<a href='telly.php?prog=$prog&when=$prev'><img src='images/left.png'></a>";
+	    echo "<a href='telly.php?prog=$uprog&when=$prev'><img src='images/left.png'></a>";
 	  }
 	  echo "&nbsp;<select name='when' size='1' onchange='formSubmit()'>";
 	  $date = $today;
@@ -81,7 +81,7 @@
 	  echo "</select>&nbsp;";
 	  $next = $when + 86400;
 	  if (isset($prog) && ($next < $date)) {
-	    echo "<a href='telly.php?prog=$prog&when=$next'><img src='images/right.png'></a>";
+	    echo "<a href='telly.php?prog=$uprog&when=$next'><img src='images/right.png'></a>";
 	  }
 	}
 	echo "
