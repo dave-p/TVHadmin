@@ -33,7 +33,6 @@ if (file_exists($config_file)) {
     $urlp = "http://$user@$ip";
   }
   else $urlp = "http://$user:$pass@$ip";
-  $profile = $settings['PROFILE'];
   $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
   if (!isset($settings['SUMM'])) $settings['SUMM'] = 'summary';
@@ -66,7 +65,7 @@ function get_epg_now($channel) {
 
 function get_epg_next($channel, $end) {
   global $urlp;
-  $data = array("channel"=>"$channel","filter"=>"[{'field':'stop','type':'numeric','value':'{$end}','comparison':'lt'}]");
+  $data = array("channel"=>"$channel","filter"=>"[{\"field\":\"start\",\"type\":\"numeric\",\"value\":\"{$end}\",\"comparison\":\"lt\"}]");
   $query = http_build_query($data);
   $ctx = stream_context_create(array('http' => array(
 	'method' => 'POST',

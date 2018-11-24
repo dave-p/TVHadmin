@@ -90,7 +90,7 @@
 	for($i=0; $i<4; $i++){
 	    $time = date('H:i', $t);
 	    echo "
-	 <div class='elapsed' style='float: left; background-color: {$colours[$i]}; width: 25%;'>
+	 <div class='elapsed' style='float: left; background-color: {$colours[$i]}; width: 24.5%;'>
 	    <img src='images/spacer.gif' width=1 height=1 alt=''>$time</div>";
 	    $t += $textent / 4;
 	}
@@ -105,6 +105,7 @@
 		$csvname = $types[$csvtype];
 		if (!array_key_exists($csvname, $media)) goto nogood;
 		$e = get_epg_next($c["name"], $tend);
+		$wd = 98 - count($e)/8;
 		echo "
      <tr>
       <td class='col_channel'>
@@ -113,10 +114,10 @@
       <td class='col_schedule'>";
 		$p = &$e[0];
 		$pcount = 0;
-		while (isset($p['start']) && ($p['start'] < $tend)) {
+		while (isset($p['start'])) {
 		    if ($pcount == 0) {
 			if ($p['start'] > $tstart) {	#Need a spacer
-			    $spc = (($p['start'] - $tstart) * 98) / $textent;
+			    $spc = (($p['start'] - $tstart) * $wd) / $textent;
 			    echo "
 	 <div class='spacer' style='width: $spc%;'>
 	    <img src='images/spacer.gif' width=1 height=1 alt=''></div>";
@@ -125,7 +126,7 @@
 		    }
 		    else $colour = '#dee6ee';
 		    $duration = min($tend, $p['stop']) - max($tstart, $p['start']);
-		    $pc = (98 * $duration) / $textent;
+		    $pc = ($wd * $duration) / $textent;
 		    @$subtitle = $p[$settings['SUMM']];
 		    echo "
 	 <div class='item' style='background-color: $colour; width: $pc%;' title=\"$subtitle\">
