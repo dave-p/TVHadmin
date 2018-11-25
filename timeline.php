@@ -104,7 +104,7 @@
 		$csvtype = $service[$svcid];
 		$csvname = $types[$csvtype];
 		if (!array_key_exists($csvname, $media)) goto nogood;
-		$e = get_epg_next($c["name"], $tend);
+		$e = get_epg($c["name"], $tstart, $tend);
 		$wd = 98 - count($e)/8;
 		echo "
      <tr>

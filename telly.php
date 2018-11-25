@@ -84,6 +84,7 @@
 	    echo "<a href='telly.php?prog=$uprog&when=$next'><img src='images/right.png'></a>";
 	  }
 	}
+	else $next = 0;
 	echo "
 	    </td>
 	  </tr>
@@ -99,7 +100,7 @@
 	  <tr class='heading'>
 	   <td colspan='4'><span class='channel_name'>$prog</span></td>
 	  </tr>";
-	  $progs = get_epg($prog);
+	  $progs = get_epg($prog, $when, $next);
 	  $i = 0;
 	  $last_prog_date = " ";
 	  foreach($progs as $p) {
@@ -109,11 +110,6 @@
 		echo "<tr class='newday'><td colspan='5'><span class='date_long'>$d</span></td></tr>";
 		$last_prog_date = $d;
 	      }
-	    }
-	    else {
-	      $delta = $p["start"] - $when;
-	      if ($delta < 0) continue;
-	      if ($delta > 86400) break;
 	    }
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);

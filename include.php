@@ -43,16 +43,6 @@ else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&
   die;
 }
 
-function get_epg($channel) {
-  global $urlp;
-  $prog = urlencode($channel);
-  $url = "$urlp/api/epg/events/grid?limit=9999&channel=$prog";
-  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
-  $j = json_decode($json, true);
-  $ret = &$j["entries"];
-  return $ret;
-}
-
 function get_epg_now($channel) {
   global $urlp;
   $prog = urlencode($channel);
@@ -63,9 +53,16 @@ function get_epg_now($channel) {
   return $ret;
 }
 
-function get_epg_next($channel, $end) {
+#return events ending after the 'from' time and beginning before the 'to' time.
+
+function get_epg($channel, $from, $to) {
   global $urlp;
-  $data = array("channel"=>"$channel","filter"=>"[{\"field\":\"start\",\"type\":\"numeric\",\"value\":\"{$end}\",\"comparison\":\"lt\"}]");
+  if ($to != 0) {
+	$data = array("channel"=>"$channel","filter"=>"[{\"field\":\"stop\",\"type\":\"numeric\",\"value\":\"{$from}\",\"comparison\":\"gt\"}, {\"field\":\"start\",\"type\":\"numeric\",\"value\":\"{$to}\",\"comparison\":\"lt\"}]");
+  }
+  else {
+	$data = array("channel"=>"$channel","limit"=>9999);
+  }
   $query = http_build_query($data);
   $ctx = stream_context_create(array('http' => array(
 	'method' => 'POST',
