@@ -210,18 +210,27 @@
           echo ">
 		</td>
 	    </tr>
-            <tr class='row_odd'>
-                <td class='col_label'><h5>Timeline length:</h5></td>
-                <td class='col_value'>
-                    <select name='TIMESPAN'>";
-        foreach (array(2, 4, 6) as $st) {
-          echo "<option value='$st'";
-          if (isset($settings['TIMESPAN']) && ($st == $settings['TIMESPAN'])) echo " selected";
-          echo ">$st hours</option>";
-        }
-                  echo "</select>
-                </td>
-            </tr>
+	    <tr class='row_odd'>
+		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
+		<td class='col_value'><input type='checkbox' name='CLASHDET'";
+	  if (isset($settings['CLASHDET'])) {
+	    echo " checked";
+	  }
+	  echo ">
+	      </td>
+	    </tr>
+	    <tr class='row_even'>
+		<td class='col_label'><h5>Timeline length:</h5></td>
+		<td class='col_value'>
+		    <select name='TIMESPAN'>";
+	foreach (array(2, 4, 6) as $st) {
+	  echo "<option value='$st'";
+	  if (isset($settings['TIMESPAN']) && ($st == $settings['TIMESPAN'])) echo " selected";
+	  echo ">$st hours</option>";
+	}
+		  echo "</select>
+		</td>
+	    </tr>
 	</table>
 
 	<table class='group'>
