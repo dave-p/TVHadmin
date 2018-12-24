@@ -47,7 +47,7 @@ function get_epg_now($channel) {
   global $urlp;
   $prog = urlencode($channel);
   $url = "$urlp/api/epg/events/grid?channel=$prog&mode=now";
-  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -69,7 +69,7 @@ function get_epg($channel, $from, $to) {
 	'header'  => 'Content-type: application/x-www-form-urlencoded',
 	'content' => $query )));
   $url = "$urlp/api/epg/events/grid";
-  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url, false, $ctx));
+  $json = file_get_contents($url, false, $ctx);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -81,7 +81,7 @@ function search_epg($channel,$title) {
   $ttl = urlencode(preg_quote($title)); 
   $url = "$urlp/api/epg/events/grid?limit=9999&title=$ttl";
   if ($channel != "") $url .= "&channel=$prog";
-  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -90,7 +90,7 @@ function search_epg($channel,$title) {
 function get_timers() {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid_upcoming?sort=start";
-  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
@@ -99,7 +99,7 @@ function get_timers() {
 function get_recordings($s) {
   global $urlp;
   $url = "$urlp/api/dvr/entry/grid?limit=99999";
-  $json = preg_replace('/[(\x00-\x1F)]/',"",file_get_contents($url));
+  $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   switch($s) {
