@@ -49,7 +49,7 @@
 		if ($t["autorec"] === $l["uuid"]) $n++;
 	    }
 	    $l['title'] = stripslashes($l['title']);
-	    $crid = strrchr($l['serieslink'], '/');
+	    $crid = substr(strstr($l['serieslink'], '//'), 2);
 	    echo "
 	<td class='col_start'>$n</td>
 	<td class='col_channel'>$channelname</td>
