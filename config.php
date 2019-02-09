@@ -1,6 +1,11 @@
 <?php
   $page_title = 'Configuration';
   include_once('./head.php');
+  $tags = get_channeltags();
+  $tag = array();
+  foreach ($tags as $t) {
+    $tag[$t["key"]] = $t["val"];
+  }
 ?>
     <script>
 	function one2two() {
@@ -144,7 +149,7 @@
 	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in What's On Now:</h5></td>
 		<td class='col_value'>";
-	foreach (array_flip($types) as $t=>$v) {
+	foreach ($tag as $v=>$t) {
 	  $g = "Media_" . $t;
 	  echo "$t: <input type='checkbox' name='$g' ";
 	  if (isset($settings[$g])) {
@@ -158,7 +163,7 @@
             <tr class='row_odd'>
                 <td class='col_label'><h5>Show in Timeline:</h5></td>
                 <td class='col_value'>";
-        foreach (array_flip($types) as $t=>$v) {
+        foreach ($tag as $v=>$t) {
           $g = "Time_" . $t;
           echo "$t: <input type='checkbox' name='$g' ";
           if (isset($settings[$g])) {
@@ -172,7 +177,7 @@
 	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
-	foreach (array_flip($types) as $t=>$v) {
+	foreach ($tag as $v=>$t) {
 	  $g = "Rec_" . $t;
 	  echo "$t: <input type='checkbox' name='$g' ";
 	  if (isset($settings[$g])) {
