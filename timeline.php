@@ -2,10 +2,10 @@
 	$page_title = "Timeline";
 	include_once './head.php';
 	$chans = get_channels();
-	$service = array();
-	$sv = get_services();
-	foreach ($sv as $s) {
-		$service[$s["uuid"]] = $s["dvb_servicetype"];
+	$tags = get_channeltags();
+	$tag = array();
+	foreach ($tags as $t) {
+		$tag[$t["key"]] = $t["val"];
 	}
 	$utime = time();
 	$wday = date('D j M', $utime);
@@ -51,13 +51,14 @@
      <tr>
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timeline</h1></td>
       <td>";
-	foreach (array_flip($types) as $t=>$v) {
+	foreach ($tag as $v=>$t) {
+		$tt = urlencode($t);
 		echo "
 	<div class='media'>
-	  <label for='$t'>$t:</label>
-	  <input type='checkbox' name='$t' id='$t' onchange='formSubmit()'";
+	  <label for='$tt'>$t:</label>
+	  <input type='checkbox' name='$tt' id='$tt' onchange='formSubmit()'";
 		if (isset($_GET['update'])) {
- 			if (isset($_GET[$t])) {
+			if (isset($_GET[$tt])) {
 				$media[$t] = 1;
 				echo " checked";
 			}
@@ -99,11 +100,11 @@
      </tr>";
 	$i = 0;
 	foreach($chans as $c) {
-		$svcid = $c["services"][0];
-		if (!array_key_exists($svcid, $service)) goto nogood;
-		$csvtype = $service[$svcid];
-		$csvname = $types[$csvtype];
-		if (!array_key_exists($csvname, $media)) goto nogood;
+	        foreach($c["tags"] as $t) {
+			if (array_key_exists($tag[$t], $media)) goto good;
+                }
+                continue;
+good:
 		$e = get_epg($c["name"], $tstart, $tend);
 		$wd = 98 - count($e)/8;
 		echo "
@@ -138,7 +139,6 @@
       </td>
      </tr>";
 		$i++;
-nogood:
 	}
 	echo "
     </table>

@@ -125,6 +125,15 @@ function get_channels() {
   return $ret;
 }
 
+function get_channeltags() {
+  global $urlp;
+  $url = "$urlp/api/channeltag/list";
+  $json = file_get_contents($url);
+  $c = json_decode($json, true);
+  $ret = &$c["entries"];
+  return $ret;
+}
+
 function get_links() {
   global $urlp;
   $url = "$urlp/api/dvr/autorec/grid";
