@@ -32,6 +32,7 @@
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
       <td>";
 	foreach ($tag as $v=>$t) {
+	  if (isset($settings["Tag_$t"])) {
 		$tt = urlencode($t);
 		echo "
 	<div class='media'>
@@ -52,6 +53,7 @@
 		}
 		echo ">
 	</div>";
+	  }
 	}
 	echo "
       </td>

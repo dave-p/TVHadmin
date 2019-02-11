@@ -56,6 +56,7 @@
 		  <input type='hidden' name='SORT' value='$sort'>
 	      ";
   foreach ($tag as $v=>$t) {
+    if (isset($settings["Tag_$t"])) {
       $tt = urlencode($t);
       echo "
 	<div class='media'>
@@ -76,6 +77,7 @@
       }
       echo ">
 	</div>";
+    }
   }
   echo "
 		</form>
