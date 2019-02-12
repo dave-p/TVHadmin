@@ -2,7 +2,7 @@
   $page_title = 'Configuration';
   include_once('./head.php');
   $tags = get_channeltags();
-  $tag = array();
+  $tag = array('All' => 'All');
   foreach ($tags as $t) {
     $tag[$t["key"]] = $t["val"];
   }

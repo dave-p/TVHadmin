@@ -16,7 +16,7 @@
   }
   $media = array();
   $tags = get_channeltags();
-  $tag = array();
+  $tag = array('All' => 'All');
   foreach ($tags as $t) {
       $tag[$t["key"]] = $t["val"];
   }
@@ -103,12 +103,14 @@
 	$i = 0;
 	foreach($recordings as $t) {
 		if ($t["sched_status"] == "scheduled") continue;
-		$cid = $t["channel"];
-		if (array_key_exists($cid, $chtags)) {
-			foreach($chtags[$cid] as $c) {
-				if (array_key_exists($tag[$c], $media)) goto good;
+		if (!isset($media["All"])) {
+			$cid = $t["channel"];
+			if (array_key_exists($cid, $chtags)) {
+				foreach($chtags[$cid] as $c) {
+				    if (array_key_exists($tag[$c], $media)) goto good;
+				}
+				continue;
 			}
-			continue;
 		}
 good:
 		$time = strftime("%H:%M", $t["start"]);

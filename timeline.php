@@ -3,7 +3,7 @@
 	include_once './head.php';
 	$chans = get_channels();
 	$tags = get_channeltags();
-	$tag = array();
+	$tag = array('All' => 'All');
 	foreach ($tags as $t) {
 		$tag[$t["key"]] = $t["val"];
 	}
@@ -102,10 +102,12 @@
      </tr>";
 	$i = 0;
 	foreach($chans as $c) {
+	    if (!isset($media["All"])) {
 	        foreach($c["tags"] as $t) {
 			if (array_key_exists($tag[$t], $media)) goto good;
                 }
                 continue;
+	    }
 good:
 		$e = get_epg($c["name"], $tstart, $tend);
 		$wd = 98 - count($e)/8;
