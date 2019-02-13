@@ -149,15 +149,6 @@ function get_profiles() {
   return $ret;
 }
 
-function get_services() {
-  global $urlp;
-  $url = "$urlp/api/mpegts/service/grid?hidemode=all&limit=9999";
-  $json = file_get_contents($url);
-  $j = json_decode($json, true);
-  $ret = &$j["entries"];
-  return $ret;
-}
-
 function sort_channels($a, $b) {
   return strcasecmp($a["name"], $b["name"]);
 }
