@@ -9,13 +9,16 @@
   if (isset($_GET['SORT'])) $sort = $_GET['SORT'];
   else if (isset($settings['SORT'])) $sort = $settings['SORT'];
   else $sort = 0;
-  $chtype = array();
+  $chtags = array();
+  $chans = get_channels();
+  foreach ($chans as $c) {
+    $chtags[$c["uuid"]] = $c["tags"];
+  }
   $media = array();
-  $sv = get_services();
-  foreach ($sv as $s) {
-      foreach ($s["channel"] as $c) {
-          $chtype[$c] = $s["dvb_servicetype"];
-      }
+  $tags = get_channeltags();
+  $tag = array('All' => 'All');
+  foreach ($tags as $t) {
+      $tag[$t["key"]] = $t["val"];
   }
   if (array_key_exists('NOANON', $settings)) {
       $view_url = $urlp;
@@ -52,13 +55,15 @@
 		  <input type='hidden' name='update' value='1'>
 		  <input type='hidden' name='SORT' value='$sort'>
 	      ";
-  foreach (array_flip($types) as $t=>$v) {
+  foreach ($tag as $v=>$t) {
+    if (isset($settings["Tag_$t"])) {
+      $tt = urlencode($t);
       echo "
 	<div class='media'>
-	  <label for='$t'>$t:</label>
-	  <input type='checkbox' name='$t' id='$t' onchange='formSubmit(\"media\")'";
+	  <label for='$tt'>$t:</label>
+	  <input type='checkbox' name='$tt' id='$tt' onchange='formSubmit(\"media\")'";
       if (isset($_GET['update'])) {
-          if (isset($_GET[$t])) {
+          if (isset($_GET[$tt])) {
               $media[$t] = 1;
               echo " checked";
            }
@@ -72,6 +77,7 @@
       }
       echo ">
 	</div>";
+    }
   }
   echo "
 		</form>
@@ -97,12 +103,16 @@
 	$i = 0;
 	foreach($recordings as $t) {
 		if ($t["sched_status"] == "scheduled") continue;
-		$cid = $t["channel"];
-		if (array_key_exists($cid, $chtype)) {
-			$typeno = $chtype[$cid];
-			$ctname = $types[$typeno];
-			if (!array_key_exists($ctname, $media)) goto nogood;
+		if (!isset($media["All"])) {
+			$cid = $t["channel"];
+			if (array_key_exists($cid, $chtags)) {
+				foreach($chtags[$cid] as $c) {
+				    if (array_key_exists($tag[$c], $media)) goto good;
+				}
+				continue;
+			}
 		}
+good:
 		$time = strftime("%H:%M", $t["start"]);
 		$date = strftime("%a %e/%m/%y", $t["start"]);
 		$duration = $t["stop_real"] - $t["start_real"];
@@ -150,7 +160,6 @@
 		else echo "<td></td>";
 		echo "</tr>";
 		$i++;
-nogood:
 	}
 ?>
        </table>

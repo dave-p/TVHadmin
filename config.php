@@ -1,6 +1,11 @@
 <?php
   $page_title = 'Configuration';
   include_once('./head.php');
+  $tags = get_channeltags();
+  $tag = array('All' => 'All');
+  foreach ($tags as $t) {
+    $tag[$t["key"]] = $t["val"];
+  }
 ?>
     <script>
 	function one2two() {
@@ -142,10 +147,10 @@
 		</td>
 	    </tr>
 	    <tr class='row_even'>
-		<td class='col_label'><h5>Show in What's On Now:</h5></td>
+		<td class='col_label'><h5>Media Tags to use for selection:</h5></td>
 		<td class='col_value'>";
-	foreach (array_flip($types) as $t=>$v) {
-	  $g = "Media_" . $t;
+	foreach ($tag as $v=>$t) {
+	  $g = "Tag_" . $t;
 	  echo "$t: <input type='checkbox' name='$g' ";
 	  if (isset($settings[$g])) {
 	    echo " checked";
@@ -155,30 +160,50 @@
 	echo "
 		</td>
 	    </tr>
-            <tr class='row_odd'>
+	    <tr class='row_odd'>
+		<td class='col_label'><h5>Show in What's On Now:</h5></td>
+		<td class='col_value'>";
+	foreach ($tag as $v=>$t) {
+	  if (isset($settings["Tag_$t"])) {
+	    $g = "Media_" . $t;
+	    echo "$t: <input type='checkbox' name='$g' ";
+	    if (isset($settings[$g])) {
+	    echo " checked";
+	    }
+	    echo ">";
+	  }
+	}
+	echo "
+		</td>
+	    </tr>
+            <tr class='row_even'>
                 <td class='col_label'><h5>Show in Timeline:</h5></td>
                 <td class='col_value'>";
-        foreach (array_flip($types) as $t=>$v) {
-          $g = "Time_" . $t;
-          echo "$t: <input type='checkbox' name='$g' ";
-          if (isset($settings[$g])) {
-            echo " checked";
-          }
-          echo ">";
+        foreach ($tag as $v=>$t) {
+	  if (isset($settings["Tag_$t"])) {
+            $g = "Time_" . $t;
+            echo "$t: <input type='checkbox' name='$g' ";
+            if (isset($settings[$g])) {
+              echo " checked";
+            }
+            echo ">";
+	  }
         }
         echo "
                 </td>
             </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
-	foreach (array_flip($types) as $t=>$v) {
-	  $g = "Rec_" . $t;
-	  echo "$t: <input type='checkbox' name='$g' ";
-	  if (isset($settings[$g])) {
-	    echo " checked";
+	foreach ($tag as $v=>$t) {
+	  if (isset($settings["Tag_$t"])) {
+	    $g = "Rec_" . $t;
+	    echo "$t: <input type='checkbox' name='$g' ";
+	    if (isset($settings[$g])) {
+	      echo " checked";
+	    }
+	    echo ">";
 	  }
-	  echo ">";
 	}
 	echo "
 		</td> 
@@ -192,7 +217,7 @@
 	  $c1 = ''; $c2 = 'checked';
 	}
 	echo "
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
 		<td class='col_value'>
 		    <label for='summ'>Summary:</label>
@@ -201,7 +226,7 @@
 		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
 		</td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
 		<td class='col_value'><input type='checkbox' name='NOANON'";
           if (isset($settings['NOANON'])) {
@@ -210,7 +235,7 @@
           echo ">
 		</td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
 		<td class='col_value'><input type='checkbox' name='CLASHDET'";
 	  if (isset($settings['CLASHDET'])) {
@@ -219,7 +244,7 @@
 	  echo ">
 	      </td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
 		<td class='col_value'>
 		    <select name='TIMESPAN'>";
@@ -237,7 +262,7 @@
 	    <tr class='heading'>
 		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_channels'>
 		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();
