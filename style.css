@@ -360,6 +360,10 @@ select.channels {
 		-o-transition-property: margin;
 		-o-transition-duration: 0.5s;
 	}
+	#navigation .navi {
+		padding-top: 8px;
+		padding-bottom: 8px;
+}
 	#layout {
 		margin-left: 0px;
 		border-left: 0;
