@@ -170,6 +170,9 @@ a:hover {
 	padding: 2px;
 }
 .wideonly { }
+.thinonly {
+	display: none;
+}
 .media {
 	white-space: nowrap;
 	display: inline-block;
@@ -363,7 +366,7 @@ select.channels {
 	#navigation .navi {
 		padding-top: 8px;
 		padding-bottom: 8px;
-}
+	}
 	#layout {
 		margin-left: 0px;
 		border-left: 0;
@@ -373,5 +376,7 @@ select.channels {
 		text-rendering: geometricPrecision;
 		font-size:medium;
 	}
-
+	.thinonly {
+		display: inline;
+	}
 }

@@ -91,7 +91,7 @@
 	  <table class='list'>
 	    <tr class='heading'>
 	      <td class='col_date'><h2>Date</h2></td>
-	      <td class='col_time'><h2>Time</h2></td>
+	      <td class='wideonly col_time'><h2>Time</h2></td>
 	      <td class='col_channel'><h2>Channel</h2></td>
 	      <td class='col_length'><h2>Length</h2></td>
 	      <td class='col_name'><h2>Name</h2></td>
@@ -148,8 +148,8 @@ good:
 		}
 		$title = htmlspecialchars($t['disp_title'],ENT_QUOTES);
 		echo "
-	  <td class='col_date'>$date</td>
-	  <td class='col_time'>$time</td>
+	  <td class='col_date'>$date<span class='thinonly'><br />$time</span></td>
+	  <td class='wideonly col_time'>$time</td>
 	  <td class='col_channel'>{$t['channelname']}</td>";
 		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
 		echo "
