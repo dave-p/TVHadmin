@@ -110,39 +110,41 @@
 	    }
 good:
 		$e = get_epg($c["name"], $tstart, $tend);
-		$wd = 98 - count($e)/8;
-		echo "
+		if (isset($e)) {
+			$wd = 98 - count($e)/8;
+			echo "
      <tr>
       <td class='col_channel'>
        <div class='channel_name' style='background-color: {$colours[$i%2]}'>{$c['name']}</div>
       </td>
       <td class='col_schedule'>";
-		$p = &$e[0];
-		$pcount = 0;
-		while (isset($p['start'])) {
-		    if ($pcount == 0) {
-			if ($p['start'] > $tstart) {	#Need a spacer
-			    $spc = (($p['start'] - $tstart) * $wd) / $textent;
-			    echo "
+			$p = &$e[0];
+			$pcount = 0;
+			while (isset($p['start'])) {
+			    if ($pcount == 0) {
+				if ($p['start'] > $tstart) {	#Need a spacer
+				    $spc = (($p['start'] - $tstart) * $wd) / $textent;
+				    echo "
 	 <div class='spacer' style='width: $spc%;'>
 	    <img src='images/spacer.gif' width=1 height=1 alt=''></div>";
-			}
-			$colour = '#b4e29c';
-		    }
-		    else $colour = '#dee6ee';
-		    $duration = min($tend, $p['stop']) - max($tstart, $p['start']);
-		    $pc = ($wd * $duration) / $textent;
-		    @$subtitle = $p[$settings['SUMM']];
-		    echo "
+				}
+				$colour = '#b4e29c';
+			    }
+			    else $colour = '#dee6ee';
+			    $duration = min($tend, $p['stop']) - max($tstart, $p['start']);
+			    $pc = ($wd * $duration) / $textent;
+			    @$subtitle = $p[$settings['SUMM']];
+			    echo "
 	 <div class='item' style='background-color: $colour; width: $pc%;' title=\"$subtitle\">
 	    <img src='images/spacer.gif' width=1 height=1 alt=''>{$p['title']}</div>";
-		    $pcount++;
-		    $p = &$e[$pcount];
-		}
-		echo "
+			    $pcount++;
+			    $p = &$e[$pcount];
+			}
+			echo "
       </td>
      </tr>";
-		$i++;
+			$i++;
+		}
 	}
 	echo "
     </table>
