@@ -93,7 +93,7 @@
 	      <td class='col_date'><h2>Date</h2></td>
 	      <td class='wideonly col_time'><h2>Time</h2></td>
 	      <td class='col_channel'><h2>Channel</h2></td>
-	      <td class='col_length'><h2>Length</h2></td>
+	      <td class='wideonly col_length'><h2>Length</h2></td>
 	      <td class='col_name'><h2>Name</h2></td>
 	      <td class='col_delete'></td>
 	      <td class='col_stream'></td>
@@ -147,12 +147,13 @@ good:
 			$summ = 'disp_subtitle';
 		}
 		$title = htmlspecialchars($t['disp_title'],ENT_QUOTES);
+		$length = sprintf("%d:%02d", $hh, $mm);
 		echo "
-	  <td class='col_date'>$date<span class='thinonly'><br />$time</span></td>
+	  <td class='col_date'>$date
+		<span class='thinonly'><br />Time: $time<br />Length: $length</span></td>
 	  <td class='wideonly col_time'>$time</td>
-	  <td class='col_channel'>{$t['channelname']}</td>";
-		printf("<td class='col_length'>%d:%02d</td>", $hh, $mm);
-		echo "
+	  <td class='col_channel'>{$t['channelname']}</td>
+	  <td class='wideonly col_length'>$length</td>
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
 	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&SORT=$sort'><img src='images\delete.png' title='Delete Recording'></a></td>";
 		if ($ok) echo "
