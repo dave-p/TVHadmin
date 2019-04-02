@@ -2,7 +2,9 @@
 	include_once "./include.php";
 	$evt = $_GET["eventId"];
 	$id = $_GET['id'];
-	$when = $_GET['when'];
+	if (isset($_GET['when'])) {
+	  $when = $_GET['when'];
+	}
 	if (isset($_GET['prog'])) {
 	  $prog = urlencode($_GET['prog']);
 	}
