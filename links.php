@@ -29,13 +29,19 @@
   ";
         $links = get_links();
 	$channels = get_channels();
-	$timers = get_timers();
 	$recordings = get_recordings(-1);
 	$rcnt = array();
+	$tcnt = array();
 	foreach($recordings as $r) {
-	    if ($r["sched_status"] == "scheduled") continue;
-	    if (isset($rcnt[$r['autorec']])) $rcnt[$r['autorec']]++;
-	    else $rcnt[$r['autorec']] = 1;
+	    $autorec = $r['autorec'];
+	    if ($r["sched_status"] == "scheduled") {
+		if (isset($tcnt[$autorec])) $tcnt[$autorec]++;
+		else $tcnt[$autorec] = 1;
+	    }
+	    else {
+		if (isset($rcnt[$autorec])) $rcnt[$autorec]++;
+		else $rcnt[$autorec] = 1;
+	    }
 	}
 	$i = 0;
 	foreach($links as $l) {
@@ -52,16 +58,14 @@
 		    break;
 		}
 	    }
-	    $n = 0;
-	    foreach($timers as $t) {
-		if ($t["autorec"] === $l["uuid"]) $n++;
-	    }
 	    if (isset($rcnt[$l['uuid']])) $recs = $rcnt[$l['uuid']];
 	    else $recs = 0;
+	    if (isset($tcnt[$l['uuid']])) $timers = $tcnt[$l['uuid']];
+	    else $timers = 0;
 	    $title = stripslashes($l['title']);
 	    $crid = substr(strstr($l['serieslink'], '//'), 2);
 	    echo "
-	<td class='col_value'>$n</td>
+	<td class='col_value'>$timers</td>
 	<td class='col_value'>$recs</td>
 	<td class='col_channel'>$channelname</td>
 	<td class='col_name'>$title</td>
