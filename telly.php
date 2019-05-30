@@ -53,8 +53,14 @@
 	  print(">$cname</option>");
 	}
 
-        if (isset($_GET['all'])) $all = 'checked';
-        else $all = '';
+        if (isset($_GET['all'])) {
+	    $all = 'checked';
+	    $rall = '&all=on';
+	}
+        else {
+	    $all = '';
+	    $rall = '';
+	}
         echo "
 	    </select>
 	  </td>
@@ -124,13 +130,13 @@
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
             $evt = $p["eventId"];
 	    if (!array_key_exists($evt, $tevents)) {
-	      echo "<td><a href='record.php?eventId=$evt&series=N&from=2&id=$id&when=$when&prog=$uprog'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
+	      echo "<td><a href='record.php?eventId=$evt&series=N&from=2&id=$id&when=$when&prog=$uprog$rall'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 	    }
 	    else {
 	      echo "<td></td>";
 	    }
 	    if ((isset($p["serieslinkUri"])) && !array_key_exists($p["serieslinkUri"], $levents)) {
-	      echo "<td><a href='record.php?eventId=$evt&series=Y&from=2&id=$id&when=$when&prog=$uprog'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td></tr>";
+	      echo "<td><a href='record.php?eventId=$evt&series=Y&from=2&id=$id&when=$when&prog=$uprog$rall'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td></tr>";
 	    }
 	    else {
 	      echo "<td></td></tr>";

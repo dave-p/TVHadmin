@@ -24,7 +24,9 @@
 	    header("Location: fav.php?when=$when#$id");
 	    break;
 	  case 2:
-	    header("Location: telly.php?when=$when&prog=$prog#$id");
+	    if (isset($_GET['all'])) $all = '&all=' . $_GET['all'];
+	    else $all = '';
+	    header("Location: telly.php?when=$when&prog=$prog$all#$id");
 	    break;
 	  case 3:
 	    header("Location: search.php?find=$id");
