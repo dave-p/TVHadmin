@@ -10,6 +10,16 @@
 	</script>
   <div id="layout">
  <?php
+	if (isset($_GET["eventId"])) {
+	  $evt = $_GET["eventId"];
+	  if ($_GET["series"] == 'Y') {
+	    $url = "$urlp/api/dvr/autorec/create_by_series?event_id=$evt&config_uuid=$config_uuid";
+	  }
+	  else {
+	    $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
+	  }
+	  file_get_contents($url);
+}
 	if($_GET['find'] != "") {
 		$find = $_GET["find"];
 		$timers = get_timers();
@@ -23,14 +33,14 @@
 			$levents[$l["serieslink"]] = 1;
 		}
 		echo "
-      <table>
-	<tr>
-	  <td class='col_title'>
-	    <div id='mobmenu'>&#9776;</div> <h1>Matches for: <i>$find</i></h1>
-	  </td>
-	</tr>
-      </table>
-      <table class='list'>";
+	<table>
+	  <tr>
+	    <td class='col_title'>
+	      <div id='mobmenu'>&#9776;</div> <h1>Matches for: <i>$find</i></h1>
+	    </td>
+	  </tr>
+	</table>
+	<table class='list'>";
 		$i = 0;
 		$last_prog_date = " ";
 		$results = search_epg("", $find);
@@ -56,13 +66,13 @@
 	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$r['summary']}</div></td>";
 			$evt = $r["eventId"];
 			if (!array_key_exists($evt, $tevents)) {
-				echo "<td><a href='record.php?eventId=$evt&series=N&from=3&id=$find'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
+				echo "<td><a href='search.php?eventId=$evt&series=N&find=$find'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 			}
 			else {
 				echo "<td></td>";
 			}
 			if ((isset($r["serieslinkUri"])) && !array_key_exists($r["serieslinkUri"], $levents)) {
-				echo "<td><a href='record.php?eventId=$evt&series=Y&from=3&id=$find'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td></tr>";
+				echo "<td><a href='search.php?eventId=$evt&series=Y&find=$find'><img src='images/rec_buttonS.png' alt='record series' title='record series'></a></td></tr>";
 			}
 			else {
 				echo "<td></td></tr>";
