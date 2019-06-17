@@ -19,6 +19,14 @@
 	$tstart = $utime - $toffset;
 	$tend = $tstart + $textent;
 	$now = ($utime - $tstart) / $textent;
+	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
+		$lcn = 1;
+		$ch_width = 145;
+	}
+	else {
+		$lcn = 0;
+		$ch_width = 120;
+	}
 	echo "
 	<script type='text/javascript'>
 	window.onload = drawCursor;
@@ -84,7 +92,7 @@
   <div id='wrapper'>
    <div id='timeline'>
     <table class='list' style='table-layout: fixed;'>
-     <col width=120px>
+     <col width={$ch_width}px>
      <col id='schedules' width=100%>
      <tr class='newday'>
       <td>$wday</td>
@@ -100,6 +108,8 @@
 	echo "
       </td>
      </tr>";
+	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) $lcn = 1;
+	else $lcn = 0;
 	$i = 0;
 	foreach($chans as $c) {
 	    if (!isset($media["All"])) {
@@ -115,7 +125,11 @@ good:
 			echo "
      <tr>
       <td class='col_channel'>
-       <div class='channel_name' style='background-color: {$colours[$i%2]}'>{$c['name']}</div>
+       <div class='channel_name' style='background-color: ";
+			if ($lcn) print "{$colours[$i%2]}'>{$c['number']} {$c['name']}";
+			else print "{$colours[$i%2]}'>{$c['name']}";
+			echo "
+       </div>
       </td>
       <td class='col_schedule'>";
 			$p = &$e[0];

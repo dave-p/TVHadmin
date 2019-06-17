@@ -16,6 +16,9 @@
 	else {
 		$view_url = 'http://' . $ip;
 	}
+	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) $lcn = 1;
+	else $lcn = 0;
+
 	echo "
 	<script type='text/javascript'>
 	function formSubmit()
@@ -99,7 +102,11 @@ good:
        </table>
       </td>
       <td class='col_channel'>
-       <div class='channel_name'>{$c['name']}</div>
+       <div class='channel_name'>";
+		if ($lcn) print "{$c['number']} {$c['name']}";
+		else print "{$c['name']}";
+		echo "
+       </div>
       </td>
       <td class='col_title'>
        <div class='epg_title'>{$p['title']}</div>

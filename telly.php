@@ -54,13 +54,17 @@
 	      <option value=''>Select Channel</option>
 	";
 	$chans = get_channels();
+	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) $lcn = 1;
+	else $lcn = 0;
 	foreach($chans as $v) {
 	  $cname = $v["name"];
 	  print("<option value='$cname'");
 	  if (isset($prog) && $cname == $prog) {
+	    $prog_lcn = $v["number"];
 	    print (" selected");
 	  }
-	  print(">$cname</option>");
+	  if ($lcn) print(">{$v["number"]} $cname</option>");
+	  else print(">$cname</option>");
 	}
 
         if (isset($_GET['all'])) {
@@ -114,7 +118,11 @@
 	  echo "
 	<table class='list'>
 	  <tr class='heading'>
-	   <td colspan='4'><span class='channel_name'>$prog</span></td>
+	   <td colspan='4'>";
+	if (isset($prog_lcn)) print "<span class='channel_name'>$prog_lcn $prog</span>";
+	else print "<span class='channel_name'>$prog</span>";
+	echo "
+	    </td>
 	  </tr>";
 	  $progs = get_epg($prog, $when, $next);
 	  $i = 0;
