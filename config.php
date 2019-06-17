@@ -147,6 +147,19 @@
 		</td>
 	    </tr>
 	    <tr class='row_even'>
+		<td class='col_label'><h5>Channels Sort Order:</h5></td>
+		<td class='col_value'>";
+	if (!isset($settings['CSORT'])) $settings['CSORT'] = 0;
+	foreach ($c_orders as $key=>$value) {
+	  echo "<label for='C$key'>$value:</label>";
+	  echo "<input type='radio' name='CSORT' id='C$key' value='$key'";
+	  if ($key == $settings['CSORT']) echo " checked>";
+	  else echo ">";
+	}
+                  echo "
+                </td>
+            </tr>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Media Tags to use for selection:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
@@ -160,7 +173,7 @@
 	echo "
 		</td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in What's On Now:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
@@ -176,7 +189,7 @@
 	echo "
 		</td>
 	    </tr>
-            <tr class='row_even'>
+            <tr class='row_odd'>
                 <td class='col_label'><h5>Show in Timeline:</h5></td>
                 <td class='col_value'>";
         foreach ($tag as $v=>$t) {
@@ -192,7 +205,7 @@
         echo "
                 </td>
             </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
@@ -217,7 +230,7 @@
 	  $c1 = ''; $c2 = 'checked';
 	}
 	echo "
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
 		<td class='col_value'>
 		    <label for='summ'>Summary:</label>
@@ -226,7 +239,7 @@
 		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
 		</td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
 		<td class='col_value'><input type='checkbox' name='NOANON'";
           if (isset($settings['NOANON'])) {
@@ -235,7 +248,7 @@
           echo ">
 		</td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
 		<td class='col_value'><input type='checkbox' name='CLASHDET'";
 	  if (isset($settings['CLASHDET'])) {
@@ -244,7 +257,7 @@
 	  echo ">
 	      </td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
 		<td class='col_value'>
 		    <select name='TIMESPAN'>";
@@ -262,7 +275,7 @@
 	    <tr class='heading'>
 		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_channels'>
 		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();

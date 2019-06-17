@@ -17,6 +17,10 @@ $orders = array(
 	1 => "Date Rev",
 	2 => "Title");
 
+$c_orders = array(
+	0 => "Name",
+	1 => "LCN");
+
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
   $settings = json_decode($conf, true);
@@ -113,12 +117,15 @@ function get_recordings($s) {
 }
 
 function get_channels() {
-  global $urlp;
+  global $urlp, $settings;
   $url = "$urlp/api/channel/grid?limit=9999";
   $json = file_get_contents($url);
   $c = json_decode($json, true);
   $ret = &$c["entries"];
-  usort($ret, "sort_channels");
+  if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
+    usort($ret, "sort_channels_lcn");
+  }
+  else usort($ret, "sort_channels");
   return $ret;
 }
 
@@ -151,6 +158,12 @@ function get_profiles() {
 
 function sort_channels($a, $b) {
   return strcasecmp($a["name"], $b["name"]);
+}
+
+function sort_channels_lcn($a, $b) {
+  $ret = $a["number"] - $b["number"];
+  if ($ret == 0) return strcasecmp($a["name"], $b["name"]);
+  else return $ret;
 }
 
 function sort_recordings($a, $b) {
