@@ -56,8 +56,8 @@
 		  <input type='hidden' name='SORT' value='$sort'>
 	      ";
   foreach ($tag as $v=>$t) {
-    if (isset($settings["Tag_$t"])) {
-      $tt = urlencode($t);
+    $tt = urlencode($t);
+    if (isset($settings["Tag_$tt"])) {
       echo "
 	<div class='media'>
 	  <label for='$tt'>$t:</label>
@@ -69,7 +69,7 @@
            }
       }
       else {
-          $g = "Rec_" . $t;
+          $g = "Rec_" . $tt;
           if (isset($settings[$g])) {
               $media[$t] = 1;
               echo " checked";

@@ -163,7 +163,7 @@
 		<td class='col_label'><h5>Media Tags to use for selection:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
-	  $g = "Tag_" . $t;
+	  $g = urlencode("Tag_" . $t);
 	  echo "$t: <input type='checkbox' name='$g' ";
 	  if (isset($settings[$g])) {
 	    echo " checked";
@@ -177,8 +177,9 @@
 		<td class='col_label'><h5>Show in What's On Now:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
-	  if (isset($settings["Tag_$t"])) {
-	    $g = "Media_" . $t;
+	  $ut = urlencode($t);
+	  if (isset($settings["Tag_$ut"])) {
+	    $g = "Media_" . $ut;
 	    echo "$t: <input type='checkbox' name='$g' ";
 	    if (isset($settings[$g])) {
 	    echo " checked";
@@ -193,8 +194,9 @@
                 <td class='col_label'><h5>Show in Timeline:</h5></td>
                 <td class='col_value'>";
         foreach ($tag as $v=>$t) {
-	  if (isset($settings["Tag_$t"])) {
-            $g = "Time_" . $t;
+	  $ut = urlencode($t);
+	  if (isset($settings["Tag_$ut"])) {
+            $g = "Time_" . $ut;
             echo "$t: <input type='checkbox' name='$g' ";
             if (isset($settings[$g])) {
               echo " checked";
@@ -209,8 +211,9 @@
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
-	  if (isset($settings["Tag_$t"])) {
-	    $g = "Rec_" . $t;
+	  $ut = urlencode($t);
+	  if (isset($settings["Tag_$ut"])) {
+	    $g = "Rec_" . $ut;
 	    echo "$t: <input type='checkbox' name='$g' ";
 	    if (isset($settings[$g])) {
 	      echo " checked";

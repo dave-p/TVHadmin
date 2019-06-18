@@ -60,8 +60,8 @@
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timeline</h1></td>
       <td>";
 	foreach ($tag as $v=>$t) {
-	  if (isset($settings["Tag_$t"])) {
-		$tt = urlencode($t);
+	  $tt = urlencode($t);
+	  if (isset($settings["Tag_$tt"])) {
 		echo "
 	<div class='media'>
 	  <label for='$tt'>$t:</label>
@@ -73,7 +73,7 @@
 			}
 		}
 		else {
-			$g = "Time_" . $t;
+			$g = "Time_" . $tt;
  			if (isset($settings[$g])) {
 				$media[$t] = 1;
 				echo " checked";
