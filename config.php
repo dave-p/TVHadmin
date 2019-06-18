@@ -291,13 +291,20 @@
 		</td>
 		<td class='col_wanted_channels'>
 		    <select name='selected_channels[]' size='8' multiple='multiple' class='channels'>";
-	$sel = &$settings['selected_channels'];
-	foreach($sel as $s) {
-	    echo "<option value='$s'>$s</option>";
-	}
+	    $sel = &$settings['selected_channels'];
+	    foreach($sel as $s) {
+		echo "<option value='$s'>$s</option>";
+	    }
 		    echo "</select>
 		</td>
 	    </tr>";
+	}
+	else {
+	    echo "
+	    <input type='hidden' name='Tag_All' value='on'>
+	    <input type='hidden' name='Media_All' value='on'>
+	    <input type='hidden' name='Time_All' value='on'>
+	    <input type='hidden' name='Rec_All' value='on'>";
 	}
 ?>
 	</table>
