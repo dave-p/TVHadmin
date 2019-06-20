@@ -69,14 +69,7 @@
       <td class='col_name'>{$t["disp_title"]}</td>";
 	    if ($t["autorec"] != "") {
 		$type = "Autorec";
-                foreach ($autorecs as $a) {
-		    if ($a["uuid"] == $t["autorec"]) {
-			if ($a["serieslink"] != "") {
-			    $type = "Series Link";
-			}
-			break;
-		    }
-		}
+		if ($autorecs[$t["autorec"]] != "") $type = "Series Link";
 	    }
 	    else if ($t["timerec"] != "") {
 		$type = "Timed Recording";
@@ -195,7 +188,11 @@
 		$url = "$urlp/api/dvr/autorec/grid?limit=99999";
 		$json = file_get_contents($url);
 		$j = json_decode($json, true);
-		$ret = &$j["entries"];
+		$recs = &$j["entries"];
+		$ret = array();
+		foreach ($recs as $r) {
+			$ret[$r["uuid"]] = $r["serieslink"];
+		}
 		return $ret;
 	}
 ?>

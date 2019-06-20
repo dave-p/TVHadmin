@@ -29,6 +29,10 @@
   ";
         $links = get_links();
 	$channels = get_channels();
+	$cname = array();
+	foreach ($channels as $c) {
+	    $cname[$c["uuid"]] = $c["name"];
+	}
 	$recordings = get_recordings(-1);
 	$rcnt = array();
 	$tcnt = array();
@@ -51,13 +55,7 @@
 	    else {
 		echo "<tr class='row_even'>";
 	    }
-	    $lc = $l["channel"];
-	    foreach($channels as $c) {
-		if ($lc === $c["uuid"]) {
-		    $channelname = $c["name"];
-		    break;
-		}
-	    }
+	    $channelname = $cname[$l["channel"]];
 	    if (isset($rcnt[$l['uuid']])) $recs = $rcnt[$l['uuid']];
 	    else $recs = 0;
 	    if (isset($tcnt[$l['uuid']])) $timers = $tcnt[$l['uuid']];
