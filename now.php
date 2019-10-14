@@ -1,6 +1,16 @@
 <?php
 	$page_title = "What's On Now";
 	include_once './head.php';
+	if (isset($_GET["eventId"])) {
+	  $evt = $_GET["eventId"];
+	  $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
+	  file_get_contents($url);
+	}
+	$timers = get_timers();
+	$tevents = array();
+	foreach ($timers as $t) {
+	  $tevents[$t["broadcast"]] = 1;
+	}
 	$chans = get_channels();
 	$tags = get_channeltags();
 	$tag = array('All' => 'All');
@@ -68,7 +78,7 @@
    <div id='whatson'>
     <table class='list'>
      <tr class='newday'>
-      <td colspan='4'><span class='date_long'>$wday</span></td>
+      <td colspan='5'><span class='date_long'>$wday</span></td>
      </tr>";
 	$i = 0;
 	foreach($chans as $c) {
@@ -111,6 +121,13 @@ good:
       <td class='col_title'>
        <div class='epg_title'>{$p['title']}</div>
        <div class='epg_subtitle'>{$summ}</div>
+      </td>
+      <td>";
+	$evt = $p["eventId"];
+	if (!array_key_exists($evt, $tevents)) {
+	  echo "<a href='now.php?eventId=$evt'><img src='images/rec_button1.png' alt='record' title='record'></a>";
+	}
+	echo "
       </td>
       <td class='col_stream'>
 	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
