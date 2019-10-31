@@ -144,6 +144,7 @@ function get_links() {
   $json = file_get_contents($url);
   $j = json_decode($json, true);
   $ret = &$j["entries"];
+  usort($ret, "sort_links");
   return $ret;
 }
 
@@ -192,6 +193,26 @@ function sort_recordings_title($a, $b) {
   $n = min(strlen($x), strlen($y));
   $ret = strncmp($x, $y, $n);
   if($ret == 0) return ($a["start"] - $b["start"]);
+  return $ret;
+}
+
+function sort_links($a, $b) {
+  $x = $a["title"];
+  $y = $b["title"];
+  if(strncmp($x, 'New: ', 5) == 0) {
+    $x = substr($x, 5);
+    if(substr($x, -3) == '...') {
+      $x = substr($x, 0, -3);
+    }
+  }
+  if(strncmp($y, 'New: ', 5) == 0) {
+    $y = substr($y, 5);
+    if(substr($y, -3) == '...') {
+      $y = substr($y, 0, -3);
+    }
+  }
+  $n = min(strlen($x), strlen($y));
+  $ret = strncmp($x, $y, $n);
   return $ret;
 }
 ?>
