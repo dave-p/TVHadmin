@@ -40,9 +40,9 @@
 	$now = time();
 	foreach($timers as $t) {
 	    if (!$t["enabled"]) continue;
-	    $start = strftime("%H:%M", $t["start"]);
-	    $stop = strftime("%H:%M", $t["stop"]);
-	    $date = strftime("%a %e/%m", $t["start"]);
+	    $start = strftime("%H:%M", $t["start_real"]);
+	    $stop = strftime("%H:%M", $t["stop_real"]);
+	    $date = strftime("%a %e/%m", $t["start_real"]);
 	    $subtitle = $t["disp_extratext"];
 	    if ($i % 2) {
 		echo "<tr class='row_odd' title=\"$subtitle\">";
@@ -50,7 +50,7 @@
 	    else {
 		echo "<tr class='row_even' title=\"$subtitle\">";
 	    }
-	    if ($t["start"] < $now) {
+	    if ($t["start_real"] < $now) {
 		$running = '&running=1';
 		echo "<td class='col_info'><img src='images/rec.png'></td>";
 	    }
@@ -106,14 +106,14 @@
 	    }
 	    $poss = search_epg($c["channelname"],$ts);
 	    foreach ($poss as $p) {
-		if ($p["start"] == $c["start"]) {
+		if ($p["start_real"] == $c["start_real"]) {
 		    $alt1 = search_epg("",$ts);
 		    echo "<p>Alternatives for \"$ts\"</p><ul>";
 		    foreach ($alt1 as $a) {
 			$sl = '';
 			if (isset($a["deafsigned"])) $sl = '[SL]';
 			if ($p["episodeUri"] === $a["episodeUri"]) {
-			    $when = strftime("%a %e/%m %H:%M", $a["start"]);
+			    $when = strftime("%a %e/%m %H:%M", $a["start_real"]);
 			    if (!check_event($timers, $a)) {
 				printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
 			    }
@@ -130,14 +130,14 @@
 
 	function check_timer($timers, $t) {
 	    if (count($timers) < 2) return 0;
-	    $tstart = $t["start"];
-	    $tstop = $t["stop"];
+	    $tstart = $t["start_real"];
+	    $tstop = $t["stop_real"];
 	    $tuuid = $t["uuid"];
 	    foreach ($timers as $m) {
 	      if (!$m["enabled"]) continue;
 	      if ($m["uuid"] === $tuuid) continue;
-	      if (($tstart >= $m["start"] && $tstart < $m["stop"])
-	          ||($m["start"] >= $tstart && $m["start"] < $tstop)) {
+	      if (($tstart >= $m["start_real"] && $tstart < $m["stop_real"])
+	          ||($m["start_real"] >= $tstart && $m["start_real"] < $tstop)) {
 		if (!isset($settings['CLASHDET'])) return 1;
 		if (get_mux_for_timer($m) === get_mux_for_timer($t)) return 1;
 		return 2;
@@ -147,14 +147,14 @@
 	}
 
         function check_event($timers, $e) {
-            $estart = $e["start"];
-            $estop = $e["stop"];
+            $estart = $e["start_real"];
+            $estop = $e["stop_real"];
             @$euuid = $e["dvrUuid"];
             foreach ($timers as $t) {
               if (!$t["enabled"]) continue;
               if ($t["uuid"] === $euuid) continue;
-              if(($estart >= $t["start"] && $estart < $t["stop"])
-                  ||($t["start"] >= $estart && $t["start"] < $estop)) {
+              if(($estart >= $t["start_real"] && $estart < $t["stop_real"])
+                  ||($t["start_real"] >= $estart && $t["start_real"] < $estop)) {
 		if (get_mux_for_event($e) === get_mux_for_timer($t)) return 1;
                 else return 2;
               }
