@@ -91,6 +91,7 @@
 good:
 		$e = get_epg_now($c["name"]);
 		$p = &$e[0];
+		if (!$p) continue;
 		if ($i % 2) echo "<tr class=\"row_odd\">";
 		else echo "<tr class=\"row_even\">";
 		$start = date('H:i', $p["start"]);
