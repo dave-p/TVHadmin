@@ -101,7 +101,7 @@ good:
 		else $pc = 0;
 		$dur = intval($duration/60);
 		$don = intval((time() - $p["start"])/60);
-		if (isset($p['summary'])) $summ = $p['summary'];
+		if (isset($p[$settings['SUMM']])) $summ = $p[$settings['SUMM']];
 		else $summ = '';
 		echo "
       <td class='col_duration'>$start - $end

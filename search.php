@@ -63,7 +63,7 @@
 	  <td class='col_channel'>
 	    <div class='channel_name'>{$r['channelName']}</div></td>
 	  <td class='col_center'>
-	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$r['summary']}</div></td>";
+	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$r[$settings['SUMM']]}</div></td>";
 			$evt = $r["eventId"];
 			if (!array_key_exists($evt, $tevents)) {
 				echo "<td><a href='search.php?eventId=$evt&series=N&find=$find'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
