@@ -117,14 +117,14 @@ window.addEventListener('load',function(event) {
 	</tr>";
 	    switch($s['signal_scale']) {
 		case 1:
-		  $s['signal'] = $s['signal'] * 100 / 65535 . ' %';
+		  $s['signal'] = round($s['signal'] * 100 / 65535) . ' %';
 		  break;
 		case 2:
 		  $s['signal'] = round($s['signal'] / 1000, 1) . ' dBm';
 	    }
 	    switch($s['snr_scale']) {
 		case 1:
-		  $s['snr'] = $s['snr'] * 100 / 65535 . ' %';
+		  $s['snr'] = round($s['snr'] * 100 / 65535) . ' %';
                   break;
 		case 2:
 		  $s['snr'] = round($s['snr'] / 1000, 1) . ' dB';
