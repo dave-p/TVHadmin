@@ -17,6 +17,7 @@ Note that the web server is responsible for security! For use across the interne
 - Copy the files to your web server's HTTPROOT or a subdirectory
 - The `data` subdirectory is used to store configuration settings, and it must be writeable by the web server user (usually 'http' or 'apache'). If you need to change this location, edit the first line of include.php to match the location and name of the config file (relative to include.php)
 - Check if `open_basedir` has been set in your PHP.INI file. If so, ensure that the locations of the TVHadmin files and the config file are under the open_basedir directory
+- Check that your TVHeadend server is configured to use 'plain' or 'plain and digest' authentication (Configuration->General->Base->HTTP Server Settings). TVHadmin won't currently work with 'digest' authentication.
 - Browse to http://your.web.server/path/TVHadmin.php. Enter the username and password of a TVHeadend admin user. In the "IP address:port" box enter the details of your TVHeadend server; if you have started TVHeadend with the "--http_root" option then add the directory after the port number. Click the 'save' button.
 - If connection to TVHeadend succeeds you will see further configuration options. Make any changes then click 'save' again.
 - TVHadmin should now be working.

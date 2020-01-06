@@ -27,13 +27,19 @@ if (file_exists($config_file)) {
   $user = $settings['USER'];
   $pass = $settings['PASS'];
   $ip = $settings['IP'];
-  if ($user == '') {
-    $urlp = "http://$ip";
+  $urlp = 'http://' . $ip;
+  if ($user != '') {
+    if ($pass == '') $auth = base64_encode($user);
+    else $auth = base64_encode("$user:$pass");
+    stream_context_set_default(
+      [
+	'http' => [
+	  'method' => 'GET',
+	  'header' => 'Authorization: Basic ' . $auth
+	]
+      ]
+    );
   }
-  else if ($pass == '') {
-    $urlp = "http://$user@$ip";
-  }
-  else $urlp = "http://$user:$pass@$ip";
   $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
   if (!isset($settings['SUMM'])) $settings['SUMM'] = 'summary';

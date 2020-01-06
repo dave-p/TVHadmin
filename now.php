@@ -20,12 +20,6 @@
 	$wday = date('l, j M Y', time());
 	$time = date('H:i', time());
 	$media = array();
-	if (array_key_exists('NOANON', $settings)) {
-		$view_url = $urlp;
-	}
-	else {
-		$view_url = 'http://' . $ip;
-	}
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) $lcn = 1;
 	else $lcn = 0;
 
@@ -131,7 +125,7 @@ good:
 	echo "
       </td>
       <td class='col_stream'>
-	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
+	<a href='$urlp/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
       </td>
      </tr>";
 		$i++;

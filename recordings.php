@@ -20,12 +20,6 @@
   foreach ($tags as $t) {
       $tag[$t["key"]] = $t["val"];
   }
-  if (array_key_exists('NOANON', $settings)) {
-      $view_url = $urlp;
-  }
-  else {
-      $view_url = 'http://' . $ip;
-  }
   echo "
     <script type='text/javascript'>
       function formSubmit(which) {
@@ -157,7 +151,7 @@ good:
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
 	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&SORT=$sort'><img src='images\delete.png' title='Delete Recording'></a></td>";
 		if ($ok) echo "
-	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>";
+	  <td class='col_stream'><a href='$urlp/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>";
 		else echo "<td></td>";
 		echo "</tr>";
 		$i++;
