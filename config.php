@@ -243,15 +243,24 @@
 		</td>
 	    </tr>
 	    <tr class='row_even'>
-		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
-		<td class='col_value'><input type='checkbox' name='CLASHDET'";
-	  if (isset($settings['CLASHDET'])) {
-	    echo " checked";
-	  }
-	  echo ">
-	      </td>
+		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
+		<td class='col_value'><input type='checkbox' name='NOANON'";
+        if (isset($settings['NOANON'])) {
+          echo " checked";
+        }
+        echo ">
+		</td>
 	    </tr>
 	    <tr class='row_odd'>
+		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
+		<td class='col_value'><input type='checkbox' name='CLASHDET'";
+	if (isset($settings['CLASHDET'])) {
+	  echo " checked";
+	}
+	echo ">
+	      </td>
+	    </tr>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
 		<td class='col_value'>
 		    <select name='TIMESPAN'>";
