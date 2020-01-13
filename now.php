@@ -85,21 +85,21 @@
 			continue;
 		}
 good:
-		$e = get_epg_now($c["name"]);
-		$p = &$e[0];
-		if (!$p) continue;
 		if ($i % 2) echo "<tr class=\"row_odd\">";
 		else echo "<tr class=\"row_even\">";
-		$start = date('H:i', $p["start"]);
-		$end = date('H:i', $p["stop"]);
-		$duration = $p["stop"] - $p["start"];
-		if($duration > 0) $pc = intval(100*(time() - $p["start"])/$duration);
-		else $pc = 0;
-		$dur = intval($duration/60);
-		$don = intval((time() - $p["start"])/60);
-		if (isset($p[$settings['SUMM']])) $summ = $p[$settings['SUMM']];
-		else $summ = '';
-		echo "
+		$e = get_epg_now($c["name"]);
+		$p = &$e[0];
+		if ($p) {
+			$start = date('H:i', $p["start"]);
+			$end = date('H:i', $p["stop"]);
+			$duration = $p["stop"] - $p["start"];
+			if($duration > 0) $pc = intval(100*(time() - $p["start"])/$duration);
+			else $pc = 0;
+			$dur = intval($duration/60);
+			$don = intval((time() - $p["start"])/60);
+			if (isset($p[$settings['SUMM']])) $summ = $p[$settings['SUMM']];
+			else $summ = '';
+			echo "
       <td class='col_duration'>$start - $end
        <table border=0 cellspacing=0 cellpadding=0 class='percent' title='$don min&nbsp;/&nbsp;$dur min'>
 	<tr>
@@ -107,7 +107,10 @@ good:
 	 <td class='remaining'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
 	</tr>
        </table>
-      </td>
+      </td>";
+		}
+		else echo "<td class='col_duration'></td>";
+		echo "
       <td class='col_channel'>
        <div class='channel_name'>";
 		if ($lcn) print "{$c['number']} {$c['name']}";
@@ -115,15 +118,21 @@ good:
 		echo "
        </div>
       </td>
-      <td class='col_title'>
+      <td class='col_title'>";
+		if ($p) {
+			echo "
        <div class='epg_title'>{$p['title']}</div>
        <div class='epg_subtitle'>{$summ}</div>
       </td>
       <td>";
-	$evt = $p["eventId"];
-	if (!array_key_exists($evt, $tevents)) {
-	  echo "<a href='now.php?eventId=$evt'><img src='images/rec_button1.png' alt='record' title='record'></a>";
-	}
+			$evt = $p["eventId"];
+			if (!array_key_exists($evt, $tevents)) echo "
+        <a href='now.php?eventId=$evt'><img src='images/rec_button1.png' alt='record' title='record'></a>";
+		}
+		else echo "
+        No EPG available
+      </td>
+      <td>";
 	echo "
       </td>
       <td class='col_stream'>
