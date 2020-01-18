@@ -133,8 +133,10 @@
 	    $tstart = $t["start_real"];
 	    $tstop = $t["stop_real"];
 	    $tuuid = $t["uuid"];
+	    $tchannel = $t["channel"];
 	    foreach ($timers as $m) {
 	      if (!$m["enabled"]) continue;
+	      if ($m["channel"] === $tchannel) continue;
 	      if ($m["uuid"] === $tuuid) continue;
 	      if (($tstart >= $m["start_real"] && $tstart < $m["stop_real"])
 	          ||($m["start_real"] >= $tstart && $m["start_real"] < $tstop)) {
