@@ -1,13 +1,19 @@
 <?php
   $page_title = 'Timers';
   include_once './head.php';
+  $timers = get_timers();
+  $now = time();
   if (isset($_GET["uuid"])) {
     $uuid = $_GET["uuid"];
-    if (isset($_GET["running"])) {
-      $url = "$urlp/api/dvr/entry/stop?uuid=$uuid";
+    foreach($timers as $key => $v) {
+      if ($v['uuid'] == $uuid) {
+	if ($v["start_real"] < $now) $url = "$urlp/api/dvr/entry/stop?uuid=$uuid";
+	else $url = "$urlp/api/dvr/entry/cancel?uuid=$uuid";
+	file_get_contents($url);
+	unset($timers[$key]);
+	break;
+      }
     }
-    else $url = "$urlp/api/dvr/entry/cancel?uuid=$uuid";
-    file_get_contents($url);
   }
   echo "
  <div id='layout'>
@@ -32,7 +38,6 @@
 	 <td class=col_delete></td>
 	</tr>
   ";
-	$timers = get_timers();
 	$autorecs = get_autorecs();
 	$i = 0;
 	$channels = array();
@@ -51,11 +56,9 @@
 		echo "<tr class='row_even' title=\"$subtitle\">";
 	    }
 	    if ($t["start_real"] < $now) {
-		$running = '&running=1';
 		echo "<td class='col_info'><img src='images/rec.png'></td>";
 	    }
 	    else {
-		$running = '';
 		switch(check_timer($timers, $t)) {
 		  case 0:
 		    echo "<td class='col_info'><img src='images/tick_green.png'></td>";
@@ -87,7 +90,7 @@
             echo "
       <td class='col_channel'>$type</td>
       <td class='col_delete'>
-	<a href='timers.php?uuid={$t['uuid']}$running'><img src='images\delete.png' title='Delete Timer'></a>
+	<a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a>
       </td>
     </tr>\n";
 	    $i++;
