@@ -42,7 +42,6 @@
 	$i = 0;
 	$channels = array();
 	$clashes = array();
-	$now = time();
 	foreach($timers as $t) {
 	    if (!$t["enabled"]) continue;
 	    $start = strftime("%H:%M", $t["start_real"]);

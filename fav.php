@@ -20,11 +20,6 @@
 	  file_get_contents($url);
 	}
         $chans = &$settings['selected_channels'];
-	$timers = get_timers();
-	$tevents = array();
-	foreach ($timers as $t) {
-	  $tevents[$t["broadcast"]] = 1;
-	}
 	$links = get_links();
 	$levents = array();
 	foreach ($links as $l) {
@@ -97,8 +92,8 @@
 	    }
 	    print("<td class='col_duration'>$start - $end</td>");
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
-	    $evt = $p["eventId"];
-	    if (!array_key_exists($evt, $tevents)) {
+	    if (!isset($p['dvrState']) || $p['dvrState'] != 'scheduled') {
+	      $evt = $p["eventId"];
 	      echo "<td><a href='fav.php?eventId=$evt&series=N&when=$when#$id'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 	    }
 	    else {
