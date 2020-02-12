@@ -141,7 +141,7 @@
 	    $id++;
 	    print("<td class='col_duration'>$start - $end</td>");
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
-	    if (!isset($p['dvrState']) || $p['dvrState'] != 'scheduled') {
+	    if (!isset($p['dvrState']) || ($p['dvrState'] != 'scheduled' && $p['dvrState'] != 'recording')) {
 	      $evt = $p["eventId"];
 	      echo "<td><a href='telly.php?eventId=$evt&series=N&when=$when&prog=$uprog$rall#$id'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 	    }
