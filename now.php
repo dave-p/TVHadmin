@@ -6,11 +6,6 @@
 	  $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
 	  file_get_contents($url);
 	}
-	$timers = get_timers();
-	$tevents = array();
-	foreach ($timers as $t) {
-	  $tevents[$t["broadcast"]] = 1;
-	}
 	$chans = get_channels();
 	$tags = get_channeltags();
 	$tag = array('All' => 'All');
@@ -125,9 +120,11 @@ good:
        <div class='epg_subtitle'>{$summ}</div>
       </td>
       <td>";
-			$evt = $p["eventId"];
-			if (!array_key_exists($evt, $tevents)) echo "
+			if (!isset($p['dvrState']) || $p['dvrState'] != 'recording') {
+				$evt = $p["eventId"];
+				echo "
         <a href='now.php?eventId=$evt'><img src='images/rec_button1.png' alt='record' title='record'></a>";
+			}
 		}
 		else echo "
         No EPG available
