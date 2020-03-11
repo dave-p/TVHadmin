@@ -251,7 +251,16 @@
         echo ">
 		</td>
 	    </tr>
-	    <tr class='row_odd'>
+           <tr class='row_odd'>
+                <td class='col_label'><h5>Show channel icons in What's On Now:</h5></td>
+                <td class='col_value'><input type='checkbox' name='ICONS'";
+        if (isset($settings['ICONS'])) {
+          echo " checked";
+        }
+        echo ">
+                </td>
+            </tr>
+	    <tr class='row_even'>
 		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
 		<td class='col_value'><input type='checkbox' name='CLASHDET'";
 	if (isset($settings['CLASHDET'])) {
@@ -260,7 +269,7 @@
 	echo ">
 	      </td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
 		<td class='col_value'>
 		    <select name='TIMESPAN'>";
@@ -278,7 +287,7 @@
 	    <tr class='heading'>
 		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_even'>
 		<td class='col_channels'>
 		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();

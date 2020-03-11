@@ -82,7 +82,7 @@
 good:
 		if ($i % 2) echo "<tr class=\"row_odd\">";
 		else echo "<tr class=\"row_even\">";
-		$e = get_epg_now($c["name"]);
+		$e = get_epg_now($c["uuid"]);
 		$p = &$e[0];
 		if ($p) {
 			$start = date('H:i', $p["start"]);
@@ -108,7 +108,10 @@ good:
 		echo "
       <td class='col_channel'>
        <div class='channel_name'>";
-		if ($lcn) print "{$c['number']} {$c['name']}";
+		if (isset($settings['ICONS']) && isset($c['icon_public_url'])) {
+			print "<img src=\"icon.php?image={$c['icon_public_url']}\" height='48' width='80'>";
+		}
+		else if ($lcn) print "{$c['number']} {$c['name']}";
 		else print "{$c['name']}";
 		echo "
        </div>
