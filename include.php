@@ -63,7 +63,7 @@ function get_epg_now($channel) {
 #return events ending after the 'from' time and beginning before the 'to' time.
 
 function get_epg($channel, $from, $to) {
-  global $urlp;
+  global $urlp, $auth;
   if ($to != 0) {
 	$data = array("channel"=>"$channel","filter"=>"[{\"field\":\"stop\",\"type\":\"numeric\",\"value\":\"{$from}\",\"comparison\":\"gt\"}, {\"field\":\"start\",\"type\":\"numeric\",\"value\":\"{$to}\",\"comparison\":\"lt\"}]");
   }
@@ -73,7 +73,8 @@ function get_epg($channel, $from, $to) {
   $query = http_build_query($data);
   $ctx = stream_context_create(array('http' => array(
 	'method' => 'POST',
-	'header'  => 'Content-type: application/x-www-form-urlencoded',
+	'header'  => "Content-type: application/x-www-form-urlencoded\r\n" .
+			'Authorization: Basic ' . $auth,
 	'content' => $query )));
   $url = "$urlp/api/epg/events/grid";
   $json = file_get_contents($url, false, $ctx);
