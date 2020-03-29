@@ -10,7 +10,8 @@
 	  'http'=>array(
 		'timeout'=>3,
 		'user_agent'=>"TVHadmin",
-		'header'=>"'Content-Type: image/png'"
+		'header'=>"Content-Type: image/png\r\n" .
+			'Authorization: Basic ' . $auth
 	  )));
 	$img = file_get_contents($url, false, $ctx);
 	if ($img) {
