@@ -37,13 +37,13 @@
 	    globalResizeTimer = window.setTimeout(drawCursor(), 200);
 	};
 	function drawCursor() {
-	    var elem = document.getElementById('schedules');
+	    var elem = document.getElementById('timeline');
 	    if(elem) {
 		var rect = elem.getBoundingClientRect();
 		var cursor = document.getElementById('timenow');
-		cursor.style.top = (rect.top+22) + 'px';
-		cursor.style.height = (rect.height-22) + 'px';
-		var pos = rect.left + 0.98*$now*rect.width;
+		cursor.style.top = (rect.top+30) + 'px';
+		cursor.style.height = (rect.height-30) + 'px';
+		var pos = rect.left + $ch_width + 0.98*$now*rect.width;
 		cursor.style.left = pos + 'px';
 	    }
 	}
@@ -92,8 +92,10 @@
   <div id='wrapper'>
    <div id='timeline'>
     <table class='list' style='table-layout: fixed;'>
-     <col width={$ch_width}px>
-     <col id='schedules' width=100%>
+     <colgroup>
+      <col style='width:{$ch_width}px'>
+      <col id='schedules'>
+     </colgroup>
      <tr class='newday'>
       <td>$wday</td>
       <td>";
