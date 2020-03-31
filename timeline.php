@@ -43,7 +43,8 @@
 		var cursor = document.getElementById('timenow');
 		cursor.style.top = (rect.top+30) + 'px';
 		cursor.style.height = (rect.height-30) + 'px';
-		var pos = rect.left + $ch_width + 0.98*$now*rect.width;
+		var pos = rect.left + 6 + $ch_width
+			+ 0.98*$now*(rect.width-$ch_width-6);
 		cursor.style.left = pos + 'px';
 	    }
 	}
