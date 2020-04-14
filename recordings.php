@@ -148,7 +148,15 @@ good:
 	  <td class='col_date'>$date
 		<span class='thinonly'><br />Time: $time<br />Length: $length</span></td>
 	  <td class='wideonly col_time'>$time</td>
-	  <td class='col_channel'>{$t['channelname']}</td>
+	  <td class='col_channel'>
+	    <div class='channel_name'>";
+		if (isset($settings['ICONS']) && isset($t['channel_icon'])) {
+		  print "<img src=\"icon.php?image={$t['channel_icon']}\" height='48' width='80' alt=\"{$t['channelname']}\" title=\"{$t['channelname']}\">";
+		}
+		else print "{$t['channelname']}";
+		echo "
+	    </div>
+	  </td>
 	  <td class='wideonly col_length'>$length</td>
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
 	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&SORT=$sort'><img src='images\delete.png' title='Delete Recording'></a></td>";

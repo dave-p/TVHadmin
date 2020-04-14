@@ -252,7 +252,7 @@
 		</td>
 	    </tr>
            <tr class='row_odd' title='Show icon instead of channel name. Needs picons installed and imagecache enabled on TVHeadend'>
-                <td class='col_label'><h5>Show channel icons in What's On Now:</h5></td>
+                <td class='col_label'><h5>Show channel icons in What's On Now & Recordings:</h5></td>
                 <td class='col_value'><input type='checkbox' name='ICONS'";
         if (isset($settings['ICONS'])) {
           echo " checked";
