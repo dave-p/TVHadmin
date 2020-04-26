@@ -198,7 +198,7 @@ function sort_recordings_title($a, $b) {
     }
   }
   $n = min(strlen($x), strlen($y));
-  $ret = strncmp($x, $y, $n);
+  $ret = strncasecmp($x, $y, $n);
   if($ret == 0) return ($a["start"] - $b["start"]);
   return $ret;
 }
