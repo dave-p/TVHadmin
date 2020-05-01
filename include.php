@@ -208,14 +208,16 @@ function sort_recordings_title($a, $b) {
 function sort_links($a, $b) {
   $x = $a["title"];
   $y = $b["title"];
-  if(strncmp($x, 'New: ', 5) == 0) {
-    $x = substr($x, 5);
+  if(strncmp($x, 'New:', 4) == 0) {
+    if($x[4] == ' ') $x = substr($x, 5);
+    else $x = substr($x, 4);
     if(substr($x, -3) == '...') {
       $x = substr($x, 0, -3);
     }
   }
-  if(strncmp($y, 'New: ', 5) == 0) {
-    $y = substr($y, 5);
+  if(strncmp($y, 'New:', 4) == 0) {
+    if($y[4] == ' ') $y = substr($x, 5);
+    else $y = substr($y, 4);
     if(substr($y, -3) == '...') {
       $y = substr($y, 0, -3);
     }
