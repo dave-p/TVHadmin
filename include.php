@@ -216,7 +216,7 @@ function sort_links($a, $b) {
     }
   }
   if(strncmp($y, 'New:', 4) == 0) {
-    if($y[4] == ' ') $y = substr($x, 5);
+    if($y[4] == ' ') $y = substr($y, 5);
     else $y = substr($y, 4);
     if(substr($y, -3) == '...') {
       $y = substr($y, 0, -3);
