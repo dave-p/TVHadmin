@@ -81,6 +81,7 @@ window.addEventListener('load',function(event) {
   }
 
   $info = get_server_info();
+  $currentload = simplexml_load_file("$urlp/status.xml");
   echo "
     <div id='layout'>
       <div id='banner'>
@@ -100,6 +101,32 @@ window.addEventListener('load',function(event) {
 	    <td class='col_channel'>Software Version</td>
 	    <td class='col_name'>{$info['sw_version']}</td>
 	  </tr>
+  ";
+  if ($currentload !== FALSE) {
+    $load = preg_replace('/(\d{2})\d*/', '$1', $currentload->systemload);
+    if (isset($currentload->recordings->recording->next)) {
+      $recstatus = 'Next: ' . strftime('%F %R', time()+60*$currentload->recordings->recording->next);
+    }
+    else {
+      $recstatus = '"' . $currentload->recordings->recording->title . '" Ends ' .
+		$currentload->recordings->recording->stop->time;
+    }
+    echo "
+	  <tr class='row_odd'>
+	    <td class='col_channel'>System Load</td>
+	    <td class='col_name'>$load</td>
+	  </tr>
+	  <tr class='row_even'>
+	    <td class='col_channel'>Recording</td>
+	    <td class='col_name'>$recstatus</td>
+	  </tr>
+	  <tr class='row_odd'>
+	    <td class='col_channel'>Subscriptions</td>
+	    <td class='col_name'>{$currentload->subscriptions}</td>
+	  </tr>
+    ";
+  }
+  echo "
 	</table>
   ";
 	$stats = get_input_status();
