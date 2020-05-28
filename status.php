@@ -104,6 +104,7 @@ window.addEventListener('load',function(event) {
   ";
   if ($currentload !== FALSE) {
     $load = preg_replace('/(\d{2})\d*/', '$1', $currentload->systemload);
+    $load = preg_replace('/,/', ', ', $load);
     if (isset($currentload->recordings->recording->next)) {
       $recstatus = 'Next: ' . strftime('%F %R', time()+60*$currentload->recordings->recording->next);
     }
