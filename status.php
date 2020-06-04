@@ -149,6 +149,9 @@ window.addEventListener('load',function(event) {
 		  break;
 		case 2:
 		  $s['signal'] = round($s['signal'] / 1000, 1) . ' dBm';
+		  break;
+		default:
+		  $s['signal'] = 0;
 	    }
 	    switch($s['snr_scale']) {
 		case 1:
@@ -156,6 +159,9 @@ window.addEventListener('load',function(event) {
                   break;
 		case 2:
 		  $s['snr'] = round($s['snr'] / 1000, 1) . ' dB';
+		  break;
+		default:
+		  $s['snr'] = 0;
 	    }    
 	    foreach($s as $key => $val) {
 		if (isset($ignore[$key])) continue;
