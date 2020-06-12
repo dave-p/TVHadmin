@@ -14,6 +14,8 @@
 	}
 	$wday = date('l, j M Y', time());
 	$time = date('H:i', time());
+	if (isset($settings['REFR'])) $timestr = "";
+	else $timestr = "at $time";
 	$media = array();
 	if (array_key_exists('NOANON', $settings)) $view_url = "http://$user:$pass@$ip";
 	else $view_url = $urlp;
@@ -21,19 +23,28 @@
 	else $lcn = 0;
 
 	echo "
-	<script type='text/javascript'>
-	function formSubmit()
-	{
-	document.media.submit();
-	}
-	</script>
+<script type='text/javascript'>
+  function formSubmit() {
+    document.media.submit();
+  }";
+	if (isset($settings['REFR'])) echo "
+  window.onload = function() {
+    setTimeout(function() {
+      location.reload(true)
+    }, 60000);
+  };
+	";
+	echo "
+</script>
  <div id='layout'>
   <div id='banner'>
    <form name='media' method='GET' action='now.php'>
     <input type='hidden' name='update' value='1'>
     <table>
      <tr>
-      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>What's on at $time</h1></td>
+      <td class='col_title'>
+	<div id='mobmenu'>&#9776;</div> <h1>What's On $timestr</h1>
+      </td>
       <td>";
 	foreach ($tag as $v=>$t) {
 	  $tt = urlencode($t);

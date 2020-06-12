@@ -28,30 +28,38 @@
 		$ch_width = 120;
 	}
 	echo "
-	<script type='text/javascript'>
-	window.onload = drawCursor;
-
-	var globalResizeTimer = null;
-	window.onresize = function() {
-	    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
-	    globalResizeTimer = window.setTimeout(drawCursor(), 200);
-	};
-	function drawCursor() {
-	    var elem = document.getElementById('timeline');
-	    if(elem) {
-		var rect = elem.getBoundingClientRect();
-		var cursor = document.getElementById('timenow');
-		cursor.style.top = (rect.top+30) + 'px';
-		cursor.style.height = (rect.height-30) + 'px';
-		var pos = rect.left + 6 + $ch_width
-			+ 0.98*$now*(rect.width-$ch_width-6);
-		cursor.style.left = pos + 'px';
-	    }
-	}
-	function formSubmit() {
-	    document.media.submit();
-	}
-	</script>
+<script type='text/javascript'>
+  window.onload = function() {
+	";
+	if (isset($settings['REFR'])) echo " 
+    setTimeout(function() {
+      location.reload()
+    }, 60000);
+	";
+	echo "
+    drawCursor();
+  };
+  var globalResizeTimer = null;
+  window.onresize = function() {
+    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
+    globalResizeTimer = window.setTimeout(drawCursor(), 200);
+  };
+  function drawCursor() {
+    var elem = document.getElementById('timeline');
+    if(elem) {
+	var rect = elem.getBoundingClientRect();
+	var cursor = document.getElementById('timenow');
+	cursor.style.top = (rect.top+30) + 'px';
+	cursor.style.height = (rect.height-30) + 'px';
+	var pos = rect.left + 6 + $ch_width
+		+ 0.98*$now*(rect.width-$ch_width-6);
+	cursor.style.left = pos + 'px';
+    }
+  }
+  function formSubmit() {
+    document.media.submit();
+  }
+</script>
  <div id='layout'>
   <div id='banner'>
    <form name='media' method='GET' action='timeline.php'>

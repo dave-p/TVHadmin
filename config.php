@@ -242,7 +242,16 @@
 		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
 		</td>
 	    </tr>
-	    <tr class='row_even' title='Log in to TVheadend when viewing recordings or live TV through TVHadmin. Not needed if you have an anonymous (&apos;*&apos;) user'>
+	    <tr class='row_even' title='Refresh the Whats On Now and Timeline screens every minute'>
+		<td class='col_label'><h5>Refresh Whats On Now and Timeline screens:</h5></td>
+		<td class='col_value'><input type='checkbox' name='REFR'";
+	if (isset($settings['REFR'])) {
+	  echo " checked";
+	}
+	echo ">
+		</td>
+	    </tr>
+	    <tr class='row_odd' title='Log in to TVheadend when viewing recordings or live TV through TVHadmin. Not needed if you have an anonymous (&apos;*&apos;) user'>
 		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
 		<td class='col_value'><input type='checkbox' name='NOANON'";
         if (isset($settings['NOANON'])) {
@@ -251,7 +260,7 @@
         echo ">
 		</td>
 	    </tr>
-           <tr class='row_odd' title='Show icon instead of channel name. Needs picons installed and imagecache enabled on TVHeadend'>
+           <tr class='row_even' title='Show icon instead of channel name. Needs picons installed and imagecache enabled on TVHeadend'>
                 <td class='col_label'><h5>Show channel icons in What's On Now & Recordings:</h5></td>
                 <td class='col_value'><input type='checkbox' name='ICONS'";
         if (isset($settings['ICONS'])) {
@@ -260,7 +269,7 @@
         echo ">
                 </td>
             </tr>
-	    <tr class='row_even' title='Show timer conflicts and alternative showings. Only works for single tuners on networks using CRIDs (series link)'>
+	    <tr class='row_odd' title='Show timer conflicts and alternative showings. Only works for single tuners on networks using CRIDs (series link)'>
 		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
 		<td class='col_value'><input type='checkbox' name='CLASHDET'";
 	if (isset($settings['CLASHDET'])) {
@@ -269,7 +278,7 @@
 	echo ">
 	      </td>
 	    </tr>
-	    <tr class='row_odd' title='Time period for the Timeline screen'>
+	    <tr class='row_even' title='Time period for the Timeline screen'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
 		<td class='col_value'>
 		    <select name='TIMESPAN'>";
@@ -287,7 +296,7 @@
 	    <tr class='heading'>
 		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
-	    <tr class='row_even'>
+	    <tr class='row_odd'>
 		<td class='col_channels'>
 		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();
