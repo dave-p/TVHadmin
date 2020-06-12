@@ -108,10 +108,11 @@ window.addEventListener('load',function(event) {
     if (isset($currentload->recordings->recording->next)) {
       $recstatus = 'Next: ' . strftime('%F %R', time()+60*$currentload->recordings->recording->next);
     }
-    else {
+    else if (isset($currentload->recordings->recording->title)) {
       $recstatus = '"' . $currentload->recordings->recording->title . '" Ends ' .
 		$currentload->recordings->recording->stop->time;
     }
+    else $recstatus = "";
     echo "
 	  <tr class='row_odd'>
 	    <td class='col_channel'>System Load</td>
