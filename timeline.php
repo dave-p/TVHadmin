@@ -44,8 +44,9 @@
     if(elem) {
 	var rect = elem.getBoundingClientRect();
 	var cursor = document.getElementById('timenow');
-	cursor.style.top = (Math.max(27,30+rect.top)) + 'px';
-	cursor.style.height = rect.height + 'px';
+	var start = Math.max(0,6+rect.top);
+	cursor.style.top = (start+27) + 'px';
+	cursor.style.height = (rect.height-start) + 'px';
 	var now = Date.now()/1000;
 	if(now - $tstart > 1800) location.reload(true);
 	var delta = (now%1800)/$textent;
