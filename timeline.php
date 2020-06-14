@@ -18,7 +18,6 @@
 	$toffset = $utime % 1800;	//secs from start of chart to now
 	$tstart = $utime - $toffset;
 	$tend = $tstart + $textent;
-	$now = ($utime - $tstart) / $textent;
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
 		$lcn = 1;
 		$ch_width = 145;
@@ -31,11 +30,7 @@
 <script type='text/javascript'>
   window.onload = function() {
 	";
-	if (isset($settings['REFR'])) echo " 
-    setTimeout(function() {
-      location.reload()
-    }, 60000);
-	";
+	if (isset($settings['REFR'])) echo "setInterval(drawCursor, 60000); ";
 	echo "
     drawCursor();
   };
@@ -49,10 +44,13 @@
     if(elem) {
 	var rect = elem.getBoundingClientRect();
 	var cursor = document.getElementById('timenow');
-	cursor.style.top = (rect.top+30) + 'px';
-	cursor.style.height = (rect.height-30) + 'px';
+	cursor.style.top = (Math.max(27,30+rect.top)) + 'px';
+	cursor.style.height = rect.height + 'px';
+	var now = Date.now()/1000;
+	if(now - $tstart > 1800) location.reload(true);
+	var delta = (now%1800)/$textent;
 	var pos = rect.left + 6 + $ch_width
-		+ 0.98*$now*(rect.width-$ch_width-6);
+		+ 0.98*delta*(rect.width-$ch_width-6);
 	cursor.style.left = pos + 'px';
     }
   }
