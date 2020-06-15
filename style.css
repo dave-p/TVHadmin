@@ -200,12 +200,15 @@ a:hover {
 	display: block;
 }
 #whatson table.percent td {
-	height: 8px;
+	height: 16px;
 }
 #whatson table.percent {
-	height: 8px;
 	width: 90px;
 	border: 1px solid #6d96a9;
+        border-collapse: collapse;
+        border-spacing: 0;
+        padding: 0;
+
 }
 #whatson table.percent .elapsed {
 	background-color: #6d96a9;
