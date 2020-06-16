@@ -47,14 +47,7 @@
 		else $rcnt[$autorec] = 1;
 	    }
 	}
-	$i = 0;
 	foreach($links as $l) {
-	    if ($i % 2) {
-		echo "<tr class='row_odd'>";
-	    }
-	    else {
-		echo "<tr class='row_even'>";
-	    }
 	    $channelname = $cname[$l["channel"]];
 	    if (isset($rcnt[$l['uuid']])) $recs = $rcnt[$l['uuid']];
 	    else $recs = 0;
@@ -63,6 +56,7 @@
 	    $title = stripslashes($l['title']);
 	    $crid = substr(strstr($l['serieslink'], '//'), 2);
 	    echo "
+      <tr class='row_alt'>
 	<td class='col_value'>$timers</td>
 	<td class='col_value'>$recs</td>
 	<td class='col_channel'>$channelname</td>
@@ -70,7 +64,6 @@
 	<td class='wideonly col_channel'>$crid</td>
 	<td class='col_delete'><a href='links.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
       </tr>\n";
-	    $i++;
 	}
  ?>
      </table>

@@ -63,26 +63,26 @@
 	    <tr class="heading">
 		<td colspan="2"><h2>TVHeadend Server</h2></td>
 	    </tr>
-	    <tr class="row_odd" title="Name of a TVheadend user with admin privilege">
+	    <tr class="row_alt" title="Name of a TVheadend user with admin privilege">
 		<td class="col_label"><h5>Username:</h5></td>
 <?php
 		echo "<td class='col_value'><input type='text' name='USER' value='$user' size='16'>";
 ?>
 		</td>
 	    </tr>
-	    <tr class="row_even" title="Password of the TVheadend user">
+	    <tr class="row_alt" title="Password of the TVheadend user">
 		<td class="col_label"><h5>Password:</h5></td>
 <?php
 		echo "<td class='col_value'><input type='password' name='PASS' value='$pass' size='16'></td>";
 ?>
 	    </tr>
-	    <tr class="row_odd" title="IP address & port of the TVheadend server, eg 192.168.0.1:9981">
+	    <tr class="row_alt" title="IP address & port of the TVheadend server, eg 192.168.0.1:9981">
 		<td class="col_label"><h5>IP Address:port:</h5></td>
 <?php
 		echo "<td class='col_value'><input type='text' name='IP' value='$ip' size='24'></td>";
 ?>
 	    </tr>
-	    <tr class='row_even' title="TVheadend profile to use for recordings. This line is blank if there is only one profile">
+	    <tr class='row_alt' title="TVheadend profile to use for recordings. This line is blank if there is only one profile">
 <?php
 	$prof = get_profiles();
 	if (isset($prof)) {
@@ -109,7 +109,7 @@
 	    <tr class='heading'>
 		<td colspan='2'><h2>Preferences</h2></td>
 	    </tr>
-	    <tr class='row_odd' title='Time after which entries appear on tomorrow&apos;s EPG. Useful if you watch TV after midnight'>
+	    <tr class='row_alt' title='Time after which entries appear on tomorrow&apos;s EPG. Useful if you watch TV after midnight'>
 		<td class='col_label'><h5>EPG Day starts at:</h5></td>
 		<td class='col_value'>
 		    <select name='EPGSTART'>";
@@ -121,7 +121,7 @@
 		  echo "</select>
 		</td>
 	    </tr>
-	    <tr class='row_even' title='Screen shown when entering TVHadmin'>
+	    <tr class='row_alt' title='Screen shown when entering TVHadmin'>
 		<td class='col_label'><h5>Home Page:</h5></td>
 		<td class='col_value'>
 		    <select name='HOME'>";
@@ -133,7 +133,7 @@
 		echo "</select>
 		</td>
 	    </tr>
-	    <tr class='row_odd' title='Sort recordings by date or by title (ignoring &apos;New:&apos;)'>
+	    <tr class='row_alt' title='Sort recordings by date or by title (ignoring &apos;New:&apos;)'>
 		<td class='col_label'><h5>Recordings Sort Order:</h5></td>
 		<td class='col_value'>";
 	if (!isset($settings['SORT'])) $settings['SORT'] = 0;
@@ -146,7 +146,7 @@
 		  echo "
 		</td>
 	    </tr>
-	    <tr class='row_even' title='Sort channels by name or Logical Channel Number'>
+	    <tr class='row_alt' title='Sort channels by name or Logical Channel Number'>
 		<td class='col_label'><h5>Channels Sort Order:</h5></td>
 		<td class='col_value'>";
 	if (!isset($settings['CSORT'])) $settings['CSORT'] = 0;
@@ -159,7 +159,7 @@
                   echo "
                 </td>
             </tr>
-	    <tr class='row_odd' title='Which TVH tags are to be used for filtering. Click &apos;Save&apos; after changing this selection to update the other preferences'>
+	    <tr class='row_alt' title='Which TVH tags are to be used for filtering. Click &apos;Save&apos; after changing this selection to update the other preferences'>
 		<td class='col_label'><h5>Media Tags to use for selection:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
@@ -173,7 +173,7 @@
 	echo "
 		</td>
 	    </tr>
-	    <tr class='row_even' title='Default filter setting for the What&apos;s On Now screen'>
+	    <tr class='row_alt' title='Default filter setting for the What&apos;s On Now screen'>
 		<td class='col_label'><h5>Show in What's On Now:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
@@ -190,7 +190,7 @@
 	echo "
 		</td>
 	    </tr>
-            <tr class='row_odd' title='Default filter setting for the Timeline screen'>
+            <tr class='row_alt' title='Default filter setting for the Timeline screen'>
                 <td class='col_label'><h5>Show in Timeline:</h5></td>
                 <td class='col_value'>";
         foreach ($tag as $v=>$t) {
@@ -207,7 +207,7 @@
         echo "
                 </td>
             </tr>
-	    <tr class='row_even' title='Default filter setting for Recordings'>
+	    <tr class='row_alt' title='Default filter setting for Recordings'>
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
 	foreach ($tag as $v=>$t) {
@@ -233,7 +233,7 @@
 	  $c1 = ''; $c2 = 'checked';
 	}
 	echo "
-	    <tr class='row_odd' title='Source of description for the EPG and recordings screens. The correct setting depends on your EPG source'>
+	    <tr class='row_alt' title='Source of description for the EPG and recordings screens. The correct setting depends on your EPG source'>
 		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
 		<td class='col_value'>
 		    <label for='summ'>Summary:</label>
@@ -242,7 +242,7 @@
 		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
 		</td>
 	    </tr>
-	    <tr class='row_even' title='Refresh the Whats On Now and Timeline screens every minute'>
+	    <tr class='row_alt' title='Refresh the Whats On Now and Timeline screens every minute'>
 		<td class='col_label'><h5>Refresh Whats On Now and Timeline screens:</h5></td>
 		<td class='col_value'><input type='checkbox' name='REFR'";
 	if (isset($settings['REFR'])) {
@@ -251,7 +251,7 @@
 	echo ">
 		</td>
 	    </tr>
-	    <tr class='row_odd' title='Log in to TVheadend when viewing recordings or live TV through TVHadmin. Not needed if you have an anonymous (&apos;*&apos;) user'>
+	    <tr class='row_alt' title='Log in to TVheadend when viewing recordings or live TV through TVHadmin. Not needed if you have an anonymous (&apos;*&apos;) user'>
 		<td class='col_label'><h5>Send user/pass when Viewing:</h5></td>
 		<td class='col_value'><input type='checkbox' name='NOANON'";
         if (isset($settings['NOANON'])) {
@@ -260,7 +260,7 @@
         echo ">
 		</td>
 	    </tr>
-           <tr class='row_even' title='Show icon instead of channel name. Needs picons installed and imagecache enabled on TVHeadend'>
+           <tr class='row_alt' title='Show icon instead of channel name. Needs picons installed and imagecache enabled on TVHeadend'>
                 <td class='col_label'><h5>Show channel icons in What's On Now & Recordings:</h5></td>
                 <td class='col_value'><input type='checkbox' name='ICONS'";
         if (isset($settings['ICONS'])) {
@@ -269,7 +269,7 @@
         echo ">
                 </td>
             </tr>
-	    <tr class='row_odd' title='Show timer conflicts and alternative showings. Only works for single tuners on networks using CRIDs (series link)'>
+	    <tr class='row_alt' title='Show timer conflicts and alternative showings. Only works for single tuners on networks using CRIDs (series link)'>
 		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
 		<td class='col_value'><input type='checkbox' name='CLASHDET'";
 	if (isset($settings['CLASHDET'])) {
@@ -278,7 +278,7 @@
 	echo ">
 	      </td>
 	    </tr>
-	    <tr class='row_even' title='Time period for the Timeline screen'>
+	    <tr class='row_alt' title='Time period for the Timeline screen'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
 		<td class='col_value'>
 		    <select name='TIMESPAN'>";
@@ -296,7 +296,7 @@
 	    <tr class='heading'>
 		<td colspan='3'><h2>Favourite Channels</h2></td>
 	    </tr>
-	    <tr class='row_odd'>
+	    <tr class='row_alt'>
 		<td class='col_channels'>
 		    <select name='all_channels' size='8' multiple='multiple' class='channels'>";
 	    $chans = get_channels();

@@ -100,15 +100,13 @@ a:hover {
 #rec_list .col_name {
 	font-weight: bold;
 }
-.row_odd td,
-.row_even td,
+.row_alt td,
 .row_error td,
 .row_inprogress td,
 .heading {
 	height: 17px;
 }
-.list .row_even:hover,
-.list .row_odd:hover {
+.list .row_alt:hover {
 	background-color: #8cc1da;
 }
 .list .row_error:hover {
@@ -129,10 +127,7 @@ a:hover {
 	white-space: normal;
 }
 
-.row_even {
-	background-color: #ffffff;
-}
-.row_odd {
+.row_alt:nth-child(even) {
 	background-color: #dee6ee;
 }
 .row_error {

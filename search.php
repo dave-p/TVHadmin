@@ -41,7 +41,6 @@
 	  </tr>
 	</table>
 	<table class='list'>";
-		$i = 0;
 		$last_prog_date = " ";
 		$results = search_epg("", $find);
 		foreach ($results as $r) {
@@ -51,13 +50,8 @@
 				echo "<tr class='newday'><td colspan='5'><span class='date_long'>$d</span></td></tr>";	
 				$last_prog_date = $d;
 			}
-			if ($i % 2) {
-				echo "<tr class='row_odd'>";
-			}
-			else {
-				echo "<tr class='row_even'>";
-			}
 			echo "
+	<tr class='row_alt'>
 	  <td class='col_duration'>
 	    <span class='time_duration'><span class='time_start'>$t</span></span></td>
 	  <td class='col_channel'>
@@ -77,7 +71,6 @@
 			else {
 				echo "<td></td></tr>";
 			}
-			$i++;
 		}
 		echo "</table>";
 	}

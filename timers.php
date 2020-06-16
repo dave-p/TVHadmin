@@ -39,7 +39,6 @@
 	</tr>
   ";
 	$autorecs = get_autorecs();
-	$i = 0;
 	$channels = array();
 	$clashes = array();
 	foreach($timers as $t) {
@@ -48,12 +47,7 @@
 	    $stop = strftime("%H:%M", $t["stop_real"]);
 	    $date = strftime("%a %e/%m", $t["start_real"]);
 	    $subtitle = $t["disp_extratext"];
-	    if ($i % 2) {
-		echo "<tr class='row_odd' title=\"$subtitle\">";
-	    }
-	    else {
-		echo "<tr class='row_even' title=\"$subtitle\">";
-	    }
+	    echo "<tr class='row_alt' title='$subtitle'>";
 	    if ($t["start_real"] < $now) {
 		echo "<td class='col_info'><img src='images/rec.png'></td>";
 	    }
@@ -92,7 +86,6 @@
 	<a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a>
       </td>
     </tr>\n";
-	    $i++;
 	}
 	echo "</table>\n";
 	foreach ($clashes as $c) {

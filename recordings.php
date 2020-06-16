@@ -96,7 +96,6 @@
 	    </tr>
   ";
         $recordings = get_recordings($sort);
-	$i = 0;
 	foreach($recordings as $t) {
 		if ($t["sched_status"] == "scheduled") continue;
 		if (!isset($media["All"])) {
@@ -117,12 +116,7 @@ good:
 		if ($t['sched_status'] == 'completed') {
 			$ok = 1;
 			if ($t['status'] == 'Completed OK') {
-				if ($i % 2) {
-					echo "<tr class='row_odd'>";
-				}
-				else {
-					echo "<tr class='row_even'>";
-				}
+				echo "<tr class='row_alt'>";
 			}
 			else {
 				echo "<tr class='row_error'>";
@@ -164,7 +158,6 @@ good:
 	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images\play.png' title='Play'></a></td>";
 		else echo "<td></td>";
 		echo "</tr>";
-		$i++;
 	}
 ?>
        </table>

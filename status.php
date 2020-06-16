@@ -97,7 +97,7 @@ window.addEventListener('load',function(event) {
 	  <tr class='heading'>
 	    <td class='col_name' colspan=2><h2>System Information</h2></td>
 	  </tr>
-	  <tr class='row_even'>
+	  <tr class='row_alt'>
 	    <td class='col_channel'>Software Version</td>
 	    <td class='col_name'>{$info['sw_version']}</td>
 	  </tr>
@@ -114,15 +114,15 @@ window.addEventListener('load',function(event) {
     }
     else $recstatus = "";
     echo "
-	  <tr class='row_odd'>
+	  <tr class='row_alt'>
 	    <td class='col_channel'>System Load</td>
 	    <td class='col_name'>$load</td>
 	  </tr>
-	  <tr class='row_even'>
+	  <tr class='row_alt'>
 	    <td class='col_channel'>Recording</td>
 	    <td class='col_name'>$recstatus</td>
 	  </tr>
-	  <tr class='row_odd'>
+	  <tr class='row_alt'>
 	    <td class='col_channel'>Subscriptions</td>
 	    <td class='col_name'>{$currentload->subscriptions}</td>
 	  </tr>
@@ -133,7 +133,6 @@ window.addEventListener('load',function(event) {
   ";
 	$stats = get_input_status();
 	foreach($stats as $s) {
-	  $i = 0;
 	  echo "
       <table class='list'>
 	<tr class='heading'>
@@ -166,17 +165,11 @@ window.addEventListener('load',function(event) {
 	    }    
 	    foreach($s as $key => $val) {
 		if (isset($ignore[$key])) continue;
-		if ($i % 2) {
-		    echo "<tr class='row_odd'>";
-		}
-		else {
-		    echo "<tr class='row_even'>";
-		}
-	    echo "
+		echo "
+      <tr class='row_alt'>
 	<td class='col_channel'>{$params[$key]}</td>
 	<td class='col_name'>$val</td>
       </tr>\n";
-	    $i++;
 	    }
 	    echo "</table>";
 	}

@@ -80,17 +80,10 @@
 	  echo "</td></tr>";
 	  $progs = get_epg($c, $when, $next);
 
-	  $i = 0;
 	  foreach($progs as $p) {
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
-	    if ($i % 2) {
-	      echo "<tr class='row_odd' id='$id'>";
-	    }
-	    else {
-	      echo "<tr class='row_even' id='$id'>";
-	    }
-	    print("<td class='col_duration'>$start - $end</td>");
+	    echo "<tr class='row_alt' id='$id'><td class='col_duration'>$start - $end</td>";
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
 	    if (!isset($p['dvrState']) || ($p['dvrState'] != 'scheduled' && $p['dvrState'] != 'recording')) {
 	      $evt = $p["eventId"];
@@ -105,7 +98,6 @@
 	    else {
 	      echo "<td></td></tr>";
 	    }
-	    $i++;
 	    $id++;
 	  }
 	  echo "</table>";

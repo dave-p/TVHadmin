@@ -82,7 +82,6 @@
      <tr class='newday'>
       <td colspan='5'><span class='date_long'>$wday</span></td>
      </tr>";
-	$i = 0;
 	foreach($chans as $c) {
 		if (!isset($media["All"])) {
 			foreach($c["tags"] as $t) {
@@ -91,8 +90,6 @@
 			continue;
 		}
 good:
-		if ($i % 2) echo "<tr class=\"row_odd\">";
-		else echo "<tr class=\"row_even\">";
 		$e = get_epg_now($c["uuid"]);
 		$p = &$e[0];
 		if ($p) {
@@ -106,6 +103,7 @@ good:
 			if (isset($p[$settings['SUMM']])) $summ = $p[$settings['SUMM']];
 			else $summ = '';
 			echo "
+    <tr class='row_alt'>
       <td class='col_duration'>$start - $end
        <table class='percent' title='$don min&nbsp;/&nbsp;$dur min'>
 	<tr>
@@ -150,7 +148,6 @@ good:
 	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
       </td>
      </tr>";
-		$i++;
 	}
 	echo "</table></div>\n";
  ?>
