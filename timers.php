@@ -47,7 +47,7 @@
 	    $stop = strftime("%H:%M", $t["stop_real"]);
 	    $date = strftime("%a %e/%m", $t["start_real"]);
 	    $subtitle = $t["disp_extratext"];
-	    echo "<tr class='row_alt' title='$subtitle'>";
+	    echo "<tr class='row_alt' title=\"$subtitle\">";
 	    if ($t["start_real"] < $now) {
 		echo "<td class='col_info'><img src='images/rec.png'></td>";
 	    }
