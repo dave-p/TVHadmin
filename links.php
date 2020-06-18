@@ -62,7 +62,7 @@
 	<td class='col_channel'>$channelname</td>
 	<td class='col_name'>$title</td>
 	<td class='wideonly col_channel'>$crid</td>
-	<td class='col_delete'><a href='links.php?uuid={$l['uuid']}'><img src='images\delete.png'></a></td>
+	<td class='col_delete'><a href='links.php?uuid={$l['uuid']}'><img src='images/delete.png'></a></td>
       </tr>\n";
 	}
  ?>

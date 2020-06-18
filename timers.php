@@ -83,7 +83,7 @@
             echo "
       <td class='col_channel'>$type</td>
       <td class='col_delete'>
-	<a href='timers.php?uuid={$t['uuid']}'><img src='images\delete.png' title='Delete Timer'></a>
+	<a href='timers.php?uuid={$t['uuid']}'><img src='images/delete.png' title='Delete Timer'></a>
       </td>
     </tr>\n";
 	}

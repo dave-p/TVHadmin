@@ -27,7 +27,7 @@
 		$ch_width = 120;
 	}
 	echo "
-<script type='text/javascript'>
+<script>
   window.onload = function() {
 	";
 	if (isset($settings['REFR'])) echo "setInterval(drawCursor, 60000); ";
@@ -172,7 +172,7 @@ good:
 	echo "
     </table>
     <span id='timenow'>
-     <img src='images/spacer.gif' border='0' width='1' height='1'>
+     <img src='images/spacer.gif' width='1' height='1' alt=''>
     </span>
     </div>\n";
  ?>

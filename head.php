@@ -24,7 +24,7 @@
 <div id="container">
   <div id="navigation">
     <div class="logo">
-      <img src="images/logo.png" alt="TVHeadend Logo" width="150" border="0">
+      <img src="images/logo.png" alt="TVHeadend Logo" width="150">
     </div>
     <div class="nav_bar">
 <?php

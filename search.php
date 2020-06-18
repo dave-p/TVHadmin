@@ -2,7 +2,7 @@
   $page_title = 'Search Results';
   include_once './head.php';
 ?>
-	<script type="text/javascript">
+	<script>
 	function formSubmit()
 	{
 	document.forms.telly.submit()

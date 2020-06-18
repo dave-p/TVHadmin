@@ -89,7 +89,7 @@
 	  if(count($prof) == 1) {
 		$config_uuid = $prof[0]['uuid'];
 		echo "<td><input type='hidden' name='PROFILE' value=''>";
-		echo "<input type='hidden' name='UUID' value='$config_uuid'></td>";
+		echo "<input type='hidden' name='UUID' value='$config_uuid'></td><td></td>";
 	  }
 	  else {
 		echo "<td class='col_label'><h5>Recording Profile:</h5></td>";
@@ -306,7 +306,7 @@
 	    }
 		    echo "</select>
 		</td>
-		<td align='center'>
+		<td style='text-align: center;'>
 		    <input type='button' onClick='one2two()' value='&gt;&gt;&gt;&gt;&gt;'><br>
 		    <input type='button' onClick='two2one()' value='&lt;&lt;&lt;&lt;&lt;'>
 		</td>

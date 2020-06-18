@@ -2,7 +2,7 @@
   $page_title = 'Channels';
   include_once './head.php';
 ?>
-	<script type="text/javascript">
+	<script>
 	function formSubmit()
 	{
 	document.whatandwhen.submit();

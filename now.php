@@ -23,7 +23,7 @@
 	else $lcn = 0;
 
 	echo "
-<script type='text/javascript'>
+<script>
   function formSubmit() {
     document.media.submit();
   }";
@@ -107,7 +107,7 @@ good:
       <td class='col_duration'>$start - $end
        <table class='percent' title='$don min&nbsp;/&nbsp;$dur min'>
 	<tr>
-	 <td class='elapsed' width='$pc%'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
+	 <td class='elapsed' style='width: $pc%;'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
 	 <td class='remaining'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
 	</tr>
        </table>
@@ -145,7 +145,7 @@ good:
 	echo "
       </td>
       <td class='col_stream'>
-	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images\play.png' title='Play'></a>
+	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><img src='images/play.png' title='Play'></a>
       </td>
      </tr>";
 	}
