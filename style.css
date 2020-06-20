@@ -127,7 +127,7 @@ a:hover {
 	white-space: normal;
 }
 
-.row_alt:nth-child(even) {
+.row_alt:nth-child(odd) {
 	background-color: #dee6ee;
 }
 .row_error {
