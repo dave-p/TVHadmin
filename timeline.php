@@ -111,8 +111,7 @@
 	for($i=0; $i<4; $i++){
 	    $time = date('H:i', $t);
 	    echo "
-	 <div class='elapsed' style='float: left; background-color: {$colours[$i]}; width: 24.5%;'>
-	    <img src='images/spacer.gif' width=1 height=1 alt=''>$time</div>";
+	<div style='float: left; background-color: {$colours[$i]}; width: 24.5%;'>$time</div>";
 	    $t += $textent / 4;
 	}
 	echo "
@@ -150,7 +149,8 @@ good:
 			$spc = (($p['start'] - $tstart) * $wd) / $textent;
 			echo "
 	 <div class='spacer' style='width: $spc%;'>
-	    <img src='images/spacer.gif' width=1 height=1 alt=''></div>";
+	  <img src='images/spacer.gif' width=1 height=1 alt=''>
+	 </div>";
 		    }
 		    $colour = '#b4e29c';
 		}
@@ -160,7 +160,7 @@ good:
 		@$subtitle = $p[$settings['SUMM']];
 		echo "
 	 <div class='item' style='background-color: $colour; width: $pc%;' title=\"$subtitle\">
-	    <img src='images/spacer.gif' width=1 height=1 alt=''>{$p['title']}</div>";
+	    {$p['title']}</div>";
 		$pcount++;
 		$p = &$e[$pcount];
 	    }
