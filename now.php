@@ -113,7 +113,11 @@ good:
        </table>
       </td>";
 		}
-		else echo "<td class='col_duration'></td>";
+		else {
+			echo "
+    <tr class='row_alt'>
+      <td class='col_duration'></td>";
+		}
 		echo "
       <td class='col_channel'>
        <div class='channel_name'>";
