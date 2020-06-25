@@ -26,15 +26,29 @@
 <script>
   function formSubmit() {
     document.media.submit();
-  }";
-	if (isset($settings['REFR'])) echo "
+  }
   window.onload = function() {
-    setTimeout(function() {
-      location.reload(true)
-    }, 60000);
-  };
 	";
+	if (isset($settings['REFR'])) echo "setInterval(updateTimeline, 60000); ";
 	echo "
+    updateTimeline()
+  };
+  function updateTimeline() {
+    var now = Date.now()/1000;
+    const bars = document.querySelectorAll('.percent');
+    for (const bar of bars) {
+      const done = bar.querySelector('.elapsed');
+      var start = parseInt(done.dataset.start);
+      var stop = parseInt(done.dataset.stop);
+      var duration = (stop - start)/60;
+      var elapsed = Math.round((now - start)/60);
+      var pc = 0;
+      if (stop > start) pc = Math.round(100*elapsed/duration);
+      if (pc > 100) location.reload(true);
+      done.style.width = pc + '%';
+      bar.title = elapsed + ' min / ' + duration + ' min';
+    }
+  }
 </script>
  <div id='layout'>
   <div id='banner'>
@@ -95,19 +109,14 @@ good:
 		if ($p) {
 			$start = date('H:i', $p["start"]);
 			$end = date('H:i', $p["stop"]);
-			$duration = $p["stop"] - $p["start"];
-			if($duration > 0) $pc = intval(100*(time() - $p["start"])/$duration);
-			else $pc = 0;
-			$dur = intval($duration/60);
-			$don = intval((time() - $p["start"])/60);
 			if (isset($p[$settings['SUMM']])) $summ = $p[$settings['SUMM']];
 			else $summ = '';
 			echo "
     <tr class='row_alt'>
       <td class='col_duration'>$start - $end
-       <table class='percent' title='$don min&nbsp;/&nbsp;$dur min'>
+       <table class='percent'>
 	<tr>
-	 <td class='elapsed' style='width: $pc%;'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
+	 <td class='elapsed' data-start='{$p["start"]}' data-stop={$p["stop"]}><img src='images/spacer.gif' width=1 height=1 alt=''></td>
 	 <td class='remaining'><img src='images/spacer.gif' width=1 height=1 alt=''></td>
 	</tr>
        </table>

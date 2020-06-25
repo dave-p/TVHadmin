@@ -195,7 +195,8 @@ a:hover {
 	display: block;
 }
 #whatson table.percent td {
-	height: 16px;
+	height: 20px;
+	padding: 0;
 }
 #whatson table.percent {
 	width: 90px;
