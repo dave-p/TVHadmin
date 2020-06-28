@@ -43,7 +43,7 @@
       var duration = (stop - start)/60;
       var elapsed = Math.round((now - start)/60);
       var pc = 0;
-      if (stop > start) pc = Math.round(100*elapsed/duration);
+      if (stop > start) pc = 100*(elapsed+0.1)/duration;
       if (pc > 100) location.reload(true);
       done.style.width = pc + '%';
       bar.title = elapsed + ' min / ' + duration + ' min';
