@@ -136,8 +136,11 @@ window.addEventListener('load',function(event) {
 	  echo "
       <table class='list'>
 	<tr class='heading'>
-	  <td class='col_name' colspan=2> 
-	    <form name='clear' method='POST' action='status.php'><h2>{$s['input']}</h2>
+	  <td class='col_name'>
+	    <h2>{$s['input']}</h2>
+	  </td>
+	  <td class='col_name'>
+	    <form name='clear' method='POST' action='status.php'>
 	      <input type='submit' name='clearcounts' value='Clear Counters'>
 	      <input type='hidden' name='uuid' value='{$s["uuid"]}'>
 	    </form>
