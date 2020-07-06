@@ -145,7 +145,7 @@ good:
 	  <td class='col_channel'>
 	    <div class='channel_name'>";
 		if (isset($settings['ICONS']) && isset($t['channel_icon'])) {
-		  print "<img src=\"icon.php?image={$t['channel_icon']}\" height='48' width='80' alt=\"{$t['channelname']}\" title=\"{$t['channelname']}\">";
+		  print "<img src=\"icon.php?image=$urlp/{$t['channel_icon']}&auth=$auth\" height='48' width='80' alt=\"{$t['channelname']}\" title=\"{$t['channelname']}\">";
 		}
 		else print "{$t['channelname']}";
 		echo "

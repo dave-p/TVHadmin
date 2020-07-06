@@ -131,7 +131,7 @@ good:
       <td class='col_channel'>
        <div class='channel_name'>";
 		if (isset($settings['ICONS']) && isset($c['icon_public_url'])) {
-			print "<img src=\"icon.php?image={$c['icon_public_url']}\" height='48' width='80' alt=\"{$c['name']}\" title=\"{$c['name']}\">";
+			print "<img src=\"icon.php?image=$urlp/{$c['icon_public_url']}&auth=$auth\" height='48' width='80' alt=\"{$c['name']}\" title=\"{$c['name']}\">";
 		}
 		else if ($lcn) print "{$c['number']} {$c['name']}";
 		else print "{$c['name']}";
