@@ -36,20 +36,17 @@
 	      <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Recordings</h1>
 	      </td>
 	      <td>
-		<form name='order' method='GET' action='recordings.php'>";
+		<form name='options' method='GET' action='recordings.php'>";
   foreach ($orders as $key=>$value) {
     echo "<div class='media'><label for='B$key'>$value:</label>";
-    echo "<input type='radio' name='SORT' id='B$key' value='$key' onChange='formSubmit(\"order\")'";
+    echo "<input type='radio' name='SORT' id='B$key' value='$key' onChange='formSubmit(\"options\")'";
     if ($key == $sort) echo " checked></div>";
     else echo "></div>";
   }
   echo "
-		</form>
 	      </td>
 	      <td><span class='wideonly'>
-		<form name='media' method='GET' action='recordings.php'>
 		  <input type='hidden' name='update' value='1'>
-		  <input type='hidden' name='SORT' value='$sort'>
 	      ";
   foreach ($tag as $v=>$t) {
     $tt = urlencode($t);
@@ -57,7 +54,7 @@
       echo "
 	<div class='media'>
 	  <label for='$tt'>$t:</label>
-	  <input type='checkbox' name='$tt' id='$tt' onchange='formSubmit(\"media\")'";
+	  <input type='checkbox' name='$tt' id='$tt' onchange='formSubmit(\"options\")'";
       if (isset($_GET['update'])) {
           if (isset($_GET[$tt])) {
               $media[$t] = 1;
