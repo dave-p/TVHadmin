@@ -3,19 +3,35 @@
   include_once './head.php';
   $timers = get_timers();
   $now = time();
-  if (isset($_GET["uuid"])) {
+  if (isset($_GET["uuid"]) && isset($_GET["func"])) {
     $uuid = $_GET["uuid"];
-    foreach($timers as $key => $v) {
+    foreach($timers as $key => &$v) {
       if ($v['uuid'] == $uuid) {
-	if ($v["start_real"] < $now) $url = "$urlp/api/dvr/entry/stop?uuid=$uuid";
-	else $url = "$urlp/api/dvr/entry/cancel?uuid=$uuid";
-	file_get_contents($url);
-	unset($timers[$key]);
-	break;
+	switch ($_GET["func"]) {
+	  case "delete":
+	    if ($v["start_real"] < $now) $url = "$urlp/api/dvr/entry/stop?uuid=$uuid";
+	    else $url = "$urlp/api/dvr/entry/cancel?uuid=$uuid";
+	    file_get_contents($url);
+	    unset($timers[$key]);
+	    break 2;
+	  case "toggle":
+	    if ($v['enabled'] == 'true') $mode = 'false';
+	    else $mode = 'true';
+	    $data = urlencode("[{\"enabled\": $mode, \"uuid\": \"$uuid\" }]");
+	    $url = "$urlp/api/idnode/save?node=$data";
+	    file_get_contents($url);
+	    $v['enabled'] = $mode;
+	    break 2;
+	}
       }
     }
   }
   echo "
+ <script>
+   function Toggle(uuid) {
+     window.location.href = 'timers.php?uuid='+uuid+'&func=toggle';
+   }
+ </script>
  <div id='layout'>
    <div id='banner'>
      <table>
@@ -35,14 +51,14 @@
 	 <td class='col_stop'><h2>Stop</h2></td> 
 	 <td class='col_name'><h2>Name</h2></td> 
 	 <td class='col_channel'><h2>Mode</h2></td>
-	 <td class=col_delete></td>
+	 <td class='col_delete'><h2>En</h2></td>
+	 <td class='col_delete'></td>
 	</tr>
   ";
 	$autorecs = get_autorecs();
 	$channels = array();
 	$clashes = array();
 	foreach($timers as $t) {
-	    if (!$t["enabled"]) continue;
 	    $start = strftime("%H:%M", $t["start_real"]);
 	    $stop = strftime("%H:%M", $t["stop_real"]);
 	    $date = strftime("%a %e/%m", $t["start_real"]);
@@ -80,10 +96,19 @@
 	    else {
 		$type = "";
 	    }
+	    if ($t["enabled"] == "true") {
+		$en = "checked";
+	    }
+	    else {
+		$en = "";
+	    }
             echo "
       <td class='col_channel'>$type</td>
       <td class='col_delete'>
-	<a href='timers.php?uuid={$t['uuid']}'><img src='images/delete.png' title='Delete Timer'></a>
+	<input type='checkbox' class='smaller' oninput='Toggle(\"{$t['uuid']}\")' $en>
+      </td>
+      <td class='col_delete'>
+	<a href='timers.php?uuid={$t['uuid']}&func=delete'><img src='images/delete.png' title='Delete Timer'></a>
       </td>
     </tr>\n";
 	}

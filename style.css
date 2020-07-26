@@ -53,6 +53,9 @@ input[type=radio] {
 	vertical-align: middle;
 	margin-right: 10px;
 }
+input.smaller {
+	margin: 0px;
+}
 img {
 	border: 0;
 	vertical-align: middle;
