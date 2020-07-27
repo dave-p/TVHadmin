@@ -47,8 +47,8 @@
 	 <td class='col_info'></td>
 	 <td class='col_channel'><h2>Channel</h2></td>
 	 <td class='col_date'><h2>Date</h2></td>
-	 <td class='col_start'><h2>Start</h2></td>
-	 <td class='col_stop'><h2>Stop</h2></td> 
+	 <td class='wideonly col_start'><h2>Start</h2></td>
+	 <td class='wideonly col_stop'><h2>Stop</h2></td>
 	 <td class='col_name'><h2>Name</h2></td> 
 	 <td class='col_channel'><h2>Mode</h2></td>
 	 <td class='col_delete'><h2>En</h2></td>
@@ -82,16 +82,22 @@
 	    }
 	    echo "
       <td class='col_channel'>{$t['channelname']}</td>
-      <td class='col_date selected'>$date</td>
-      <td class='col_start'>$start</td>
-      <td class='col_stop'>$stop</td>
+      <td class='col_date'>$date
+	<span class='thinonly'><br />$start-$stop</span></td>
+      <td class='wideonly col_start'>$start</td>
+      <td class='wideonly col_stop'>$stop</td>
       <td class='col_name'>{$t["disp_title"]}</td>";
 	    if ($t["autorec"] != "") {
 		$type = "Autorec";
-		if ($autorecs[$t["autorec"]] != "") $type = "Series Link";
+		$type2 = "Autorec";
+		if ($autorecs[$t["autorec"]] != "") {
+		    $type = "Series Link";
+		    $type2 = "Series";
+		}
 	    }
 	    else if ($t["timerec"] != "") {
 		$type = "Timed Recording";
+		$type2 = "Timer";
 	    }
 	    else {
 		$type = "";
@@ -103,7 +109,10 @@
 		$en = "";
 	    }
             echo "
-      <td class='col_channel'>$type</td>
+      <td class='col_channel'>
+	<span class='wideonly'>$type</span>
+	<span class='thinonly'>$type2</span>
+      </td>
       <td class='col_delete'>
 	<input type='checkbox' class='smaller' oninput='Toggle(\"{$t['uuid']}\")' $en>
       </td>
