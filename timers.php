@@ -101,6 +101,7 @@
 	    }
 	    else {
 		$type = "";
+		$type2 = "";
 	    }
 	    if ($t["enabled"] == "true") {
 		$en = "checked";
