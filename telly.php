@@ -131,8 +131,13 @@
 	    }
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
-	    echo "<tr class='row_alt' id='$id'><td class='col_duration'>$start - $end</td>";
-	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
+	    echo "
+	  <tr class='row_alt' id='$id'>
+	    <td class='col_duration'>$start - $end</td>
+	    <td class='col_title'>
+	      <div class='epg_title'>{$p['title']}</div>
+	      <div class='epg_subtitle'>".@$p[$settings['SUMM']]."</div>
+	    </td>";
 	    if (!isset($p['dvrState']) || ($p['dvrState'] != 'scheduled' && $p['dvrState'] != 'recording')) {
 	      $evt = $p["eventId"];
 	      echo "<td><a href='telly.php?eventId=$evt&series=N&when=$when&prog=$uprog$rall#$id'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
