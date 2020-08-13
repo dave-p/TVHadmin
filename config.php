@@ -133,19 +133,6 @@
 		echo "</select>
 		</td>
 	    </tr>
-	    <tr class='row_alt' title='Sort recordings by date or by title (ignoring &apos;New:&apos;)'>
-		<td class='col_label'><h5>Recordings Sort Order:</h5></td>
-		<td class='col_value'>";
-	if (!isset($settings['SORT'])) $settings['SORT'] = 0;
-	foreach ($orders as $key=>$value) {
-	  echo "<label for='B$key'>$value:</label>";
-	  echo "<input type='radio' name='SORT' id='B$key' value='$key'";
-	  if ($key == $settings['SORT']) echo " checked>";
-	  else echo ">";
-	}
-		  echo "
-		</td>
-	    </tr>
 	    <tr class='row_alt' title='Sort channels by name or Logical Channel Number'>
 		<td class='col_label'><h5>Channels Sort Order:</h5></td>
 		<td class='col_value'>";
@@ -173,57 +160,6 @@
 	echo "
 		</td>
 	    </tr>
-	    <tr class='row_alt' title='Default filter setting for the What&apos;s On Now screen'>
-		<td class='col_label'><h5>Show in What's On Now:</h5></td>
-		<td class='col_value'>";
-	foreach ($tag as $v=>$t) {
-	  $ut = urlencode($t);
-	  if (isset($settings["Tag_$ut"])) {
-	    $g = "Media_" . $ut;
-	    echo "$t: <input type='checkbox' name='$g' ";
-	    if (isset($settings[$g])) {
-	    echo " checked";
-	    }
-	    echo ">";
-	  }
-	}
-	echo "
-		</td>
-	    </tr>
-            <tr class='row_alt' title='Default filter setting for the Timeline screen'>
-                <td class='col_label'><h5>Show in Timeline:</h5></td>
-                <td class='col_value'>";
-        foreach ($tag as $v=>$t) {
-	  $ut = urlencode($t);
-	  if (isset($settings["Tag_$ut"])) {
-            $g = "Time_" . $ut;
-            echo "$t: <input type='checkbox' name='$g' ";
-            if (isset($settings[$g])) {
-              echo " checked";
-            }
-            echo ">";
-	  }
-        }
-        echo "
-                </td>
-            </tr>
-	    <tr class='row_alt' title='Default filter setting for Recordings'>
-		<td class='col_label'><h5>Show in Recordings:</h5></td>
-		<td class='col_value'>";
-	foreach ($tag as $v=>$t) {
-	  $ut = urlencode($t);
-	  if (isset($settings["Tag_$ut"])) {
-	    $g = "Rec_" . $ut;
-	    echo "$t: <input type='checkbox' name='$g' ";
-	    if (isset($settings[$g])) {
-	      echo " checked";
-	    }
-	    echo ">";
-	  }
-	}
-	echo "
-		</td> 
-	    </tr> 
 	";
 	if (!isset($settings['SUMM'])) $settings[SUMM] = 'summary';
 	if ($settings['SUMM'] == 'summary') {
@@ -288,6 +224,76 @@
 	  echo ">$st hours</option>";
 	}
 		  echo "</select>
+		</td>
+	    </tr>
+	</table>
+
+	<table class='group'>
+	    <tr class='heading'>
+		<td colspan='2'><h2>Defaults</h2></td>
+	    </tr>
+	    <tr class='row_alt' title='Default filter setting for the What&apos;s On Now screen'>
+		<td class='col_label'><h5>Show in What's On Now:</h5></td>
+		<td class='col_value'>";
+	foreach ($tag as $v=>$t) {
+	  $ut = urlencode($t);
+	  if (isset($settings["Tag_$ut"])) {
+	    $g = "Media_" . $ut;
+	    echo "$t: <input type='checkbox' name='$g' ";
+	    if (isset($settings[$g])) {
+		echo " checked";
+	    }
+	    echo ">";
+	  }
+	}
+	echo "
+		</td>
+	    </tr>
+	    <tr class='row_alt' title='Default filter setting for the Timeline screen'>
+		<td class='col_label'><h5>Show in Timeline:</h5></td>
+		<td class='col_value'>";
+	foreach ($tag as $v=>$t) {
+	  $ut = urlencode($t);
+	  if (isset($settings["Tag_$ut"])) {
+	    $g = "Time_" . $ut;
+	    echo "$t: <input type='checkbox' name='$g' ";
+	    if (isset($settings[$g])) {
+	      echo " checked";
+	    }
+	    echo ">";
+	  }
+	}
+	echo "
+		</td>
+	    </tr>
+	    <tr class='row_alt' title='Default filter setting for Recordings'>
+		<td class='col_label'><h5>Show in Recordings:</h5></td>
+		<td class='col_value'>";
+	foreach ($tag as $v=>$t) {
+	  $ut = urlencode($t);
+	  if (isset($settings["Tag_$ut"])) {
+	    $g = "Rec_" . $ut;
+	    echo "$t: <input type='checkbox' name='$g' ";
+	    if (isset($settings[$g])) {
+	      echo " checked";
+	    }
+	    echo ">";
+	  }
+	}
+	echo "
+		</td>
+	    </tr>
+	    <tr class='row_alt' title='Sort recordings by date or by title (ignoring &apos;New:&apos;)'>
+		<td class='col_label'><h5>Recordings Sort Order:</h5></td>
+		<td class='col_value'>";
+	if (!isset($settings['SORT'])) $settings['SORT'] = 0;
+	foreach ($orders as $key=>$value) {
+	  echo "<label for='B$key'>$value:</label>";
+	  echo "<input type='radio' name='SORT' id='B$key' value='$key'";
+	  if ($key == $settings['SORT']) echo " checked>";
+	  else echo ">";
+	}
+		  echo "
 		</td>
 	    </tr>
 	</table>
