@@ -26,20 +26,20 @@
 		$lcn = 0;
 		$ch_width = 120;
 	}
+	if (isset($settings['REFR'])) $refresh = 1;
+	else $refresh = 0;
 	echo "
 <script>
   window.onload = function() {
-	";
-	if (isset($settings['REFR'])) echo "setInterval(drawCursor, 60000); ";
-	echo "
-    drawCursor();
+    drawCursor($refresh);
   };
   var globalResizeTimer = null;
   window.onresize = function() {
     if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
-    globalResizeTimer = window.setTimeout(drawCursor(), 200);
+    globalResizeTimer = window.setTimeout(drawCursor, 200, $refresh);
   };
-  function drawCursor() {
+  function drawCursor(refresh) {
+    var now = Date.now()/1000;
     var elem = document.getElementById('timeline');
     if(elem) {
 	var rect = elem.getBoundingClientRect();
@@ -47,12 +47,15 @@
 	var start = Math.max(0,6+rect.top);
 	cursor.style.top = (start+27) + 'px';
 	cursor.style.height = (rect.height-start) + 'px';
-	var now = Date.now()/1000;
 	if(now - $tstart > 1800) location.reload(true);
 	var delta = (now%1800)/$textent;
 	var pos = rect.left + 6 + $ch_width
 		+ 0.98*delta*(rect.width-$ch_width-6);
 	cursor.style.left = pos + 'px';
+    }
+    if(refresh == 1) {
+	var sync = (now % 60) * 1000;
+	setTimeout(drawCursor, 63000-sync, 1);	// Avoid race
     }
   }
   function formSubmit() {
