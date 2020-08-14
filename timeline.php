@@ -18,6 +18,7 @@
 	$toffset = $utime % 1800;	//secs from start of chart to now
 	$tstart = $utime - $toffset;
 	$tend = $tstart + $textent;
+	$tnext = $tend;
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
 		$lcn = 1;
 		$ch_width = 145;
@@ -29,39 +30,6 @@
 	if (isset($settings['REFR'])) $refresh = 1;
 	else $refresh = 0;
 	echo "
-<script>
-  window.onload = function() {
-    drawCursor($refresh);
-  };
-  var globalResizeTimer = null;
-  window.onresize = function() {
-    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
-    globalResizeTimer = window.setTimeout(drawCursor, 200, $refresh);
-  };
-  function drawCursor(refresh) {
-    var now = Date.now()/1000;
-    var elem = document.getElementById('timeline');
-    if(elem) {
-	var rect = elem.getBoundingClientRect();
-	var cursor = document.getElementById('timenow');
-	var start = Math.max(0,6+rect.top);
-	cursor.style.top = (start+27) + 'px';
-	cursor.style.height = (rect.height-start) + 'px';
-	if(now - $tstart > 1800) location.reload(true);
-	var delta = (now%1800)/$textent;
-	var pos = rect.left + 6 + $ch_width
-		+ 0.98*delta*(rect.width-$ch_width-6);
-	cursor.style.left = pos + 'px';
-    }
-    if(refresh == 1) {
-	var sync = (now % 60) * 1000;
-	setTimeout(drawCursor, 63000-sync, 1);	// Avoid race
-    }
-  }
-  function formSubmit() {
-    document.media.submit();
-  }
-</script>
  <div id='layout'>
   <div id='banner'>
    <form name='media' method='GET' action='timeline.php'>
@@ -156,6 +124,7 @@ good:
 	 </div>";
 		    }
 		    $colour = '#b4e29c';
+		    $tnext = min($tnext, $p['stop']);
 		}
 		else $colour = '#dee6ee';
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
@@ -177,10 +146,43 @@ good:
     <span id='timenow'>
      <img src='images/spacer.gif' width='1' height='1' alt=''>
     </span>
-    </div>\n";
- ?>
+    </div>
     </div>
    </div>
   </div>
+<script>
+  window.onload = function() {
+    drawCursor($refresh);
+  };
+  var globalResizeTimer = null;
+  window.onresize = function() {
+    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
+    globalResizeTimer = window.setTimeout(drawCursor, 200, $refresh);
+  };
+  function drawCursor(refresh) {
+    var now = Date.now()/1000;
+    var elem = document.getElementById('timeline');
+    if(elem) {
+	var rect = elem.getBoundingClientRect();
+	var cursor = document.getElementById('timenow');
+	var start = Math.max(0,6+rect.top);
+	cursor.style.top = (start+27) + 'px';
+	cursor.style.height = (rect.height-start) + 'px';
+	if(now > $tnext) location.reload(true);
+	var delta = (now%1800)/$textent;
+	var pos = rect.left + 6 + $ch_width
+		+ 0.98*delta*(rect.width-$ch_width-6);
+	cursor.style.left = pos + 'px';
+    }
+    if(refresh == 1) {
+	var sync = (now % 60) * 1000;
+	setTimeout(drawCursor, 63000-sync, 1);  // Avoid race
+    }
+  }
+  function formSubmit() {
+    document.media.submit();
+  }
+</script>
  </body>
-</html>
+</html>";
+?>
