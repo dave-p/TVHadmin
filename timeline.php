@@ -1,13 +1,17 @@
 <?php
 	$page_title = "Timeline";
 	include_once './head.php';
+	$now = time();
 	$chans = get_channels();
 	$tags = get_channeltags();
 	$tag = array('All' => 'All');
 	foreach ($tags as $t) {
 		$tag[$t["key"]] = $t["val"];
 	}
-	$utime = time();
+	if(isset($_GET['when'])) {
+		$utime = max($_GET['when'], $now);
+	}
+	else $utime = $now;
 	$wday = date('D j M', $utime);
 	$media = array();
 	$colours = array('#ffffff', '#dee6ee', '#ffffff', '#dee6ee');
@@ -19,6 +23,8 @@
 	$tstart = $utime - $toffset;
 	$tend = $tstart + $textent;
 	$tnext = $tend;
+	$tforw = $tstart + $textent/2;
+	$tback = $tstart - $textent/2;
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
 		$lcn = 1;
 		$ch_width = 145;
@@ -63,6 +69,10 @@
 	  }
 	}
 	echo "
+      </td>
+      <td>
+       <a href='timeline.php?when=$tback' title='Earlier'><img src='images/left.png'></a>
+       <a href='timeline.php?when=$tforw' title='Later'><img src='images/right.png'></a>
       </td>
      </tr>
     </table>
@@ -112,10 +122,8 @@ good:
        </div>
       </td>
       <td class='col_schedule'>";
-	    $p = &$e[0];
-	    $pcount = 0;
-	    while (isset($p['start'])) {
-		if ($pcount == 0) {
+	    foreach ($e as $p) {
+		if ($p['start'] <= $now && $p['stop'] > $now) {
 		    if ($p['start'] > $tstart) {	#Need a spacer
 			$spc = (($p['start'] - $tstart) * $wd) / $textent;
 			echo "
@@ -128,13 +136,12 @@ good:
 		}
 		else $colour = '#dee6ee';
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
+		if ($duration == 0) continue;
 		$pc = ($wd * $duration) / $textent;
-		@$subtitle = $p[$settings['SUMM']];
+		@$subtitle = htmlspecialchars($p[$settings['SUMM']], ENT_QUOTES|ENT_HTML5);
 		echo "
-	 <div class='item' style='background-color: $colour; width: $pc%;' title=\"$subtitle\">
+	 <div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>
 	    {$p['title']}</div>";
-		$pcount++;
-		$p = &$e[$pcount];
 	    }
 	    echo "
       </td>
@@ -142,10 +149,12 @@ good:
 	    $i++;
 	}
 	echo "
-    </table>
+    </table>";
+	if(($now >= $tstart) && ($now < $tend)) echo "
     <span id='timenow'>
      <img src='images/spacer.gif' width='1' height='1' alt=''>
-    </span>
+    </span>";
+	echo "
     </div>
     </div>
    </div>
@@ -161,14 +170,14 @@ good:
   };
   function drawCursor(refresh) {
     var now = Date.now()/1000;
-    var elem = document.getElementById('timeline');
-    if(elem) {
+    if(now > $tnext) location.reload(true);
+    var cursor = document.getElementById('timenow');
+    if(cursor) {
+	var elem = document.getElementById('timeline');
 	var rect = elem.getBoundingClientRect();
-	var cursor = document.getElementById('timenow');
 	var start = Math.max(0,6+rect.top);
 	cursor.style.top = (start+27) + 'px';
 	cursor.style.height = (rect.height-start) + 'px';
-	if(now > $tnext) location.reload(true);
 	var delta = (now%1800)/$textent;
 	var pos = rect.left + 6 + $ch_width
 		+ 0.98*delta*(rect.width-$ch_width-6);
