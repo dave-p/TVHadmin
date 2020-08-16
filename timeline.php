@@ -129,9 +129,9 @@ good:
 		else $colour = '#dee6ee';
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		$pc = ($wd * $duration) / $textent;
-		@$subtitle = $p[$settings['SUMM']];
+		@$subtitle = htmlspecialchars($p[$settings['SUMM']], ENT_QUOTES|ENT_HTML5);
 		echo "
-	 <div class='item' style='background-color: $colour; width: $pc%;' title=\"$subtitle\">
+	 <div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>
 	    {$p['title']}</div>";
 		$pcount++;
 		$p = &$e[$pcount];
