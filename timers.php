@@ -160,6 +160,7 @@
 
 	function check_timer($timers, $t) {
 	    if (count($timers) < 2) return 0;
+	    if (!$t["enabled"]) return 0;
 	    $tstart = $t["start_real"];
 	    $tstop = $t["stop_real"];
 	    $tuuid = $t["uuid"];
