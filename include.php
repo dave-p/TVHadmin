@@ -141,7 +141,10 @@ function get_channeltags() {
   $url = "$urlp/api/channeltag/list";
   $json = file_get_contents($url);
   $c = json_decode($json, true);
-  $ret = &$c["entries"];
+  $ret = array('All' => 'All');
+  foreach ($c["entries"] as $t) {
+    $ret[$t["key"]] = $t["val"];
+  }
   return $ret;
 }
 

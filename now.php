@@ -8,10 +8,6 @@
 	}
 	$chans = get_channels();
 	$tags = get_channeltags();
-	$tag = array('All' => 'All');
-	foreach ($tags as $t) {
-		$tag[$t["key"]] = $t["val"];
-	}
 	$wday = date('l, j M Y', time());
 	$time = date('H:i', time());
 	if (isset($settings['REFR'])) $timestr = "";
@@ -60,7 +56,7 @@
 	<div id='mobmenu'>&#9776;</div> <h1>What's On $timestr</h1>
       </td>
       <td>";
-	foreach ($tag as $v=>$t) {
+	foreach ($tags as $v=>$t) {
 	  $tt = urlencode($t);
 	  if (isset($settings["Tag_$tt"])) {
 		echo "
@@ -99,7 +95,7 @@
 	foreach($chans as $c) {
 		if (!isset($media["All"])) {
 			foreach($c["tags"] as $t) {
-				if (array_key_exists($tag[$t], $media)) goto good;
+				if (array_key_exists($tags[$t], $media)) goto good;
 			}
 			continue;
 		}

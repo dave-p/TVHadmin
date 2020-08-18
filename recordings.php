@@ -16,10 +16,6 @@
   }
   $media = array();
   $tags = get_channeltags();
-  $tag = array('All' => 'All');
-  foreach ($tags as $t) {
-      $tag[$t["key"]] = $t["val"];
-  }
   if (array_key_exists('NOANON', $settings)) $view_url = "http://$user:$pass@$ip";
   else $view_url = $urlp;
   echo "
@@ -48,7 +44,7 @@
 	      <td><span class='wideonly'>
 		  <input type='hidden' name='update' value='1'>
 	      ";
-  foreach ($tag as $v=>$t) {
+  foreach ($tags as $v=>$t) {
     $tt = urlencode($t);
     if (isset($settings["Tag_$tt"])) {
       echo "
@@ -99,7 +95,7 @@
 			$cid = $t["channel"];
 			if (array_key_exists($cid, $chtags)) {
 				foreach($chtags[$cid] as $c) {
-				    if (array_key_exists($tag[$c], $media)) goto good;
+				    if (array_key_exists($tags[$c], $media)) goto good;
 				}
 				continue;
 			}
