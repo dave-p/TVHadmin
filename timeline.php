@@ -4,27 +4,23 @@
 	$now = time();
 	$chans = get_channels();
 	$tags = get_channeltags();
-	$tag = array('All' => 'All');
-	foreach ($tags as $t) {
-		$tag[$t["key"]] = $t["val"];
-	}
-	if(isset($_GET['when'])) {
-		$utime = max($_GET['when'], $now);
-	}
-	else $utime = $now;
-	$wday = date('D j M', $utime);
-	$media = array();
-	$colours = array('#ffffff', '#dee6ee', '#ffffff', '#dee6ee');
 	if(isset($settings['TIMESPAN'])) {
 		$textent = $settings['TIMESPAN'] * 3600;
 	}
 	else $textent = 14400;
+	if(isset($_GET['start'])) {
+		$utime = max($_GET['start'], $now);
+		if(isset($_GET['right_x'])) $utime += $textent/2;
+		else if(isset($_GET['left_x'])) $utime = max($utime-$textent/2, $now);
+	}
+	else $utime = $now;
 	$toffset = $utime % 1800;	//secs from start of chart to now
 	$tstart = $utime - $toffset;
 	$tend = $tstart + $textent;
 	$tnext = $tend;
-	$tforw = $tstart + $textent/2;
-	$tback = $tstart - $textent/2;
+	$wday = date('D j M', $utime);
+	$media = array();
+	$colours = array('#ffffff', '#dee6ee', '#ffffff', '#dee6ee');
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
 		$lcn = 1;
 		$ch_width = 145;
@@ -40,11 +36,12 @@
   <div id='banner'>
    <form name='media' method='GET' action='timeline.php'>
     <input type='hidden' name='update' value='1'>
+    <input type='hidden' name='start' value='$tstart'>
     <table>
      <tr>
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timeline</h1></td>
       <td>";
-	foreach ($tag as $v=>$t) {
+	foreach ($tags as $v=>$t) {
 	  $tt = urlencode($t);
 	  if (isset($settings["Tag_$tt"])) {
 		echo "
@@ -71,8 +68,8 @@
 	echo "
       </td>
       <td>
-       <a href='timeline.php?when=$tback' title='Earlier'><img src='images/left.png'></a>
-       <a href='timeline.php?when=$tforw' title='Later'><img src='images/right.png'></a>
+       <input type='image' alt='Earlier' title='Earlier' name='left' src='images/left.png'>
+       <input type='image' alt='Later' title='Later' name='right' src='images/right.png'>
       </td>
      </tr>
     </table>
@@ -104,7 +101,7 @@
 	foreach($chans as $c) {
 	    if (!isset($media["All"])) {
 	        foreach($c["tags"] as $t) {
-			if (array_key_exists($tag[$t], $media)) goto good;
+			if (array_key_exists($tags[$t], $media)) goto good;
                 }
                 continue;
 	    }
@@ -170,7 +167,14 @@ good:
   };
   function drawCursor(refresh) {
     var now = Date.now()/1000;
-    if(now > $tnext) location.reload(true);
+    if(now > $tnext) {
+	const params = new URLSearchParams(window.location.search);
+	params.delete('left.x');
+	params.delete('right.x');
+	var newurl = location.pathname + '?' + params.toString();
+	window.history.replaceState({}, '', newurl);
+	location.reload(true);
+    }
     var cursor = document.getElementById('timenow');
     if(cursor) {
 	var elem = document.getElementById('timeline');
