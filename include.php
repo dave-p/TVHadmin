@@ -42,7 +42,6 @@ if (file_exists($config_file)) {
   }
   $config_uuid = $settings['UUID'];
   $epg_start = $settings['EPGSTART'];
-  if (!isset($settings['SUMM'])) $settings['SUMM'] = 'summary';
 }
 else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&
 	(strpos($_SERVER['PHP_SELF'], 'configure.php') === false)) {

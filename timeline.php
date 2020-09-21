@@ -135,7 +135,9 @@ good:
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		if ($duration == 0) continue;
 		$pc = ($wd * $duration) / $textent;
-		@$subtitle = htmlspecialchars($p[$settings['SUMM']], ENT_QUOTES|ENT_HTML5);
+		if (isset($p['summary'])) $desc = $p['summary'];
+		else $desc = $p['description'];
+		@$subtitle = htmlspecialchars($desc, ENT_QUOTES|ENT_HTML5);
 		echo "
 	 <div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>
 	    {$p['title']}</div>";

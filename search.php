@@ -46,6 +46,8 @@
 		foreach ($results as $r) {
 			$d = date('l d/n', $r["start"]);
                         $t = date('H:i', $r["start"]);
+			if (isset($r['summary'])) $desc = $r['summary'];
+			else $desc = $r['description'];
 			if ($d != $last_prog_date) {
 				echo "<tr class='newday'><td colspan='5'><span class='date_long'>$d</span></td></tr>";	
 				$last_prog_date = $d;
@@ -57,7 +59,7 @@
 	  <td class='col_channel'>
 	    <div class='channel_name'>{$r['channelName']}</div></td>
 	  <td class='col_center'>
-	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$r[$settings['SUMM']]}</div></td>";
+	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$desc}</div></td>";
 			$evt = $r["eventId"];
 			if (!array_key_exists($evt, $tevents)) {
 				echo "<td><a href='search.php?eventId=$evt&series=N&find=$find'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";

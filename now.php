@@ -105,7 +105,8 @@ good:
 		if ($p) {
 			$start = date('H:i', $p["start"]);
 			$end = date('H:i', $p["stop"]);
-			if (isset($p[$settings['SUMM']])) $summ = $p[$settings['SUMM']];
+			if (isset($p['summary'])) $summ = $p['summary'];
+			else if (isset($p['description'])) $summ = $p['description'];
 			else $summ = '';
 			echo "
     <tr class='row_alt'>

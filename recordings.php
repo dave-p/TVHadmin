@@ -123,12 +123,7 @@ good:
 			$ok = 0;
 			echo "<tr class='row_error'>";
 		}
-		if ($settings['SUMM'] == 'summary') {
-			$summ = 'disp_description';
-		}
-		else {
-			$summ = 'disp_subtitle';
-		}
+		$summ = $t['disp_extratext'];
 		$title = htmlspecialchars($t['disp_title'],ENT_QUOTES);
 		$length = sprintf("%d:%02d", $hh, $mm);
 		echo "
@@ -145,7 +140,7 @@ good:
 	    </div>
 	  </td>
 	  <td class='wideonly col_length'>$length</td>
-	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$t[$summ]}</div></td>
+	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$summ}</div></td>
 	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&SORT=$sort'><img src='images/delete.png' title='Delete Recording'></a></td>";
 		if ($ok) echo "
 	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images/play.png' title='Play'></a></td>";

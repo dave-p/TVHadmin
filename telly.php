@@ -131,12 +131,14 @@
 	    }
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
+	    if (isset($p['summary'])) $desc = $p['summary'];
+	    else $desc = $p['description'];
 	    echo "
 	  <tr class='row_alt' id='$id'>
 	    <td class='col_duration'>$start - $end</td>
 	    <td class='col_title'>
 	      <div class='epg_title'>{$p['title']}</div>
-	      <div class='epg_subtitle'>".@$p[$settings['SUMM']]."</div>
+	      <div class='epg_subtitle'>$desc</div>
 	    </td>";
 	    if (!isset($p['dvrState']) || ($p['dvrState'] != 'scheduled' && $p['dvrState'] != 'recording')) {
 	      $evt = $p["eventId"];

@@ -83,8 +83,10 @@
 	  foreach($progs as $p) {
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
+	    if (isset($p['summary'])) $desc = $p['summary'];
+	    else $desc = $p['description'];
 	    echo "<tr class='row_alt' id='$id'><td class='col_duration'>$start - $end</td>";
-	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"],$p[$settings['SUMM']]);
+	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"], $desc);
 	    if (!isset($p['dvrState']) || ($p['dvrState'] != 'scheduled' && $p['dvrState'] != 'recording')) {
 	      $evt = $p["eventId"];
 	      echo "<td><a href='fav.php?eventId=$evt&series=N&when=$when#$id'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
@@ -102,7 +104,7 @@
 	  }
 	  echo "</table>";
 	}
- ?>
+?>
 	</div>
       </div>
     </div>

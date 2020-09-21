@@ -156,24 +156,6 @@
 	echo "
 		</td>
 	    </tr>
-	";
-	if (!isset($settings['SUMM'])) $settings[SUMM] = 'summary';
-	if ($settings['SUMM'] == 'summary') {
-	  $c1 = 'checked'; $c2 = '';
-	}
-	else {
-	  $c1 = ''; $c2 = 'checked';
-	}
-	echo "
-	    <tr class='row_alt' title='Source of description for the EPG and recordings screens. The correct setting depends on your EPG source'>
-		<td class='col_label'><h5>Show in EPG and Recordings:</h5></td>
-		<td class='col_value'>
-		    <label for='summ'>Summary:</label>
-		    <input type='radio' name='SUMM' value='summary' id='summ' $c1>
-		    <label for='subt'>Subtitle:</label>
-		    <input type='radio' name='SUMM' value='subtitle' id='subt' $c2>
-		</td>
-	    </tr>
 	    <tr class='row_alt' title='Refresh the Whats On Now and Timeline screens every minute'>
 		<td class='col_label'><h5>Refresh Whats On Now and Timeline screens:</h5></td>
 		<td class='col_value'><input type='checkbox' name='REFR'";
