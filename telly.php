@@ -132,7 +132,8 @@
 	    $start = date('H:i', $p["start"]);
 	    $end = date('H:i', $p["stop"]);
 	    if (isset($p['summary'])) $desc = $p['summary'];
-	    else $desc = $p['description'];
+	    else if (isset($p['description'])) $desc = $p['description'];
+	    else $desc = "";
 	    echo "
 	  <tr class='row_alt' id='$id'>
 	    <td class='col_duration'>$start - $end</td>
