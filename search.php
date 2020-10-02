@@ -22,24 +22,21 @@
 }
 	if($_GET['find'] != "") {
 		$find = $_GET["find"];
-		$timers = get_timers();
-		$tevents = array();
-		foreach ($timers as $t) {
-			$tevents[$t["broadcast"]] = 1;
-		}
 		$links = get_links();
 		$levents = array();
 		foreach ($links as $l) {
 			$levents[$l["serieslink"]] = 1;
 		}
 		echo "
-	<table>
-	  <tr>
-	    <td class='col_title'>
-	      <div id='mobmenu'>&#9776;</div> <h1>Matches for: <i>$find</i></h1>
-	    </td>
-	  </tr>
-	</table>
+	<div id='banner'>
+	  <table>
+	    <tr>
+	      <td class='col_title'>
+	        <div id='mobmenu'>&#9776;</div> <h1>Matches for: <i>$find</i></h1>
+	      </td>
+	    </tr>
+	  </table>
+	</div>
 	<table class='list'>";
 		$last_prog_date = " ";
 		$results = search_epg("", $find);
@@ -61,7 +58,7 @@
 	  <td class='col_center'>
 	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$desc}</div></td>";
 			$evt = $r["eventId"];
-			if (!array_key_exists($evt, $tevents)) {
+			if (!isset($r["dvrState"]) || $r["dvrState"] != "scheduled" && $r["dvrState"] != "recording") {
 				echo "<td><a href='search.php?eventId=$evt&series=N&find=$find'><img src='images/rec_button1.png' alt='record' title='record'></a></td>";
 			}
 			else {
