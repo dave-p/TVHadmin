@@ -159,6 +159,7 @@
 	}
 
 	function check_timer($timers, $t) {
+	    global $settings;
 	    if (count($timers) < 2) return 0;
 	    if (!$t["enabled"]) return 0;
 	    $tstart = $t["start_real"];
