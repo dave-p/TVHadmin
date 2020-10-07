@@ -136,7 +136,7 @@
 	    }
 	    $poss = search_epg($c["channelname"],$ts);
 	    foreach ($poss as $p) {
-		if ($p["start_real"] == $c["start_real"]) {
+		if ($p["start"] == $c["start"]) {
 		    $alt1 = search_epg("",$ts);
 		    echo "<p>Alternatives for \"$ts\"</p><ul>";
 		    foreach ($alt1 as $a) {
@@ -213,15 +213,18 @@
 		if (empty($channels)) {
 			$channels = get_channels();
 		}
-		foreach ($channels as $c) {
+		foreach ($channels as &$c) {
 			if ($ch === $c["uuid"]) break;
 		}
+		if (isset($c["mux"])) return $c["mux"];
 		$svc = $c["services"][0];
 		$url = "$urlp/api/service/streams?uuid=$svc";
 		$json = file_get_contents($url);
 		$j = json_decode($json, true);
 		$name = $j["name"];
-		return substr($name, 0, strrpos($name, '/'));
+		$mux = substr($name, 0, strrpos($name, '/'));
+		$c["mux"] = $mux;
+		return $mux;
 	}
 
 	function get_autorecs() {
