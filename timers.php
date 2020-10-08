@@ -124,6 +124,7 @@
 	}
 	echo "</table>\n";
 	foreach ($clashes as $c) {
+	    if (!isset($c["uri"])) continue;
 	    $title = $c["disp_title"];
 	    if (preg_match("/^(.*)\.\.\./", $title, $t)) {
 		$title = $t[1];
@@ -134,27 +135,24 @@
 	    else {
 		$ts = $title;
 	    }
-	    $poss = search_epg($c["channelname"],$ts);
-	    foreach ($poss as $p) {
-		if ($p["start"] == $c["start"]) {
-		    $alt1 = search_epg("",$ts);
-		    echo "<p>Alternatives for \"$ts\"</p><ul>";
-		    foreach ($alt1 as $a) {
-			$sl = '';
-			if (isset($a["deafsigned"])) $sl = '[SL]';
-			if ($p["episodeUri"] === $a["episodeUri"]) {
-			    $when = strftime("%a %e/%m %H:%M", $a["start_real"]);
-			    if (!check_event($timers, $a)) {
-				printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
-			    }
-			    else {
-				printf("<li>%s %s %s %s (CLASH)</li>", $when,$a["channelName"],$a["title"], $sl);
-			    }
+	    $alt = search_epg("",$ts);
+	    if (count($alt) > 1) {
+		echo "<p>Alternatives for \"$ts\"</p><ul>";
+		foreach ($alt as $a) {
+		    if (isset($a["dvrUuid"]) && $a["dvrUuid"] == $c["uuid"]) continue;
+		    $sl = '';
+		    if (isset($a["deafsigned"])) $sl = '[SL]';
+		    if (isset($a["episodeUri"]) && ($c["uri"] === $a["episodeUri"])) {
+			$when = strftime("%a %e/%m %H:%M", $a["start"]);
+			if (!check_event($timers, $a)) {
+			    printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
+			}
+			else {
+			    printf("<li>%s %s %s %s (CLASH)</li>", $when,$a["channelName"],$a["title"], $sl);
 			}
 		    }
-		    echo "</ul>";
-		    break;
 		}
+		echo "</ul>";
 	    }
 	}
 
@@ -181,12 +179,10 @@
 	}
 
         function check_event($timers, $e) {
-            $estart = $e["start_real"];
-            $estop = $e["stop_real"];
-            @$euuid = $e["dvrUuid"];
+            $estart = $e["start"];
+            $estop = $e["stop"];
             foreach ($timers as $t) {
               if (!$t["enabled"]) continue;
-              if ($t["uuid"] === $euuid) continue;
               if(($estart >= $t["start_real"] && $estart < $t["stop_real"])
                   ||($t["start_real"] >= $estart && $t["start_real"] < $estop)) {
 		if (get_mux_for_event($e) === get_mux_for_timer($t)) return 1;
