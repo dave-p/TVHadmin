@@ -150,7 +150,7 @@ good:
 	echo "
     </table>";
 	if(($now >= $tstart) && ($now < $tend)) echo "
-    <span id='timenow'>
+    <span id='timenow' style='visibility: hidden'>
      <img src='images/spacer.gif' width='1' height='1' alt=''>
     </span>";
 	echo "
@@ -188,6 +188,7 @@ good:
 	var pos = rect.left + 6 + $ch_width
 		+ 0.98*delta*(rect.width-$ch_width-6);
 	cursor.style.left = pos + 'px';
+	cursor.style.visibility = 'visible';
     }
     if(refresh == 1) {
 	var sync = (now % 60) * 1000;
