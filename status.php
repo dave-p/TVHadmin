@@ -49,12 +49,6 @@ window.addEventListener('load',function(event) {
 	'tc_block'  => 'Total Block Error Count',
 	'ec_bit'    => 'Bit Error Count');
 
-  $ignore = array(
-	'input'	=> 1,
-	'snr_scale' => 'SNR Scale',
-	'signal_scale' => 'Signal Scale',
-	'pids' => 'PIDs');
-
   if (isset($_POST['uuid'])) clear_input_stats($_POST['uuid']);
 
   function get_input_status() {
@@ -165,9 +159,9 @@ window.addEventListener('load',function(event) {
 		  break;
 		default:
 		  $s['snr'] = 0;
-	    }    
+	    }
 	    foreach($s as $key => $val) {
-		if (isset($ignore[$key])) continue;
+		if (!isset($params[$key])) continue;
 		echo "
       <tr class='row_alt'>
 	<td class='col_channel'>{$params[$key]}</td>
