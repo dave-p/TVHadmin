@@ -142,7 +142,11 @@ good:
        <div class='epg_subtitle'>{$summ}</div>
       </td>
       <td>";
-			if (!isset($p['dvrState']) || $p['dvrState'] != 'recording') {
+			if (isset($p['dvrState']) && $p['dvrState'] == 'recording') {
+				echo "
+	<img src='images/rec.png' alt='Recording' title='Recording'>";
+			}
+			else {
 				$evt = $p["eventId"];
 				echo "
         <a href='now.php?eventId=$evt'><img src='images/rec_button1.png' alt='record' title='record'></a>";
