@@ -5,7 +5,7 @@ This project provides a simple web-based front-end for TVHeadend. It is inspired
 
 An alternative version written in Javascript which does not need a web server is at https://github.com/dave-p/TVHadmin-JS.
 
-Sample screenshots can be found [here](/screenshots/now.png) [here](/screenshots/timeline.png) [here](/screenshots/recordings.png) and [here](/screenshots/favourite.png).
+Sample screenshots can be found [here](/screenshots/).
 
 ### Requirements
 - A recent version of TVHeadend (at least v4.2 - the latest development version preferred).
