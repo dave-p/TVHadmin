@@ -44,7 +44,7 @@
 	      <td><span class='wideonly'>
 		  <input type='hidden' name='update' value='1'>
 	      ";
-  foreach ($tags as $v=>$t) {
+  foreach ($tags as $t=>$v) {
     $tt = urlencode($t);
     if (isset($settings["Tag_$tt"])) {
       echo "
@@ -53,14 +53,14 @@
 	  <input type='checkbox' name='$tt' id='$tt' onchange='formSubmit(\"options\")'";
       if (isset($_GET['update'])) {
           if (isset($_GET[$tt])) {
-              $media[$t] = 1;
+              $media[$t] = $v;
               echo " checked";
            }
       }
       else {
           $g = "Rec_" . $tt;
           if (isset($settings[$g])) {
-              $media[$t] = 1;
+              $media[$t] = $v;
               echo " checked";
           }
       }
@@ -94,13 +94,9 @@
 		if (!isset($media["All"])) {
 			$cid = $t["channel"];
 			if (array_key_exists($cid, $chtags)) {
-				foreach($chtags[$cid] as $c) {
-				    if (array_key_exists($tags[$c], $media)) goto good;
-				}
-				continue;
+				if (count(array_intersect($chtags[$cid], $media)) == 0) continue;
 			}
 		}
-good:
 		$time = strftime("%H:%M", $t["start"]);
 		$date = strftime("%a %e/%m/%y", $t["start"]);
 		$duration = $t["stop"] - $t["start"];

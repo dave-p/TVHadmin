@@ -41,7 +41,7 @@
      <tr>
       <td class='col_title'><div id='mobmenu'>&#9776;</div> <h1>Timeline</h1></td>
       <td>";
-	foreach ($tags as $v=>$t) {
+	foreach ($tags as $t=>$v) {
 	  $tt = urlencode($t);
 	  if (isset($settings["Tag_$tt"])) {
 		echo "
@@ -50,14 +50,14 @@
 	  <input type='checkbox' name='$tt' id='$tt' onchange='formSubmit()'";
 		if (isset($_GET['update'])) {
 			if (isset($_GET[$tt])) {
-				$media[$t] = 1;
+				$media[$t] = $v;
 				echo " checked";
 			}
 		}
 		else {
 			$g = "Time_" . $tt;
  			if (isset($settings[$g])) {
-				$media[$t] = 1;
+				$media[$t] = $v;
 				echo " checked";
 			}
 		}
@@ -100,12 +100,8 @@
 	$i = 0;
 	foreach($chans as $c) {
 	    if (!isset($media["All"])) {
-	        foreach($c["tags"] as $t) {
-			if (array_key_exists($tags[$t], $media)) goto good;
-                }
-                continue;
+			if (count(array_intersect($c["tags"], $media)) == 0) continue;
 	    }
-good:
 	    $e = get_epg($c["name"], $tstart, $tend);
 	    if (!isset($e)) continue;
 	    $wd = 98 - count($e)/8;

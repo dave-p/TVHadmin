@@ -145,7 +145,7 @@
 	    <tr class='row_alt' title='Which TVH tags are to be used for filtering. Click &apos;Save&apos; after changing this selection to update the other preferences'>
 		<td class='col_label'><h5>Media Tags to use for selection:</h5></td>
 		<td class='col_value'>";
-	foreach ($tags as $v=>$t) {
+	foreach ($tags as $t=>$v) {
 	  $g = urlencode("Tag_" . $t);
 	  echo "$t: <input type='checkbox' name='$g' ";
 	  if (isset($settings[$g])) {
@@ -214,7 +214,7 @@
 screen'>
 		<td class='col_label'><h5>Show in What's On Now:</h5></td>
 		<td class='col_value'>";
-	foreach ($tags as $v=>$t) {
+	foreach ($tags as $t=>$v) {
 	  $ut = urlencode($t);
 	  if (isset($settings["Tag_$ut"])) {
 	    $g = "Media_" . $ut;
@@ -231,7 +231,7 @@ screen'>
 	    <tr class='row_alt' title='Default filter setting for the Timeline screen'>
 		<td class='col_label'><h5>Show in Timeline:</h5></td>
 		<td class='col_value'>";
-	foreach ($tags as $v=>$t) {
+	foreach ($tags as $t=>$v) {
 	  $ut = urlencode($t);
 	  if (isset($settings["Tag_$ut"])) {
 	    $g = "Time_" . $ut;
@@ -248,7 +248,7 @@ screen'>
 	    <tr class='row_alt' title='Default filter setting for Recordings'>
 		<td class='col_label'><h5>Show in Recordings:</h5></td>
 		<td class='col_value'>";
-	foreach ($tags as $v=>$t) {
+	foreach ($tags as $t=>$v) {
 	  $ut = urlencode($t);
 	  if (isset($settings["Tag_$ut"])) {
 	    $g = "Rec_" . $ut;

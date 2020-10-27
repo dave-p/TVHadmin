@@ -142,7 +142,7 @@ function get_channeltags() {
   $c = json_decode($json, true);
   $ret = array('All' => 'All');
   foreach ($c["entries"] as $t) {
-    $ret[$t["key"]] = $t["val"];
+    $ret[$t["val"]] = $t["key"];
   }
   return $ret;
 }
