@@ -126,7 +126,7 @@
 	foreach ($clashes as $c) {
 	    if (!isset($c["uri"])) continue;
 	    $title = $c["disp_title"];
-	    if (preg_match("/^(.*)\.\.\./", $title, $t)) {
+	    if (preg_match("/^(.*?)\.\.\./", $title, $t)) {
 		$title = $t[1];
 	    }
 	    if (preg_match("/^New: (.*)/", $title, $t)) {
@@ -137,7 +137,7 @@
 	    }
 	    $alt = search_epg("",$ts);
 	    if (count($alt) > 1) {
-		echo "<p>Alternatives for \"$ts\"</p><ul>";
+		$s = '';
 		foreach ($alt as $a) {
 		    if (isset($a["dvrUuid"]) && $a["dvrUuid"] == $c["uuid"]) continue;
 		    $sl = '';
@@ -145,14 +145,16 @@
 		    if (isset($a["episodeUri"]) && ($c["uri"] === $a["episodeUri"])) {
 			$when = strftime("%a %e/%m %H:%M", $a["start"]);
 			if (!check_event($timers, $a)) {
-			    printf("<li>%s %s %s %s</li>", $when,$a["channelName"],$a["title"], $sl);
+			    $s .= "<li>$when {$a["channelName"]} {$a["title"]} $sl</li>";
 			}
 			else {
-			    printf("<li>%s %s %s %s (CLASH)</li>", $when,$a["channelName"],$a["title"], $sl);
+			    $s .= "<li>$when {$a["channelName"]} {$a["title"]} $sl(CLASH)</li>";
 			}
 		    }
 		}
-		echo "</ul>";
+		if (strlen($s) > 0) {
+		    echo "<p>Alternatives for \"$ts\"</p><ul>$s</ul></p>";
+		}
 	    }
 	}
 
