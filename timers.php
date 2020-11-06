@@ -166,32 +166,34 @@
 	    $tstop = $t["stop_real"];
 	    $tuuid = $t["uuid"];
 	    $tchannel = $t["channel"];
+	    $ret = 0;
 	    foreach ($timers as $m) {
 	      if (!$m["enabled"]) continue;
 	      if ($m["channel"] === $tchannel) continue;
 	      if ($m["uuid"] === $tuuid) continue;
 	      if (($tstart >= $m["start_real"] && $tstart < $m["stop_real"])
 	          ||($m["start_real"] >= $tstart && $m["start_real"] < $tstop)) {
-		if (!isset($settings['CLASHDET'])) return 1;
-		if (get_mux_for_timer($m) === get_mux_for_timer($t)) return 1;
-		return 2;
+		if (!isset($settings['CLASHDET'])
+		  || (get_mux_for_timer($m) === get_mux_for_timer($t))) $ret = max($ret,1);
+		else $ret = max($ret,2);
 	      }
 	    }
-	    return 0;
+	    return $ret;
 	}
 
         function check_event($timers, $e) {
             $estart = $e["start"];
             $estop = $e["stop"];
+	    $ret = 0;
             foreach ($timers as $t) {
               if (!$t["enabled"]) continue;
               if(($estart >= $t["start_real"] && $estart < $t["stop_real"])
                   ||($t["start_real"] >= $estart && $t["start_real"] < $estop)) {
-		if (get_mux_for_event($e) === get_mux_for_timer($t)) return 1;
-                else return 2;
+		if (get_mux_for_event($e) === get_mux_for_timer($t)) $ret = max($ret,1);
+                else $ret = max($ret,2);
               }
             }
-            return 0;
+            return $ret;
         }
 
 	function get_mux_for_event($event) {
