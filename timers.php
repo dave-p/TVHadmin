@@ -57,6 +57,7 @@
   ";
 	$autorecs = get_autorecs();
 	$channels = array();
+	$muxes = array();
 	$clashes = array();
 	foreach($timers as $t) {
 	    $start = strftime("%H:%M", $t["start_real"]);
@@ -209,19 +210,17 @@
 	}
 
 	function get_mux_for_channel($ch) {
-		global $urlp, $channels;
+		global $urlp, $channels, $muxes;
 		if (empty($channels)) {
 			$channels = get_channels();
+			$muxes = get_muxes();
 		}
 		foreach ($channels as &$c) {
 			if ($ch === $c["uuid"]) break;
 		}
 		if (isset($c["mux"])) return $c["mux"];
 		$svc = $c["services"][0];
-		$url = "$urlp/api/service/streams?uuid=$svc";
-		$json = file_get_contents($url);
-		$j = json_decode($json, true);
-		$name = $j["name"];
+		$name = $muxes[$svc];
 		$mux = substr($name, 0, strrpos($name, '/'));
 		$c["mux"] = $mux;
 		return $mux;
@@ -236,6 +235,19 @@
 		$ret = array();
 		foreach ($recs as $r) {
 			$ret[$r["uuid"]] = $r["serieslink"];
+		}
+		return $ret;
+	}
+
+	function get_muxes() {
+		global $urlp;
+		$url = "$urlp/api/service/list?enum=1";
+		$json = file_get_contents($url);
+		$j = json_decode($json, true);
+		$recs = &$j["entries"];
+		$ret = array();
+		foreach ($recs as $r) {
+			$ret[$r["key"]] = $r["val"];
 		}
 		return $ret;
 	}
