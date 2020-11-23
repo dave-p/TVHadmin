@@ -4,6 +4,8 @@
 	$now = time();
 	$chans = get_channels();
 	$tags = get_channeltags();
+	if (array_key_exists('NOANON', $settings)) $view_url = "http://$user:$pass@$ip";
+	else $view_url = $urlp;
 	if(isset($settings['TIMESPAN'])) {
 		$textent = $settings['TIMESPAN'] * 3600;
 	}
@@ -126,6 +128,8 @@
 		    }
 		    $colour = '#b4e29c';
 		    $tnext = min($tnext, $p['stop']);
+		    echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'>";
+		    $p['onnow'] = 1;
 		}
 		else $colour = '#dee6ee';
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
@@ -137,6 +141,7 @@
 		echo "
 	 <div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>
 	    {$p['title']}</div>";
+		if (isset($p['onnow'])) echo "</a>";
 	    }
 	    echo "
       </td>
