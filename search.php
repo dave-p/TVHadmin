@@ -37,7 +37,9 @@
 	    </tr>
 	  </table>
 	</div>
-	<table class='list'>";
+	<div id='wrapper'>
+	  <div id='content'>
+	    <table class='list'>";
 		$last_prog_date = " ";
 		$results = search_epg("", $find);
 		foreach ($results as $r) {
@@ -50,13 +52,13 @@
 				$last_prog_date = $d;
 			}
 			echo "
-	<tr class='row_alt'>
-	  <td class='col_duration'>
-	    <span class='time_duration'><span class='time_start'>$t</span></span></td>
-	  <td class='col_channel'>
-	    <div class='channel_name'>{$r['channelName']}</div></td>
-	  <td class='col_center'>
-	    <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$desc}</div></td>";
+	      <tr class='row_alt'>
+		<td class='col_duration'>
+		  <span class='time_duration'><span class='time_start'>$t</span></span></td>
+		<td class='col_channel'>
+		  <div class='channel_name'>{$r['channelName']}</div></td>
+		<td class='col_center'>
+		  <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$desc}</div></td>";
 			if (isset($r["serieslinkUri"]) && array_key_exists($r["serieslinkUri"], $levents)) {
 			  echo "<td></td><td><img src='images/rec.png' title='Series recording scheduled'></td>";
 			}
@@ -75,7 +77,10 @@
 			  }
 			}
 		}
-		echo "</table>";
+		echo "
+	    </table>
+	  </div>
+	</div>";
 	}
 ?>
    </div>
