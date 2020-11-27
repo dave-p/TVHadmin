@@ -84,9 +84,10 @@
       <col style='width:{$ch_width}px'>
       <col id='schedules'>
      </colgroup>
-     <tr class='newday'>
-      <td>$wday</td>
-      <td>";
+     <thead>
+      <tr class='newday'>
+       <th>$wday</th>
+       <th>";
 	$t = $tstart;
 	for($i=0; $i<4; $i++){
 	    $time = date('H:i', $t);
@@ -95,8 +96,9 @@
 	    $t += $textent / 4;
 	}
 	echo "
-      </td>
-     </tr>";
+       </th>
+      </tr>
+     </thead>";
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) $lcn = 1;
 	else $lcn = 0;
 	$i = 0;
