@@ -132,6 +132,9 @@
 		    $p['onnow'] = 1;
 		}
 		else $colour = '#dee6ee';
+		if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
+		    $colour = '#dea8a8';
+		}
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		if ($duration == 0) continue;
 		$pc = ($wd * $duration) / $textent;
@@ -181,13 +184,12 @@
     var cursor = document.getElementById('timenow');
     if(cursor) {
 	var elem = document.getElementById('timeline');
-	var rect = elem.getBoundingClientRect();
-	var start = Math.max(0,6+rect.top);
-	cursor.style.top = (start+27) + 'px';
-	cursor.style.height = (rect.height-start) + 'px';
+	var start = elem.offsetTop;
+	cursor.style.top = (start+33) + 'px';
+	cursor.style.height = (elem.offsetHeight-start) + 'px';
 	var delta = (now%1800)/$textent;
-	var pos = rect.left + 6 + $ch_width
-		+ 0.98*delta*(rect.width-$ch_width-6);
+	var pos = elem.offsetLeft + 6 + $ch_width
+		+ 0.98*delta*(elem.offsetWidth-$ch_width-6);
 	cursor.style.left = pos + 'px';
 	cursor.style.visibility = 'visible';
     }
