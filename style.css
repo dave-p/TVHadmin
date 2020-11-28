@@ -189,6 +189,7 @@ a:hover {
 	padding-left: 3px;
 	font-weight: bold;
 	color: white;
+	text-align: left;
 }
 #whatson .epg_title,
 #whatson .channel_name {
