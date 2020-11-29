@@ -1,6 +1,11 @@
 <?php
 	$page_title = "Timeline";
 	include_once './head.php';
+	if (isset($_GET["eventId"])) {
+	  $evt = $_GET["eventId"];
+	  $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
+	  file_get_contents($url);
+	}
 	$now = time();
 	$chans = get_channels();
 	$tags = get_channeltags();
@@ -130,12 +135,11 @@
 		    }
 		    $colour = '#b4e29c';
 		    $tnext = min($tnext, $p['stop']);
-		    echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'>";
-		    $p['onnow'] = 1;
+		    $p['onNow'] = 1;
 		}
 		else $colour = '#dee6ee';
 		if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
-		    $colour = '#dea8a8';
+		    $colour = '#e8a8a8';
 		}
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		if ($duration == 0) continue;
@@ -143,10 +147,12 @@
 		if (isset($p['summary'])) $desc = $p['summary'];
 		else $desc = $p['description'];
 		@$subtitle = htmlspecialchars($desc, ENT_QUOTES|ENT_HTML5);
-		echo "
-	 <div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>
-	    {$p['title']}</div>";
-		if (isset($p['onnow'])) echo "</a>";
+		if (isset($p['onNow'])) echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>{$p['title']}</div></a>";
+		else if (isset($p['dvrState'])) echo "<div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>{$p['title']}</div>";
+		else {
+		    $esctitle = htmlspecialchars($p['title'], ENT_QUOTES|ENT_HTML5);
+		    echo "<div class='item' style='background-color: $colour; width: $pc%; cursor: pointer;' title='$subtitle' onclick='make_timer(\"{$p['eventId']}\",\"$esctitle\")'>{$p['title']}</div>";
+		}
 	    }
 	    echo "
       </td>
@@ -179,6 +185,7 @@
 	const params = new URLSearchParams(window.location.search);
 	params.delete('left.x');
 	params.delete('right.x');
+	params.delete('eventId');
 	var newurl = location.pathname + '?' + params.toString();
 	window.history.replaceState({}, '', newurl);
 	location.reload(true);
@@ -202,6 +209,12 @@
   }
   function formSubmit() {
     document.media.submit();
+  }
+  function make_timer(event_id, title) {
+    if (confirm('Create Timer for ' + title + '?')) {
+      var here = window.location.href;
+      location.replace(here + '&eventId=' + event_id);
+    }
   }
 </script>
  </body>
