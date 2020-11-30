@@ -112,7 +112,6 @@
 			if (count(array_intersect($c["tags"], $media)) == 0) continue;
 	    }
 	    $e = get_epg($c["name"], $tstart, $tend);
-	    if (!isset($e)) continue;
 	    $wd = 98 - count($e)/8;
 	    echo "
      <tr>
@@ -124,7 +123,8 @@
        </div>
       </td>
       <td class='col_schedule'>";
-	    foreach ($e as $p) {
+	    if (count($e) > 0) {
+	      foreach ($e as $p) {
 		if ($p['start'] <= $now && $p['stop'] > $now) {
 		    if ($p['start'] > $tstart) {	#Need a spacer
 			$spc = (($p['start'] - $tstart) * $wd) / $textent;
@@ -153,6 +153,10 @@
 		    $esctitle = htmlspecialchars($p['title'], ENT_QUOTES|ENT_HTML5);
 		    echo "<div class='item' style='background-color: $colour; width: $pc%; cursor: pointer;' title='$subtitle' onclick='make_timer(\"{$p['eventId']}\",\"$esctitle\")'>{$p['title']}</div>";
 		}
+	      }
+	    }
+	    else {
+	      echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item' style='background-color: white; width: 98%;'>No EPG Available</div></a>";
 	    }
 	    echo "
       </td>
