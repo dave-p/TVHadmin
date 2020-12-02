@@ -21,6 +21,6 @@ Note that the web server is responsible for security! For use across the interne
 - Check if `open_basedir` has been set in your PHP.INI file. If so, ensure that the locations of the TVHadmin files and the config file are under the open_basedir directory
 - Check that your TVHeadend server is configured to use 'plain' or 'plain and digest' authentication (Configuration->General->Base->HTTP Server Settings). TVHadmin won't currently work with 'digest' authentication.
 - If necessary create a TVHeadend user. The user must have the 'Web Interface' box ticked, and for full fuctionality should have all the 'Streaming' and 'Video Recorder' boxes ticked. If you are using Kodi with the 'TVHeadend HTSP' plugin, you should make use of the same user for both TVHadmin and Kodi.
-- Browse to http://your.web.server/path/TVHadmin.php. Enter the username and password of the TVHeadend user. In the "IP address:port" box enter the details of your TVHeadend server; if you have started TVHeadend with the "--http_root" option then add the directory after the port number. Click the 'save' button.
-- If connection to TVHeadend succeeds you will see further configuration options. Make any changes then click 'save' again.
+- Browse to http://your.web.server/path/TVHadmin.php. Enter the username and password of the TVHeadend user. In the "IP address:port" box enter the details of your TVHeadend server; if you have started TVHeadend with the "--http_root" option then add the directory after the port number. Click the 'Connect' button.
+- If connection to TVHeadend succeeds you will see further configuration options. Make any changes then click 'Save'.
 - TVHadmin should now be working.

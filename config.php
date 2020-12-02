@@ -78,27 +78,22 @@
 		echo "<td class='col_value'><input type='text' name='IP' value='$ip' size='24'></td>";
 ?>
 	    </tr>
-	    <tr class='row_alt' title="TVheadend profile to use for recordings. This line is blank if there is only one profile">
+	    <tr class='row_alt' title="TVheadend profile to use for recordings.">
 <?php
 	$prof = get_profiles();
 	if (isset($prof)) {
-	  if(count($prof) == 1) {
-		$config_uuid = $prof[0]['uuid'];
-		echo "<td><input type='hidden' name='PROFILE' value=''>";
-		echo "<input type='hidden' name='UUID' value='$config_uuid'></td><td></td>";
-	  }
-	  else {
 		echo "<td class='col_label'><h5>Recording Profile:</h5></td>";
-		echo "<td class='col_value'><select name='PROFILE'>";
+		echo "<td class='col_value'><select name='UUID'>";
+		if (!isset($config_uuid)) $config_uuid = $prof[0]['uuid'];
 		foreach ($prof as $p) {
+		    if (!$p['enabled']) continue;
 		    $pname = $p['name'];
 		    if ($pname == '') $pname = '(default)';
 		    if ($p['uuid'] === $config_uuid) $sel = 'selected';
 		    else $sel = '';
-		    echo "<option value='$pname' $sel>$pname</option>";
+		    echo "<option value='{$p['uuid']}' $sel>$pname</option>";
 		}
 		echo "</td>";
-	  }
 	  echo "</tr>
 	</table>
 	<table class='group'>
@@ -304,6 +299,7 @@ screen'>
 		    echo "</select>
 		</td>
 	    </tr>";
+	    $save = "Save";
 	}
 	else {
 	    echo "
@@ -311,13 +307,15 @@ screen'>
 	    <input type='hidden' name='Media_All' value='on'>
 	    <input type='hidden' name='Time_All' value='on'>
 	    <input type='hidden' name='Rec_All' value='on'>";
+	    $save = "Connect";
 	}
-?>
+	echo "
 	</table>
-	<div id="buttons">
-	    <input type="submit" class="submit" name="save" value="Save" onclick="selectAll()">
+	<div id='buttons'>
+	    <input type='submit' class='submit' name='save' value=$save onclick='selectAll()'>
 	</div>
-    </form>
+    </form>";
+?>
     <script>
 // IMPORTANT: this is the extra bit of code
 // shorthand for referring to menus
