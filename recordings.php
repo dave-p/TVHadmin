@@ -1,10 +1,12 @@
 <?php
   $page_title = 'Recordings';
   include_once './head.php';
+  $query = $_SERVER['QUERY_STRING'];
   if (isset($_GET["uuid"])) {
     $uuid = $_GET["uuid"];
     $url = "$urlp/api/dvr/entry/remove?uuid=$uuid";
     file_get_contents($url);
+    $query = preg_replace("/uuid=.*?&/", "?", $query);
   }
   if (isset($_GET['SORT'])) $sort = $_GET['SORT'];
   else if (isset($settings['SORT'])) $sort = $settings['SORT'];
@@ -137,7 +139,7 @@
 	  </td>
 	  <td class='wideonly col_length'>$length</td>
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$summ}</div></td>
-	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&SORT=$sort'><img src='images/delete.png' title='Delete Recording'></a></td>";
+	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&{$query}'><img src='images/delete.png' title='Delete Recording'></a></td>";
 		if ($ok) echo "
 	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images/play.png' title='Play'></a></td>";
 		else echo "<td></td>";
