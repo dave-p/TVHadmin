@@ -1,11 +1,17 @@
 <?php
 	$page_title = "What's On Now";
 	include_once './head.php';
+	$query = $_SERVER['QUERY_STRING'];
 	if (isset($_GET["eventId"])) {
 	  $evt = $_GET["eventId"];
 	  $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
 	  file_get_contents($url);
+	  if (preg_match("/eventId=.*?&/", $query)) {
+	    $query = preg_replace("/eventId=.*?&/", "", $query);
+	  }
+	  else $query = "";
 	}
+	if ($query !== '') $query = '&' . $query;
 	$chans = get_channels();
 	$tags = get_channeltags();
 	$wday = date('l, j M Y', time());
@@ -143,9 +149,8 @@
 	<img src='images/rec.png' alt='Recording' title='Recording'>";
 			}
 			else {
-				$evt = $p["eventId"];
 				echo "
-        <a href='now.php?eventId=$evt'><img src='images/rec_button1.png' alt='record' title='record'></a>";
+        <a href='now.php?eventId={$p["eventId"]}$query'><img src='images/rec_button1.png' alt='record' title='record'></a>";
 			}
 		}
 		else echo "
