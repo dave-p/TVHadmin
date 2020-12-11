@@ -74,8 +74,10 @@
 	}
 	echo "
       </td>
-      <td>
-       <input type='image' alt='Earlier' title='Earlier' name='left' src='images/left.png'>
+      <td>";
+	if ($now < $tstart) echo "<input type='image' alt='Earlier' title='Earlier' name='left' src='images/left.png'>";
+	else echo "<input type='image' name='left' src='images/spacer.gif' style='width:20px;height:32px;'>";
+	echo "
        <input type='image' alt='Later' title='Later' name='right' src='images/right.png'>
       </td>
      </tr>
