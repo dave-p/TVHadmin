@@ -15,12 +15,12 @@
 	    unset($timers[$key]);
 	    break 2;
 	  case "toggle":
-	    if ($v['enabled'] == 'true') $mode = 'false';
+	    if ($v['enabled'] === TRUE) $mode = 'false';
 	    else $mode = 'true';
 	    $data = urlencode("[{\"enabled\": $mode, \"uuid\": \"$uuid\" }]");
 	    $url = "$urlp/api/idnode/save?node=$data";
 	    file_get_contents($url);
-	    $v['enabled'] = $mode;
+	    $v['enabled'] = !$v['enabled'];
 	    break 2;
 	}
       }
@@ -79,6 +79,9 @@
 		  case 2:
 		    echo "<td class='col_info'><img src='images/tick_red.png'></td>";
 		    $clashes[] = $t;
+		    break;
+		  case 4:
+		    echo "<td class='col_info'><img src='images/spacer.gif'></td>";
 		}
 	    }
 	    echo "
@@ -162,7 +165,7 @@
 	function check_timer($timers, $t) {
 	    global $settings;
 	    if (count($timers) < 2) return 0;
-	    if (!$t["enabled"]) return 0;
+	    if (!$t["enabled"]) return 4;
 	    $tstart = $t["start_real"];
 	    $tstop = $t["stop_real"];
 	    $tuuid = $t["uuid"];
