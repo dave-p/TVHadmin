@@ -27,7 +27,6 @@
 	$tnext = $tend;
 	$wday = date('D j M', $utime);
 	$media = array();
-	$colours = array('#ffffff', '#dee6ee', '#ffffff', '#dee6ee');
 	if (isset($settings["CSORT"]) && ($settings["CSORT"] == 1)) {
 		$lcn = 1;
 		$ch_width = 145;
@@ -99,7 +98,7 @@
 	for($i=0; $i<4; $i++){
 	    $time = date('H:i', $t);
 	    echo "
-	<div style='float: left; background-color: {$colours[$i]}; width: 24.5%;'>$time</div>";
+	<div class='row_alt' style='float: left; width: 24.5%;'>$time</div>";
 	    $t += $textent / 4;
 	}
 	echo "
@@ -117,10 +116,10 @@
 	    $wd = 98 - count($e)/8;
 	    echo "
      <tr>
-      <td class='col_channel'>
-       <div class='channel_name' style='background-color: ";
-	    if ($lcn) print "{$colours[$i%2]}'>{$c['number']} {$c['name']}";
-	    else print "{$colours[$i%2]}'>{$c['name']}";
+      <td class='col_channel row_$i'>
+       <div class='channel_name'>";
+	    if ($lcn) print "{$c['number']} {$c['name']}";
+	    else print "{$c['name']}";
 	    echo "
        </div>
       </td>
@@ -135,13 +134,13 @@
 	  <img src='images/spacer.gif' width=1 height=1 alt=''>
 	 </div>";
 		    }
-		    $colour = '#b4e29c';
+		    $colour = 'onNow';
 		    $tnext = min($tnext, $p['stop']);
 		    $p['onNow'] = 1;
 		}
-		else $colour = '#dee6ee';
+		else $colour = 'onSoon';
 		if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
-		    $colour = '#e8a8a8';
+		    $colour = 'record';
 		}
 		$duration = min($tend, $p['stop']) - max($tstart, $p['start']);
 		if ($duration == 0) continue;
@@ -149,21 +148,21 @@
 		if (isset($p['summary'])) $desc = $p['summary'];
 		else $desc = $p['description'];
 		@$subtitle = htmlspecialchars($desc, ENT_QUOTES|ENT_HTML5);
-		if (isset($p['onNow'])) echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>{$p['title']}</div></a>";
-		else if (isset($p['dvrState'])) echo "<div class='item' style='background-color: $colour; width: $pc%;' title='$subtitle'>{$p['title']}</div>";
+		if (isset($p['onNow'])) echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item $colour' style='width: $pc%;' title='$subtitle'>{$p['title']}</div></a>";
+		else if (isset($p['dvrState'])) echo "<div class='item $colour' style='width: $pc%;' title='$subtitle'>{$p['title']}</div>";
 		else {
 		    $esctitle = htmlspecialchars($p['title'], ENT_QUOTES|ENT_HTML5);
-		    echo "<div class='item' style='background-color: $colour; width: $pc%; cursor: pointer;' title='$subtitle' onclick='make_timer(\"{$p['eventId']}\",\"$esctitle\")'>{$p['title']}</div>";
+		    echo "<div class='item $colour' style='width: $pc%; cursor: pointer;' title='$subtitle' onclick='make_timer(\"{$p['eventId']}\",\"$esctitle\")'>{$p['title']}</div>";
 		}
 	      }
 	    }
 	    else {
-	      echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item' style='background-color: white; width: 98%;'>No EPG Available</div></a>";
+	      echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item onNow' style='width: 98%;'>No EPG Available</div></a>";
 	    }
 	    echo "
       </td>
      </tr>";
-	    $i++;
+	    $i = ($i+1)%2;
 	}
 	echo "
     </table>";
