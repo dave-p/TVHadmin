@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="application-name" content="TVHadmin">
 <title>TVHadmin - <?php echo $page_title; ?></title>
-<link rel="stylesheet" href="style.css">
+<?php
+  include_once './include.php';
+  if (isset($settings["THEME"]) && ($settings["THEME"] == 1)) {
+    echo '<link rel="stylesheet" href="style.dark.css">';
+  }
+  else echo '<link rel="stylesheet" href="style.css">';
+?>
 <!--[if !IE]> -->
 <script>
   window.addEventListener('load',function() {
@@ -28,7 +34,6 @@
     </div>
     <div class="nav_bar">
 <?php
-  include_once './include.php';
   foreach ($pages as $key=>$value) {
     echo "<div class='navi'><a href='TVHadmin.php?screen=$key'>$value</a></div>";
   }

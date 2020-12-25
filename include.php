@@ -21,6 +21,10 @@ $c_orders = array(
 	0 => "Name",
 	1 => "LCN");
 
+$themes = array(
+	0 => "Light",
+	1 => "Dark");
+
 if (file_exists($config_file)) {
   $conf = file_get_contents($config_file);
   $settings = json_decode($conf, true);

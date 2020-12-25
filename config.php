@@ -100,6 +100,19 @@
 	    <tr class='heading'>
 		<td colspan='2'><h2>Preferences</h2></td>
 	    </tr>
+	    <tr class='row_alt' title='Select display theme'>
+		<td class='col_label'><h5>Display theme:</h5></td>
+		<td class='col_value'>";
+	if (!isset($settings['THEME'])) $settings['THEME'] = 0;
+	foreach ($themes as $key=>$value) {
+	  echo "<label for='C$key'>$value:</label>";
+	  echo "<input type='radio' name='THEME' id='C$key' value='$key'";
+	  if ($key == $settings['THEME']) echo " checked>";
+	  else echo ">";
+	}
+                  echo "
+                </td>
+            </tr>
 	    <tr class='row_alt' title='Time after which entries appear on tomorrow&apos;s EPG. Useful if you watch TV after midnight'>
 		<td class='col_label'><h5>EPG Day starts at:</h5></td>
 		<td class='col_value'>
