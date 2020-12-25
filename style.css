@@ -245,6 +245,20 @@ a:hover {
 	border-right:0px none;
 	white-space: nowrap;
 }
+#timeline .onNow {
+	background-color: #b4e29c;
+}
+#timeline .onSoon {
+	background-color: #dee6ee;
+}
+#timeline .record {
+	background-color: ##e8a8a8;
+}
+#timeline .row_0 {
+}
+#timeline .row_1 {
+	background-color: #dee6ee;
+}
 
 #timenow {
 	background: red;
