@@ -12,7 +12,6 @@
   }
   else echo '<link rel="stylesheet" href="style.css">';
 ?>
-<!--[if !IE]> -->
 <script>
   window.addEventListener('load',function() {
     var mytop=document.getElementById("mobmenu");
@@ -23,8 +22,11 @@
         else mynav.classList.add('focus');
     });
   },false);
+  function checkForm() {
+    var x = document.forms["telly"]["find"].value;
+    if (x == "") return false;
+  }
 </script>
-<!-- <![endif]-->
 </head> 
 <body>
 <div id="container">
@@ -38,7 +40,7 @@
     echo "<div class='navi'><a href='TVHadmin.php?screen=$key'>$value</a></div>";
   }
 ?>
-      <form action="search.php" method="GET" name="telly" class="search">
+      <form action="search.php" method="GET" name="telly" class="search" onsubmit="return checkForm()">
         <input type="text" name="find"><br>
         <input type="submit" name="submit" value="Search">
       </form>
