@@ -61,8 +61,12 @@
 	$clashes = array();
 	foreach($timers as $t) {
 	    $start = strftime("%H:%M", $t["start_real"]);
-	    $stop = strftime("%H:%M", $t["stop_real"]);
 	    $date = strftime("%a %e/%m", $t["start_real"]);
+	    if (strpos($t["uri"], "#")) {
+		$s = get_ms_stop($t);
+		$stop = strftime("%H:%M", $s);
+	    }
+	    else $stop = strftime("%H:%M", $t["stop_real"]);
 	    $subtitle = $t["disp_extratext"];
 	    echo "<tr class='row_alt' title=\"$subtitle\">";
 	    if ($t["start_real"] < $now) {
@@ -251,6 +255,16 @@
 		$ret = array();
 		foreach ($recs as $r) {
 			$ret[$r["key"]] = $r["val"];
+		}
+		return $ret;
+	}
+
+	function get_ms_stop($t) {
+		$limit = $t["stop"] + 10800;
+		$epg = get_epg($t["channelname"], $t["start"], $limit);
+		$ret = $t["stop"];
+		foreach ($epg as $e) {
+			if ($e["episodeUri"] == $t["uri"]) $ret = $e["stop"];
 		}
 		return $ret;
 	}
