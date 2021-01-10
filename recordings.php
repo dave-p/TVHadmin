@@ -101,7 +101,10 @@
 		}
 		$time = strftime("%H:%M", $t["start"]);
 		$date = strftime("%a %e/%m/%y", $t["start"]);
-		$duration = $t["stop"] - $t["start"];
+		if (isset($t["uri"]) && strpos($t["uri"], "#")) {
+			$duration = $t["stop_real"] - $t["start_real"];
+		}
+		else $duration = $t["stop"] - $t["start"];
 		$hh = $duration / 3600;
 		$mm = ($duration % 3600) / 60;
 		if ($t['sched_status'] == 'completed') {
