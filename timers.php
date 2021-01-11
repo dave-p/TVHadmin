@@ -137,7 +137,7 @@
 	    if (preg_match("/^(.*?)\.\.\./", $title, $t)) {
 		$title = $t[1];
 	    }
-	    if (preg_match("/^New: (.*)/", $title, $t)) {
+	    if (preg_match("/^New: *(.*)/", $title, $t)) {
 		$ts = $t[1];
 	    }
 	    else {
@@ -161,7 +161,8 @@
 		    }
 		}
 		if (strlen($s) > 0) {
-		    echo "<p>Alternatives for \"$ts\"</p><ul>$s</ul></p>";
+		    $dt = strftime("%a %e/%m at %H:%M", $c["start"]);
+		    echo "<p>Alternatives for \"$ts\" on $dt</p><ul>$s</ul></p>";
 		}
 	    }
 	}
