@@ -26,6 +26,7 @@
 	  $levents[$l["serieslink"]] = 1;
 	}
 	$channels = get_channels();
+	$channel_names = array_column($channels, 'name');
         $dt = localtime(time(), true);
         $today = mktime($epg_start, 0, 0, $dt["tm_mon"]+1, $dt["tm_mday"], $dt["tm_year"]+1900);
 	if(isset($_GET['when'])) {
@@ -76,7 +77,7 @@
 	$id = 0;
 
 	foreach ($choices as $c) {
-	  if (array_search($c, array_column($channels, 'name')) === false) continue;
+	  if (array_search($c, $channel_names) === false) continue;
 	  echo "<table class='list'>";
 	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$c</span>";
 	  echo "</td></tr>";
