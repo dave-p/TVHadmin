@@ -19,12 +19,13 @@
 	  }
 	  file_get_contents($url);
 	}
-        $chans = &$settings['selected_channels'];
+        $choices = &$settings['selected_channels'];
 	$links = get_links();
 	$levents = array();
 	foreach ($links as $l) {
 	  $levents[$l["serieslink"]] = 1;
 	}
+	$channels = get_channels();
         $dt = localtime(time(), true);
         $today = mktime($epg_start, 0, 0, $dt["tm_mon"]+1, $dt["tm_mday"], $dt["tm_year"]+1900);
 	if(isset($_GET['when'])) {
@@ -74,7 +75,8 @@
 	<div id='content'>";
 	$id = 0;
 
-	foreach ($chans as $c) {
+	foreach ($choices as $c) {
+	  if (array_search($c, array_column($channels, 'name')) === false) continue;
 	  echo "<table class='list'>";
 	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$c</span>";
 	  echo "</td></tr>";
