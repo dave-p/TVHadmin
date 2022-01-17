@@ -23,7 +23,7 @@
 	  <td class='col_value'><h2>Recs</h2></td>
 	  <td class='col_channel'><h2>Channel</h2></td>
 	  <td class='col_name'><h2>Name</h2></td>
-	  <td class='wideonly col_channel'><h2>Link</h2></td>
+	  <td class='wideonly col_channel'><h2>Next Timer</h2></td>
 	  <td class='col_delete'></td>
 	</tr>
   ";
@@ -36,11 +36,16 @@
 	$recordings = get_recordings(-1);
 	$rcnt = array();
 	$tcnt = array();
+	$tnext = array();
 	foreach($recordings as $r) {
 	    $autorec = $r['autorec'];
 	    if ($r["sched_status"] == "scheduled") {
 		if (isset($tcnt[$autorec])) $tcnt[$autorec]++;
 		else $tcnt[$autorec] = 1;
+		if (isset($tnext[$autorec])) {
+			$tnext[$autorec] = max($tnext[$autorec], $r['start']);
+		}
+		else $tnext[$autorec] = $r['start'];
 	    }
 	    else {
 		if (isset($rcnt[$autorec])) $rcnt[$autorec]++;
@@ -54,7 +59,8 @@
 	    if (isset($tcnt[$l['uuid']])) $timers = $tcnt[$l['uuid']];
 	    else $timers = 0;
 	    $title = stripslashes($l['title']);
-	    $crid = substr(strstr($l['serieslink'], '//'), 2);
+	    if (isset($tnext[$l['uuid']])) $crid = strftime("%a %e/%m %H:%M", $tnext[$l['uuid']]);
+	    else $crid = '';
 	    echo "
       <tr class='row_alt'>
 	<td class='col_value'>$timers</td>
