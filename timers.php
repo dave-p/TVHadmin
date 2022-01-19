@@ -60,13 +60,13 @@
 	$muxes = array();
 	$clashes = array();
 	foreach($timers as $t) {
-	    $start = strftime("%H:%M", $t["start_real"]);
-	    $date = strftime("%a %e/%m", $t["start_real"]);
+	    $start = date("H:i", $t["start_real"]);
+	    $date = date("D d/m", $t["start_real"]);
 	    if (strpos($t["uri"], "#")) {
 		$s = get_ms_stop($t);
-		$stop = strftime("%H:%M", $s);
+		$stop = date("H:i", $s);
 	    }
-	    else $stop = strftime("%H:%M", $t["stop_real"]);
+	    else $stop = date("H:i", $t["stop_real"]);
 	    $subtitle = $t["disp_extratext"];
 	    echo "<tr class='row_alt' title=\"$subtitle\">";
 	    if ($t["start_real"] < $now) {
@@ -151,7 +151,7 @@
 		    $sl = '';
 		    if (isset($a["deafsigned"])) $sl = '[SL]';
 		    if (isset($a["episodeUri"]) && ($c["uri"] === $a["episodeUri"])) {
-			$when = strftime("%a %e/%m %H:%M", $a["start"]);
+			$when = date("D d/m H:i", $a["start"]);
 			if (!check_event($timers, $a)) {
 			    $s .= "<li>$when {$a["channelName"]} {$a["title"]} $sl</li>";
 			}
@@ -161,7 +161,7 @@
 		    }
 		}
 		if (strlen($s) > 0) {
-		    $dt = strftime("%a %e/%m at %H:%M", $c["start"]);
+		    $dt = date("D d/m \a\\t H:i", $c["start"]);
 		    echo "<p>Alternatives for \"$ts\" on $dt</p><ul>$s</ul></p>";
 		}
 	    }

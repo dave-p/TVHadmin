@@ -11,6 +11,7 @@ Sample screenshots can be found [here](/screenshots/).
 - A recent version of TVHeadend (at least v4.2 - the latest development version preferred).
 - A web server to host TVHadmin, with PHP available.
 - PHP must have the JSON and XML extensions available. They are built-in by default in recent versions, but some distributions package them separately.
+- The `date.timezone` directive in your PHP.INI file must be set to the timezone of your TVHeadend server.
 - The PHP.INI setting "allow_url_fopen" must be ON.
 
 Note that the web server is responsible for security! For use across the internet you should configure authentication on the web server and preferably use SSL. If the web server and TVH server are not on the same local network, bear in mind that the TVH username and password are stored in clear text on the web server and are sent in clear text from web server to TVH.

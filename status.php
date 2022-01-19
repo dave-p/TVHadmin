@@ -100,7 +100,7 @@ window.addEventListener('load',function(event) {
     $load = preg_replace('/(\d{2})\d*/', '$1', $currentload->systemload);
     $load = preg_replace('/,/', ', ', $load);
     if (isset($currentload->recordings->recording->next)) {
-      $recstatus = 'Next: ' . strftime('%F %R', time()+60*$currentload->recordings->recording->next);
+      $recstatus = 'Next: ' . date('Y-m-d H:i', time()+60*$currentload->recordings->recording->next);
     }
     else if (isset($currentload->recordings->recording->title)) {
       $recstatus = '"' . $currentload->recordings->recording->title . '" Ends ' .

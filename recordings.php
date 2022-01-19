@@ -99,8 +99,8 @@
 				if (count(array_intersect($chtags[$cid], $media)) == 0) continue;
 			}
 		}
-		$time = strftime("%H:%M", $t["start"]);
-		$date = strftime("%a %e/%m/%y", $t["start"]);
+		$time = date("H:i", $t["start"]);
+		$date = date("D d/m/y", $t["start"]);
 		if (isset($t["uri"]) && strpos($t["uri"], "#")) {
 			$duration = $t["stop_real"] - $t["start_real"];
 		}
