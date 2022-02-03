@@ -66,10 +66,10 @@
 		    echo "<td><img src='images/rec.png' title='Recording scheduled'></td>";
 		  }
 		  else {
-		    echo "<td><a href='search.php?eventId={$r['eventId']}&series=N'><img src='images/rec_button1.png' title='record'></a></td>";
+		    echo "<td><a href='search.php?eventId={$r['eventId']}&series=N&find={$find}'><img src='images/rec_button1.png' title='record'></a></td>";
 		  }
 		  if (isset($r["serieslinkUri"])) {
-		    echo "<td><a href='search.php?eventId={$r['eventId']}&series=Y'><img src='images/rec_buttonS.png' title='record series'></a></td></tr>";
+		    echo "<td><a href='search.php?eventId={$r['eventId']}&series=Y&find={$find}'><img src='images/rec_buttonS.png' title='record series'></a></td></tr>";
 		  }
 		  else {
 		    echo "<td></td></tr>";
