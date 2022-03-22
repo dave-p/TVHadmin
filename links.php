@@ -43,7 +43,7 @@
 		if (isset($tcnt[$autorec])) $tcnt[$autorec]++;
 		else $tcnt[$autorec] = 1;
 		if (isset($tnext[$autorec])) {
-			$tnext[$autorec] = max($tnext[$autorec], $r['start']);
+			$tnext[$autorec] = min($tnext[$autorec], $r['start']);
 		}
 		else $tnext[$autorec] = $r['start'];
 	    }
