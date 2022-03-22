@@ -58,16 +58,16 @@
 		  <div class='channel_name'>{$r['channelName']}</div></td>
 		<td class='col_center'>
 		  <div class='epg_title'>{$r['title']}</div><div class='epg_subtitle'>{$desc}</div></td>";
-		if (isset($r["serieslinkUri"]) && array_key_exists($r["serieslinkUri"], $levents)) {
-		  echo "<td></td><td><img src='images/rec.png' title='Series recording scheduled'></td>";
-		}
-		else {
-		  if (isset($r['dvrState']) && ($r['dvrState'] == 'scheduled' || $r['dvrState'] == 'recording')) {
-		    echo "<td><img src='images/rec.png' title='Recording scheduled'></td>";
+		if (isset($r['dvrState']) && ($r['dvrState'] == 'scheduled' || $r['dvrState'] == 'recording')) {
+		  if (isset($r["serieslinkUri"]) && array_key_exists($r["serieslinkUri"], $levents)) {
+		    echo "<td></td><td><img src='images/rec.png' title='Series recording scheduled'></td>";
 		  }
 		  else {
-		    echo "<td><a href='search.php?eventId={$r['eventId']}&series=N&find={$find}'><img src='images/rec_button1.png' title='record'></a></td>";
+		    echo "<td><img src='images/rec.png' title='Recording scheduled'></td>";
 		  }
+		}
+		else {
+		  echo "<td><a href='search.php?eventId={$r['eventId']}&series=N&find={$find}'><img src='images/rec_button1.png' title='record'></a></td>";
 		  if (isset($r["serieslinkUri"])) {
 		    echo "<td><a href='search.php?eventId={$r['eventId']}&series=Y&find={$find}'><img src='images/rec_buttonS.png' title='record series'></a></td></tr>";
 		  }

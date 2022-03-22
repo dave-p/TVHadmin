@@ -90,16 +90,16 @@
 	    else $desc = $p['description'];
 	    echo "<tr class='row_alt' id='$id'><td class='col_duration'>$start - $end</td>";
 	    printf("<td class='col_title'><div class='epg_title'>%s</div><div class='epg_subtitle'>%s</div></td>", $p["title"], $desc);
-	    if (isset($p["serieslinkUri"]) && array_key_exists($p["serieslinkUri"], $levents)) {
-	      echo "<td></td><td><img src='images/rec.png' title='Series recording scheduled'></td>";
-	    }
-	    else {
-	      if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
-		echo "<td><img src='images/rec.png' title='Recording scheduled'></td>";
+	    if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
+	      if (isset($p["serieslinkUri"]) && array_key_exists($p["serieslinkUri"], $levents)) {
+		echo "<td></td><td><img src='images/rec.png' title='Series recording scheduled'></td>";
 	      }
 	      else {
-		echo "<td><a href='fav.php?eventId={$p['eventId']}&series=N&when=$when#$id'><img src='images/rec_button1.png' title='record'></a></td>";
+	        echo "<td><img src='images/rec.png' title='Recording scheduled'></td>";
 	      }
+	    }
+	    else {
+	      echo "<td><a href='fav.php?eventId={$p['eventId']}&series=N&when=$when#$id'><img src='images/rec_button1.png' title='record'></a></td>";
 	      if (isset($p["serieslinkUri"])) {
 		echo "<td><a href='fav.php?eventId={$p['eventId']}&series=Y&when=$when#$id'><img src='images/rec_buttonS.png' title='record series'></a></td></tr>";
 	      }
