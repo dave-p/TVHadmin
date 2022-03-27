@@ -44,6 +44,7 @@
 	foreach ($results as $r) {
 		$d = date('l d/n', $r["start"]);
 		$t = date('H:i', $r["start"]);
+		$e = date('H:i', $r["stop"]);
 		if (isset($r['summary'])) $desc = $r['summary'];
 		else $desc = $r['description'];
 		if ($d != $last_prog_date) {
@@ -53,7 +54,7 @@
 		echo "
 	      <tr class='row_alt'>
 		<td class='col_duration'>
-		  <span class='time_duration'><span class='time_start'>$t</span></span></td>
+		  <span class='time_duration'>$t - $e</span></td>
 		<td class='col_channel'>
 		  <div class='channel_name'>{$r['channelName']}</div></td>
 		<td class='col_center'>
