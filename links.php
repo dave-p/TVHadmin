@@ -38,6 +38,7 @@
 	$tcnt = array();
 	$tnext = array();
 	foreach($recordings as $r) {
+	    if (! $r["enabled"]) continue;
 	    $autorec = $r['autorec'];
 	    if ($r["sched_status"] == "scheduled") {
 		if (isset($tcnt[$autorec])) $tcnt[$autorec]++;
@@ -47,7 +48,7 @@
 		}
 		else $tnext[$autorec] = $r['start'];
 	    }
-	    else {
+	    else if ($r["sched_status"] == "completed") {
 		if (isset($rcnt[$autorec])) $rcnt[$autorec]++;
 		else $rcnt[$autorec] = 1;
 	    }
