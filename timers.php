@@ -15,7 +15,7 @@
 	    unset($timers[$key]);
 	    break 2;
 	  case "toggle":
-	    if ($v['enabled'] === TRUE) $mode = 'false';
+	    if ($v['enabled']) $mode = 'false';
 	    else $mode = 'true';
 	    $data = urlencode("[{\"enabled\": $mode, \"uuid\": \"$uuid\" }]");
 	    $url = "$urlp/api/idnode/save?node=$data";
@@ -111,7 +111,7 @@
 		$type = "";
 		$type2 = "";
 	    }
-	    if ($t["enabled"] == "true") {
+	    if ($t["enabled"]) {
 		$en = "checked";
 	    }
 	    else {
