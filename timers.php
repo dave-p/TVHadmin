@@ -62,7 +62,7 @@
 	foreach($timers as $t) {
 	    $start = date("H:i", $t["start_real"]);
 	    $date = date("D d/m", $t["start_real"]);
-	    if (strpos($t["uri"], "#")) {
+	    if (isset($t["uri"]) && strpos($t["uri"], "#")) {
 		$s = get_ms_stop($t);
 		$stop = date("H:i", $s);
 	    }
