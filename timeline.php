@@ -3,7 +3,12 @@
 	include_once './head.php';
 	if (isset($_GET["eventId"])) {
 	  $evt = $_GET["eventId"];
-	  $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
+	  if (isset($_GET["series"])) {
+	    $url = "$urlp/api/dvr/autorec/create_by_series?event_id=$evt&config_uuid=$config_uuid";
+	  }
+	  else {
+	    $url = "$urlp/api/dvr/entry/create_by_event?event_id=$evt&config_uuid=$config_uuid";
+	  }
 	  file_get_contents($url);
 	}
 	$now = time();
@@ -152,7 +157,8 @@
 		else if (isset($p['dvrState'])) echo "<div class='item $colour' style='width: $pc%;' title='$subtitle'>{$p['title']}</div>";
 		else {
 		    $esctitle = htmlspecialchars($p['title'], ENT_QUOTES|ENT_HTML5);
-		    echo "<div class='item $colour' style='width: $pc%; cursor: pointer;' title='$subtitle' onclick='make_timer(\"{$p['eventId']}\",\"$esctitle\")'>{$p['title']}</div>";
+		    $is_series = isset($p['serieslinkUri']) ? 1 : 0;
+		    echo "<div class='item $colour' style='width: $pc%; cursor: pointer;' title='$subtitle' onclick='make_timer(\"{$p['eventId']}\",\"$esctitle\", $is_series)'>{$p['title']}</div>";
 		}
 	      }
 	    }
@@ -171,6 +177,14 @@
      <img src='images/spacer.gif' width='1' height='1' alt=''>
     </span>";
 	echo "
+    <dialog id='recDialog'>
+     <p id='recText'></p>
+     <div style='display: flex; justify-content: center;'>
+      <button id='recCancel'>Cancel</button>
+      <button id='recOnce' style='margin-left: 10px;'>Record</button>
+      <button id='recSeries' style='margin-left: 10px;'>Series</button>
+     </div>
+    </dialog>
     </div>
     </div>
    </div>
@@ -215,11 +229,32 @@
   function formSubmit() {
     document.media.submit();
   }
-  function make_timer(event_id, title) {
-    if (confirm('Create Timer for ' + title + '?')) {
-      var here = window.location.href;
-      location.replace(here + '&eventId=' + event_id);
+  function make_timer(event_id, title, is_series) {
+    let recDialog = document.getElementById('recDialog');
+    let recCancel = document.getElementById('recCancel');
+    let recOnce = document.getElementById('recOnce');
+    let recSeries = document.getElementById('recSeries');
+    recCancel.addEventListener('click', function() {
+      recDialog.close();
+    });
+    recOnce.addEventListener('click', function rec() {
+      location.replace(window.location.href + `&eventId=\${event_id}`);
+      recOnce.removeEventListener('click', rec);
+      recDialog.close();
+    });
+    document.getElementById('recText').textContent = `Record \"\${title}\"?`;
+    if (is_series) {
+      recSeries.disabled = false;
+      recSeries.addEventListener('click', function recs(event) {
+	location.replace(window.location.href + `&eventId=\${event_id}&series=1`);
+	recSeries.removeEventListener('click', recs);
+	recDialog.close();
+      });
     }
+    else {
+	recSeries.disabled = true;
+    }
+    recDialog.showModal();
   }
 </script>
  </body>
