@@ -130,8 +130,9 @@
       </td>
       <td class='col_schedule'>";
 	    if (count($e) > 0) {
+	      $init = 1;
 	      foreach ($e as $p) {
-		if ($p['start'] <= $now && $p['stop'] > $now) {
+		if ($init) {
 		    if ($p['start'] > $tstart) {	#Need a spacer
 			$spc = (($p['start'] - $tstart) * $wd) / $textent;
 			echo "
@@ -139,9 +140,12 @@
 	  <img src='images/spacer.gif' width=1 height=1 alt=''>
 	 </div>";
 		    }
-		    $colour = 'onNow';
-		    $tnext = min($tnext, $p['stop']);
-		    $p['onNow'] = 1;
+		    if ($p['start'] <= $now && $p['stop'] > $now) {
+		      $colour = 'onNow';
+		      $tnext = min($tnext, $p['stop']);
+		      $p['onNow'] = 1;
+		    }
+		    $init = 0;
 		}
 		else $colour = 'onSoon';
 		if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
