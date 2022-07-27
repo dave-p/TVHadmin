@@ -6,7 +6,7 @@
     $uuid = $_GET["uuid"];
     $url = "$urlp/api/dvr/entry/remove?uuid=$uuid";
     file_get_contents($url);
-    $query = preg_replace("/uuid=.*?&/", "?", $query);
+    $query = preg_replace("/uuid=.*?&/", "", $query);
   }
   if (isset($_GET['SORT'])) $sort = $_GET['SORT'];
   else if (isset($settings['SORT'])) $sort = $settings['SORT'];
