@@ -23,7 +23,9 @@
 	if(isset($_GET['start'])) {
 		$utime = max($_GET['start'], $now);
 		if(isset($_GET['right_x'])) $utime += $textent/2;
+		else if(isset($_GET['right2_x'])) $utime += 86400;
 		else if(isset($_GET['left_x'])) $utime = max($utime-$textent/2, $now);
+		else if(isset($_GET['left2_x'])) $utime -= 86400;
 	}
 	else $utime = $now;
 	$toffset = $utime % 1800;	//secs from start of chart to now
@@ -79,10 +81,20 @@
 	echo "
       </td>
       <td>";
-	if ($now < $tstart) echo "<input type='image' alt='Earlier' title='Earlier' name='left' src='images/left.png'>";
-	else echo "<input type='image' name='left' src='images/spacer.gif' style='width:20px;height:32px;'>";
+	if (($tstart - ($now - $now % 1800)) >= 86400) {
+	  echo "<input type='image' alt='Prev Day' title='Prev Day' name='left2' src='images/left2.png'>";
+	  echo "<input type='image' name='left2s' src='images/spacer.gif' style='width:10px;height:32px;' disabled>";
+	}
+	else echo "<input type='image' name='left2' src='images/spacer.gif' style='width:37px;height:32px;' disabled>";
+	if ($now < $tstart) {
+	  echo "<input type='image' alt='Earlier' title='Earlier' name='left' src='images/left.png'>";
+	  echo "<input type='image' name='lefts' src='images/spacer.gif' style='width:10px;height:32px;' disabled>";
+	}
+	else echo "<input type='image' name='left' src='images/spacer.gif' style='width:30px;height:32px;' disabled>";
 	echo "
        <input type='image' alt='Later' title='Later' name='right' src='images/right.png'>
+       <input type='image' name='rights' src='images/spacer.gif' style='width:5px;height:32px;' disabled>
+       <input type='image' alt='Next Day' title='Next Day' name='right2' src='images/right2.png'>
       </td>
      </tr>
     </table>
