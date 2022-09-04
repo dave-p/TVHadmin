@@ -25,3 +25,21 @@ Note that the web server is responsible for security! For use across the interne
 - Browse to http://your.web.server/path/TVHadmin.php. Enter the username and password of the TVHeadend user. In the "IP address:port" box enter the details of your TVHeadend server; if you have started TVHeadend with the "--http_root" option then add the directory after the port number. Click the 'Connect' button.
 - If connection to TVHeadend succeeds you will see further configuration options. Make any changes then click 'Save'.
 - TVHadmin should now be working.
+
+### Timer Clashes
+TVHadmin can optionally detect and warn about timer clashes (where there is no free source to make a recording). Clash detection is set up using the Configuration screen.
+
+Clash detection has not been fully tested with IPTV and other non-tuner sources.
+
+#### Single Tuner
+TVHadmin shows a timer clash by displaying a red 'tick' against any conflicting timers. Below the main display is shown any alternative broadcasts of the same programme. These alternatives are in turn checked to see if they clash with any other timers.
+
+The alternatives display depends on the broadcasters providing 'series link' information; it has been tested on UK Freeview and Freesat.
+
+A yellow 'tick' mark is shown if overlapping timers are from the same network and mux - tuners will normally allow multiple channels on the same mux to be recorded.
+
+#### Multiple Tuners
+TVHadmin checks the allocation of sources to timers using the same algorithm as TVHeadend. However in order for the check to work correctly it is important that each source for a channel should have a different priority set - if TVHeadend has two or more sources with the same priority to make a recording it will choose one at random, so the clash detection will not be accurate.
+
+The priority for a recording source is the sum of the service priority and the tuner priority (network priority for IPTV). If not using IPTV the simplest approach is to set each TV tuner to a different priority and leave the service priorities as default. If TVHadmin detects that there are multiple 'best' sources for a recording with the same priority, the 'tick' mark against the recording will show grey.
+

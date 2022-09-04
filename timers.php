@@ -55,10 +55,19 @@
 	 <td class='col_delete'></td>
 	</tr>
   ";
+	$images = array('images/tick_green.png','images/tick_yellow.png','images/tick_red.png','images/rec.png', 'images/spacer.gif', 'images/tick_gray.png');
 	$autorecs = get_autorecs();
-	$channels = array();
-	$muxes = array();
 	$clashes = array();
+	if (!isset($settings["CLASHMODE"])) $settings["CLASHMODE"] = 0;
+	if ($settings["CLASHMODE"] != 0) {
+	    $channels = get_channels();
+	    $muxes = get_muxes();
+	}
+	if ($settings["CLASHMODE"] == 2) {
+	    $networks = get_networks();
+	    $services = get_services();
+	    $tuners = get_tuners();
+	}
 	foreach($timers as $t) {
 	    $start = date("H:i", $t["start_real"]);
 	    $date = date("D d/m", $t["start_real"]);
@@ -69,25 +78,19 @@
 	    else $stop = date("H:i", $t["stop_real"]);
 	    $subtitle = $t["disp_extratext"];
 	    echo "<tr class='row_alt' title=\"$subtitle\">";
-	    if ($t["start_real"] < $now) {
-		echo "<td class='col_info'><img src='images/rec.png'></td>";
-	    }
-	    else {
-		switch(check_timer($timers, $t)) {
-		  case 0:
-		    echo "<td class='col_info'><img src='images/tick_green.png'></td>";
-	            break;
-		  case 1:
-		    echo "<td class='col_info'><img src='images/tick_yellow.png'></td>";
+
+	    switch ($settings["CLASHMODE"]) {
+		case 0:
+		    $status = 5;
 		    break;
-		  case 2:
-		    echo "<td class='col_info'><img src='images/tick_red.png'></td>";
-		    $clashes[] = $t;
+		case 1:
+		    $status = check_timer($timers, $t);
 		    break;
-		  case 4:
-		    echo "<td class='col_info'><img src='images/spacer.gif'></td>";
-		}
+		case 2:
+		    $status = check_timer2($timers, $t);
 	    }
+	    echo "<td class='col_info'><img src='$images[$status]'></td>";
+	    if (($status == 2) && $settings["CLASHMODE"] == 1) $clashes[] = $t;
 	    echo "
       <td class='col_channel'>{$t['channelname']}</td>
       <td class='col_date'>$date
@@ -168,10 +171,11 @@
 	}
 
 	function check_timer($timers, $t) {
-	    global $settings;
+	    global $settings, $now;
 	    if (count($timers) < 2) return 0;
 	    if (!$t["enabled"]) return 4;
 	    $tstart = $t["start_real"];
+	    if ($tstart < $now) return 3;
 	    $tstop = $t["stop_real"];
 	    $tuuid = $t["uuid"];
 	    $tchannel = $t["channel"];
@@ -182,7 +186,7 @@
 	      if ($m["uuid"] === $tuuid) continue;
 	      if (($tstart >= $m["start_real"] && $tstart < $m["stop_real"])
 	          ||($m["start_real"] >= $tstart && $m["start_real"] < $tstop)) {
-		if (!isset($settings['CLASHDET'])
+		if ($settings['CLASHMODE'] == 0
 		  || (get_mux_for_timer($m) === get_mux_for_timer($t))) $ret = max($ret,1);
 		else $ret = max($ret,2);
 	      }
@@ -219,10 +223,6 @@
 
 	function get_mux_for_channel($ch) {
 		global $urlp, $channels, $muxes;
-		if (empty($channels)) {
-			$channels = get_channels();
-			$muxes = get_muxes();
-		}
 		foreach ($channels as &$c) {
 			if ($ch === $c["uuid"]) break;
 		}
@@ -266,6 +266,142 @@
 		$ret = $t["stop"];
 		foreach ($epg as $e) {
 			if ($e["episodeUri"] == $t["uri"]) $ret = $e["stop"];
+		}
+		return $ret;
+	}
+
+	function check_timer2($timers, $t) {
+		global $settings, $now;
+		static $run_time = 0;
+		if (count($timers) < 2) return 0;
+		if (!$t["enabled"]) return 4;
+		$tstart = $t["start_real"];
+		if ($tstart < $now) {
+			$run_time = max($run_time, $tstop);
+			return 3;
+		}
+		if ($run_time > $tstart) {      // timer overlaps with one currently running - don't know which tuner in use
+			$run_time = max($run_time, $tstop);
+			return 5;
+		}
+		else return find_tuner($t);
+	}
+
+	function find_tuner($timer) {
+		global $channels, $networks, $tuners, $services;
+		$best = array("tuner" => '', "mux" => '', "priority" => -999, "dup" => 0);
+		foreach ($channels as &$ch) {
+		    if ($ch["uuid"] == $timer["channel"]) break;
+		}
+		foreach ($ch["services"] as $s) {
+		    list ($net, $mux, $svc) = explode('/', $services[$s]["name"]);
+		    $n = $networks[$net];
+		    if (!$n["enabled"]) continue;
+		    if (isset($n["priority"])) {		// IPTV (or SAT>IP?)
+			$prio = $services[$s]["priority"] + $u["priority"];
+			if ($prio > $best["priority"]) {
+			    $best["priority"] = $prio;
+			    $best["tuner"] = $n["networkname"];
+			    $best["mux"] = $mux;
+			    $best["dup"] = 0;
+			}
+			else if ($prio == $best["priority"]) {
+			    $best["dup"]++;
+			}
+		    }
+		    else {
+			foreach ($tuners as $k => $u) {
+			    if ($u["network"] != $net) continue;
+			    if (($timer["start_real"] <= $u["alloc"]) && ($u["mux"] == $mux)) {   // Use existing
+				alloc_tuner($k, $timer, $mux);
+				return 1;
+			    }
+			    if ($timer["start_real"] > $u["alloc"]) {   // available
+				$prio = $services[$s]["priority"] + $u["priority"];
+				if ($prio > $best["priority"]) {
+				    $best["priority"] = $prio;
+				    $best["tuner"] = $k;
+				    $best["mux"] = $mux;
+				    $best["dup"] = 0;
+				}
+				else if ($prio == $best["priority"]) {
+				    $best["dup"]++;
+				}
+			    }
+			}
+		    }
+		}
+		if ($best["tuner"] != '') {
+		    if ($best["dup"] == 0) {
+#			var_dump($best["tuner"], $best["mux"]);
+			alloc_tuner($best["tuner"], $timer, $best["mux"]);
+			return 0;
+		    }
+		    else {
+#			var_dump($best["tuner"]);
+			return 5;
+		    }
+		}
+#		foreach($tuners as $k => $t) {
+#		    var_dump($k, $t["mux"], $t["alloc"]);
+#		}
+		return 2;
+	}
+
+	function alloc_tuner($tuner, $timer, $mux) {
+		global $tuners;
+		$tuners[$tuner]["alloc"] = $timer["stop_real"];
+		$tuners[$tuner]["mux"] = $mux;
+	}
+
+	function get_networks() {
+		global $urlp;
+		$url = "$urlp/api/mpegts/network/grid";
+		$json = file_get_contents($url);
+		$j = json_decode($json, true);
+		$recs = &$j["entries"];
+		$ret = array();
+		foreach ($recs as $r) {
+			$ret[$r["networkname"]] = $r;
+		}
+		return $ret;
+	}
+
+	function get_services() {
+		global $urlp;
+		$url = "$urlp/api/service/list?list=priority";
+		$json = file_get_contents($url);
+		$j = json_decode($json, true);
+		$recs = &$j["entries"];
+		$ret = array();
+		foreach ($recs as $r) {
+			$ret[$r["uuid"]] = array("name" => $r["text"], "priority" => $r["params"][0]["value"]);
+		}
+		return $ret;
+	}
+
+	function get_tuners() {
+		global $urlp;
+		$ret = array();
+		$url = "$urlp/api/hardware/tree?uuid=root";
+		$json = file_get_contents($url);
+		$rootlist = json_decode($json, true);
+		foreach ($rootlist as $l) {
+		    $url = "$urlp/api/hardware/tree?uuid={$l['uuid']}";
+		    $json = file_get_contents($url);
+		    $dev = json_decode($json, true);
+		    foreach ($dev as $d) {
+			foreach ($d["params"] as $t) {
+			    if ($t["id"] == "enabled" && !$t["value"]) break;
+			    if ($t["id"] == "priority") {
+				$url = "$urlp/api/mpegts/input/network_list?uuid={$d['uuid']}";
+				$json = file_get_contents($url);
+				$tuner = json_decode($json, true);
+				$ret["{$d["text"]}"] = array("network" => $tuner["entries"][0]["val"], "priority" => $t["value"], "alloc" => 0, "mux" => 0);
+				break;
+			    }
+			}
+		    }
 		}
 		return $ret;
 	}

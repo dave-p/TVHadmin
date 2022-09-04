@@ -1,6 +1,10 @@
 <?php
   $page_title = 'Configuration';
   include_once('./head.php');
+  $clashmodes = array(
+      0 => "Off:",
+      1 => "Single tuner:",
+      2 => "Multiple tuners:");
   $tags = get_channeltags();
 ?>
     <script>
@@ -191,14 +195,17 @@
         echo ">
                 </td>
             </tr>
-	    <tr class='row_alt' title='Show timer conflicts and alternative showings. Only works for single tuners on networks using CRIDs (series link)'>
-		<td class='col_label'><h5>Detect timer clashes (single tuner only):</h5></td>
-		<td class='col_value'><input type='checkbox' name='CLASHDET'";
-	if (isset($settings['CLASHDET'])) {
-	  echo " checked";
+	    <tr class='row_alt' title='Show timer conflicts. Multiple tuner option is experimental and needs ADMIN privilege.'>
+		<td class='col_label'><h5>Detect timer clashes:</h5></td>
+		<td class='col_value'>";
+	if (!isset($settings['CLASHMODE'])) $settings['CLASHMODE'] = 0;
+	foreach ($clashmodes as $key=>$value) {
+	  echo "<label for='T$key'>$value</label>";
+	  echo "<input type='radio' name='CLASHMODE' id='T$key' value='$key'";
+	  if ($key == $settings['CLASHMODE']) echo " checked>";
+	  else echo ">";
 	}
-	echo ">
-	      </td>
+	echo "</td>
 	    </tr>
 	    <tr class='row_alt' title='Time period for the Timeline screen'>
 		<td class='col_label'><h5>Timeline length:</h5></td>
