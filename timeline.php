@@ -169,7 +169,7 @@
 		if (isset($p['summary'])) $desc = $p['summary'];
 		else $desc = $p['description'];
 		@$subtitle = htmlspecialchars($desc, ENT_QUOTES|ENT_HTML5);
-		if (isset($p['onNow'])) echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item $colour' style='width: $pc%;' title='$subtitle'>{$p['title']}</div></a>";
+		if (isset($p['onNow'])) echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}' download='{$c['uuid']}.m3u'><div class='item $colour' style='width: $pc%;' title='$subtitle'>{$p['title']}</div></a>";
 		else if (isset($p['dvrState'])) echo "<div class='item $colour' style='width: $pc%;' title='$subtitle'>{$p['title']}</div>";
 		else {
 		    $esctitle = htmlspecialchars($p['title'], ENT_QUOTES|ENT_HTML5);
@@ -179,7 +179,7 @@
 	      }
 	    }
 	    else {
-	      echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}'><div class='item onNow' style='width: 98%;'>No EPG Available</div></a>";
+	      echo "<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}' download='{$c['uuid']}.m3u'><div class='item onNow' style='width: 98%;'>No EPG Available</div></a>";
 	    }
 	    echo "
       </td>

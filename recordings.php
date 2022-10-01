@@ -144,7 +144,7 @@
 	  <td class='col_name'><div class='epg_title'>{$title}</div><div class='epg_subtitle'>{$summ}</div></td>
 	  <td class='col_delete'><a href='recordings.php?uuid={$t['uuid']}&{$query}'><img src='images/delete.png' title='Delete Recording'></a></td>";
 		if ($ok) echo "
-	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}'><img src='images/play.png' title='Play'></a></td>";
+	  <td class='col_stream'><a href='$view_url/play/dvrfile/{$t['uuid']}?title={$title}' download='{$t['uuid']}.m3u'><img src='images/play.png' title='Play'></a></td>";
 		else echo "<td></td>";
 		echo "</tr>";
 	}
