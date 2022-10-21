@@ -48,7 +48,7 @@
 		}
 		else $tnext[$autorec] = $r['start'];
 	    }
-	    else if ($r["sched_status"] == "completed") {
+	    else if ($r["sched_status"] == "completed" || $r["sched_status"] == "recording") {
 		if (isset($rcnt[$autorec])) $rcnt[$autorec]++;
 		else $rcnt[$autorec] = 1;
 	    }
