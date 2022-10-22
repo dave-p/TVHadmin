@@ -39,6 +39,7 @@
 	$tnext = array();
 	foreach($recordings as $r) {
 	    if (! $r["enabled"]) continue;
+	    if ($r['autorec'] == "") continue;
 	    $autorec = $r['autorec'];
 	    if ($r["sched_status"] == "scheduled") {
 		if (isset($tcnt[$autorec])) $tcnt[$autorec]++;
