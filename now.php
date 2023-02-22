@@ -160,7 +160,7 @@
 	echo "
       </td>
       <td class='col_stream'>
-	<a href='$view_url/play/stream/channel/{$c['uuid']}?title={$c['name']}' download='{$c['uuid']}.m3u'><img src='images/play.png' title='Play'></a>
+	<a href='$view_url/play/ticket/stream/channel/{$c['uuid']}?title={$c['name']}' download='{$c['uuid']}.m3u'><img src='images/play.png' title='Play'></a>
       </td>
      </tr>";
 	}
