@@ -295,6 +295,7 @@
 		}
 		foreach ($ch["services"] as $s) {
 		    list ($net, $mux, $svc) = explode('/', $services[$s]["name"]);
+		    if (str_starts_with($svc, '---')) continue;
 		    $n = $networks[$net];
 		    if (!$n["enabled"]) continue;
 		    if (isset($n["priority"])) {		// IPTV (or SAT>IP?)
