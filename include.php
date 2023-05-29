@@ -67,7 +67,7 @@ function get_epg_now($channel) {
 
 function get_epg($channel, $from, $to) {
   global $urlp, $auth;
-  if ($to != 0) {
+  if ($to > 0) {
 	$data = array("channel"=>"$channel","filter"=>"[{\"field\":\"stop\",\"type\":\"numeric\",\"value\":\"{$from}\",\"comparison\":\"gt\"}, {\"field\":\"start\",\"type\":\"numeric\",\"value\":\"{$to}\",\"comparison\":\"lt\"}]");
   }
   else {

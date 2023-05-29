@@ -81,7 +81,7 @@
 	  echo "<table class='list'>";
 	  echo "<tr class='heading'><td colspan='4'><span class='channel_name'>$c</span>";
 	  echo "</td></tr>";
-	  $progs = get_epg($c, $when, $next);
+	  $progs = get_epg($c, $when+1, $next-1);
 
 	  foreach($progs as $p) {
 	    $start = date('H:i', $p["start"]);

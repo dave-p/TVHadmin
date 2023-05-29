@@ -119,7 +119,7 @@
 	echo "
 	    </td>
 	  </tr>";
-	  $progs = get_epg($prog, $when, $next);
+	  $progs = get_epg($prog, $when+1, $next-1);
 	  $last_prog_date = " ";
 	  foreach($progs as $p) {
 	    if (isset($_GET['all'])) {
