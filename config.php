@@ -105,10 +105,15 @@
 	      <td class='col_value'><select name='SUUID'>
 <?php
 	  $sprof = get_stream_profiles();
-	  if (!isset($config_suuid)) $config_suuid = $sprof[0]['uuid'];
 	  foreach ($sprof as $p) {
-	    if ($p['uuid'] === $config_suuid) $sel = 'selected';
-	    else $sel = '';
+	    if (isset($config_suuid)) {
+	      if ($p['uuid'] === $config_suuid) $sel = 'selected';
+	      else $sel = '';
+	    }
+	    else {
+	      if ($p['name'] === 'pass') $sel = 'selected';
+	      else $sel = '';
+	    }
 	    echo "<option value='{$p['uuid']}' $sel>{$p['name']}</option>";
 	  }
 ?>
