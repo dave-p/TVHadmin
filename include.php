@@ -45,6 +45,7 @@ if (file_exists($config_file)) {
     );
   }
   $config_uuid = $settings['UUID'];
+  $config_suuid = $settings['SUUID'];
   $epg_start = $settings['EPGSTART'];
 }
 else if ((strpos($_SERVER['PHP_SELF'], 'config.php') === false) &&
@@ -168,6 +169,20 @@ function get_profiles() {
   $j = json_decode($json, true);
   $ret = &$j["entries"];
   return $ret;
+}
+
+function get_stream_profiles() {
+  global $urlp;
+  $url = "$urlp/api/profile/list";
+  $json = file_get_contents($url);
+  $j = json_decode($json, true);
+  $a = array();
+  foreach ($j["entries"] as $p) {
+    $json = file_get_contents("$urlp/api/raw/export?uuid={$p["key"]}");
+    $s = json_decode($json, true);
+    array_push($a, $s[0]);
+  }
+  return $a;
 }
 
 function sort_channels($a, $b) {

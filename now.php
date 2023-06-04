@@ -157,10 +157,12 @@
         No EPG available
       </td>
       <td>";
-	echo "
+		if (isset($config_suuid)) $s = "&profile={$config_suuid}";
+		else $s = "";
+		echo "
       </td>
       <td class='col_stream'>
-	<a href='$view_url/play/ticket/stream/channel/{$c['uuid']}?title={$c['name']}' download='{$c['uuid']}.m3u'><img src='images/play.png' title='Play'></a>
+	<a href='$view_url/play/ticket/stream/channel/{$c['uuid']}?title={$c['name']}$s' download='{$c['uuid']}.m3u'><img src='images/play.png' title='Play'></a>
       </td>
      </tr>";
 	}
