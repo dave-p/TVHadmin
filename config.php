@@ -106,13 +106,12 @@
 <?php
 	  $sprof = get_stream_profiles();
 	  foreach ($sprof as $p) {
+	    $sel = '';
 	    if (isset($config_suuid)) {
 	      if ($p['uuid'] === $config_suuid) $sel = 'selected';
-	      else $sel = '';
 	    }
 	    else {
-	      if ($p['name'] === 'pass') $sel = 'selected';
-	      else $sel = '';
+	      if ($p['default']) $sel = 'selected';
 	    }
 	    echo "<option value='{$p['uuid']}' $sel>{$p['name']}</option>";
 	  }
