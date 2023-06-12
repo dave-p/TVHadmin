@@ -86,19 +86,37 @@
 <?php
 	$prof = get_profiles();
 	if (isset($prof)) {
-		echo "<td class='col_label'><h5>Recording Profile:</h5></td>";
-		echo "<td class='col_value'><select name='UUID'>";
-		if (!isset($config_uuid)) $config_uuid = $prof[0]['uuid'];
-		foreach ($prof as $p) {
-		    if (!$p['enabled']) continue;
-		    $pname = $p['name'];
-		    if ($pname == '') $pname = '(default)';
-		    if ($p['uuid'] === $config_uuid) $sel = 'selected';
-		    else $sel = '';
-		    echo "<option value='{$p['uuid']}' $sel>$pname</option>";
-		}
-		echo "</td>";
-	  echo "</tr>
+	  echo "<td class='col_label'><h5>Recording Profile:</h5></td>";
+	  echo "<td class='col_value'><select name='UUID'>";
+	  if (!isset($config_uuid)) $config_uuid = $prof[0]['uuid'];
+	  foreach ($prof as $p) {
+	    if (!$p['enabled']) continue;
+	    $pname = $p['name'];
+	    if ($pname == '') $pname = '(default)';
+	    if ($p['uuid'] === $config_uuid) $sel = 'selected';
+	    else $sel = '';
+	    echo "<option value='{$p['uuid']}' $sel>$pname</option>";
+	  }
+?>
+		</td>
+	    </tr>
+	    <tr class='row_alt' title="TVheadend profile to use for streaming.">
+	      <td class='col_label'><h5>Streaming Profile:</h5></td>
+	      <td class='col_value'><select name='SUUID'>
+<?php
+	  $sprof = get_stream_profiles();
+	  foreach ($sprof as $p) {
+	    $sel = '';
+	    if (isset($config_suuid)) {
+	      if ($p['uuid'] === $config_suuid) $sel = 'selected';
+	    }
+	    else {
+	      if ($p['default']) $sel = 'selected';
+	    }
+	    echo "<option value='{$p['uuid']}' $sel>{$p['name']}</option>";
+	  }
+?>
+	    </tr>
 	</table>
 	<table class='group'>
 	    <tr class='heading'>
@@ -106,7 +124,8 @@
 	    </tr>
 	    <tr class='row_alt' title='Select display theme'>
 		<td class='col_label'><h5>Display theme:</h5></td>
-		<td class='col_value'>";
+		<td class='col_value'>
+<?php
 	if (!isset($settings['THEME'])) $settings['THEME'] = 0;
 	foreach ($themes as $key=>$value) {
 	  echo "<label for='C$key'>$value:</label>";
