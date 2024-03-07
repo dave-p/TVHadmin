@@ -59,6 +59,15 @@ window.addEventListener('load',function(event) {
 	return $j;
   }
 
+  function get_comet_poll() {
+        global $urlp;
+        $url = "$urlp/comet/poll";
+        $json = file_get_contents($url);
+        $j = json_decode($json, true);
+        $ret = &$j["messages"];
+        return $ret;
+  }
+
   function clear_input_stats($uuid) {
     global $urlp;
     $url = "$urlp/api/status/inputclrstats?uuid=$uuid";
@@ -89,6 +98,10 @@ window.addEventListener('load',function(event) {
   if ($currentload !== FALSE) {
     $load = preg_replace('/(\d{2})\d*/', '$1', $currentload->systemload);
     $load = preg_replace('/,/', ', ', $load);
+    $poll = get_comet_poll();
+    $free = round($poll[0]["freediskspace"] / 1000000000, 1);
+    $total = $poll[0]["totaldiskspace"] / 1000000000;
+    $pc = round($free*100/$total, 1);
     if (isset($currentload->recordings->recording->next)) {
       $recstatus = 'Next: ' . date('Y-m-d H:i', time()+60*$currentload->recordings->recording->next);
     }
@@ -101,6 +114,10 @@ window.addEventListener('load',function(event) {
         <tr class='row_alt'>
           <td class='col_channel'>System Load</td>
           <td class='col_name'>$load</td>
+        </tr>
+        <tr class='row_alt'>
+          <td class='col_channel'>Free Disk Space</td>
+          <td class='col_name'>$free GB ($pc%)</td>
         </tr>
         <tr class='row_alt'>
           <td class='col_channel'>Recording</td>
