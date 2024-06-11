@@ -266,7 +266,7 @@
     });
     document.getElementById('recText').textContent = `Record \"\${title}\"?`;
     if (is_series) {
-      recSeries.disabled = false;
+      recSeries.style.display = 'block';
       recSeries.addEventListener('click', function recs(event) {
 	location.replace(window.location.href + `&eventId=\${event_id}&series=1`);
 	recSeries.removeEventListener('click', recs);
@@ -274,7 +274,7 @@
       });
     }
     else {
-	recSeries.disabled = true;
+	recSeries.style.display = 'none';
     }
     recDialog.showModal();
   }
