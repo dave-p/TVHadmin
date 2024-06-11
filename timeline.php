@@ -256,27 +256,37 @@
     let recCancel = document.getElementById('recCancel');
     let recOnce = document.getElementById('recOnce');
     let recSeries = document.getElementById('recSeries');
-    recCancel.addEventListener('click', function() {
-      recDialog.close();
-    });
-    recOnce.addEventListener('click', function rec() {
-      location.replace(window.location.href + `&eventId=\${event_id}`);
-      recOnce.removeEventListener('click', rec);
-      recDialog.close();
-    });
+    recCancel.addEventListener('click', canc);
+    recOnce.addEventListener('click', rec);
     document.getElementById('recText').textContent = `Record \"\${title}\"?`;
     if (is_series) {
       recSeries.style.display = 'block';
-      recSeries.addEventListener('click', function recs(event) {
-	location.replace(window.location.href + `&eventId=\${event_id}&series=1`);
-	recSeries.removeEventListener('click', recs);
-	recDialog.close();
-      });
+      recSeries.addEventListener('click', recs);
     }
     else {
 	recSeries.style.display = 'none';
     }
     recDialog.showModal();
+    function canc() {
+      recCancel.removeEventListener('click', canc);
+      recOnce.removeEventListener('click', rec);
+      recSeries.removeEventListener('click', recs);
+      recDialog.close();
+    }
+    function rec() {
+      location.replace(window.location.href + `&eventId=\${event_id}`);
+      recOnce.removeEventListener('click', rec);
+      recCancel.removeEventListener('click', canc);
+      recSeries.removeEventListener('click', recs);
+      recDialog.close();
+    }
+    function recs() {
+      location.replace(window.location.href + `&eventId=\${event_id}&series=1`);
+      recCancel.removeEventListener('click', canc);
+      recOnce.removeEventListener('click', rec);
+      recSeries.removeEventListener('click', recs);
+      recDialog.close();
+    }
   }
 </script>
  </body>
