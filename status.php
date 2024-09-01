@@ -99,8 +99,8 @@ window.addEventListener('load',function(event) {
     $load = preg_replace('/(\d{2})\d*/', '$1', $currentload->systemload);
     $load = preg_replace('/,/', ', ', $load);
     $poll = get_comet_poll();
-    $free = round($poll[0]["freediskspace"] / 1000000000, 1);
-    $total = $poll[0]["totaldiskspace"] / 1000000000;
+    $free = round($poll[0]["freediskspace"] / 1073741824, 1);
+    $total = $poll[0]["totaldiskspace"] / 1073741824;
     $pc = round($free*100/$total, 1);
     if (isset($currentload->recordings->recording->next)) {
       $recstatus = 'Next: ' . date('Y-m-d H:i', time()+60*$currentload->recordings->recording->next);
