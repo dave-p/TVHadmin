@@ -11,7 +11,8 @@ window.addEventListener('load',function(event) {
     // get widest
     for(i = 0; i < tableArr.length; i++)
     {
-           if(cellWidth < tableArr[i].rows[1].cells[0].clientWidth)
+           if(cellWidth < tableArr[i].rows[1].cells[0].clientWidth
+	     && tableArr[i].rows[1].cells.length > 1)
                 cellWidth = tableArr[i].rows[1].cells[0].clientWidth;
     }
 
