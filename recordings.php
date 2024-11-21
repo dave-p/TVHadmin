@@ -107,9 +107,9 @@
 		else $duration = $t["stop"] - $t["start"];
 		$hh = $duration / 3600;
 		$mm = ($duration % 3600) / 60;
+		$ok = 1;
 		if ($t['sched_status'] == 'completed') {
-			$ok = 1;
-			if ($t['status'] == 'Completed OK') {
+			if (!$t['errorcode']) {
 				echo "<tr class='row_alt'>";
 			}
 			else {
@@ -117,7 +117,6 @@
 			}
 		}
 		else if ($t['sched_status'] == 'recording') {
-			$ok = 1;
 			echo "<tr class='row_inprogress'>";
 		}
 		else {
