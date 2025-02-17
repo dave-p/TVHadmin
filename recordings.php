@@ -109,7 +109,7 @@
 		$mm = ($duration % 3600) / 60;
 		$ok = 1;
 		if ($t['sched_status'] == 'completed') {
-			if (!$t['errorcode']) {
+			if (!$t['errorcode'] && $t['data_errors'] < 10000) {
 				echo "<tr class='row_alt'>";
 			}
 			else {
