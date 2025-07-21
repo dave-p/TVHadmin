@@ -144,6 +144,7 @@
 	    if (count($e) > 0) {
 	      $init = 1;
 	      foreach ($e as $p) {
+		$colour = 'onSoon';
 		if ($init) {
 		    if ($p['start'] > $tstart) {	#Need a spacer
 			$spc = (($p['start'] - $tstart) * $wd) / $textent;
@@ -157,9 +158,9 @@
 		      $tnext = min($tnext, $p['stop']);
 		      $p['onNow'] = 1;
 		    }
+		    else $colour = 'onSoon';
 		    $init = 0;
 		}
-		else $colour = 'onSoon';
 		if (isset($p['dvrState']) && ($p['dvrState'] == 'scheduled' || $p['dvrState'] == 'recording')) {
 		    $colour = 'record';
 		}
