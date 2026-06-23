@@ -47,8 +47,10 @@ window.addEventListener('load',function(event) {
 	global $urlp;
 	$url = "$urlp/api/status/inputs";
 	$json = file_get_contents($url);
-	$j = json_decode($json, true);
-	$ret = &$j["entries"];
+	$ret = json_decode($json, true)['entries'];
+	usort($ret, function ($a, $b) {
+	  return $a['input'] <=> $b['input'];
+	});
 	return $ret;
   }
 
